@@ -78,7 +78,7 @@ body,button,.touch,.stick,.panel,.btns{-webkit-user-select:none;user-select:none
 </head>
 <body>
 <canvas id="c" tabindex="0"></canvas>
-<div class="top"><h1>Ekskavatör · toprak fiziği</h1><span class="tag">prototip v0.11</span></div>
+<div class="top"><h1>Ekskavatör · toprak fiziği</h1><span class="tag">prototip v0.12</span></div>
 <aside class="panel gauges">
   <div class="g"><label><span id="lB">Kova</span> <b id="tB">0.00 m³</b></label><div class="bar"><i id="gB"></i></div></div>
   <div class="g"><label>Kamyon <b id="tT">0.0 m³ · 0.0 t</b></label><div class="bar"><i id="gT" class="grn"></i></div></div>
@@ -99,7 +99,7 @@ body,button,.touch,.stick,.panel,.btns{-webkit-user-select:none;user-select:none
 <div class="qrbox" id="qrbox"><div><img alt="QR" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUoAAAFKAQAAAABTUiuoAAACzElEQVR4Xu1awY3cMAwkzwLytIErIKXYHaSk1JQO1qVcB/bzABkMhqTsuyAP6yFAuyAfC+9aELwcDzmkyEI3bX27uZCIYml4IDzwRrSz20JEvOzMRHsiWjlRuZWCML14YBA1DXTyGDMxT0Q0b/jQW7iKV7sXDzAre/ZEvAA8hWwZM35jVtJ186y37EWDJkD6bvsEWh1J1kkpddqLeuCZ/tZ3tA4W2odMgIyJEsgVaPXmARFRYAbR+Mc8DWJ5i0YReUQk7McDhyk/f4UgBw0o2Kq3IDqeKmQ8U3ireNYE9hRo9oNlnQYwKhPh6mvtXLFrLG3mAShBtWUUoVk+wbKDNTr6jX7iwE1r5qy71uYBkLIUIy2rSuU148qylVZj+rXNA8SuFR4gLX3lQaes0BLZKuZsWJoFWjV+rYCgYunJrWxtDHkgHLoSVFppfyPQ6kJnod46khdYI1pNHyoOjyQ0bkTrr5zYJGLFOxBL23jAuWXpyQzxbxtAMK/BIm+5tYGgbtc9WXWsZRUz/xBap4NVaqg69I5h3a53LXat8ICpDNeEmrygN0A1S14mMCJv9ZG3Tk2oXSYNghodMxoa3o03LEMT1rCggjAVSwu3rMAqItAOtEq95bhV7BpL23igKAqLf34aaVdWE2shFtzqJxK6/rN662xtmMrwcBiRsIsaxrk1l0R1HZGUcOiiI/JWH3nrspNlphO1bWgZLPqE3XCr6AkQ7Orlmoy/RmlCZTSSDhWCxMWEZauCmxdYZ/s9urqdqAwD1meeNODhuP/3pr0MHCpbfyPmCbuIhP/OPPG8TRilmYjnP5inoaOMAFQwNpa28cB/Z54UH8HBv4cAdOMbPUCbv/XSu/rME4621p+fbD34dSpHkjHz1Ene0vOtc9zpPfP8gZ9GDGcoo/Z3ifOtjtC6Zp4oY8hJW1DeiLJObydv1kuHt1sWHngmD/wF2tTRyWIglZ8AAAAASUVORK5CYII="><b>Telefonun kamerasıyla okut</b><br>Oyun telefonda açılır, her zaman en son sürüm.<br><small>bayramgezer.github.io/ismakinesi<br>Tam ekran için: Safari/Chrome → "Ana Ekrana Ekle". Telefonu yan çevir.</small><br><br><small>(Kapatmak için tıkla)</small></div></div>
 <div class="rot" id="rot">Telefonu yan çevir</div>
 <div class="btns">
-  <button id="bMach" class="pri">Makine: Ekskavatör (1-4)</button>
+  <button id="bMach" class="pri">Makine: Ekskavatör (1-5)</button>
   <button id="bEng">Motor: çalıştır (M)</button>
   <button id="bTool">Ataşman: Kova (T)</button>
   <button id="bDump">Kasayı boşalt</button>
@@ -117,9 +117,9 @@ body,button,.touch,.stick,.panel,.btns{-webkit-user-select:none;user-select:none
     <div><h3>Sağ kol</h3><ul><li><kbd>↑</kbd>Bom indir</li><li><kbd>↓</kbd>Bom kaldır</li><li><kbd>←</kbd>Kova kapat (kaz)</li><li><kbd>→</kbd>Kova aç (boşalt)</li></ul></div>
     <div><h3>Paletler</h3><ul><li><kbd>Q</kbd><kbd>Z</kbd>Sol palet ileri / geri</li><li><kbd>E</kbd><kbd>C</kbd>Sağ palet ileri / geri</li><li><kbd>T</kbd>Kova / kırıcı değiştir</li><li><kbd>Space</kbd>Kırıcıyla vur</li></ul></div>
     <div><h3>Dozer (2)</h3><ul><li><kbd>W</kbd><kbd>S</kbd>İleri / geri</li><li><kbd>A</kbd><kbd>D</kbd>Sola / sağa</li><li><kbd>↑</kbd><kbd>↓</kbd>Bıçak indir / kaldır</li><li><kbd>←</kbd><kbd>→</kbd>Bıçak tilt</li><li><kbd>R</kbd><kbd>F</kbd>Ripper indir / kaldır</li><li><kbd>G</kbd>Otomatik bıçak (kesme kotunu tutar)</li></ul></div>
-    <div><h3>Kamyon (3)</h3><ul><li><kbd>W</kbd>Gaz</li><li><kbd>S</kbd>Fren / geri</li><li><kbd>A</kbd><kbd>D</kbd>Direksiyon</li><li><kbd>R</kbd><kbd>F</kbd>Damper kaldır / indir</li></ul></div>
+    <div><h3>Kamyon (3) · Maden kamyonu (5)</h3><ul><li><kbd>W</kbd>Gaz</li><li><kbd>S</kbd>Fren / geri</li><li><kbd>A</kbd><kbd>D</kbd>Direksiyon</li><li><kbd>R</kbd><kbd>F</kbd>Damper kaldır / indir</li></ul></div>
     <div><h3>Shovel (4)</h3><ul><li><kbd>W</kbd><kbd>S</kbd>Arm ileri (crowd) / geri</li><li><kbd>↓</kbd><kbd>↑</kbd>Bom kaldır / indir</li><li><kbd>←</kbd><kbd>→</kbd>Kovayı topla / devir</li><li><kbd>A</kbd><kbd>D</kbd>Dönüş</li><li><kbd>R</kbd>Alttan boşalt (basılı tut)</li><li><kbd>Q</kbd><kbd>Z</kbd><kbd>E</kbd><kbd>C</kbd>Paletler</li></ul></div>
-    <div><h3>Genel</h3><ul><li><kbd>1</kbd>-<kbd>4</kbd>Ekskavatör / dozer / kamyon / shovel</li><li><kbd>M</kbd>Motoru çalıştır / durdur</li><li><kbd>V</kbd>Kamera değiştir</li><li>Fare sürükle: kamera, tekerlek: zoom</li></ul></div>
+    <div><h3>Genel</h3><ul><li><kbd>1</kbd>-<kbd>5</kbd>Ekskavatör / dozer / kamyon / shovel / maden kamyonu</li><li><kbd>M</kbd>Motoru çalıştır / durdur</li><li><kbd>V</kbd>Kamera değiştir</li><li>Fare sürükle: kamera, tekerlek: zoom</li></ul></div>
   </div>
   <div class="tip">Kırmızı toprağın altında sıkı kum-çakıl, en altta ana kaya var. Kayayı kova kazamaz: kırıcıyı tak (T), ucu kayaya dayayıp Space ile vur ya da dozerin ripper'ıyla sök. Büyük kaya blokları kovaya sığmaz, kırıcıyla böl. 1.5 m'den derin kazarsan yeraltı suyu çıkar. Paletlerle sürekli geçtiğin yer sıkışıp sertleşir (koyulaşır), kazması zorlaşır. Yüzeyden ince alırsan kova daha az zorlanır. Kumanda yokken motor rölantiye düşer, ilk harekette devir toplaması bir saniye sürer.</div>
   <div class="msel" id="msel"><h3>Sahaya çıkacak makineleri seç</h3>
@@ -127,6 +127,7 @@ body,button,.touch,.stick,.panel,.btns{-webkit-user-select:none;user-select:none
     <label><input type="checkbox" id="mDz"> Dozer (D9 sınıfı, 49 t)</label>
     <label><input type="checkbox" id="mTr" checked> Kamyon (6x6 damper)</label>
     <label><input type="checkbox" id="mSh"> Shovel (EX5600 sınıfı, 540 t)</label>
+    <label><input type="checkbox" id="mMt"> Maden kamyonu (230 t yük)</label>
     <small>Motorlar kapalı başlar: <kbd>M</kbd> ya da "Motor" düğmesiyle çalıştır.</small></div>
   <div style="margin-top:14px;text-align:right"><button id="bGo" class="pri">Başla</button></div>
 </section>
@@ -165,7 +166,7 @@ try{const cv=document.createElement('canvas');cv.width=256;cv.height=128;const x
   const sx=256*0.6,sy=128*0.29,rg=x.createRadialGradient(sx,sy,1,sx,sy,26);rg.addColorStop(0,'rgba(255,245,220,1)');rg.addColorStop(1,'rgba(255,245,220,0)');x.fillStyle=rg;x.fillRect(0,0,256,128);
   const et=new THREE.CanvasTexture(cv);et.mapping=THREE.EquirectangularReflectionMapping;et.encoding=THREE.sRGBEncoding;
   const pm=new THREE.PMREMGenerator(renderer);scene.environment=pm.fromEquirectangular(et).texture;pm.dispose();et.dispose()}catch(e){}
-const camera=new THREE.PerspectiveCamera(52,1,0.1,600);
+const camera=new THREE.PerspectiveCamera(52,1,0.1,1100);
 scene.add(new THREE.HemisphereLight(lin('#dcefff'),lin('#5d7d3c'),0.75));
 const sunL=new THREE.DirectionalLight(lin('#fff4e0'),1.75);sunL.castShadow=true;sunL.shadow.mapSize.set(MOBILE?1024:2048,MOBILE?1024:2048);
 Object.assign(sunL.shadow.camera,{left:-24,right:24,top:24,bottom:-24,near:1,far:120});sunL.shadow.bias=-0.0004;sunL.shadow.normalBias=0.03;
@@ -199,7 +200,7 @@ const bump=noiseTex(256,11,0,1,0.06);bump.repeat.set(26,26);
 const dustTex=(()=>{const cv=document.createElement('canvas');cv.width=cv.height=64;const x=cv.getContext('2d');const g=x.createRadialGradient(32,32,2,32,32,31);g.addColorStop(0,'rgba(255,255,255,.9)');g.addColorStop(1,'rgba(255,255,255,0)');x.fillStyle=g;x.fillRect(0,0,64,64);return new THREE.CanvasTexture(cv)})();
 
 /* ---------- Sabitler ---------- */
-const N=256,SIZE=80,DX=SIZE/(N-1),HALF=SIZE/2;
+const N=576,SIZE=180,DX=SIZE/(N-1),HALF=SIZE/2;
 const LOOSE=Math.tan(34*Math.PI/180),INTACT=Math.tan(62*Math.PI/180);
 const SANDL=-3.0,WROCK=-7.0,WL=-6.5,RIVL=-1.55,SWELL=1.25,CAP=1.05,DENS=1.8,LOOSE_DENS=1450;
 const TRUCK={x:2.2,z:-6.6,floor:1.6};
@@ -211,7 +212,9 @@ const CUT={V:0,L:0,S:0,D:0,dir:new V3()};
 
 /* ---------- Heightfield ---------- */
 class HF{
-  constructor(nx,nz,dx,ox,oz){Object.assign(this,{nx,nz,dx,ox,oz});const n=nx*nz;this.h=new Float32Array(n);this.h0=new Float32Array(n);this.c=new Float32Array(n).fill(1);this.b=new Float32Array(n);this.m=new Float32Array(n);this.w=new Float32Array(n);this.cp=new Float32Array(n);this.cc=new Float32Array(n);this.bo=new Float32Array(n);this.dirty=true}
+  constructor(nx,nz,dx,ox,oz){Object.assign(this,{nx,nz,dx,ox,oz});const n=nx*nz;this.h=new Float32Array(n);this.h0=new Float32Array(n);this.c=new Float32Array(n).fill(1);this.b=new Float32Array(n);this.m=new Float32Array(n);this.w=new Float32Array(n);this.cp=new Float32Array(n);this.cc=new Float32Array(n);this.bo=new Float32Array(n);this.dirty=true;this.dj0=0;this.dj1=nz-1}
+  touch(k){const j=(k/this.nx)|0;if(j<this.dj0)this.dj0=j;if(j>this.dj1)this.dj1=j;this.dirty=true}
+  touchRows(a,b){if(a<this.dj0)this.dj0=Math.max(0,a);if(b>this.dj1)this.dj1=Math.min(this.nz-1,b);this.dirty=true}
   near(x,z){const i=Math.round((x-this.ox)/this.dx),j=Math.round((z-this.oz)/this.dx);return(i<1||j<1||i>=this.nx-1||j>=this.nz-1)?-1:j*this.nx+i}
   inside(x,z){const i=(x-this.ox)/this.dx,j=(z-this.oz)/this.dx;return i>=0&&j>=0&&i<=this.nx-1&&j<=this.nz-1}
   s0(x,z){const h=this.h;this.h=this.h0;const r=this.sample(x,z);this.h=h;return r}
@@ -222,26 +225,33 @@ class HF{
     const i=fx|0,j=fz|0,u=fx-i,v=fz-j,a=j*this.nx+i,n=this.nx,dh=vol/(this.dx*this.dx);
     const ks=[a,a+1,a+n,a+n+1],ws=[(1-u)*(1-v),u*(1-v),(1-u)*v,u*v];
     for(let q=0;q<4;q++){const k=ks[q],a=dh*ws[q];this.h[k]+=a;if(ws[q]>0.2){if(this.c[k]>0.5)this.m[k]=mf;this.c[k]=0;this.cp[k]*=0.5}this.m[k]+=(mf-this.m[k])*Math.min(1,a/0.12)}
-    this.dirty=true;return true}
+    this.touchRows(j,j+1);return true}
   pair(a,b){const h=this.h,d=h[a]-h[b];if(d===0)return false;const hi=d>0?a:b,lo=d>0?b:a,ad=Math.abs(d);
     const lim=(LOOSE+(INTACT-LOOSE)*this.c[hi])*this.dx;if(ad<=lim)return false;
     const m=Math.min((ad-lim)*0.4,h[hi]-this.b[hi]);if(m<=1e-5)return false;
-    h[hi]-=m;h[lo]+=m;const mh=this.c[hi]>0.5?this.matF(hi):this.m[hi];if(this.c[lo]>0.5)this.m[lo]=mh;else this.m[lo]+=(mh-this.m[lo])*Math.min(1,m/0.1);this.c[lo]=0;return true}
+    h[hi]-=m;h[lo]+=m;this.touch(hi);this.touch(lo);const mh=this.c[hi]>0.5?this.matF(hi):this.m[hi];if(this.c[lo]>0.5)this.m[lo]=mh;else this.m[lo]+=(mh-this.m[lo])*Math.min(1,m/0.1);this.c[lo]=0;return true}
   relax(iters,i0=0,i1=this.nx-1,j0=0,j1=this.nz-1){const nx=this.nx,nz=this.nz;let moved=false;i0=Math.max(0,i0);j0=Math.max(0,j0);i1=Math.min(nx-1,i1);j1=Math.min(nz-1,j1);
     for(let it=0;it<iters;it++)for(let j=j0;j<=j1;j++)for(let i=i0;i<=i1;i++){const a=j*nx+i;
       if(i<nx-1&&this.pair(a,a+1))moved=true;if(j<nz-1&&this.pair(a,a+nx))moved=true}
-    if(moved)this.dirty=true}
+    if(moved)this.dirty=true;return moved}
   volume(){let s=0;for(let k=0;k<this.h.length;k++)s+=this.h[k]-this.b[k];return s*this.dx*this.dx}
   mat(k){if(this.c[k]<0.5)return'loose';const h=this.h[k];if(h>this.h0[k]-0.35&&this.h0[k]>-1)return'top';return h<WROCK?'wrock':h<SANDL?'sand':'sub'}
   matF(k){if(this.cc[k]>0)return 2.6;const t=this.mat(k);return t==='loose'?this.m[k]:t==='sand'?1:t==='wrock'?1.6:0}
 }
 const T=new HF(N,N,DX,-SIZE/2,-SIZE/2);
-const Bed=new HF(23,11,0.235,0.1,-1.175); // kasa yerel koordinatlarında
+let Bed=new HF(23,11,0.235,0.1,-1.175); // kasa yerel koordinatlarında
 const sstep=(a,b,x)=>{const t=Math.max(0,Math.min(1,(x-a)/(b-a)));return t*t*(3-2*t)};
-const RZ=34;function riverH(x,z){const c=RZ+Math.sin(x*0.07)*1.5,d=Math.abs(z-c);return -2.5+Math.max(0,d-2.6)*1.1}
-const HILLS=[[11,5,2.6,26],[-6,9,1.4,40],[-22,-18,3.2,60],[25,-20,2.2,45],[-25,18,2.8,70],[8,24,1.8,35],[30,8,3.5,80],[-12,-30,2.0,50],[22,-34,2.4,40],[-33,-4,2.2,55]];
+const RZ=74;function riverH(x,z){const c=RZ+Math.sin(x*0.07)*1.5,d=Math.abs(z-c);return -2.5+Math.max(0,d-2.6)*1.1}
+const HILLS=[[11,5,2.6,26],[-6,9,1.4,40],[-22,-18,3.2,60],[25,-20,2.2,45],[-25,18,2.8,70],[8,24,1.8,35],[30,8,3.5,80],[22,-34,2.4,40],[-33,-4,2.2,55]];
+{let s=4242;const r=()=>(s=(s*16807)%2147483647)/2147483647;let n=0;
+  for(let t=0;t<400&&n<34;t++){const x=(r()-.5)*170,z=(r()-.5)*170;if(Math.max(Math.abs(x),Math.abs(z))<42)continue;if(Math.abs(z-74)<12)continue;
+    if(x>15&&x<75&&z>-70&&z<-2)continue;if(x<-35&&x>-80&&z<-28&&z>-68)continue;if(Math.hypot(x+20,z+37)<9)continue;
+    const big=r()<0.3;HILLS.push([x,z,big?5+r()*5:1.8+r()*3,big?300+r()*500:80+r()*220]);n++}}
+// taşıma yolu (maden -> döküm sahası) ve döküm sahası
+const HAUL=[[22,-30],[8,-35],[-12,-38],[-36,-43],[-56,-50]],HAULW=6.5;
+function haulD(x,z){let best=1e9,bt=0,bi=0;for(let q=0;q<HAUL.length-1;q++){const[a,b]=HAUL[q],[c,d]=HAUL[q+1],dx=c-a,dz=d-b,L2=dx*dx+dz*dz;let t=((x-a)*dx+(z-b)*dz)/L2;t=Math.max(0,Math.min(1,t));const e=Math.hypot(x-a-dx*t,z-b-dz*t);if(e<best){best=e;bt=t;bi=q}}return[best,bi+bt]}
 // beton yol: 5 m genişlik, 25 cm döşeme. Sağlam beton ana kaya gibi davranır (kova/bıçak kesemez); kırıcı/ripper kırar
-const SHP={x:9,z:-20};const RD={z:12.5,w:2.5,x0:-38,x1:38},CONC_T=0.25,ROADK=new Uint8Array(N*N);let ROADM=null;
+const SHP={x:9,z:-20},DZONE={x:-64,z:-54,w:28,d:24};const RD={z:12.5,w:2.5,x0:-86,x1:86},CONC_T=0.25,ROADK=new Uint8Array(N*N);let ROADM=null;
 function initTerrain(){
   for(let j=0;j<N;j++)for(let i=0;i<N;i++){const k=j*N+i,x=-SIZE/2+i*DX,z=-SIZE/2+j*DX;
     let h=0.22*Math.sin(x*.17)*Math.cos(z*.13)+0.12*Math.sin(x*.41+z*.33);
@@ -249,16 +259,22 @@ function initTerrain(){
     const r=Math.hypot(x,z),flatE=sstep(3,5.5,r);
     const tx=Math.max(0,Math.abs(x-TRUCK.x)-4.3),tz=Math.max(0,Math.abs(z-TRUCK.z)-1.8),flatT=sstep(0,2.5,Math.hypot(tx,tz));
     const edge=sstep(HALF-0.2,HALF-3.5,Math.max(Math.abs(x),Math.abs(z)));
-    const flatD=sstep(0,3,Math.hypot(Math.max(0,Math.abs(x+27)-7),Math.max(0,Math.abs(z+26)-6)));
+    const flatD=sstep(0,4,Math.hypot(Math.max(0,Math.abs(x-DZONE.x)-DZONE.w/2),Math.max(0,Math.abs(z-DZONE.z)-DZONE.d/2)));
     const flatS=sstep(7.5,10.5,Math.hypot(x-SHP.x,z-SHP.z));
     // maden basamağı: doğuda 4.5 m yüksek, ~60° yüzlü basamak (shovel için kazı aynası)
-    const bench=4.5*sstep(23.6,27.2,x)*sstep(-38.5,-35,z)*(1-sstep(-8.5,-5,z));
+    const bench=(4.5*sstep(23.6,27.2,x)+4.5*sstep(44,47.6,x))*sstep(-66,-62,z)*(1-sstep(-8.5,-5,z));
     h=h*Math.min(flatE,flatT,flatD,flatS)*edge+bench*edge;h=Math.min(h,riverH(x,z));
-    T.h[k]=T.h0[k]=h;T.c[k]=1;T.m[k]=bench>0.05?0.45:0;const inZ=Math.abs(x+27)<7&&Math.abs(z+26)<6,inB_=bench>0.05||Math.hypot(x-SHP.x,z-SHP.z)<8;T.w[k]=inZ||inB_?1:0;T.cp[k]=inZ?0.6:inB_?0.3:0;// ana kaya derinde (~-14 m); birkaç tepenin altında yüzeye yaklaşan kaya çıkıntıları
+    T.h[k]=T.h0[k]=h;T.c[k]=1;T.m[k]=bench>0.05?0.45:0;const inZ=Math.abs(x-DZONE.x)<DZONE.w/2&&Math.abs(z-DZONE.z)<DZONE.d/2,inB_=bench>0.05||Math.hypot(x-SHP.x,z-SHP.z)<8;T.w[k]=inZ||inB_?1:0;T.cp[k]=inZ?0.6:inB_?0.3:0;// ana kaya derinde (~-14 m); birkaç tepenin altında yüzeye yaklaşan kaya çıkıntıları
     const g1=Math.exp(-((x-30)**2+(z-8)**2)/70),g2=Math.exp(-((x+22)**2+(z+18)**2)/55),g3=Math.exp(-((x-22)**2+(z+34)**2)/30);
     T.b[k]=Math.max(-14+1.6*Math.sin(x*.07+1)+1.3*Math.cos(z*.06),-14+14.8*g1,-14+14.4*g2,-14+14*g3);T.bo[k]=T.b[k];T.cc[k]=0}
-  buildRoad();
-  T.dirty=true;Bed.h.fill(0);Bed.b.fill(0);Bed.c.fill(0);Bed.m.fill(0);Bed.dirty=true}
+  buildRoad();buildHaul();
+  T.dirty=true;T.dj0=0;T.dj1=N-1;Bed.h.fill(0);Bed.b.fill(0);Bed.c.fill(0);Bed.m.fill(0);Bed.dirty=true}
+function buildHaul(){const P=[];let L=0;for(let q=0;q<HAUL.length-1;q++){const[a,b]=HAUL[q],[c,d]=HAUL[q+1],l=Math.hypot(c-a,d-b),n=Math.ceil(l);for(let i=0;i<n;i++)P.push(T.sample(a+(c-a)*i/n,b+(d-b)*i/n));L+=l}
+  const sm=P.map((_,i)=>{let a=0,n=0;for(let q=-18;q<=18;q++){const v=P[Math.max(0,Math.min(P.length-1,i+q))];a+=v;n++}return a/n});
+  const segL=[];for(let q=0;q<HAUL.length-1;q++)segL.push(Math.ceil(Math.hypot(HAUL[q+1][0]-HAUL[q][0],HAUL[q+1][1]-HAUL[q][1])));
+  for(let k=0;k<N*N;k++){const i=k%N,j=(k/N)|0,x=-HALF+i*DX,z=-HALF+j*DX;if(T.cc[k]>0)continue;const[d,u]=haulD(x,z);if(d>HAULW+4.5)continue;
+    const q=Math.min(HAUL.length-2,Math.floor(u)),t=u-q;let off=0;for(let w=0;w<q;w++)off+=segL[w];const sx=Math.min(sm.length-1.001,off+t*segL[q]),s0=Math.floor(sx),rh=sm[s0]+(sm[Math.min(sm.length-1,s0+1)]-sm[s0])*(sx-s0);
+    const bl=sstep(HAULW,HAULW+4.5,d);T.h[k]=T.h0[k]=rh+(T.h[k]-rh)*bl;if(d<HAULW+0.6){T.w[k]=1;T.cp[k]=0.7;T.m[k]=0.35}}}
 function buildRoad(){ROADK.fill(0);const prof=new Float32Array(N),sm=new Float32Array(N);
   for(let i=0;i<N;i++){let a=0,n=0;for(let j=0;j<N;j++){const z=-HALF+j*DX;if(Math.abs(z-RD.z)<RD.w+1){a+=T.h[j*N+i];n++}}prof[i]=a/n}
   for(let i=0;i<N;i++){let a=0,n=0;for(let q=-22;q<=22;q++){a+=prof[Math.max(0,Math.min(N-1,i+q))];n++}sm[i]=a/n}
@@ -312,7 +328,7 @@ function updRoad(){const R=ROADM,g=R.m.geometry,p=g.attributes.position.array,c=
     const x=(T.h[k-1]-T.h[k+1])/(2*DX),z=(T.h[k-N]-T.h[k+N])/(2*DX),l=1/Math.sqrt(x*x+1+z*z);nr[q*3]=x*l;nr[q*3+1]=l;nr[q*3+2]=z*l}
   g.attributes.position.needsUpdate=true;g.attributes.color.needsUpdate=true;g.attributes.normal.needsUpdate=true}
 const bedMat=soilMat.clone();bedMat.map=detail.clone();bedMat.map.repeat.set(4,2);bedMat.map.needsUpdate=true;
-const bMesh=hfMesh(Bed,22*0.235,10*0.235,bedMat);bMesh.castShadow=true;
+let bMesh=hfMesh(Bed,22*0.235,10*0.235,bedMat);bMesh.castShadow=true;
 const PAL={conc:C3('#aeaba3'),cJ:C3('#8e8b84'),cCr:C3('#6f6c67'),grass:C3('#64b23a'),grass2:C3('#529d30'),worn:C3('#8b7445'),top:C3('#5b3321'),subA:C3('#a8582d'),subB:C3('#954b28'),
   sandA:C3('#dccb9d'),sandB:C3('#cdb98a'),rock:C3('#8d8f93'),lDirt:C3('#9c5631'),lSand:C3('#e0d0a4'),bank:C3('#c9b98e'),packed:C3('#76583a'),wrA:C3('#8e7c68'),wrB:C3('#766656')};
 const NZ=new Float32Array(N*N).map((_,k)=>{const x=(k%N)*DX,z=((k/N)|0)*DX;return 0.5+0.25*Math.sin(x*1.7+Math.sin(z*1.3)*2.5)+0.25*Math.cos(z*2.1+x*0.9)});
@@ -389,7 +405,7 @@ const tuftMat=new THREE.MeshLambertMaterial({vertexColors:true,side:THREE.Double
 // oyun alanı çimi: her hücrede bir tutam, kazılınca/ezilince kaybolur
 const GR={n:0,k:null,base:null};
 {const r=sd(33),ks=[],base=[];const o=new THREE.Object3D();
-  for(let k=0;k<N*N;k++){if(r()<(MOBILE?0.62:0.25))continue;const i=k%N,j=(k/N)|0;if(i<1||j<1||i>N-2||j>N-2)continue;const x=-SIZE/2+i*DX+(r()-.5)*DX,z=-SIZE/2+j*DX+(r()-.5)*DX;
+  for(let k=0;k<N*N;k++){if(r()<(MOBILE?0.95:0.86))continue;const i=k%N,j=(k/N)|0;if(i<1||j<1||i>N-2||j>N-2)continue;const x=-SIZE/2+i*DX+(r()-.5)*DX,z=-SIZE/2+j*DX+(r()-.5)*DX;
     o.position.set(x,0,z);o.rotation.set(0,r()*6,0);o.scale.setScalar(0.85+r()*0.9);o.updateMatrix();ks.push(Math.round((z+SIZE/2)/DX)*N+Math.round((x+SIZE/2)/DX));base.push(...o.matrix.elements)}
   GR.n=ks.length;GR.k=Int32Array.from(ks);GR.base=Float32Array.from(base);
   GR.im=new THREE.InstancedMesh(tuftGeo,tuftMat,GR.n);GR.im.receiveShadow=true;const c=new THREE.Color();
@@ -404,7 +420,7 @@ function updGrass(k0=0,k1=N*N){const a=GR.im.instanceMatrix.array,s0=lowerB(GR.k
     for(let q=0;q<16;q++)a[o+q]=GR.base[o+q];a[o+13]=y;if(f<1){a[o+4]*=f;a[o+5]*=f;a[o+6]*=f}GR.sy[i]=y;GR.sf[i]=f;ch=true}
   if(ch)GR.im.instanceMatrix.needsUpdate=true}
 // toprak topakları: gevşek toprakta ve kazı yüzeylerinde
-const CL={n:MOBILE?5000:9000};
+const CL={n:MOBILE?8000:22000};
 {const r=sd(44);CL.k=new Int32Array(CL.n);CL.base=new Float32Array(CL.n*16);CL.q=new Float32Array(CL.n);const o=new THREE.Object3D();
   const cl=[];for(let i=0;i<CL.n;i++){const x=(r()-.5)*(SIZE-1.5),z=(r()-.5)*(SIZE-1.5);cl.push([Math.round((z+SIZE/2)/DX)*N+Math.round((x+SIZE/2)/DX),x,z])}cl.sort((p,q)=>p[0]-q[0]);
   for(let i=0;i<CL.n;i++){const[kk,x,z]=cl[i];CL.k[i]=kk;CL.q[i]=r();
@@ -515,14 +531,14 @@ const cylBoom=[makeCyl(0.085,0.055),makeCyl(0.085,0.055)],cylArm=makeCyl(0.1,0.0
 const sideL=[makeLink(0.06,0.12),makeLink(0.06,0.12)],hL=[makeLink(0.06,0.14),makeLink(0.06,0.14)];
 
 /* ---------- Kamyon (6x6 arazi damperi, sürülebilir, damperli) ---------- */
-const truck=new THREE.Group();truck.rotation.order='YZX';scene.add(truck);
+let truck=new THREE.Group();truck.rotation.order='YZX';scene.add(truck);
 const F=TRUCK.floor,TW=M('#ffc21c'),BED=M('#f5c51e'),TRB=RUBBER.clone(),TRD=M('#c79508');
-const TRK={eng:0,crank:0,x:TRUCK.x,z:TRUCK.z,yaw:0,v:0,steer:0,tip:0,rpm:600,pow:0,wr:0,lastIn:-1e9,idle:true,mud:0,dumpAcc:0,moving:false,beepT:0};
+let TRK={eng:0,crank:0,x:TRUCK.x,z:TRUCK.z,yaw:0,v:0,steer:0,tip:0,rpm:600,pow:0,wr:0,lastIn:-1e9,idle:true,mud:0,dumpAcc:0,moving:false,beepT:0};
 // şasi
 for(const s of[-1,1])box(7.6,0.32,0.2,DARK,truck,0.05,1.02,s*0.48);
 for(const x of[-3.2,-1.9,-0.6,0.8,2.1,3.4])box(0.14,0.22,0.95,DARK,truck,x,1.02,0);
 // tekerlekler (ön aks direksiyonlu, arka tandem boji)
-const WHL=[];const tireG=new THREE.CylinderGeometry(0.64,0.64,0.52,24);tireG.rotateX(Math.PI/2);
+let WHL=[];const tireG=new THREE.CylinderGeometry(0.64,0.64,0.52,24);tireG.rotateX(Math.PI/2);
 const lugG=new THREE.BoxGeometry(0.12,0.06,0.54);
 for(const[x,steer]of[[2.75,1],[-1.35,0],[-2.75,0]])for(const s of[-1,1]){const hub=new THREE.Group();hub.position.set(x,0.64,s*1.12);truck.add(hub);
   const rot=new THREE.Group();hub.add(rot);mesh(tireG,TRB,rot);
@@ -542,18 +558,18 @@ box(0.9,0.55,0.55,STEEL,truck,0.9,0.85,-1.0);box(0.7,0.45,0.45,DARK,truck,0.9,0.
 for(const s of[-1,1])box(0.04,0.55,0.5,DARK,truck,-3.45,0.7,s*1.12);
 box(0.2,0.25,2.3,DARK,truck,-3.75,0.95,0);for(const s of[-1,1]){const tl=box(0.05,0.1,0.25,M('#d32f2f',0,0,{emissive:lin('#a00000'),emissiveIntensity:0.5}),truck,-3.86,0.95,s*0.9);tl.noOutline=true}
 // damper kasası: menteşe arkada, bedG yerel x ekseni kasanın boyu
-const bedG=new THREE.Group();bedG.position.set(-3.45,F-0.1,0);truck.add(bedG);
+let bedG=new THREE.Group();bedG.position.set(-3.45,F-0.1,0);truck.add(bedG);
 box(5.45,0.16,2.6,BED,bedG,2.72,0.02,0);
 for(const s of[-1,1]){ext([[0,0.1],[5.45,0.1],[5.45,1.25],[0,0.95]],0.1,BED,bedG,s*1.24,0.015);
   for(let i=0;i<6;i++)box(0.09,0.95,0.07,TRD,bedG,0.4+i*0.95,0.6,s*1.32);box(5.5,0.1,0.14,TRD,bedG,2.72,1.12,s*1.3)}
 box(0.14,1.55,2.62,BED,bedG,5.47,0.85,0);box(1.05,0.12,2.62,BED,bedG,5.98,1.56,0);for(let i=0;i<3;i++)box(0.08,0.1,2.62,TRD,bedG,5.6+i*0.38,1.48,0);
 for(let i=0;i<4;i++)box(5.4,0.12,0.12,DARK,bedG,2.72,-0.1,-0.9+i*0.6);
-const tailG=new THREE.Group();tailG.position.set(-0.03,1.0,0);bedG.add(tailG);box(0.1,0.92,2.6,BED,tailG,0,-0.47,0);box(0.12,0.08,2.6,TRD,tailG,0,-0.1,0);
-const hoist=makeCyl(0.12,0.08);
+let tailG=new THREE.Group();tailG.position.set(-0.03,1.0,0);bedG.add(tailG);box(0.1,0.92,2.6,BED,tailG,0,-0.47,0);box(0.12,0.08,2.6,TRD,tailG,0,-0.1,0);
+const hoist=makeCyl(0.12,0.08);let hoists=[hoist];
 // kasa içindeki toprak yüzeyi ve kasaya kaynaşan topaklar
 bedG.add(bMesh);bMesh.position.set(Bed.ox+11*Bed.dx,0.1,Bed.oz+5*Bed.dx);
-const BMC={max:1500,ptr:0,y0:new Float32Array(1500),r:new Float32Array(1500),a:new Uint8Array(1500),base:new Float32Array(1500*16)};
-const bmcMesh=new THREE.InstancedMesh(new THREE.DodecahedronGeometry(1,0),TOON('#ffffff'),BMC.max);bmcMesh.castShadow=true;bmcMesh.frustumCulled=false;bedG.add(bmcMesh);
+let BMC={max:1500,ptr:0,y0:new Float32Array(1500),r:new Float32Array(1500),a:new Uint8Array(1500),base:new Float32Array(1500*16)};
+let bmcMesh=new THREE.InstancedMesh(new THREE.DodecahedronGeometry(1,0),TOON('#ffffff'),BMC.max);bmcMesh.castShadow=true;bmcMesh.frustumCulled=false;bedG.add(bmcMesh);
 {const c=new THREE.Color(1,1,1);for(let i=0;i<BMC.max;i++)bmcMesh.setColorAt(i,c);bmcMesh.instanceMatrix.array.fill(0)}
 let BMCD=false;
 function updBMC(){const a=bmcMesh.instanceMatrix.array;for(let j=0;j<BMC.max;j++){const o=j*16;if(!BMC.a[j]){if(a[o+15]!==0)for(let q=0;q<16;q++)a[o+q]=0;continue}
@@ -561,49 +577,102 @@ function updBMC(){const a=bmcMesh.instanceMatrix.array;for(let j=0;j<BMC.max;j++
   if(h>BMC.y0[j]+0.35){for(let q=0;q<16;q++)a[o+q]=0;continue}for(let q=0;q<16;q++)a[o+q]=BMC.base[o+q];a[o+13]=0.1+h-r*0.25}
   bmcMesh.instanceMatrix.needsUpdate=true;BMCD=false}
 // çarpışma kutuları: kamyon gövdesi (kamyon yerel) ve kasa (kasa yerel)
-const TBOX=[[-3.95,4.4,0.5,1.22,-0.75,0.75],[1.8,4.1,1.0,3.15,-1.2,1.2],[1.95,3.5,0,1.3,-1.45,1.45],[-3.5,-0.55,0,1.3,-1.45,1.45],[4.0,4.4,0.75,1.15,-1.3,1.3]];
-const BBOX_FIX=[[0,5.45,-0.15,0.1,-1.32,1.32],[0,5.45,0.1,1.25,1.18,1.32],[0,5.45,0.1,1.25,-1.32,-1.18],[5.4,5.56,0.1,1.62,-1.32,1.32],[5.45,6.5,1.48,1.62,-1.32,1.32]];
-const BBOX_TAIL=[-0.1,0.03,0.1,0.98,-1.32,1.32];
+let TBOX=[[-3.95,4.4,0.5,1.22,-0.75,0.75],[1.8,4.1,1.0,3.15,-1.2,1.2],[1.95,3.5,0,1.3,-1.45,1.45],[-3.5,-0.55,0,1.3,-1.45,1.45],[4.0,4.4,0.75,1.15,-1.3,1.3]];
+let BBOX_FIX=[[0,5.45,-0.15,0.1,-1.32,1.32],[0,5.45,0.1,1.25,1.18,1.32],[0,5.45,0.1,1.25,-1.32,-1.18],[5.4,5.56,0.1,1.62,-1.32,1.32],[5.45,6.5,1.48,1.62,-1.32,1.32]];
+let BBOX_TAIL=[-0.1,0.03,0.1,0.98,-1.32,1.32];
 const bboxes=()=>TRK.tip<0.1?[...BBOX_FIX,BBOX_TAIL]:BBOX_FIX;
 let _bx=0,_by=0,_bz=0;
-function bedLocal(x,y,z){_l.set(x,y,z);bedG.worldToLocal(_l);_bx=_l.x;_by=_l.y;_bz=_l.z;return _bx>0.08&&_bx<5.38&&Math.abs(_bz)<1.17&&_by>-0.3&&_by<2.2}
-function trkBlock(x,z,rad){const dx=x-TRK.x,dz=z-TRK.z,c=Math.cos(TRK.yaw),s=Math.sin(TRK.yaw),lx=dx*c-dz*s,lz=dx*s+dz*c;return Math.abs(lx-0.2)<4.3+rad&&Math.abs(lz)<1.5+rad}
+// kamyon tipi parametreleri; birden çok kamyon aynı kodu bağlam değiştirerek kullanır (useTruck)
+const C6={id:'tr',near2:40,htop:7,bl0:0.08,bl1:5.38,bw:1.17,bh:2.2,m0:22000,P:280e3,vmax:13,vrev:4.5,stmax:0.55,wb:4.8,af:2.75,ar:-2.05,hw:1.1,wr:0.64,rad:3,blkL:4.3,blkW:1.5,blkO:0.2,
+  rutG:1.12,rutH:2.9,rutW:0.5,tipMax:0.95,tipRate:0.2,tip0:0.32,flowK:1.8,flow0:0.06,big:false,lipX:-0.15,lipH:0.5,spreadZ:1.05,cap:12,idle:650,rpmLo:800,rpmMax:2000,
+  cab:[2.55,2.6,0.45],look:[14,0.8,0.2],camY:2.6,camD:19,hoistPts:[[[1.4,1.15,0],[4.6,-0.12,0],0.9]],exh:[1.6,3.35,1.05],snd:1.1,lp:1};
+let TC=C6,CURT=null;
+const TRUCKS=[];let TACT=[];
+function useTruck(c){if(CURT===c)return;if(CURT)CURT.BMCD=BMCD;CURT=c;TC=c.cfg;truck=c.truck;TRK=c.TRK;bedG=c.bedG;tailG=c.tailG;hoists=c.hoists;WHL=c.WHL;Bed=c.Bed;bMesh=c.bMesh;BMC=c.BMC;bmcMesh=c.bmcMesh;BMCD=c.BMCD;TBOX=c.TBOX;BBOX_FIX=c.BBOX_FIX;BBOX_TAIL=c.BBOX_TAIL}
+function bedLocal(x,y,z){_l.set(x,y,z);bedG.worldToLocal(_l);_bx=_l.x;_by=_l.y;_bz=_l.z;return _bx>TC.bl0&&_bx<TC.bl1&&Math.abs(_bz)<TC.bw&&_by>-0.3&&_by<TC.bh}
+function bedLocalAny(x,y,z){for(const c of TACT){const T_=c.TRK,dx=x-T_.x,dz=z-T_.z;if(dx*dx+dz*dz>c.cfg.near2)continue;useTruck(c);if(bedLocal(x,y,z))return c}return null}
+function trkBlockC(c,x,z,rad){const T_=c.TRK,cf=c.cfg,dx=x-T_.x,dz=z-T_.z,co=Math.cos(T_.yaw),s=Math.sin(T_.yaw),lx=dx*co-dz*s,lz=dx*s+dz*co;return Math.abs(lx-cf.blkO)<cf.blkL+rad&&Math.abs(lz)<cf.blkW+rad}
+function trkBlock(x,z,rad,skip){for(const c of TACT){if(c!==skip&&trkBlockC(c,x,z,rad))return true}return false}
+function viewTruck(){if(MACH==='tr'||MACH==='mt'){const c=TRUCKS.find(c=>c.id===MACH);if(c)return c}const p=curM();let best=null,bd=1e18;for(const c of TACT){const d=(c.TRK.x-p.x)**2+(c.TRK.z-p.z)**2;if(d<bd){bd=d;best=c}}return best}
 // döküm alanı
-const DZONE={x:-27,z:-26,w:14,d:12};
 {const pm=M('#ff7a1a'),wm=M('#f5f5f0');for(const[a,b]of[[-1,-1],[1,-1],[-1,1],[1,1]]){const x=DZONE.x+a*DZONE.w/2,z=DZONE.z+b*DZONE.d/2;
   const g=new THREE.Group();g.position.set(x,0,z);scene.add(g);for(let i=0;i<4;i++)cyl(0.08,0.4,i%2?wm:pm,g,0,0.2+i*0.4,0,null,8);box(0.7,0.4,0.04,pm,g,0.35,1.55,0);DZONE.poles=(DZONE.poles||[]).concat([g])}}
 const inDump=(x,z)=>Math.abs(x-DZONE.x)<DZONE.w/2&&Math.abs(z-DZONE.z)<DZONE.d/2;
-function trkPose(){const c=Math.cos(TRK.yaw),s=Math.sin(TRK.yaw),H=(a,b)=>T.sample(TRK.x+c*a+s*b,TRK.z-s*a+c*b);
-  const hf=(H(2.75,-1.1)+H(2.75,1.1))/2,hb=(H(-2.05,-1.1)+H(-2.05,1.1))/2,hl=(H(2.75,-1.1)+H(-2.05,-1.1))/2,hr=(H(2.75,1.1)+H(-2.05,1.1))/2;
-  truck.position.set(TRK.x,(hf+hb)/2+0.02,TRK.z);truck.rotation.set(Math.atan2(hl-hr,2.24),TRK.yaw,Math.atan2(hf-hb,4.8));
+TRUCKS.push({id:'tr',idx:0,truck,TRK,bedG,tailG,hoists:[hoist],WHL,Bed,bMesh,BMC,bmcMesh,BMCD:false,TBOX,BBOX_FIX,BBOX_TAIL,TRB,cfg:C6});useTruck(TRUCKS[0]);
+/* ---------- Maden kamyonu (rijit şasi, ~165 t boş, 230 t yük, 1800 kW, 3.6 m lastik) ---------- */
+const CM={id:'mt',near2:200,htop:10,bl0:0.15,bl1:9.4,bw:3.15,bh:4.4,m0:165000,P:1.8e6,vmax:15,vrev:3,stmax:0.6,wb:5.9,af:3.0,ar:-2.9,hw:2.7,wr:1.8,rad:8,blkL:6.4,blkW:3.8,blkO:0.2,
+  rutG:2.7,rutH:4.5,rutW:1.0,tipMax:0.85,tipRate:0.11,tip0:0.28,flowK:1.1,flow0:0.5,big:true,lipX:-0.45,lipH:1.5,spreadZ:3.0,cap:130,idle:700,rpmLo:900,rpmMax:1900,
+  cab:[4.45,4.75,2.55],look:[24,2.0,0.6],camY:5,camD:34,hoistPts:[[[-0.6,2.1,-1.05],[5.3,-0.2,-1.05],1.7],[[-0.6,2.1,1.05],[5.3,-0.2,1.05],1.7]],exh:[2.6,6.0,-1.6],snd:1.8,lp:0.6};
+const MT0={x:-6,z:-36};
+TRUCKS.push((()=>{const g=new THREE.Group();g.rotation.order='YZX';scene.add(g);
+  const MY=M('#f2b21b'),MYD=M('#c98d0c'),MD=M('#34373d'),tb=RUBBER.clone();
+  // şasi, ön güverte, motor kaputu, ızgara
+  for(const z of[-1.15,1.15])box(10.6,0.7,0.45,MD,g,-0.5,2.0,z);box(1.6,0.8,7.4,MY,g,5.4,2.65,0);box(0.5,2.3,3.0,MD,g,6.05,3.9,0);for(let i=0;i<7;i++)box(0.06,0.08,2.9,MY,g,6.32,2.95+i*0.3,0);
+  box(2.6,1.9,3.0,MY,g,4.4,3.95,0);box(2.7,0.12,3.1,MYD,g,4.4,4.92,0);
+  // kabin (solda) ve korkuluklar, merdiven
+  box(2.2,2.3,1.9,MY,g,4.35,4.2,2.55).noOutline=true;box(2.3,0.12,2.0,MYD,g,4.35,5.38,2.55).noOutline=true;
+  box(0.06,1.1,1.7,GLASS,g,5.47,4.55,2.55).noOutline=true;box(1.8,1.0,0.06,GLASS,g,4.35,4.5,3.52).noOutline=true;box(1.8,1.0,0.06,GLASS,g,4.35,4.5,1.58).noOutline=true;
+  const RL=M('#e9e3d2');for(let q=0;q<6;q++)cyl(0.04,0.95,RL,g,6.1,3.5,-3.4+q*1.36,null,6);box(0.05,0.05,7.0,RL,g,6.1,3.95,0);
+  {const st=seg([7.1,0.6],[6.0,3.05],0.1,1.0,MD,g);st.position.z=-2.6;for(let q=0;q<5;q++)box(0.3,0.05,1.0,MD,g,6.95-q*0.24,0.95+q*0.5,-2.6)}
+  for(const s of[-1,1]){const hl=box(0.08,0.25,0.5,M('#fff6c9',0,0,{emissive:lin('#fff3b0'),emissiveIntensity:0.6}),g,6.25,3.2,s*2.6);hl.noOutline=true}
+  box(1.6,1.2,1.0,MD,g,1.0,2.6,-2.1);box(1.6,1.0,0.9,MYD,g,1.0,2.6,2.1);cyl(0.14,1.6,MD,g,2.6,5.4,-1.6,null,10);
+  // tekerlekler: önde tek, arkada çift; diş blokları
+  const WH=[],tg=new THREE.CylinderGeometry(1.8,1.8,1.05,28);tg.rotateX(Math.PI/2);const lg=new THREE.BoxGeometry(0.34,0.14,1.07);
+  for(const[x,zs,steer]of[[3.0,[2.7],1],[-2.9,[2.1,3.25],0]])for(const s of[-1,1])for(const zz of zs){const hub=new THREE.Group();hub.position.set(x,1.8,s*zz);g.add(hub);const rot=new THREE.Group();hub.add(rot);
+    mesh(tg,tb,rot);for(let i=0;i<22;i++){const a=i/22*Math.PI*2,l=mesh(lg,tb,rot,Math.cos(a)*1.8,Math.sin(a)*1.8,0);l.rotation.z=a+Math.PI/2}
+    cyl(1.0,1.08,STEEL,rot,0,0,0,'z',16);cyl(0.42,1.12,MD,rot,0,0,0,'z',10);WH.push({hub,rot,steer})}
+  for(const s of[-1,1]){const f=box(2.6,0.15,1.3,MYD,g,3.0,3.75,s*2.7);f.rotation.z=0.05}
+  // damper kasası: menteşe arkada; ön duvar + kabin üstüne uzanan siperlik
+  const bg=new THREE.Group();bg.position.set(-5.6,2.75,0);g.add(bg);
+  box(9.7,0.25,7.0,MY,bg,4.85,-0.05,0);
+  for(const s of[-1,1]){ext([[0,0],[9.7,0],[9.7,3.0],[0,2.4]],0.18,MY,bg,s*3.42,0.02);for(let i=0;i<7;i++)box(0.16,2.6,0.14,MYD,bg,0.7+i*1.4,1.35,s*3.55);box(9.8,0.18,0.24,MYD,bg,4.85,2.75,s*3.52)}
+  box(0.25,3.7,7.0,MY,bg,9.7,1.85,0);box(2.6,0.2,7.0,MY,bg,11.0,3.6,0);for(let i=0;i<4;i++)box(0.12,0.16,7.0,MYD,bg,10.0+i*0.65,3.48,0);
+  {const t=box(0.8,0.2,6.9,MY,bg,-0.35,0.2,0);t.rotation.z=-0.35}for(let i=0;i<5;i++)box(9.5,0.18,0.18,MD,bg,4.85,-0.27,-2.6+i*1.3);
+  const tl=new THREE.Group();bg.add(tl);
+  const BedM=new HF(31,22,0.3,0.2,-3.15);const bm=hfMesh(BedM,30*0.3,21*0.3,bedMat);bm.castShadow=true;bg.add(bm);bm.position.set(BedM.ox+15*BedM.dx,0.1,BedM.oz+10.5*BedM.dx);
+  const BM={max:1200,ptr:0,y0:new Float32Array(1200),r:new Float32Array(1200),a:new Uint8Array(1200),base:new Float32Array(1200*16)};
+  const bmm=new THREE.InstancedMesh(new THREE.DodecahedronGeometry(1,0),TOON('#ffffff'),BM.max);bmm.castShadow=true;bmm.frustumCulled=false;bg.add(bmm);
+  {const c=new THREE.Color(1,1,1);for(let i=0;i<BM.max;i++)bmm.setColorAt(i,c);bmm.instanceMatrix.array.fill(0)}
+  const hs=[makeCyl(0.24,0.16),makeCyl(0.24,0.16)];
+  outline(g);
+  return{id:'mt',idx:1,truck:g,TRK:{eng:0,crank:0,x:MT0.x,z:MT0.z,yaw:0,v:0,steer:0,tip:0,rpm:0,pow:0,wr:0,lastIn:-1e9,idle:true,mud:0,dumpAcc:0,moving:false,beepT:0},
+    bedG:bg,tailG:tl,hoists:hs,WHL:WH,Bed:BedM,bMesh:bm,BMC:BM,bmcMesh:bmm,BMCD:false,
+    TBOX:[[-6.0,6.3,1.0,2.7,-1.4,1.4],[3.2,6.4,2.6,5.5,-3.7,3.7],[1.2,4.8,0,3.6,-3.25,-2.15],[1.2,4.8,0,3.6,2.15,3.25],[-4.7,-1.1,0,3.6,-3.9,-1.6],[-4.7,-1.1,0,3.6,1.6,3.9]],
+    BBOX_FIX:[[0,9.7,-0.35,0.1,-3.5,3.5],[0,9.7,0.1,3.0,3.32,3.55],[0,9.7,0.1,3.0,-3.55,-3.32],[9.55,9.85,0.1,3.75,-3.5,3.5],[9.6,12.3,3.45,3.75,-3.5,3.5]],
+    BBOX_TAIL:[-0.6,0.1,0.1,0.55,-3.4,3.4],TRB:tb,cfg:CM}})());
+
+function trkPose(){const c=Math.cos(TRK.yaw),s=Math.sin(TRK.yaw),H=(a,b)=>T.sample(TRK.x+c*a+s*b,TRK.z-s*a+c*b),cf=TC;
+  const hf=(H(cf.af,-cf.hw)+H(cf.af,cf.hw))/2,hb=(H(cf.ar,-cf.hw)+H(cf.ar,cf.hw))/2,hl=(H(cf.af,-cf.hw)+H(cf.ar,-cf.hw))/2,hr=(H(cf.af,cf.hw)+H(cf.ar,cf.hw))/2;
+  truck.position.set(TRK.x,(hf+hb)/2+0.02,TRK.z);truck.rotation.set(Math.atan2(hl-hr,2*cf.hw),TRK.yaw,Math.atan2(hf-hb,cf.af-cf.ar));
   bedG.rotation.z=TRK.tip;tailG.rotation.z=-TRK.tip*1.05;for(const w of WHL){w.rot.rotation.z=-TRK.wr;if(w.steer)w.hub.rotation.y=TRK.steer}
   truck.updateMatrixWorld(true);for(const p of DZONE.poles)p.position.y=T.sample(p.position.x,p.position.z)}
-function trkDraw(){_p1.set(1.4,1.15,0);truck.localToWorld(_p1);_p2.set(4.6,-0.12,0);bedG.localToWorld(_p2);placeCyl(hoist,_p1,_p2,0.9)}
+function trkDraw(){for(let q=0;q<hoists.length;q++){const[A,B,L]=TC.hoistPts[q];_p1.set(A[0],A[1],A[2]);truck.localToWorld(_p1);_p2.set(B[0],B[1],B[2]);bedG.localToWorld(_p2);placeCyl(hoists[q],_p1,_p2,L)}}
 function bedMF(){let s=0,m=0;for(let k=0;k<Bed.h.length;k++){s+=Bed.h[k];m+=Bed.h[k]*Bed.m[k]}return s>1e-6?m/s:0}
 function trkStep(u,dt){
   trkPose();
-  const vol=Bed.volume(),m=22000+vol*1800,W=m*9.81,rf=Math.max(0.3,TRK.rpm/2000);
+  const cf=TC,vol=Bed.volume(),m=cf.m0+vol*1800,W=m*9.81,rf=Math.max(0.3,TRK.rpm/cf.rpmMax);
   const k=T.near(TRK.x,TRK.z),loose=k>=0&&T.c[k]<0.5,pitch=truck.rotation.z;
-  const trac=0.62*W*0.7,res=(loose?0.07:0.025)*W,P=280e3*rf;let a;
+  const trac=0.62*W*0.7,res=(loose?0.07:0.025)*W,P=cf.P*rf;let a;
   if(Math.abs(u.thr)>0.03&&u.thr*TRK.v<-0.1){a=-Math.sign(TRK.v)*Math.min(Math.abs(TRK.v)/dt,6);TRK.pow=0.1}
   else if(Math.abs(u.thr)>0.03){const Fd=Math.min(trac,P*0.85/Math.max(Math.abs(TRK.v),1.3))*u.thr;a=(Fd-Math.sign(TRK.v||u.thr)*res)/m-9.81*Math.sin(pitch);TRK.pow=Math.min(1,Math.abs(Fd)*Math.max(Math.abs(TRK.v),1.3)/P)}
   else{a=-Math.sign(TRK.v)*Math.min(Math.abs(TRK.v)/dt,res/m+0.9)-9.81*Math.sin(pitch)*(Math.abs(TRK.v)>0.4?1:0);TRK.pow=0.05}
-  TRK.v=Math.max(-4.5,Math.min(13,TRK.v+a*dt));if(Math.abs(u.thr)<0.03&&Math.abs(TRK.v)<0.3)TRK.v=0;
-  const st=u.st*0.55*(1-0.55*Math.min(1,Math.abs(TRK.v)/12));TRK.steer+=Math.max(-0.9*dt,Math.min(0.9*dt,st-TRK.steer));
-  const w=TRK.v*Math.tan(TRK.steer)/4.8,ny=TRK.yaw+w*dt,nx=TRK.x+Math.cos(ny)*TRK.v*dt,nz=TRK.z-Math.sin(ny)*TRK.v*dt;
+  TRK.v=Math.max(-cf.vrev,Math.min(cf.vmax,TRK.v+a*dt));if(Math.abs(u.thr)<0.03&&Math.abs(TRK.v)<0.3)TRK.v=0;
+  const st=u.st*cf.stmax*(1-0.55*Math.min(1,Math.abs(TRK.v)/(cf.vmax*0.92)));TRK.steer+=Math.max(-0.9*dt,Math.min(0.9*dt,st-TRK.steer));
+  const w=TRK.v*Math.tan(TRK.steer)/cf.wb,ny=TRK.yaw+w*dt,nx=TRK.x+Math.cos(ny)*TRK.v*dt,nz=TRK.z-Math.sin(ny)*TRK.v*dt;
   const o0={x:TRK.x,z:TRK.z,yaw:TRK.yaw};TRK.x=nx;TRK.z=nz;TRK.yaw=ny;
-  if(trkBlock(ex.x,ex.z,2.4)||trkBlock(DZ.x,DZ.z,2.8)||shBlock(nx,nz,2.4)||Math.abs(nx)>HALF-3||Math.abs(nz)>HALF-3){const v0=TRK.v;Object.assign(TRK,o0);if(Math.abs(v0)>2)sfx.hit(0.6,'truck');if(Math.abs(v0)>0.4)shk('tr',-0.12*Math.sign(v0)*Math.min(1,Math.abs(v0)/4),(Math.random()-.5)*0.06,0.05);TRK.v=0}
-  TRK.wr+=TRK.v*dt/0.64;TRK.moving=Math.abs(TRK.v)>0.05;
+  let oth=false;for(const o of TACT){if(o!==CURT&&(trkBlockC(o,TRK.x+Math.cos(TRK.yaw)*cf.blkL*0.7,TRK.z-Math.sin(TRK.yaw)*cf.blkL*0.7,cf.blkW*0.8)||trkBlockC(o,TRK.x,TRK.z,cf.blkW)||trkBlockC(o,TRK.x-Math.cos(TRK.yaw)*cf.blkL*0.7,TRK.z+Math.sin(TRK.yaw)*cf.blkL*0.7,cf.blkW*0.8)))oth=true}
+  if(oth||(ACT.ex&&trkBlockC(CURT,ex.x,ex.z,2.4))||(ACT.dz&&trkBlockC(CURT,DZ.x,DZ.z,2.8))||shBlock(nx,nz,cf.blkW+1)||Math.abs(nx)>HALF-cf.rad||Math.abs(nz)>HALF-cf.rad){const v0=TRK.v;Object.assign(TRK,o0);if(Math.abs(v0)>2)sfx.hit(0.6,'truck');if(Math.abs(v0)>0.4)shk(cf.id,-0.12*Math.sign(v0)*Math.min(1,Math.abs(v0)/4),(Math.random()-.5)*0.06,0.05);TRK.v=0}
+  TRK.wr+=TRK.v*dt/cf.wr;TRK.moving=Math.abs(TRK.v)>0.05;
   // damper: kasa kalkınca yük arkadan akar
-  TRK.tip=Math.max(0,Math.min(0.95,TRK.tip+u.bed*0.2*dt*rf));
-  if(TRK.tip>0.32&&vol>0.01){const dv=Math.min(vol,vol*(TRK.tip-0.32)*1.8*dt+0.06*dt),f=1-dv/vol,mf=bedMF();for(let q=0;q<Bed.h.length;q++)Bed.h[q]*=f;Bed.dirty=true;BMCD=true;
+  TRK.tip=Math.max(0,Math.min(cf.tipMax,TRK.tip+u.bed*cf.tipRate*dt*rf));
+  if(TRK.tip>cf.tip0&&vol>0.01){const dv=Math.min(vol,vol*(TRK.tip-cf.tip0)*cf.flowK*dt+cf.flow0*dt),f=1-dv/vol,mf=bedMF();for(let q=0;q<Bed.h.length;q++)Bed.h[q]*=f;Bed.dirty=true;BMCD=true;
     if(inDump(TRK.x,TRK.z))delivered+=dv;TRK.dumpAcc+=dv;
-    while(TRK.dumpAcc>0.004){const r=soilR(),vr=volR(r);if(vr>TRK.dumpAcc)break;TRK.dumpAcc-=vr;_p1.set(-0.15,0.15+Math.random()*0.5,(Math.random()-.5)*2.1);bedG.localToWorld(_p1);
-      _p2.set(-1,0,0).transformDirection(bedG.matrixWorld);addChunk(_p1.x,_p1.y,_p1.z,mf,_p2.x*1.8+Math.cos(TRK.yaw)*TRK.v,_p2.y*1.8,_p2.z*1.8-Math.sin(TRK.yaw)*TRK.v,r,mf>1.4?1:0);if(Math.random()<0.5)spray(_p1.x,_p1.y,_p1.z,2,mf,0.6,0.4,_p2.x*1.5,_p2.z*1.5)}}
-  trackRuts(TRK.x,TRK.z,TRK.yaw,1.12,2.9,TRK.v,TRK.v,dt,0.5);
+    let nsp=0;while(TRK.dumpAcc>0.004&&nsp<(cf.big?10:40)){nsp++;const r=cf.big?0.2+0.2*Math.pow(Math.random(),1.2):soilR(),vr=volR(r);if(vr>TRK.dumpAcc)break;TRK.dumpAcc-=vr;_p1.set(cf.lipX,0.15+Math.random()*cf.lipH,(Math.random()-.5)*2*cf.spreadZ);bedG.localToWorld(_p1);
+      _p2.set(-1,0,0).transformDirection(bedG.matrixWorld);if(addChunk(_p1.x,_p1.y,_p1.z,mf,_p2.x*1.8+Math.cos(TRK.yaw)*TRK.v,_p2.y*1.8,_p2.z*1.8-Math.sin(TRK.yaw)*TRK.v,r,mf>1.4?1:0)<0)T.deposit(_p1.x+_p2.x*1.5,_p1.z+_p2.z*1.5,vr,mf);if(Math.random()<0.5)spray(_p1.x,_p1.y,_p1.z,2,mf,0.6,0.4,_p2.x*1.5,_p2.z*1.5)}}
+  trackRuts(TRK.x,TRK.z,TRK.yaw,cf.rutG,cf.rutH,TRK.v,TRK.v,dt,cf.rutW);
   if(loose)TRK.mud=Math.min(1,TRK.mud+Math.abs(TRK.v)*dt*0.02);
   const act=Math.abs(u.thr)+Math.abs(u.st)+Math.abs(u.bed)>0.05;if(act)TRK.lastIn=performance.now();TRK.idle=performance.now()-TRK.lastIn>4000;
-  const tg=TRK.eng!==2?(TRK.eng===1?190:0):TRK.idle?650:Math.max(800,Math.min(2000,900+Math.abs(TRK.v)/13*900+TRK.pow*500+Math.abs(u.bed)*700));const rate=tg>TRK.rpm?800:500;TRK.rpm+=Math.max(-rate*dt,Math.min(rate*dt,tg-TRK.rpm));if(TRK.eng===2&&TRK.rpm<550)TRK.rpm=550}
+  const tg=TRK.eng!==2?(TRK.eng===1?190:0):TRK.idle?cf.idle:Math.max(cf.rpmLo,Math.min(cf.rpmMax,cf.rpmLo+100+Math.abs(TRK.v)/cf.vmax*(cf.rpmMax-cf.rpmLo)*0.55+TRK.pow*(cf.rpmMax-cf.rpmLo)*0.4+Math.abs(u.bed)*600));const rate=tg>TRK.rpm?800:500;TRK.rpm+=Math.max(-rate*dt,Math.min(rate*dt,tg-TRK.rpm));if(TRK.eng===2&&TRK.rpm<cf.idle-100)TRK.rpm=cf.idle-100}
 
 // kabin içi: konsol ve kumanda kolları
 const JOY=[];
@@ -629,7 +698,7 @@ function setTool(t){ex.tool=t;if(typeof touchUI==='function')setTimeout(touchUI,
 let HACC=0;
 let CACC=0;
 // beton döşeme delindiyse altı sıkışmış dolgu (kazılabilir)
-function concBreak(q){if(T.cc[q]>0&&T.b[q]<=T.h0[q]-CONC_T){T.b[q]=T.bo[q];T.cc[q]=0;T.c[q]=1;T.cp[q]=1;T.dirty=true}}
+function concBreak(q){if(T.cc[q]>0&&T.b[q]<=T.h0[q]-CONC_T){T.b[q]=T.bo[q];T.cc[q]=0;T.c[q]=1;T.cp[q]=1;T.touch(q)}}
 function hammerBlow(){tmp.copy(HAMPT.l).applyMatrix4(bkG.matrixWorld);sfx.hammer();shk('ex',0.035*Math.cos(ex.swing)*(Math.random()<.5?1:-1),0.03*Math.sin(ex.swing)*(Math.random()<.5?1:-1),0.015);
   let best=-1,bd=1e9;for(let i=0;i<DM.max;i++){if(!DM.a[i]||DM.t[i]!==1)continue;const d=Math.hypot(DM.x[i]-tmp.x,DM.y[i]-tmp.y,DM.z[i]-tmp.z)-DM.r[i];if(d<bd){bd=d;best=i}}
   if(best>=0&&bd<0.3){wake(best);DM.px[best]=DM.x[best];DM.pz[best]=DM.z[best];DM.hp[best]--;if(Math.random()<0.5)dust(tmp.x,tmp.y,tmp.z,0.5);if(DM.hp[best]<=0)splitRock(best);return}
@@ -637,7 +706,7 @@ function hammerBlow(){tmp.copy(HAMPT.l).applyMatrix4(bkG.matrixWorld);sfx.hammer
   if(tmp.y<=T.b[k]+0.12&&T.h[k]-T.b[k]<0.3){const i0=k%N,j0=(k/N)|0;let vol=0;
     let cv=0;for(let dj=-1;dj<=1;dj++)for(let di=-1;di<=1;di++){const q=(j0+dj)*N+i0+di,cq=T.cc[q]>0,d=(di||dj)?(cq?0.03:0.022):(cq?0.065:0.055);if(!cq&&T.b[q]-d<-6)continue;
       const exposed=T.h[q]-T.b[q]<0.3;T.b[q]-=d;if(cq)cv+=d*DX*DX;else vol+=d*DX*DX;if(exposed)T.h[q]=Math.max(T.b[q],T.h[q]-d);if(cq)concBreak(q)}
-    T.dirty=true;HACC+=vol*1.5;CACC+=cv*1.5;
+    T.touchRows(j0-1,j0+1);HACC+=vol*1.5;CACC+=cv*1.5;
     while(CACC>0.004){const r=0.06+0.17*Math.pow(Math.random(),1.4),v=volR(r);if(v>CACC)break;CACC-=v;const a=Math.random()*6.28;
       addChunk(tmp.x+Math.cos(a)*0.3,tmp.y+0.12+r,tmp.z+Math.sin(a)*0.3,3,Math.cos(a)*0.8,0.8+Math.random(),Math.sin(a)*0.8,r,1)}
     while(HACC>0.003){const r=0.05+0.14*Math.pow(Math.random(),1.6),v=volR(r);if(v>HACC)break;HACC-=v;const a=Math.random()*6.28;
@@ -721,7 +790,7 @@ function dzSoil(dt){const v=DZ.v;let cutVol=0,cutS=0,rockHit=0,mfs=0,dep=[];
       const h=T.h[k];if(h<=_p1.y)continue;
       if(_p1.y<T.b[k]-0.03)rockHit++;
       const tgt=Math.max(_p1.y,T.b[k]);if(h<=tgt)continue;const rem=h-tgt,mf=T.matF(k),sk=sigAt(k);let vol=rem*DX*DX*(T.c[k]>0.5?SWELL:1);
-      T.h[k]=tgt;T.cp[k]*=rem>0.15?0.2:0.7;T.dirty=true;cutVol+=rem*DX*DX;cutS+=rem*DX*DX*sk;mfs+=mf*vol;dep.push([zs,vol,mf])}}
+      T.h[k]=tgt;T.cp[k]*=rem>0.15?0.2:0.7;T.touch(k);cutVol+=rem*DX*DX;cutS+=rem*DX*DX*sk;mfs+=mf*vol;dep.push([zs,vol,mf])}}
   // kesilen toprak bıçağın önüne yığılır; bir kısmı topak olarak yuvarlanır
   for(const[zs,vol,mf]of dep){let vv=vol;if(DM.n<650&&Math.random()<0.12&&vv>0.004){DZACC+=vv*0.5;DZMF+=mf*vv*0.5;vv*=0.5}
     _p1.set(4.0+Math.random()*0.45,0,zs*1.02);dzG.localToWorld(_p1);T.deposit(_p1.x,_p1.z,vv,mf)}
@@ -736,7 +805,7 @@ function dzSoil(dt){const v=DZ.v;let cutVol=0,cutS=0,rockHit=0,mfs=0,dep=[];
   // ripper: zemini gevşetir, kayayı çatlatıp parçaları yüzeye çıkarır
   if(DZ.rp>0.05&&v>0.05){_p1.set(-3.4,-DZ.rp+0.02,0);dzG.localToWorld(_p1);const k=T.near(_p1.x,_p1.z);
     if(k>=0){const depth=Math.max(0,T.h[k]-_p1.y);fr+=depth*140e3;
-      if(depth>0.05){if(T.c[k]>0.5){T.m[k]=T.matF(k);T.c[k]=0}T.h[k]-=0.015*v*dt*10;_p2.set(-3.4,0,0.55);dzG.localToWorld(_p2);T.deposit(_p2.x,_p2.z,0.004*v*dt*10,T.m[k]);_p2.set(-3.4,0,-0.55);dzG.localToWorld(_p2);T.deposit(_p2.x,_p2.z,0.004*v*dt*10,T.m[k]);T.dirty=true}
+      if(depth>0.05){if(T.c[k]>0.5){T.m[k]=T.matF(k);T.c[k]=0}T.h[k]-=0.015*v*dt*10;_p2.set(-3.4,0,0.55);dzG.localToWorld(_p2);T.deposit(_p2.x,_p2.z,0.004*v*dt*10,T.m[k]);_p2.set(-3.4,0,-0.55);dzG.localToWorld(_p2);T.deposit(_p2.x,_p2.z,0.004*v*dt*10,T.m[k]);T.touch(k)}
       if(_p1.y<T.b[k]){fr+=260e3;const d=Math.min(T.b[k]-_p1.y,0.08*v*dt*(T.cc[k]>0?0.5:1));T.b[k]-=d;concBreak(k);RIPACC+=d*DX*DX*1.5*6;
         while(RIPACC>0.01){const r=0.07+0.16*Math.pow(Math.random(),1.5),vr=volR(r);if(vr>RIPACC)break;RIPACC-=vr;_p2.set(-3.6-Math.random()*0.4,0.2,(Math.random()-.5)*0.6);dzG.localToWorld(_p2);
           addChunk(_p2.x,T.sample(_p2.x,_p2.z)+r+0.05,_p2.z,2,0,0.5,0,r,1)}}}}
@@ -872,7 +941,7 @@ function killChunk(i){if(!DM.a[i])return;DM.a[i]=0;DM.n--;DM.inB[i]=0;DM.inT[i]=
 function wake(i){if(DM.sl[i]){DM.sl[i]=0;DM.rest[i]=0;DM.px[i]=DM.x[i];DM.py[i]=DM.y[i];DM.pz[i]=DM.z[i]}}
 
 function mergeChunk(i){const x=DM.x[i],z=DM.z[i];if(DM.t[i]===0&&Math.random()<0.4)spray(x,DM.y[i],z,1,DM.mf[i],0.6,0.6);
-  if(bedLocal(x,DM.y[i],z)){Bed.deposit(_bx,_bz,DM.v[i],DM.mf[i]);addBMC(i,_bx,_by,_bz)}else{T.deposit(x,z,DM.v[i],DM.mf[i]);addMC(i,false)}
+  if(bedLocalAny(x,DM.y[i],z)){Bed.deposit(_bx,_bz,DM.v[i],DM.mf[i]);addBMC(i,_bx,_by,_bz)}else{T.deposit(x,z,DM.v[i],DM.mf[i]);addMC(i,false)}
   killChunk(i)}
 // bir kayayı hacmi korunarak parçalara böl
 function splitRock(i){const V=DM.v[i],x=DM.x[i],y=DM.y[i],z=DM.z[i],r0=DM.r[i];killChunk(i);
@@ -886,8 +955,9 @@ function dem(dt){
   MB.copy(bkG.matrixWorld);if(!mbInit){MBi.copy(MB).invert();mbInit=true}
   const De=MD.copy(MBi).premultiply(MB).elements;MBi.copy(MB).invert();
   MCi.copy(chassis.matrixWorld).invert();MUi.copy(upper.matrixWorld).invert();MZi.copy(dzG.matrixWorld).invert();
-  MBD.copy(bedG.matrixWorld);if(!mbdInit){MBDi.copy(MBD).invert();mbdInit=true}const BDd=MBDd.copy(MBDi).premultiply(MBD).elements;MBDi.copy(MBD).invert();MTi.copy(truck.matrixWorld).invert();
-  const BDi=MBDi.elements,BDe=MBD.elements,Ti=MTi.elements,TWm=truck.matrixWorld.elements,BB=bboxes();
+  for(const c of TACT){if(!c.mm)c.mm={BD:new THREE.Matrix4(),BDi:new THREE.Matrix4(),BDd:new THREE.Matrix4(),Ti:new THREE.Matrix4(),init:false};const q=c.mm;
+    q.BD.copy(c.bedG.matrixWorld);if(!q.init){q.BDi.copy(q.BD).invert();q.init=true}q.BDd.copy(q.BDi).premultiply(q.BD);q.BDi.copy(q.BD).invert();q.Ti.copy(c.truck.matrixWorld).invert();
+    useTruck(c);c.e={BDd:q.BDd.elements,BDi:q.BDi.elements,BDe:q.BD.elements,Ti:q.Ti.elements,TWm:c.truck.matrixWorld.elements,BB:bboxes()}}
   const Be=MB.elements,Ie=MBi.elements,Ce=MCi.elements,Ue=MUi.elements,Ze=MZi.elements,ZW=dzG.matrixWorld.elements,g=9.81*dt*dt;
   if(ACT.sh){MSL.copy(shLow.matrixWorld).invert();MSU.copy(shUp.matrixWorld).invert();MSB.copy(shBk.matrixWorld).invert()}const SLe=MSL.elements,SUe=MSU.elements,SBe=MSB.elements;
   tr(Be,0.65,0.55,0);const bcx=_ox,bcy=_oy,bcz=_oz;tr(De,bcx,bcy,bcz);const bmov=Math.hypot(_ox-bcx,_oy-bcy,_oz-bcz)>0.0004;
@@ -896,9 +966,9 @@ function dem(dt){
   for(let i=0;i<DM.max;i++){if(!DM.a[i])continue;
     if(SL[i]){const dbx=X[i]-bcx,dby=Y[i]-bcy,dbz=Z[i]-bcz;
       if((bmov&&dbx*dbx+dby*dby+dbz*dbz<6.5)||(DZ.moving&&(X[i]-DZ.x)**2+(Z[i]-DZ.z)**2<36))wake(i);
-      else if((i+frameStep)%12===0&&Math.abs(T.sample(X[i],Z[i])-DM.g0[i])>0.05&&!bedLocal(X[i],Y[i],Z[i]))wake(i)}
+      else if((i+frameStep)%12===0&&Math.abs(T.sample(X[i],Z[i])-DM.g0[i])>0.05&&!bedLocalAny(X[i],Y[i],Z[i]))wake(i)}
     if(!SL[i]){
-      if(DM.inT[i]&&!DM.inB[i]){tr(BDd,X[i],Y[i],Z[i]);X[i]=_ox;Y[i]=_oy;Z[i]=_oz;tr(BDd,PX[i],PY[i],PZ[i]);PX[i]=_ox;PY[i]=_oy;PZ[i]=_oz}
+      if(DM.inT[i]&&!DM.inB[i]&&TRUCKS[DM.inT[i]-1].e){const BDd=TRUCKS[DM.inT[i]-1].e.BDd;tr(BDd,X[i],Y[i],Z[i]);X[i]=_ox;Y[i]=_oy;Z[i]=_oz;tr(BDd,PX[i],PY[i],PZ[i]);PX[i]=_ox;PY[i]=_oy;PZ[i]=_oz}
       if(DM.inB[i]){tr(De,X[i],Y[i],Z[i]);X[i]=_ox;Y[i]=_oy;Z[i]=_oz;tr(De,PX[i],PY[i],PZ[i]);PX[i]=_ox;PY[i]=_oy;PZ[i]=_oz;
         // taşıma sırasında (ağız yukarı) yükün kendi içindeki yavaş kayması statik sürtünme/kohezyonla tutulur; ağız dönünce serbest akar
         if(heapOn){const rx=X[i]-PX[i],ry=Y[i]-PY[i],rz=Z[i]-PZ[i];if(rx*rx+ry*ry+rz*rz<1.6e-5){PX[i]=X[i]-rx*0.2;PY[i]=Y[i]-ry*0.2;PZ[i]=Z[i]-rz*0.2}}}
@@ -925,15 +995,17 @@ function dem(dt){
     for(let i=0;i<DM.max;i++){if(!DM.a[i]||SL[i])continue;const r=R[i];
       const ht=T.sample(X[i],Z[i]);if(Y[i]-r<ht){const vy=Y[i]-PY[i];Y[i]=ht+r;PY[i]=Math.max(PY[i],Y[i]-Math.max(0,-vy)*0.12);fric(i,TT[i]?0.45:0.6);CT_[i]=1;
         if(it===0&&vy<-0.025){if(TT[i])hits.rock++;else{hits.ground++;if(Math.random()<0.35)spray(X[i],ht+0.03,Z[i],2,DM.mf[i],1.4,1.3)}if(Math.random()<0.04)dust(X[i],ht+0.1,Z[i],0.7)}}
-      const tdx=X[i]-TRK.x,tdz=Z[i]-TRK.z;
-      if(tdx*tdx+tdz*tdz<40&&Y[i]<truck.position.y+7){
-        tr(Ti,X[i],Y[i],Z[i]);let hitT=false;for(const b of TBOX){if(boxPush(i,_ox,_oy,_oz,b)){tr(TWm,_ox,_oy,_oz);X[i]=_ox;Y[i]=_oy;Z[i]=_oz;hitT=true;tr(Ti,X[i],Y[i],Z[i])}}if(hitT)fric(i,0.3);
-        tr(BDi,X[i],Y[i],Z[i]);let lx=_ox,ly=_oy,lz=_oz,mv=false;
-        if(lx>0.08&&lx<5.38&&Math.abs(lz)<1.17&&ly>-0.3){const hb=0.1+Bed.sample(lx,lz);if(ly-r<hb){const vy=Y[i]-PY[i];ly=hb+r;mv=true;CT_[i]=1;if(it===0&&vy<-0.025){hits.bed+=TT[i]?3:1;const I=DM.v[i]*(-vy)*120*(TT[i]?0.09:0.05);shk('tr',I*0.25,(lz/1.2)*I*0.5,-I*0.6)}}DM.inT[i]=ly<hb+r+0.6?1:0}else DM.inT[i]=0;
+      let inT_=0;
+      for(const c of TACT){const TR_=c.TRK,cf=c.cfg,E=c.e;const tdx=X[i]-TR_.x,tdz=Z[i]-TR_.z;
+      if(tdx*tdx+tdz*tdz<cf.near2&&Y[i]<c.truck.position.y+cf.htop){const Ti=E.Ti,TWm=E.TWm,BDi=E.BDi,BDe=E.BDe,BDd=E.BDd,BB=E.BB,Bd=c.Bed;
+        tr(Ti,X[i],Y[i],Z[i]);let hitT=false;for(const b of c.TBOX){if(boxPush(i,_ox,_oy,_oz,b)){tr(TWm,_ox,_oy,_oz);X[i]=_ox;Y[i]=_oy;Z[i]=_oz;hitT=true;tr(Ti,X[i],Y[i],Z[i])}}if(hitT)fric(i,0.3);
+        tr(BDi,X[i],Y[i],Z[i]);let lx=_ox,ly=_oy,lz=_oz,mv=false,itn=0;
+        if(lx>cf.bl0&&lx<cf.bl1&&Math.abs(lz)<cf.bw&&ly>-0.3){const hb=0.1+Bd.sample(lx,lz);if(ly-r<hb){const vy=Y[i]-PY[i];ly=hb+r;mv=true;CT_[i]=1;if(it===0&&vy<-0.025){hits.bed+=TT[i]?3:1;const I=DM.v[i]*(-vy)*120*(TT[i]?0.09:0.05)*(cf.big?0.15:1);shk(cf.id,I*0.25,(lz/(cf.bw+0.03))*I*0.5,-I*0.6)}}itn=ly<hb+r+0.6?1:0}
         for(const b of BB){if(boxPush(i,lx,ly,lz,b)){lx=_ox;ly=_oy;lz=_oz;mv=true}}
+        if(itn)inT_=c.idx+1;
         if(mv){tr(BDe,lx,ly,lz);const cx=_ox-X[i],cy=_oy-Y[i],cz=_oz-Z[i];X[i]=_ox;Y[i]=_oy;Z[i]=_oz;PX[i]+=cx*0.85;PY[i]+=cy*0.85;PZ[i]+=cz*0.85;
-          if(DM.inT[i]){tr(BDd,X[i],Y[i],Z[i]);const bvx=_ox-X[i],bvy=_oy-Y[i],bvz=_oz-Z[i],rvx=(X[i]-PX[i])-bvx,rvy=(Y[i]-PY[i])-bvy,rvz=(Z[i]-PZ[i])-bvz;PX[i]=X[i]-bvx-rvx*0.4;PY[i]=Y[i]-bvy-rvy*0.4;PZ[i]=Z[i]-bvz-rvz*0.4}}}
-      else DM.inT[i]=0;
+          if(itn){tr(BDd,X[i],Y[i],Z[i]);const bvx=_ox-X[i],bvy=_oy-Y[i],bvz=_oz-Z[i],rvx=(X[i]-PX[i])-bvx,rvy=(Y[i]-PY[i])-bvy,rvz=(Z[i]-PZ[i])-bvz;PX[i]=X[i]-bvx-rvx*0.4;PY[i]=Y[i]-bvy-rvy*0.4;PZ[i]=Z[i]-bvz-rvz*0.4}}}}
+      DM.inT[i]=inT_;
       const dbx=X[i]-bcx,dby=Y[i]-bcy,dbz=Z[i]-bcz;
       if(dbx*dbx+dby*dby+dbz*dbz<2.7*2.7){tr(Ie,X[i],Y[i],Z[i]);let lx2=_ox,ly=_oy,lz2=_oz;const ox=lx2,oy=ly,oz=lz2;
         if(bucketOn&&Math.abs(lz2)<0.62+r){const ins=inPoly(lx2,ly),was=DM.inB[i],az0=Math.abs(lz2);let touch=false;
@@ -967,7 +1039,7 @@ function dem(dt){
     DM.rx[i]+=dz/R[i];DM.rz[i]-=dx/R[i];
     if(DM.inB[i]){bc++;bm+=DM.mf[i]*DM.v[i];bv+=DM.v[i];DM.rest[i]=0;continue}
     if(dx*dx+dy*dy+dz*dz<vr)DM.rest[i]+=dt;else DM.rest[i]=0;
-    if(TT[i]===1){if(DM.rest[i]>0.8){if(bedLocal(X[i],Y[i],Z[i]))mergeChunk(i);else{SL[i]=1;DM.g0[i]=T.sample(X[i],Z[i])}}}
+    if(TT[i]===1){if(DM.rest[i]>0.8){if(bedLocalAny(X[i],Y[i],Z[i]))mergeChunk(i);else{SL[i]=1;DM.g0[i]=T.sample(X[i],Z[i])}}}
     else if(DM.rest[i]>0.6||(DM.n>DM.max-80&&DM.rest[i]>0.1))mergeChunk(i)}
   DM.bc=bc;ex.load=bv+CUTACC;ex.mf=bv?bm/bv:ex.mf;frameStep++}
 let HEAPN=0,HEAPC=true,CUTACC=0,CUTMF=0,CUTZ=0,CUTW=0,frameStep=0,nextR=soilR();
@@ -991,14 +1063,14 @@ function drawChunks(){const a=cMesh.instanceMatrix.array,b=rMesh.instanceMatrix.
     if(!isS){if(a[o+15]!==0)for(let q=0;q<16;q++)a[o+q]=0}
     if(!isR){if(b[o+15]!==0)for(let q=0;q<16;q++)b[o+q]=0}
     if(!DM.a[i])continue;
-    _o.position.set(DM.x[i],DM.y[i],DM.z[i]);if(SHON){if(DM.inB[i])_o.position.applyMatrix4(SHM.ex);else if(DM.inT[i])_o.position.applyMatrix4(SHM.tr)}_o.rotation.set(DM.rx[i],0,DM.rz[i]);const r=DM.r[i]*(isR?1.08:1.15);_o.scale.set(r*DM.sh[i*3],r*DM.sh[i*3+1],r*DM.sh[i*3+2]);_o.updateMatrix();
+    _o.position.set(DM.x[i],DM.y[i],DM.z[i]);if(SHON){if(DM.inB[i])_o.position.applyMatrix4(SHM.ex);else if(DM.inT[i])_o.position.applyMatrix4(SHM[TRUCKS[DM.inT[i]-1].id])}_o.rotation.set(DM.rx[i],0,DM.rz[i]);const r=DM.r[i]*(isR?1.08:1.15);_o.scale.set(r*DM.sh[i*3],r*DM.sh[i*3+1],r*DM.sh[i*3+2]);_o.updateMatrix();
     const t=isR?b:a;for(let q=0;q<16;q++)t[o+q]=_o.matrix.elements[q]}
   cMesh.instanceMatrix.needsUpdate=true;rMesh.instanceMatrix.needsUpdate=true}
 
 const DUST=[];for(let i=0;i<70;i++){const s=new THREE.Sprite(new THREE.SpriteMaterial({map:dustTex,color:lin('#cdb894'),transparent:true,depthWrite:false,opacity:0}));s.visible=false;s.life=0;scene.add(s);DUST.push(s)}
 let dPtr=0;
 function placeRocks(){let s=77;const rnd=()=>(s=(s*16807)%2147483647)/2147483647;let n=0;
-  for(let t=0;t<1500&&n<80;t++){const x=(rnd()-.5)*(SIZE-6),z=(rnd()-.5)*(SIZE-6);
+  for(let t=0;t<6000&&n<320;t++){const x=(rnd()-.5)*(SIZE-6),z=(rnd()-.5)*(SIZE-6);if(haulD(x,z)[0]<HAULW+2||(Math.abs(x-DZONE.x)<DZONE.w/2+2&&Math.abs(z-DZONE.z)<DZONE.d/2+2))continue;
     if(Math.hypot(x,z)<6.5||Math.hypot(x-DZ.x,z-DZ.z)<6||(Math.abs(x-TRUCK.x)<6&&Math.abs(z-TRUCK.z)<3.5)||Math.abs(z-RZ)<5||Math.abs(z-RD.z)<6||Math.hypot(x-SHP.x,z-SHP.z)<10)continue;
     const r=0.2+Math.pow(rnd(),1.4)*0.45,h=T.sample(x,z),i=addChunk(x,h+r*0.72,z,2,0,0,0,r,1);if(i>=0){DM.sl[i]=1;DM.g0[i]=h;n++}}}
 function dust(x,y,z,amt){const s=DUST[dPtr++%DUST.length];s.position.set(x+(Math.random()-.5)*0.5,y,z+(Math.random()-.5)*0.5);s.life=1;s.amt=amt;s.vx=(Math.random()-.5)*0.4;s.vz=(Math.random()-.5)*0.4;s.visible=true}
@@ -1009,8 +1081,9 @@ function smoke(x,y,z,dark,amt,vx,vz){const s=SMK[smPtr++%SMK.length];s.position.
 function drawSmoke(dt){for(const s of SMK){if(!s.visible)continue;s.life-=dt/s.dur;if(s.life<=0){s.visible=false;continue}
   s.vy*=Math.pow(0.55,dt);s.position.x+=(s.vx+0.7)*dt;s.position.y+=s.vy*dt;s.position.z+=(s.vz+0.25)*dt;const k=1-s.life;s.scale.setScalar(0.45+k*(3.2+2.2*s.amt));s.material.opacity=Math.min(1,s.life*1.6)*(0.35+0.45*s.amt)*Math.min(1,k*8)}}
 // egzoz: devir ve yükle artar; ani gaz açışında ve zorlanmada siyah duman
-const EXH=[{acc:0,prev:0,src:()=>{tmp.set(-3.9,5.0,-1.7);shUp.localToWorld(tmp);return tmp},m:()=>SH,k:'sh',big:1.3},{acc:0,prev:0,src:()=>{tmp.set(-3.9,5.0,-0.7);shUp.localToWorld(tmp);return tmp},m:()=>SH,k:'sh',big:1.3},{acc:0,prev:0,src:()=>{tmp.set(-0.4,1.9,0.85);upper.localToWorld(tmp);return tmp},m:()=>ex,k:'ex'},{acc:0,prev:0,src:()=>{tmp.set(1.85,3.4,0.35);dzG.localToWorld(tmp);return tmp},m:()=>DZ,k:'dz'},{acc:0,prev:0,src:()=>{tmp.set(1.6,3.35,1.05);truck.localToWorld(tmp);return tmp},m:()=>TRK,k:'tr'}];
-function exhaust(dt){if(!started)return;for(const e of EXH){if(!ACT[e.k])continue;const m=e.m(),dr=(m.rpm-e.prev)/Math.max(dt,1e-3);e.prev=m.rpm;if(m.rpm<120)continue;
+const EXH=[{acc:0,prev:0,src:()=>{tmp.set(-3.9,5.0,-1.7);shUp.localToWorld(tmp);return tmp},m:()=>SH,k:'sh',big:1.3},{acc:0,prev:0,src:()=>{tmp.set(-3.9,5.0,-0.7);shUp.localToWorld(tmp);return tmp},m:()=>SH,k:'sh',big:1.3},{acc:0,prev:0,src:()=>{tmp.set(-0.4,1.9,0.85);upper.localToWorld(tmp);return tmp},m:()=>ex,k:'ex'},{acc:0,prev:0,src:()=>{tmp.set(1.85,3.4,0.35);dzG.localToWorld(tmp);return tmp},m:()=>DZ,k:'dz'}];
+function addTruckExh(){for(const c of TRUCKS)EXH.push({acc:0,prev:0,src:()=>{tmp.set(...c.cfg.exh);c.truck.localToWorld(tmp);return tmp},m:()=>c.TRK,k:c.id,big:c.cfg.big?1.4:1})}
+let exhInit=false;function exhaust(dt){if(!exhInit){exhInit=true;addTruckExh()}if(!started)return;for(const e of EXH){if(!ACT[e.k])continue;const m=e.m(),dr=(m.rpm-e.prev)/Math.max(dt,1e-3);e.prev=m.rpm;if(m.rpm<120)continue;
   const load=m.pow||0,surge=Math.max(0,Math.min(1,dr/500)),rate=3+12*load+18*surge,dark=Math.min(1,load*0.75+surge*0.9)*(e.k==='sh'?0.55:1);
   e.acc+=rate*(e.big||1)*dt;while(e.acc>1){e.acc-=1;const p=e.src();smoke(p.x,p.y,p.z,dark,Math.min(1,0.3+load*0.7+surge),0,0)}}}
 function drawDust(dt){for(const s of DUST){if(!s.visible)continue;s.life-=dt/2.8;if(s.life<=0){s.visible=false;continue}
@@ -1026,7 +1099,7 @@ function spray(x,y,z,n,mf,sp=1.2,up=1.2,bvx=0,bvz=0){for(let q=0;q<n;q++)crumb(x
 function crumbs(dt){const a=crMesh.instanceMatrix.array;let ch=false;
   for(let i=0;i<CR.max;i++){const o=i*16,st=CR.st[i];if(!st){continue}
     if(st===1){CR.vy[i]-=9.81*dt;CR.x[i]+=CR.vx[i]*dt;CR.y[i]+=CR.vy[i]*dt;CR.z[i]+=CR.vz[i]*dt;
-      let g=T.sample(CR.x[i],CR.z[i]);if(bedLocal(CR.x[i],CR.y[i],CR.z[i])){_l.set(_bx,0.1+Bed.sample(_bx,_bz),_bz);bedG.localToWorld(_l);g=_l.y}
+      let g=T.sample(CR.x[i],CR.z[i]);if(bedLocalAny(CR.x[i],CR.y[i],CR.z[i])){_l.set(_bx,0.1+Bed.sample(_bx,_bz),_bz);bedG.localToWorld(_l);g=_l.y}
       if(CR.y[i]<=g+CR.s[i]*0.5){CR.y[i]=g+CR.s[i]*0.4;CR.st[i]=2;CR.h0[i]=g;CR.life[i]=Math.min(CR.life[i],3+Math.random()*4)}}
     else{CR.life[i]-=dt;if((i&7)===(frameN&7)&&Math.abs(T.sample(CR.x[i],CR.z[i])-CR.h0[i])>0.08)CR.life[i]=0}
     if(st===1)CR.life[i]-=dt*0.2;
@@ -1040,7 +1113,7 @@ const EXW=mudMat(WORN),EXS=mudMat(STEEL),EXTR=mudMat(WORN),DZTR=mudMat(WORN),DZB
 for(const o of BKMESH)o.traverse(q=>{if(q.isMesh&&!q.isOutline){if(q.material===WORN)q.material=EXW;else if(q.material===STEEL)q.material=EXS}});
 tracks.l.im.material=EXTR;tracks.r.im.material=EXTR;dzTracks.l.material=DZTR;dzTracks.r.material=DZTR;
 bladeG.traverse(q=>{if(q.isMesh&&!q.isOutline&&q.material===DY)q.material=DZBL});
-TRB.userData.base=TRB.color.clone();
+for(const c of TRUCKS)c.TRB.userData.base=c.TRB.color.clone();
 function mudSlots(parent,n,gen){const im=new THREE.InstancedMesh(new THREE.DodecahedronGeometry(1,0),TOON('#ffffff'),n);im.castShadow=true;parent.add(im);const o=new THREE.Object3D(),c=new THREE.Color();
   for(let i=0;i<n;i++){const[x,y,z,s]=gen(i);o.position.set(x,y,z);o.rotation.set(Math.random()*3,Math.random()*3,Math.random()*3);o.scale.set(s,s*0.6,s*(0.8+Math.random()*0.5));o.updateMatrix();im.setMatrixAt(i,o.matrix);
     const p=Math.random()<0.2?CT:CD,k=0.65+Math.random()*0.35;c.setRGB(p[0]*k,p[1]*k,p[2]*k);im.setColorAt(i,c)}im.count=0;return im}
@@ -1051,10 +1124,10 @@ const MUD={bk:mudSlots(bkG,80,()=>{const i=(Math.random()*(SHELL.length-1))|0,a=
     return[pr[i][0]+(pr[i+1][0]-pr[i][0])*t+0.06,y*Math.random(),(Math.random()-.5)*4.1,0.04+Math.random()*0.08]}),
   dzT:mudSlots(dzG,60,()=>[(Math.random()-.5)*3.4,0.74,(Math.random()<0.5?-1:1)*(1.125+(Math.random()-.5)*0.3),0.05+Math.random()*0.08])};
 ex.mudB=0;ex.mudT=0;DZ.mudB=0;DZ.mudT=0;
-function mudUpdate(dt){ex.mudB=Math.max(0,ex.mudB-dt*0.002);ex.mudT=Math.max(0,ex.mudT-dt*0.001);DZ.mudB=Math.max(0,DZ.mudB-dt*0.0015);DZ.mudT=Math.max(0,DZ.mudT-dt*0.001);TRK.mud=Math.max(0,TRK.mud-dt*0.001);
+function mudUpdate(dt){ex.mudB=Math.max(0,ex.mudB-dt*0.002);ex.mudT=Math.max(0,ex.mudT-dt*0.001);DZ.mudB=Math.max(0,DZ.mudB-dt*0.0015);DZ.mudT=Math.max(0,DZ.mudT-dt*0.001);for(const c of TRUCKS)c.TRK.mud=Math.max(0,c.TRK.mud-dt*0.001);
   if(nO.y<-0.6&&ex.tool==='bucket')ex.mudB=Math.max(0,ex.mudB-dt*0.01);
   const tint=(m,v)=>m.color.copy(m.userData.base).lerp(MUDC,Math.min(1,v)*0.65);
-  tint(EXW,ex.mudB);tint(EXS,ex.mudB*0.7);tint(EXTR,ex.mudT);tint(DZTR,DZ.mudT);tint(DZBL,DZ.mudB*0.6);tint(TRB,TRK.mud);
+  tint(EXW,ex.mudB);tint(EXS,ex.mudB*0.7);tint(EXTR,ex.mudT);tint(DZTR,DZ.mudT);tint(DZBL,DZ.mudB*0.6);for(const c of TRUCKS)tint(c.TRB,c.TRK.mud);
   MUD.bk.count=Math.floor(Math.min(1,ex.mudB)*80);MUD.exT.count=Math.floor(Math.min(1,ex.mudT)*50);MUD.bl.count=Math.floor(Math.min(1,DZ.mudB)*100);MUD.dzT.count=Math.floor(Math.min(1,DZ.mudT)*60)}
 function onLoose(x,z){const k=T.near(x,z);return k>=0&&(T.c[k]<0.5||Math.abs(T.h[k]-T.h0[k])>0.05)}
 
@@ -1083,7 +1156,7 @@ function touchUI(){if(!TCH.on)return;const t=$('tbtn');t.innerHTML='';const L=$(
 function dzAuto(){DZ.auto=!DZ.auto;DZ.hY=null;toast(DZ.auto?'Otomatik bıçak açık: kesme kotu sabit tutulur':'Otomatik bıçak kapalı');touchUI()}
 for(const ev of['contextmenu','selectstart','dragstart'])addEventListener(ev,e=>{if(!(e.target&&e.target.closest&&e.target.closest('input,textarea')))e.preventDefault()},{passive:false});
 const tdz=v=>Math.abs(v)<0.12?0:(v-Math.sign(v)*0.12)/0.88;
-addEventListener('keydown',e=>{keys[e.code]=true;if(/^Arrow|Space/.test(e.code))e.preventDefault();if(e.code==='KeyV'&&!e.repeat)toggleCam();if(!e.repeat&&started){if(e.code==='Digit1')setMach('ex');if(e.code==='Digit2')setMach('dz');if(e.code==='Digit3')setMach('tr');if(e.code==='Digit4')setMach('sh');if(e.code==='KeyM')toggleEngine();if(e.code==='KeyT'&&MACH==='ex')setTool(ex.tool==='bucket'?'hammer':'bucket');if(e.code==='KeyG'&&MACH==='dz')dzAuto()}if(!started)start()});
+addEventListener('keydown',e=>{keys[e.code]=true;if(/^Arrow|Space/.test(e.code))e.preventDefault();if(e.code==='KeyV'&&!e.repeat)toggleCam();if(!e.repeat&&started){if(e.code==='Digit1')setMach('ex');if(e.code==='Digit2')setMach('dz');if(e.code==='Digit3')setMach('tr');if(e.code==='Digit4')setMach('sh');if(e.code==='Digit5')setMach('mt');if(e.code==='KeyM')toggleEngine();if(e.code==='KeyT'&&MACH==='ex')setTool(ex.tool==='bucket'?'hammer':'bucket');if(e.code==='KeyG'&&MACH==='dz')dzAuto()}if(!started)start()});
 addEventListener('keyup',e=>{keys[e.code]=false});
 addEventListener('blur',()=>{for(const k in keys)keys[k]=false});
 const ax=(p,n)=>(keys[p]?1:0)-(keys[n]?1:0);
@@ -1159,13 +1232,13 @@ function selfArm(){let n=0;for(const p of(ex.tool==='hammer'?HBKP:BKP)){_w.copy(
     _l.copy(_w);armG.worldToLocal(_l);if(Math.hypot(_l.x-2.9,_l.y)>0.28&&Math.abs(_l.z)<0.3&&inPolyG(ARMP,_l.x,_l.y))n++;
     _l.copy(_w);boomG.worldToLocal(_l);if(Math.abs(_l.z)<0.32&&inPolyG(BOOMP,_l.x,_l.y))n++}
   return n}
-function collisions(){let n=0,what='';const sa=selfArm();if(sa){n+=sa;what='arm'}
+function collisions(){let n=0,what='',tid='tr';const sa=selfArm();if(sa){n+=sa;what='arm'}
   for(const c of(ex.tool==='hammer'?HCP:CP)){_w.copy(c.l).applyMatrix4(c.f.matrixWorld);
-    _l.copy(_w);truck.worldToLocal(_l);let tb=false;for(const b of TBOX)if(inB(_l,b)){tb=true;break}
-    if(!tb){_l.copy(_w);bedG.worldToLocal(_l);for(const b of bboxes())if(inB(_l,b)){tb=true;break}}if(tb){n++;what='truck'}
+    for(const c of TACT){const T_=c.TRK;if((_w.x-T_.x)**2+(_w.z-T_.z)**2>c.cfg.near2)continue;useTruck(c);_l.copy(_w);truck.worldToLocal(_l);let tb=false;for(const b of TBOX)if(inB(_l,b)){tb=true;break}
+    if(!tb){_l.copy(_w);bedG.worldToLocal(_l);for(const b of bboxes())if(inB(_l,b)){tb=true;break}}if(tb){n++;what='truck';tid=c.id}}
     _l.copy(_w);chassis.worldToLocal(_l);if(inB(_l,SELF_C)){n++;what='self'}
     _l.copy(_w);upper.worldToLocal(_l);if(inB(_l,SELF_U)){n++;what='self'}}
-  return{n,what}}
+  return{n,what,tid}}
 function plowClear(){let m=1e9;if(ex.tool==='hammer'){for(const p of[HAMPT,...HPLOW]){tmp.copy(p.l).applyMatrix4(bkG.matrixWorld);const k=T.near(tmp.x,tmp.z);if(k>=0)m=Math.min(m,tmp.y-T.h[k]+(p===HAMPT?0.35:0))}return m}
   const pts=PLOW;for(const p of pts){if(p.f!==bkG)continue;tmp.copy(p.l).applyMatrix4(bkG.matrixWorld);const k=T.near(tmp.x,tmp.z);if(k>=0&&T.c[k]>0.5)m=Math.min(m,tmp.y-T.h[k])}return m}
 function boulderClear(){if(ex.tool!=='hammer')return 1e9;let m=1e9;for(const p of[HAMPT.l,...HBKP]){tmp.copy(p).applyMatrix4(bkG.matrixWorld);
@@ -1223,7 +1296,7 @@ function soil(dt){nO.copy(NOPEN).transformDirection(bkG.matrixWorld);let cutV=0;
     const tgt=Math.max(ty,T.b[k]),rem=hs-tgt;if(rem<=0)return;
     // kova sırtı ve arm yerinde (sıkı) toprağı kesmez: bastırınca direnç oluşur, yalnızca gevşek toprağı yana iter
     if(!tooth&&T.c[k]>0.5){const pv=rem*DX*DX;CUT.V+=pv*0.5;CUT.S+=pv*0.5*sigAt(k);return}
-    const sk=sigAt(k),mf=T.matF(k);let vol=rem*DX*DX*(T.c[k]>0.5?SWELL:1);T.h[k]=tgt;T.cp[k]*=rem>0.15?0.2:0.7;T.dirty=true;const sp=Math.hypot(vx,vy,vz);cutV=Math.max(cutV,sp);
+    const sk=sigAt(k),mf=T.matF(k);let vol=rem*DX*DX*(T.c[k]>0.5?SWELL:1);T.h[k]=tgt;T.cp[k]*=rem>0.15?0.2:0.7;T.touch(k);const sp=Math.hypot(vx,vy,vz);cutV=Math.max(cutV,sp);
     if(tooth)CUT.D=Math.max(CUT.D,hs-ty);
     const bv=rem*DX*DX*(tooth?1:1.6);CUT.V+=bv;CUT.S+=bv*sk;
     const vn=vx*nO.x+vy*nO.y+vz*nO.z;
@@ -1258,11 +1331,11 @@ function trackRuts(X0,Z0,yaw,gauge,half,vl,vr,dt,w){const c=Math.cos(yaw),s=Math
       T.w[k]=Math.min(1,T.w[k]+dt*v*1.6);T.cp[k]=Math.min(1,T.cp[k]+dt*v*(w>0.6?0.06:0.035));
       if(T.c[k]<0.5){const r=Math.min(0.028*dt*v,T.h[k]-T.b[k]);if(r>0){T.h[k]-=r;T.deposit(x+s*sg,z+c*sg,r*DX*DX*0.6,T.m[k])}}
       else if(T.h[k]>T.h0[k]-0.05)T.h[k]-=0.004*dt*v;
-      T.dirty=true}}}
+      T.touch(k)}}}
 function ruts(dt){if(onLoose(ex.x,ex.z))ex.mudT=Math.min(1.2,ex.mudT+(Math.abs(ex.v.l)+Math.abs(ex.v.r))*dt*0.02);trackRuts(ex.x,ex.z,ex.yaw,1.15,1.8,ex.v.l*TRV+(ex.v.l-ex.v.r)*0.2,ex.v.r*TRV+(ex.v.r-ex.v.l)*0.2,dt,0.6)}
 /* ---------- Makine seçimi ve motorlar ---------- */
-const ACT={ex:true,dz:true,tr:true,sh:true},MORD=['ex','dz','tr','sh'];
-const MNAME={ex:'Ekskavatör',dz:'Dozer D9',tr:'Kamyon',sh:'Shovel 540 t'};
+const ACT={ex:true,dz:true,tr:true,sh:true,mt:true},MORD=['ex','dz','tr','sh','mt'];
+const MNAME={ex:'Ekskavatör',dz:'Dozer D9',tr:'Kamyon 6x6',sh:'Shovel 540 t',mt:'Maden kamyonu'};
 /* ---------- Ön kepçe (face shovel), EX5600 sınıfı: ~540 t, 29 m³ alttan boşaltmalı kova, 2 x 1450 kW ---------- */
 const SH={x:SHP.x,z:SHP.z,yaw:0,swing:0,boom:0.55,stick:-2.2,bk:0.25,clam:0,cutV:0,
   v:{swing:0,boom:0,stick:0,bk:0,clam:0,l:0,r:0},rpm:0,pow:0,load:0,mf:1,fcut:0,s:1,trk:{l:0,r:0},eng:0,crank:0,idle:true,lastIn:0,mudT:0,
@@ -1375,11 +1448,11 @@ function shSpawn(vol,mf,lx,ly,spreadZ,vx,vy,vz){SHSP+=vol;let n=0;
 
 const _sw=new V3(),_sl=new V3(),_bv=new V3(),_bp=new V3(),_bp0=new V3();let SHBP=false;
 function shClearRock(){let m=1e9;for(const p of SHCUT.concat(SHPLOW)){tmp.copy(p.l);shBk.localToWorld(tmp);const k=T.near(tmp.x,tmp.z);if(k>=0)m=Math.min(m,tmp.y-T.b[k])}return m}
-function shCollide(){let n=0,what='';for(const p of SHPTS){_sw.copy(p);shBk.localToWorld(_sw);
-  if(ACT.tr){_sl.copy(_sw);truck.worldToLocal(_sl);let tb=false;for(const b of TBOX)if(inB(_sl,b)){tb=true;break}
-    if(!tb){_sl.copy(_sw);bedG.worldToLocal(_sl);for(const b of bboxes())if(inB(_sl,b)){tb=true;break}}if(tb){n++;what='truck'}}
+function shCollide(){let n=0,what='',tid='tr';for(const p of SHPTS){_sw.copy(p);shBk.localToWorld(_sw);
+  for(const c of TACT){const T_=c.TRK;if((_sw.x-T_.x)**2+(_sw.z-T_.z)**2>c.cfg.near2+40)continue;useTruck(c);_sl.copy(_sw);truck.worldToLocal(_sl);let tb=false;for(const b of TBOX)if(inB(_sl,b)){tb=true;break}
+    if(!tb){_sl.copy(_sw);bedG.worldToLocal(_sl);for(const b of bboxes())if(inB(_sl,b)){tb=true;break}}if(tb){n++;what='truck';tid=c.id}}
   _sl.copy(_sw);shLow.worldToLocal(_sl);if(inB(_sl,SH_LOWBOX)){n++;what='self'}
-  _sl.copy(_sw);shUp.worldToLocal(_sl);if(_sl.x<2.2&&inB(_sl,SH_UPBOX)){n++;what='self'}}return{n,what}}
+  _sl.copy(_sw);shUp.worldToLocal(_sl);if(_sl.x<2.2&&inB(_sl,SH_UPBOX)){n++;what='self'}}return{n,what,tid}}
 
 function shStep(u,dt){SH.u=u;const now=performance.now();if(Object.values(u).some(v=>Math.abs(v)>0.05))SH.lastIn=now;
   // motor ve marş
@@ -1396,7 +1469,7 @@ function shStep(u,dt){SH.u=u;const now=performance.now();if(Object.values(u).som
   SH.pow=Math.min(1,pdem/SH_PMAX*(run?1:0)+(run&&!SH.idle?0.12:0));
   // yürüyüş
   const sp=(SH.v.l+SH.v.r)/2,w=(SH.v.r-SH.v.l)/5.9,ny=SH.yaw+w*dt,nx=SH.x+Math.cos(ny)*sp*dt,nz=SH.z-Math.sin(ny)*sp*dt;
-  const free=Math.abs(nx)<HALF-5.2&&Math.abs(nz)<HALF-5.2&&!(ACT.tr&&trkBlock(nx,nz,4.6))&&!(ACT.ex&&Math.hypot(nx-ex.x,nz-ex.z)<7.8)&&!(ACT.dz&&Math.hypot(nx-DZ.x,nz-DZ.z)<8.4);
+  const free=Math.abs(nx)<HALF-5.2&&Math.abs(nz)<HALF-5.2&&!trkBlock(nx,nz,4.6)&&!(ACT.ex&&Math.hypot(nx-ex.x,nz-ex.z)<7.8)&&!(ACT.dz&&Math.hypot(nx-DZ.x,nz-DZ.z)<8.4);
   if(free){SH.yaw=ny;SH.x=nx;SH.z=nz}else{if(Math.abs(sp)>0.15){shk('sh',-0.05*Math.sign(sp),0,0.02);sfx.hit(0.6,'truck')}SH.v.l=SH.v.r=0}
   SH.moving=Math.abs(sp)>0.02||Math.abs(w)>0.01;SH.trk.l=SH.v.l;SH.trk.r=SH.v.r;SHTR.l.s+=SH.v.l*dt;SHTR.r.s+=SH.v.r*dt;
   if(SH.moving){trackRuts(SH.x,SH.z,SH.yaw,2.95,4.4,SH.v.l,SH.v.r,dt*2.2,1.0);if(onLoose(SH.x,SH.z))SH.mudT=Math.min(1.2,SH.mudT+Math.abs(sp)*dt*0.03)}
@@ -1407,7 +1480,7 @@ function shStep(u,dt){SH.u=u;const now=performance.now();if(Object.values(u).som
   if((ra<-0.03&&ra<rb-0.001)||col.n>cb){const v0={...SH.v},sv=Math.abs(v0.swing)*3+Math.abs(v0.boom)+Math.abs(v0.stick)+Math.abs(v0.bk);
     [SH.swing,SH.boom,SH.stick,SH.bk]=prev;for(const j of['swing','boom','stick','bk'])SH.v[j]=-v0[j]*0.15;shPose();
     if(now-SH.lastBump>220&&sv>0.04){SH.lastBump=now;const A=0.03+0.07*Math.min(1,sv*2.5);shk('sh',A*Math.cos(SH.swing)*(v0.boom<0?1:-1),-A*Math.sin(SH.swing)*0.6+v0.swing*0.1,0.02);
-      if(col.n>cb){if(now-SH.lastHit>450){sfx.hit(Math.min(1,sv*2),col.what);SH.lastHit=now}if(col.what==='truck')shk('tr',0.14,(Math.random()-.5)*0.08,-0.08)}
+      if(col.n>cb){if(now-SH.lastHit>450){sfx.hit(Math.min(1,sv*2),col.what);SH.lastHit=now}if(col.what==='truck')shk(col.tid,col.tid==='mt'?0.05:0.14,(Math.random()-.5)*0.08,-0.08)}
       else if(ra<-0.03&&now-SH.lastRock>450){sfx.scrapeRock();SH.lastRock=now}}}
   // kepçe hızı (ağız yönü, dökme hızı için)
   _bp.set(1.6,1.4,0);shBk.localToWorld(_bp);if(!SHBP){_bp0.copy(_bp);SHBP=true}_bv.subVectors(_bp,_bp0).divideScalar(dt);_bp0.copy(_bp);
@@ -1421,7 +1494,7 @@ function shStep(u,dt){SH.u=u;const now=performance.now();if(Object.values(u).som
     for(let j=j0;j<=j1;j++)for(let i=i0;i<=i1;i++){if(i<1||j<1||i>=N-1||j>=N-1)continue;const k=j*N+i,X=T.ox+i*DX,Z=T.oz+j*DX;
       let t=L2>1e-8?((X-ox)*sx+(Z-oz)*sz)/L2:1;t=Math.max(0,Math.min(1,t));if(Math.hypot(X-(ox+sx*t),Z-(oz+sz*t))>(heel?DX*1.1:DX*0.72))continue;
       const ty=oy+(tmp.y-oy)*t,hs=T.h[k];if(ty>=hs)continue;const tgt=Math.max(ty,T.b[k]),rem=hs-tgt;if(rem<=0)continue;
-      const sk=sigAt(k),mf=T.matF(k),v=rem*DX*DX*(T.c[k]>0.5?SWELL:1);T.h[k]=tgt;T.cp[k]*=0.2;T.dirty=true;E+=rem*DX*DX*sk*(heel?2.5:1);
+      const sk=sigAt(k),mf=T.matF(k),v=rem*DX*DX*(T.c[k]>0.5?SWELL:1);T.h[k]=tgt;T.cp[k]*=0.2;T.touch(k);E+=rem*DX*DX*sk*(heel?2.5:1);
       if(heel){HV+=v;HMF+=mf*v}else{V+=v;MF+=mf*v;cut=true}}};
   for(const pt of SHCUT)sweep(pt,false);for(const pt of SHPLOW)sweep(pt,true);
   // topuk sürtünmesiyle sökülen toprak kovanın önüne itilir
@@ -1441,8 +1514,9 @@ function shStep(u,dt){SH.u=u;const now=performance.now();if(Object.values(u).som
   // devir
   const tgt=run?(SH.idle?1000:1800-220*SH.pow*SH.pow):SH.eng===1?190:0,rate=tgt>SH.rpm?520:380;SH.rpm+=Math.max(-rate*dt,Math.min(rate*dt,tgt-SH.rpm));if(run&&SH.rpm<650)SH.rpm=650}
 
-const MOBJ=()=>({ex,dz:DZ,tr:TRK,sh:SH});
+const MOBJ=()=>({ex,dz:DZ,tr:TRUCKS[0].TRK,sh:SH,mt:TRUCKS[1].TRK});
 function curM(){return MOBJ()[MACH]}
+function trucksStep(dt){for(const c of TACT){useTruck(c);const inp=(MACH===c.id&&started&&TRK.eng===2)?readTr():{thr:0,st:0,bed:0};trkStep(inp,dt)}}
 function engTick(m,dt){if(m.eng===1){m.crank=(m.crank||0)+dt;if(m.crank>1.3){m.eng=2;m.rpm=Math.max(m.rpm,760)}}}
 function engBtn(){const m=curM(),b=$('bEng');if(!b)return;b.textContent=m.eng===2?'Motor: durdur (M)':m.eng===1?'Marş basılıyor…':'Motor: çalıştır (M)';b.classList.toggle('on',m.eng===2)}
 function toggleEngine(){if(!started)return;const m=curM();if(m.eng===0){m.eng=1;m.crank=0;toast(MNAME[MACH]+': marş')}else{m.eng=0;toast(MNAME[MACH]+': motor durduruluyor')}engBtn();touchUI()}
@@ -1453,9 +1527,9 @@ function toast(msg,key){const now=performance.now();if(key){if(now-(msgT[key]||0
 let MACH='ex';
 const Z_EX=()=>({swing:0,arm:0,boom:0,bucket:0,l:0,r:0}),Z_DZ=()=>({thr:0,st:0,bl:0,tl:0,rp:0});
 function hammerTick(dt){ex.hamOn=started&&ex.eng===2&&MACH==='ex'&&ex.tool==='hammer'&&(keys.Space||GPA||TCH.hit);if(!ex.hamOn){ex.hamT=0.1;return}ex.hamT+=dt;while(ex.hamT>=0.11){ex.hamT-=0.11;hammerBlow()}}
-function step(dt){const u=(MACH==='ex'&&started&&ex.eng===2)?readInput():Z_EX(),du=(MACH==='dz'&&started&&DZ.eng===2)?readDz():Z_DZ(),tu=(MACH==='tr'&&started&&TRK.eng===2)?readTr():{thr:0,st:0,bed:0},su=(MACH==='sh'&&started&&SH.eng===2)?readSh():Z_SH();
-  engTick(ex,dt);engTick(DZ,dt);engTick(TRK,dt);if(frameN%15===0)engBtn();
-  if(!ACT.ex){hammerTick(dt);if(ACT.dz)dzStep(du,dt);if(ACT.tr)trkStep(tu,dt);if(ACT.sh)shStep(su,dt);soil(dt);dem(dt);shkStep(dt);return}ex.u=u;const active=Object.values(u).some(v=>Math.abs(v)>0.05);const now=performance.now();if(active)ex.lastIn=now;
+function step(dt){const u=(MACH==='ex'&&started&&ex.eng===2)?readInput():Z_EX(),du=(MACH==='dz'&&started&&DZ.eng===2)?readDz():Z_DZ(),tu={thr:0,st:0,bed:0},su=(MACH==='sh'&&started&&SH.eng===2)?readSh():Z_SH();
+  engTick(ex,dt);engTick(DZ,dt);for(const c of TRUCKS)engTick(c.TRK,dt);if(frameN%15===0)engBtn();
+  if(!ACT.ex){hammerTick(dt);if(ACT.dz)dzStep(du,dt);trucksStep(dt);if(ACT.sh)shStep(su,dt);soil(dt);dem(dt);shkStep(dt);return}ex.u=u;const active=Object.values(u).some(v=>Math.abs(v)>0.05);const now=performance.now();if(active)ex.lastIn=now;
   pose();hydraulics(u,dt);shkStep(dt);
   // yürüyüş
   const sp=(ex.v.l+ex.v.r)/2*TRV,w=(ex.v.r-ex.v.l)*TRV/2.3;
@@ -1473,12 +1547,12 @@ function step(dt){const u=(MACH==='ex'&&started&&ex.eng===2)?readInput():Z_EX(),
   else if((ra<-0.03&&ra<rb-0.0015)||col.n>cb){const sv=Math.abs(ex.v.swing)+Math.abs(ex.v.boom)+Math.abs(ex.v.arm)+Math.abs(ex.v.bucket),v0={...ex.v};
     [ex.swing,ex.boom,ex.arm,ex.bucket]=prev;for(const j of['swing','boom','arm','bucket'])ex.v[j]=-v0[j]*0.22;pose();
     {const nowB=performance.now();if(nowB-(ex.lastBump||0)>180){ex.lastBump=nowB;const A=0.05+0.16*Math.min(1,sv),sg=(v0.boom+0.4*v0.arm)<0?1:-1,cs=Math.cos(ex.swing),sn=Math.sin(ex.swing);
-      shk('ex',A*cs*sg,-A*sn*sg*0.8+v0.swing*0.12,0.06*Math.min(1,sv));if(col.what==='truck')shk('tr',A*0.5,(Math.random()-.5)*A,-0.05)}}
+      shk('ex',A*cs*sg,-A*sn*sg*0.8+v0.swing*0.12,0.06*Math.min(1,sv));if(col.what==='truck')shk(col.tid,A*0.5*(col.tid==='mt'?0.3:1),(Math.random()-.5)*A,-0.05)}}
     const now2=performance.now();
     if(col.n>cb){if(col.what!=='arm'&&now2-ex.lastHit>450)sfx.hit(Math.min(1,sv*1.2),col.what);ex.lastHit=now2}
     else{if(now2-ex.lastRock>450)sfx.scrapeRock();ex.lastRock=now2}}
   if(ex.relief&&ex.fdig>30e3)toast('Tahliye valfi açtı: daha ince talaş al','rel');
-  hammerTick(dt);if(ACT.dz)dzStep(du,dt);if(ACT.tr)trkStep(tu,dt);if(ACT.sh)shStep(su,dt);soil(dt);dem(dt);
+  hammerTick(dt);if(ACT.dz)dzStep(du,dt);trucksStep(dt);if(ACT.sh)shStep(su,dt);soil(dt);dem(dt);
   // motor devri (otomatik rölanti)
   ex.idle=now-ex.lastIn>4000;const tgt=ex.eng!==2?(ex.eng===1?190:0):ex.idle?1050:1850-230*ex.pow*ex.pow;
   const rate=tgt>ex.rpm?700:450;ex.rpm+=Math.max(-rate*dt,Math.min(rate*dt,tgt-ex.rpm));if(ex.eng===2&&ex.rpm<600)ex.rpm=600}
@@ -1493,9 +1567,9 @@ const pend=e=>{PTR.delete(e.pointerId);if(PTR.size<2)pinch=0;drag=PTR.size===1?{
 cv.addEventListener('wheel',e=>{e.preventDefault();cam.dist=Math.max(6,Math.min(90,cam.dist*(1+Math.sign(e.deltaY)*0.1)))},{passive:false});
 function toggleCam(){cam.mode^=1;$('bCam').textContent=cam.mode?'Takip kamerası (V)':'Kabin kamerası (V)'}
 const cPos=new V3(),cLook=new V3();
-function updateCam(dt){const isD=MACH==='dz',isT=MACH==='tr',isS=MACH==='sh';
-  if(cam.mode){if(isS){cPos.set(3.35,5.15,2.15);shUp.localToWorld(cPos);cLook.set(16,-1.5,0.3);shUp.localToWorld(cLook)}else if(isT){cPos.set(2.55,2.6,0.45);truck.localToWorld(cPos);cLook.set(14,0.8,0.2);truck.localToWorld(cLook)}else if(isD){cPos.set(-0.55,3.5,0);dzG.localToWorld(cPos);cLook.set(9,-0.2,0);dzG.localToWorld(cLook)}else{cPos.set(0.05,2.0,-0.8);upper.localToWorld(cPos);cLook.set(7,-0.4,-0.2);upper.localToWorld(cLook)}camera.position.copy(cPos);camera.lookAt(cLook);return}
-  const tx=isS?SH.x:isT?TRK.x:isD?DZ.x:ex.x,tz=isS?SH.z:isT?TRK.z:isD?DZ.z:ex.z,ty=(isS?shG.position.y+6:isT?truck.position.y+2.6:isD?dzG.position.y+2.6:chassis.position.y+2.2);
+function updateCam(dt){const isD=MACH==='dz',isT=MACH==='tr'||MACH==='mt',isS=MACH==='sh';
+  if(cam.mode){if(isS){cPos.set(3.35,5.15,2.15);shUp.localToWorld(cPos);cLook.set(16,-1.5,0.3);shUp.localToWorld(cLook)}else if(isT){cPos.set(...TC.cab);truck.localToWorld(cPos);cLook.set(...TC.look);truck.localToWorld(cLook)}else if(isD){cPos.set(-0.55,3.5,0);dzG.localToWorld(cPos);cLook.set(9,-0.2,0);dzG.localToWorld(cLook)}else{cPos.set(0.05,2.0,-0.8);upper.localToWorld(cPos);cLook.set(7,-0.4,-0.2);upper.localToWorld(cLook)}camera.position.copy(cPos);camera.lookAt(cLook);return}
+  const tx=isS?SH.x:isT?TRK.x:isD?DZ.x:ex.x,tz=isS?SH.z:isT?TRK.z:isD?DZ.z:ex.z,ty=(isS?shG.position.y+6:isT?truck.position.y+TC.camY:isD?dzG.position.y+2.6:chassis.position.y+2.2);
   cam.tx=cam.tx===undefined?tx:cam.tx+(tx-cam.tx)*Math.min(1,dt*5);cam.tz=cam.tz===undefined?tz:cam.tz+(tz-cam.tz)*Math.min(1,dt*5);
   cam.ty+=(ty-cam.ty)*Math.min(1,dt*4);cLook.set(cam.tx,cam.ty,cam.tz);
   camera.position.set(cLook.x+Math.cos(cam.pitch)*Math.cos(cam.yaw)*cam.dist,cLook.y+Math.sin(cam.pitch)*cam.dist,cLook.z+Math.cos(cam.pitch)*Math.sin(cam.yaw)*cam.dist);
@@ -1558,10 +1632,10 @@ const trkPh={l:0,r:0};
 function audioUpdate(dt){if(!AU.ctx||!AU.n)return;const C=AU.ctx,t=C.currentTime,n=AU.n,on=AU.on&&started;
   const T_=(p,v,k=0.06)=>p.setTargetAtTime(v,t,k);
   T_(AU.master.gain,on?0.9:0,0.1);T_(AU.cab.frequency,cam.mode?1300:16000,0.2);
-  const isD=MACH==='dz',isT=MACH==='tr',isS=MACH==='sh',M_=curM(),rpm=Math.max(1,M_.rpm),f1=rpm/60,rn=Math.max(0,(rpm-(isS?1000:isT?650:isD?700:1050))/(isS?800:isT?1350:isD?1100:800)),ld=M_.pow||0,big=isS?1.9:isD?1.3:isT?1.1:1,ef=Math.min(1,rpm/520);
+  const isD=MACH==='dz',isT=MACH==='tr'||MACH==='mt',isS=MACH==='sh',M_=curM(),rpm=Math.max(1,M_.rpm),f1=rpm/60,rn=Math.max(0,(rpm-(isS?1000:isT?TC.idle:isD?700:1050))/(isS?800:isT?TC.rpmMax-TC.idle:isD?1100:800)),ld=M_.pow||0,big=isS?1.9:isD?1.3:isT?TC.snd:1,ef=Math.min(1,rpm/520);
   T_(n.stG.gain,M_.eng===1?0.07:0,0.03);T_(n.stO.frequency,M_.eng===1?150+20*Math.sin(t*3):150,0.05);
   T_(n.eng.frequency,f1,0.05);T_(n.mod.frequency,3*f1,0.05);
-  T_(n.engG.gain,(rpm>300?1:rpm/300)*(0.17+0.08*rn+0.12*ld)*big);T_(n.engLP.frequency,(450+650*rn+1500*ld)*(isS?0.55:isD?0.8:1));
+  T_(n.engG.gain,(rpm>300?1:rpm/300)*(0.17+0.08*rn+0.12*ld)*big);T_(n.engLP.frequency,(450+650*rn+1500*ld)*(isS?0.55:isD?0.8:isT?TC.lp:1));
   T_(n.clOut.gain,ef*(0.025+0.035*rn+0.08*ld)*big);T_(n.rumG.gain,ef*(0.06+0.05*rn+0.05*ld)*big);
   T_(n.tur.frequency,1600+2600*rn*(0.6+0.4*ld),0.3);T_(n.turG.gain,ef*(0.003+0.012*rn*ld),0.3);
   const pm=isS?Math.min(1,SH.pow+(SH.relief?0.5:0)):isT?0.1:isD?Math.min(1,DZ.pow*0.6):Math.max(ex.p.boom,ex.p.arm,ex.p.bucket,ex.p.swing)/PREL;
@@ -1581,16 +1655,16 @@ let delivered=0;
 const setBar=(el,f)=>{el.style.width=(Math.max(0,Math.min(1,f))*100).toFixed(1)+'%'};
 const HB={gB:$('gB'),gT:$('gT'),gR:$('gR'),gL:$('gL'),gF:$('gF')};
 let hudM='';
-function hud(){const bv=Bed.volume(),isD=MACH==='dz',isT=MACH==='tr',isS=MACH==='sh',M_=curM(),engTxt=M_.eng===1?'Marş basılıyor…':'Motor kapalı · M ile çalıştır';
+function hud(){const VT=viewTruck();if(VT)useTruck(VT);const bv=VT?Bed.volume():0,isD=MACH==='dz',isT=MACH==='tr'||MACH==='mt',isS=MACH==='sh',M_=curM(),engTxt=M_.eng===1?'Marş basılıyor…':'Motor kapalı · M ile çalıştır';
   const mk=MACH+ex.tool;if(mk!==hudM){hudM=mk;$('lB').textContent=isS?'Kova':isT?'Kasa':isD?'Bıçak önü yük':ex.tool==='hammer'?'Kırıcı':'Kova';$('lF').textContent=isT?'Hız':isD?'İtme direnci':'Kazma kuvveti';
-    $('circ').style.display=MACH==='ex'?'':'none';$('bTool').style.display=MACH==='ex'?'':'none';$('bMach').textContent='Makine: '+MNAME[MACH]+' (1-4)';$('bDump').style.display=ACT.tr?'':'none'}
+    $('circ').style.display=MACH==='ex'?'':'none';$('bTool').style.display=MACH==='ex'?'':'none';$('bMach').textContent='Makine: '+MNAME[MACH]+' (1-5)';$('bDump').style.display=TACT.length?'':'none'}
   if(isS){$('tB').textContent=SH.load.toFixed(1)+' / 29 m³';setBar(HB.gB,SH.load/SH_CAP);
     $('tR').textContent=Math.round(SH.rpm)+' rpm';setBar(HB.gR,SH.rpm/2000);$('tL').textContent=Math.round(SH.pow*100)+'%';setBar(HB.gL,SH.pow);
     $('tF').textContent=Math.round(SH.fcut/1000)+' kN';setBar(HB.gF,SH.fcut/SH_FMAX);
     $('tI').textContent=SH.eng!==2?engTxt:SH.clam>0.1?'Alt kapak açık: boşaltıyor':SH.relief?'Kesme kuvveti sınırda: daha ince dilim al':SH.idle?'Otomatik rölanti':'Çalışma devri · 2 x 1450 kW'}
-  else if(isT){$('tB').textContent=bv.toFixed(1)+' m³ · '+(bv*DENS).toFixed(1)+' t';setBar(HB.gB,bv/12);
+  else if(isT){$('tB').textContent=bv.toFixed(1)+' m³ · '+(bv*DENS).toFixed(1)+' t';setBar(HB.gB,bv/TC.cap);
     $('tR').textContent=Math.round(TRK.rpm)+' rpm';setBar(HB.gR,TRK.rpm/2200);$('tL').textContent=Math.round(TRK.pow*100)+'%';setBar(HB.gL,TRK.pow);
-    $('tF').textContent=(Math.abs(TRK.v)*3.6).toFixed(0)+' km/sa';setBar(HB.gF,Math.abs(TRK.v)/13);
+    $('tF').textContent=(Math.abs(TRK.v)*3.6).toFixed(0)+' km/sa';setBar(HB.gF,Math.abs(TRK.v)/TC.vmax);
     $('tI').textContent=TRK.eng!==2?engTxt:'Kasa açısı '+Math.round(TRK.tip*57.3)+'°'+(inDump(TRK.x,TRK.z)?' · döküm alanındasın':' · döküm alanı: turuncu direkler')}
   else if(isD){$('tB').textContent=DZ.vpile.toFixed(1)+' m³';setBar(HB.gB,DZ.vpile/9);
     $('tR').textContent=Math.round(DZ.rpm)+' rpm';setBar(HB.gR,DZ.rpm/2000);$('tL').textContent=Math.round(DZ.pow*100)+'%';setBar(HB.gL,DZ.pow);
@@ -1600,23 +1674,24 @@ function hud(){const bv=Bed.volume(),isD=MACH==='dz',isT=MACH==='tr',isS=MACH===
     $('tR').textContent=Math.round(ex.rpm)+' rpm';setBar(HB.gR,ex.rpm/2000);$('tL').textContent=Math.round(ex.pow*100)+'%';setBar(HB.gL,ex.pow);
     $('tF').textContent=Math.round(ex.fdig/1000)+' kN';setBar(HB.gF,ex.fdig/150e3);
     $('tI').textContent=ex.eng!==2?engTxt:ex.idle?'Otomatik rölanti':'Çalışma devri'}
-  $('tT').textContent=bv.toFixed(1)+' m³ · '+(bv*DENS).toFixed(1)+' t';setBar(HB.gT,bv/12);
+  $('tT').textContent=VT?bv.toFixed(1)+' m³ · '+(bv*DENS).toFixed(0)+' t':'—';setBar(HB.gT,VT?bv/TC.cap:0);
   $('tS').textContent=delivered.toFixed(1)+' m³';
   if(MACH==='ex')for(const[id,j]of[['B','boom'],['A','arm'],['K','bucket'],['S','swing']]){const p=ex.p[j];$('p'+id).textContent=Math.round(p/1e5)+' bar';
     const b=$('b'+id);setBar(b.firstElementChild,p/PREL);b.classList.toggle('rel',p>=PREL-1)}}
-function setMach(m){if(!ACT[m])return;const was=MACH;MACH=m;cam.tx=undefined;if(m==='sh')cam.dist=Math.max(cam.dist,40);else if(was==='sh'&&cam.dist>30)cam.dist=19;touchUI();engBtn();
-  const hint=curM().eng!==2?' · motoru çalıştır: M':'';toast((m==='tr'?'Kamyon: W gaz, S fren/geri, A/D direksiyon, R/F damper. Turuncu direkli alana dök':m==='dz'?'Dozer: W/S gaz, A/D yön, ↑↓ bıçak, ←→ tilt, R/F ripper':m==='sh'?'Shovel: W/S arm, ↑↓ bom, ←→ kova, A/D dönüş, R alttan boşalt':'Ekskavatör')+hint);cv.focus()}
+function setMach(m){if(!ACT[m])return;const was=MACH;MACH=m;cam.tx=undefined;if(m==='sh')cam.dist=Math.max(cam.dist,40);else if(m==='mt')cam.dist=Math.max(cam.dist,34);else if((was==='sh'||was==='mt')&&cam.dist>30)cam.dist=19;touchUI();engBtn();
+  const hint=curM().eng!==2?' · motoru çalıştır: M':'';toast((m==='tr'||m==='mt'?(m==='mt'?'Maden kamyonu':'Kamyon')+': W gaz, S fren/geri, A/D direksiyon, R/F damper. Turuncu direkli döküm sahasına dök':m==='dz'?'Dozer: W/S gaz, A/D yön, ↑↓ bıçak, ←→ tilt, R/F ripper':m==='sh'?'Shovel: W/S arm, ↑↓ bom, ←→ kova, A/D dönüş, R alttan boşalt':'Ekskavatör')+hint);cv.focus()}
 function nextMach(){const a=MORD.filter(k=>ACT[k]);setMach(a[(a.indexOf(MACH)+1)%a.length])}
 
 /* ---------- Butonlar ---------- */
-function applyMachines(){const sel={ex:$('mEx').checked,dz:$('mDz').checked,tr:$('mTr').checked,sh:$('mSh').checked};if(!Object.values(sel).some(v=>v))sel.ex=true;
+function applyMachines(){const sel={ex:$('mEx').checked,dz:$('mDz').checked,tr:$('mTr').checked,sh:$('mSh').checked,mt:$('mMt').checked};if(!Object.values(sel).some(v=>v))sel.ex=true;
   for(const k of MORD)ACT[k]=sel[k];
   const hide=(list)=>list.forEach(o=>{o.visible=false});
   if(!ACT.ex){hide([chassis,...cylBoom.map(c=>c.g),cylArm.g,cylBk.g,...sideL.map(c=>c.g),...hL.map(c=>c.g)]);ex.x=ex.z=9000;pose()}
   if(!ACT.dz){hide([dzG,...dzArms.map(c=>c.g),...dzLift.map(c=>c.g),dzTiltC.g,...dzRipC.map(c=>c.g)]);DZ.x=DZ.z=9000;DZ.moving=false;dzPose()}
-  if(!ACT.tr){hide([truck,hoist.g]);TRK.x=TRK.z=9000;truck.position.set(9000,0,9000);truck.updateMatrixWorld(true)}
+  for(const c of TRUCKS)if(!ACT[c.id]){hide([c.truck,...c.hoists.map(h=>h.g)]);c.TRK.x=c.TRK.z=9000;c.truck.position.set(9000,0,9000);c.truck.updateMatrixWorld(true)}
+  TACT=TRUCKS.filter(c=>ACT[c.id]);
   if(!ACT.sh){hide([shG,...Object.values(SHCYL).flat().map(c=>c.g)]);SH.x=SH.z=9000;shPose()}
-  $('msel').style.display='none';MACH=MORD.find(k=>ACT[k]);cam.tx=undefined;if(MACH==='sh')cam.dist=40;hudM=''}
+  $('msel').style.display='none';MACH=MORD.find(k=>ACT[k]);cam.tx=undefined;if(MACH==='sh')cam.dist=40;if(MACH==='mt')cam.dist=34;hudM=''}
 function start(){if(started)return;applyMachines();started=true;$('help').classList.add('hidden');setTimeout(()=>{engBtn();toast(MNAME[MACH]+' · motoru çalıştır: M ya da "Motor" düğmesi')},300);if(MOBILE){TCH.on=true;$('touch').classList.remove('hidden');touchUI();try{const el=document.documentElement;(el.requestFullscreen||el.webkitRequestFullscreen).call(el).catch(()=>{})}catch(e){}}audioInit();if(AU.ctx)AU.ctx.resume();ex.lastIn=performance.now();cv.focus()}
 $('bGo').onclick=start;
 $('bMach').onclick=nextMach;$('bEng').onclick=()=>{toggleEngine();cv.focus()};
@@ -1625,40 +1700,40 @@ $('bQR').onclick=()=>$('qrbox').classList.add('on');$('qrbox').onclick=()=>$('qr
 $('bHelp').onclick=()=>{$('help').classList.toggle('hidden')};
 $('bCam').onclick=()=>{toggleCam();cv.focus()};
 $('bSnd').onclick=()=>{AU.on=!AU.on;$('bSnd').textContent='Ses: '+(AU.on?'açık':'kapalı');if(AU.on){audioInit();AU.ctx&&AU.ctx.resume()}cv.focus()};
-$('bDump').onclick=()=>{const v=Bed.volume();if(v<0.05){toast('Kamyon boş');return}delivered+=v;Bed.h.fill(0);Bed.dirty=true;BMC.a.fill(0);BMCD=true;for(let i=0;i<DM.max;i++){if(DM.a[i]&&bedLocal(DM.x[i],DM.y[i],DM.z[i]))killChunk(i)}toast(v.toFixed(1)+' m³ gönderildi (kasa boşaltıldı)');cv.focus()};
-$('bReset').onclick=()=>{CR.st.fill(0);initTerrain();syncRows(T,tMesh,tColor,0,0,N-1);GRD=true;GK0=0;GK1=N*N;ex.load=0;DM.a.fill(0);DM.sl.fill(0);DM.n=0;placeRocks();MC.a.fill(0);MCD=true;CUTACC=CUTMF=0;delivered=0;cv.focus()};
+$('bDump').onclick=()=>{const VT=viewTruck();if(!VT)return;useTruck(VT);const v=Bed.volume();if(v<0.05){toast('Kamyon boş');return}delivered+=v;Bed.h.fill(0);Bed.dirty=true;BMC.a.fill(0);BMCD=true;for(let i=0;i<DM.max;i++){if(DM.a[i]&&bedLocalAny(DM.x[i],DM.y[i],DM.z[i])===VT)killChunk(i)}toast(v.toFixed(1)+' m³ gönderildi (kasa boşaltıldı)');cv.focus()};
+$('bReset').onclick=()=>{CR.st.fill(0);initTerrain();for(const c of TRUCKS){for(const k of['h','b','c','m'])c.Bed[k].fill(0);c.Bed.dirty=true;c.BMC.a.fill(0);c.BMCD=true}BMCD=true;syncRows(T,tMesh,tColor,0,0,N-1);GRD=true;GK0=0;GK1=N*N;ex.load=0;DM.a.fill(0);DM.sl.fill(0);DM.n=0;placeRocks();MC.a.fill(0);MCD=true;CUTACC=CUTMF=0;delivered=0;cv.focus()};
 
 /* ---------- Döngü ---------- */
 function size(){renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix()}
 addEventListener('resize',size);size();
-syncRows(T,tMesh,tColor,0,0,N-1);updGrass();updClods();
-dzPose();shPose();placeRocks();
+syncRows(T,tMesh,tColor,0,0,N-1);T.dj0=1e9;T.dj1=-1;updGrass();updClods();
+dzPose();shPose();for(const c of TRUCKS){useTruck(c);trkPose()}useTruck(TRUCKS[0]);TACT=TRUCKS.slice();placeRocks();
 pose();for(const t of TEETH)t.p.copy(t.l).applyMatrix4(bkG.matrixWorld);for(const p of PLOW)p.p.copy(p.l).applyMatrix4(p.f.matrixWorld);
-let last=performance.now(),acc=0,frameN=0,GRD=true,GK0=0,GK1=N*N;const H=1/120;
+let PB0=1e9,PB1=-1,last=performance.now(),acc=0,frameN=0,GRD=true,GK0=0,GK1=N*N;const H=1/120;
 // çarpma sarsıntısı: makine gövdesi yay-sönüm gibi kısa salınır (görsel; fizik pozunu bozmaz)
-const SHK={ex:{p:0,vp:0,r:0,vr:0,y:0,vy:0},dz:{p:0,vp:0,r:0,vr:0,y:0,vy:0},tr:{p:0,vp:0,r:0,vr:0,y:0,vy:0},sh:{p:0,vp:0,r:0,vr:0,y:0,vy:0}};
+const SHK={ex:{p:0,vp:0,r:0,vr:0,y:0,vy:0},dz:{p:0,vp:0,r:0,vr:0,y:0,vy:0},tr:{p:0,vp:0,r:0,vr:0,y:0,vy:0},sh:{p:0,vp:0,r:0,vr:0,y:0,vy:0},mt:{p:0,vp:0,r:0,vr:0,y:0,vy:0}};
 function shk(m,p,r,y){const s=SHK[m];s.vp+=p;s.vr+=r;s.vy+=y}
-function shkStep(dt){for(const k in SHK){const s=SHK[k],w=k==='tr'?11:k==='sh'?9:15,z=k==='tr'?0.16:0.22;
+function shkStep(dt){for(const k in SHK){const s=SHK[k],w=k==='tr'?11:k==='mt'?7:k==='sh'?9:15,z=k==='tr'||k==='mt'?0.16:0.22;
   s.vp+=(-w*w*s.p-2*z*w*s.vp)*dt;s.p+=s.vp*dt;s.vr+=(-w*w*s.r-2*z*w*s.vr)*dt;s.r+=s.vr*dt;s.vy+=(-w*w*s.y-2*z*w*s.vy)*dt;s.y+=s.vy*dt;
   s.p=Math.max(-0.035,Math.min(0.035,s.p));s.r=Math.max(-0.035,Math.min(0.035,s.r));s.y=Math.max(-0.08,Math.min(0.08,s.y))}}
-const SHM={ex:new THREE.Matrix4(),tr:new THREE.Matrix4()},_shi=new THREE.Matrix4();let SHON=false;
-function shakeOn(){const G={ex:chassis,dz:dzG,tr:truck,sh:shG};
+const SHM={ex:new THREE.Matrix4(),tr:new THREE.Matrix4(),mt:new THREE.Matrix4()},_shi=new THREE.Matrix4();let SHON=false;
+function shakeOn(){const G={ex:chassis,dz:dzG,tr:TRUCKS[0].truck,sh:shG,mt:TRUCKS[1].truck};
   for(const k in G){const g=G[k],s=SHK[k];if(SHM[k])_shi.copy(g.matrixWorld).invert();g.rotation.z+=s.p;g.rotation.x+=s.r;g.position.y+=s.y;g.updateMatrixWorld(true);if(SHM[k])SHM[k].copy(g.matrixWorld).multiply(_shi)}SHON=true}
-function shakeOff(){const G={ex:chassis,dz:dzG,tr:truck,sh:shG};for(const k in G){const g=G[k],s=SHK[k];g.rotation.z-=s.p;g.rotation.x-=s.r;g.position.y-=s.y;g.updateMatrixWorld(true)}SHON=false}
+function shakeOff(){const G={ex:chassis,dz:dzG,tr:TRUCKS[0].truck,sh:shG,mt:TRUCKS[1].truck};for(const k in G){const g=G[k],s=SHK[k];g.rotation.z-=s.p;g.rotation.x-=s.r;g.position.y-=s.y;g.updateMatrixWorld(true)}SHON=false}
 function frame(now){const dt=Math.min(0.05,(now-last)/1000);last=now;acc+=dt;let n=0;hits.bed=hits.ground=hits.rock=0;
   while(acc>=H&&n<8){step(H);acc-=H;n++}if(n>=8)acc=0;
   // aktif bölgeler: makinelerin ve kamyonun çevresi; ara sıra tüm harita
-  {const RB=46,ci=x=>Math.round((x+HALF)/DX),act=[];if(ACT.ex)act.push([ex.x,ex.z]);if(ACT.dz)act.push([DZ.x,DZ.z]);if(ACT.tr)act.push([TRK.x,TRK.z]);if(ACT.sh)act.push([SH.x,SH.z]);
+  {const RB=46,ci=x=>Math.round((x+HALF)/DX),act=[];if(ACT.ex)act.push([ex.x,ex.z]);if(ACT.dz)act.push([DZ.x,DZ.z]);for(const c of TACT)act.push([c.TRK.x,c.TRK.z]);if(ACT.sh)act.push([SH.x,SH.z]);
     for(const[ax_,az]of act)T.relax(2,ci(ax_)-RB,ci(ax_)+RB,ci(az)-RB,ci(az)+RB);
-    if(frameN%45===0)T.relax(1);Bed.relax(2);
-    if(T.dirty){let j0=0,j1=N-1;if(frameN%90!==0){j0=1e9;j1=-1e9;for(const[,az]of act){j0=Math.min(j0,ci(az)-RB);j1=Math.max(j1,ci(az)+RB)}}syncRows(T,tMesh,tColor,0,j0,j1);GRD=true;GK0=Math.min(GK0,Math.max(0,j0)*N);GK1=Math.max(GK1,Math.min(N,j1+1)*N)}}if(Bed.dirty)syncHF(Bed,bMesh,bColor,-0.03);
+    {const B=24,b0=(frameN*B)%N;T.relax(1,1,N-2,Math.max(1,b0),Math.min(N-2,b0+B))}for(const c of TACT)c.Bed.relax(2);
+    if(T.dirty&&T.dj1>=T.dj0){const j0=T.dj0,j1=Math.min(T.dj1,j0+140);syncRows(T,tMesh,tColor,0,j0,j1);if(j1<T.dj1){T.dj0=j1+1;T.dirty=true}else{T.dj0=1e9;T.dj1=-1}GRD=true;GK0=Math.min(GK0,Math.max(0,j0)*N);GK1=Math.max(GK1,Math.min(N,j1+1)*N)}else T.dirty=false}for(const c of TACT)if(c.Bed.dirty)syncHF(c.Bed,c.bMesh,bColor,-0.03);
   soilMesh.visible=false;
   
   if(++frameN%4===0&&GRD){updGrass(GK0,GK1);updClods(GK0,GK1);GRD=false;GK0=1e9;GK1=-1}
   {const p=ex.mf>0.5?CS:CD;SOILM.color.setRGB(p[0],p[1],p[2])}
   for(const[st,a,b]of JOY){st.rotation.z=-(ex.u[a]||0)*0.35;st.rotation.x=(ex.u[b]||0)*0.35}
-  shakeOn();if(ACT.ex){drawTracks();drawCyls()}if(ACT.dz){dzDrawTracks();dzDrawLinks()}if(ACT.tr)trkDraw();if(ACT.sh){shDrawTracks();shDrawCyls();shDrawLoad()}drawChunks();crumbs(dt);if(frameN%10===0)mudUpdate(dt*10);if(BMCD||frameN%6===1)updBMC();if(MCD||frameN%6===3)updMC();drawDust(dt);exhaust(dt);drawSmoke(dt);updateCam(dt);
-  {const p=MACH==='sh'?SH:MACH==='dz'?DZ:MACH==='tr'?TRK:ex;sunL.target.position.set(p.x,0,p.z);sunL.position.set(p.x+SUN.x*40,SUN.y*40,p.z+SUN.z*40)}
+  shakeOn();if(ACT.ex){drawTracks();drawCyls()}if(ACT.dz){dzDrawTracks();dzDrawLinks()}for(const c of TACT){useTruck(c);trkDraw()}if(ACT.sh){shDrawTracks();shDrawCyls();shDrawLoad()}drawChunks();crumbs(dt);if(frameN%10===0)mudUpdate(dt*10);for(const c of TACT){useTruck(c);if(BMCD||frameN%6===1)updBMC()}if(MCD||frameN%6===3)updMC();drawDust(dt);exhaust(dt);drawSmoke(dt);{const VT=viewTruck();if(VT)useTruck(VT)}updateCam(dt);
+  {const VT=viewTruck();if(VT)useTruck(VT);const p=curM();sunL.target.position.set(p.x,0,p.z);sunL.position.set(p.x+SUN.x*40,SUN.y*40,p.z+SUN.z*40)}
   audioUpdate(dt);hud();renderer.render(scene,camera);shakeOff();requestAnimationFrame(frame)}
 requestAnimationFrame(frame);
 }
