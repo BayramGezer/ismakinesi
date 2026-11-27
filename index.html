@@ -46,8 +46,19 @@ button.pri{background:var(--y);color:#1d1d20}
 kbd{display:inline-block;min-width:24px;text-align:center;font:600 13px Barlow,sans-serif;background:#3a3a40;border-bottom:2px solid #18181b;border-radius:4px;padding:1px 6px;margin-right:6px;color:#fff}
 .help .tip{margin-top:14px;padding:10px 12px;background:rgba(242,179,26,.12);border-left:3px solid var(--y);border-radius:6px}
 .hidden{display:none}
-#mmap{position:fixed;inset:auto;right:14px;bottom:72px;width:170px;height:170px;border-radius:10px;border:2px solid rgba(20,20,24,.75);box-shadow:0 2px 8px rgba(0,0,0,.3);pointer-events:none;z-index:4}
-body.mobile #mmap{inset:auto;left:8px;top:144px;width:84px;height:84px}
+#eco{font:600 14px Barlow,sans-serif;color:var(--ink);border-top:1px solid rgba(255,255,255,.12);padding-top:6px}#eco:empty{display:none}#eco b{color:var(--y)}#eco span{font-weight:500;font-size:13px;color:var(--mut)}
+.pnl{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(560px,calc(100vw - 20px));max-height:calc(100vh - 90px);overflow:auto;background:rgba(20,20,23,.96);border-radius:14px;padding:16px 18px;display:none;z-index:12}.pnl.on{display:block}
+.pnl h2{margin:0 0 6px;font:700 26px "Barlow Condensed",sans-serif;color:var(--y)}.pnl h3{margin:12px 0 6px;font:700 17px "Barlow Condensed",sans-serif}.pnl .mut{color:var(--mut);margin:4px 0 8px}
+.pnl .row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08)}.pnl .row small{color:var(--mut)}.pnl .row button{min-height:38px;background:var(--y);color:#1d1d20;white-space:nowrap}.pnl .row button:disabled{background:#3a3a40;color:#888}.pnl .own{color:#7cbf5a;font-weight:600;white-space:nowrap}
+#pnlX{position:sticky;top:0;float:right;min-height:36px;padding:0 12px}
+.task{padding:8px 10px;border-radius:8px;margin:4px 0;background:rgba(255,255,255,.04)}.task.done{opacity:.55}.task.cur{background:rgba(242,179,26,.16);border-left:3px solid var(--y)}.task small{color:var(--mut)}
+.log{display:flex;gap:1px;margin:4px 0}.log i{display:block;width:12px;height:12px;border-radius:2px}
+.panv{position:fixed;left:50%;top:44%;transform:translate(-50%,-50%);display:none;text-align:center;background:rgba(20,20,23,.85);padding:12px;border-radius:14px;z-index:11;font:600 14px Barlow,sans-serif}.panv.on{display:block}
+body.career #bDump,body.career #bReset{display:none}body:not(.career) .car{display:none}#bPan,#bBlast{display:none}
+.modes{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0 10px}.modes button{flex:1 1 180px;min-height:54px;font-size:16px}
+.story{color:var(--mut);margin:6px 0}
+#mmap{position:fixed;inset:auto;right:14px;bottom:130px;width:170px;height:170px;border-radius:10px;border:2px solid rgba(20,20,24,.75);box-shadow:0 2px 8px rgba(0,0,0,.3);pointer-events:none;z-index:4}
+body.mobile #mmap{inset:auto;right:8px;top:96px;width:84px;height:84px}
 #toast{position:fixed;left:50%;top:16px;transform:translateX(-50%);background:var(--red);color:#fff;font:600 15px Barlow,sans-serif;padding:8px 14px;border-radius:8px;opacity:0;transition:opacity .25s;pointer-events:none;max-width:calc(100vw - 40px);text-align:center}
 #toast.on{opacity:1}
 #err{position:fixed;inset:0;display:none;place-items:center;background:#18181b;color:#fff;padding:20px;text-align:center}
@@ -68,19 +79,19 @@ body.mobile .circ{display:none!important}
 body.mobile .gauges{width:168px;padding:8px 10px;gap:4px;top:42px;left:8px}
 body.mobile .gauges .g label{font-size:12px}body.mobile .gauges .bar{height:5px}
 body.mobile .top{left:8px;top:8px}body.mobile h1{font-size:17px}body.mobile .tag{font-size:11px}
-body.mobile #bCam,body.mobile #bSnd,body.mobile #bReset{display:none}
+body.mobile #bCam,body.mobile #bSnd,body.mobile #bReset,body.mobile #bDump{display:none}body.mobile #eco{font-size:12px}
 body.mobile .gauges .g:nth-child(4),body.mobile .gauges .g:nth-child(5),body.mobile #tI{display:none}body.mobile .gauges{width:150px;padding:6px 9px;gap:3px;top:36px}body.mobile .gauges .g label{font-size:11px}body.mobile h1{font-size:14px}body.mobile .tag{display:none}body.mobile .btns button{min-height:32px;font-size:11px;padding:0 8px}body.mobile .stick{width:130px;height:130px}
 @media(orientation:portrait){body.mobile .rot{display:block}}
 .qrbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.55);z-index:20}.qrbox.on{display:flex}.qrbox div{background:#fff;color:#222;border-radius:14px;padding:18px 22px;text-align:center;font:500 15px Barlow,sans-serif;max-width:320px}.qrbox img{width:240px;height:240px;image-rendering:pixelated;display:block;margin:0 auto 10px}body.mobile #bQR{display:none}
 body,button,.touch,.stick,.panel,.btns{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
-.msel{margin-top:12px;}body.mobile .help .grid,body.mobile .help .tip,body.mobile #bEng{display:none}body.mobile .msel label{font-size:15px;margin:5px 16px 5px 0}.msel{padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.06)}.msel h3{margin:0 0 6px}.msel label{display:inline-flex;align-items:center;gap:6px;margin:3px 14px 3px 0;cursor:pointer}.msel input{width:18px;height:18px}.msel small{display:block;margin-top:6px;opacity:.8}#bEng.on{background:#3f7d3a;color:#fff}
+.msel{margin-top:4px;}body.mobile .help .grid,body.mobile .help .tip,body.mobile #bEng{display:none}body.mobile .msel label{font-size:15px;margin:5px 16px 5px 0}.msel{padding:10px 12px;border-radius:10px;background:rgba(255,255,255,.06)}.msel h3{margin:0 0 6px}.msel label{display:inline-flex;align-items:center;gap:6px;margin:3px 14px 3px 0;cursor:pointer}.msel input{width:18px;height:18px}.msel small{display:block;margin-top:6px;opacity:.8}#bEng.on{background:#3f7d3a;color:#fff}
 .rot{display:none;position:fixed;left:50%;top:40%;transform:translate(-50%,-50%);background:rgba(20,20,23,.9);color:#fff;padding:12px 16px;border-radius:12px;font:600 15px Barlow,sans-serif;z-index:9;pointer-events:none}
 @media(prefers-reduced-motion:reduce){#toast{transition:none}}
 </style>
 </head>
 <body>
 <canvas id="c" tabindex="0"></canvas>
-<div class="top"><h1>Ekskavatör · toprak fiziği</h1><span class="tag">prototip v0.15</span></div>
+<div class="top"><h1>İş makinesi · altın madeni</h1><span class="tag">prototip v0.16</span></div>
 <aside class="panel gauges">
   <div class="g"><label><span id="lB">Kova</span> <b id="tB">0.00 m³</b></label><div class="bar"><i id="gB"></i></div></div>
   <div class="g"><label>Kamyon <b id="tT">0.0 m³ · 0.0 t</b></label><div class="bar"><i id="gT" class="grn"></i></div></div>
@@ -89,6 +100,7 @@ body,button,.touch,.stick,.panel,.btns{-webkit-user-select:none;user-select:none
   <div class="g"><label><span id="lF">Kazma kuvveti</span> <b id="tF">0 kN</b></label><div class="bar"><i id="gF" class="red"></i></div></div>
   <div class="g"><label>Teslim edilen <b id="tS">0.0 m³</b></label></div>
   <div class="idle" id="tI">Otomatik rölanti</div>
+  <div id="eco"></div>
 </aside>
 <aside class="panel circ" id="circ">
   <h2>Hidrolik basınç · tahliye 343 bar</h2>
@@ -106,6 +118,12 @@ body,button,.touch,.stick,.panel,.btns{-webkit-user-select:none;user-select:none
   <button id="bTool">Ataşman: Kova (T)</button>
   <button id="bDump">Kasayı boşalt</button>
   <button id="bBlast">💥 Patlat (X)</button>
+  <button id="bPan">🥘 Tava (P)</button>
+  <button id="bSell" class="car">💰 Altın sat</button>
+  <button id="bShop" class="car">🏪 Mağaza (B)</button>
+  <button id="bTasks" class="car">📋 Görevler (J)</button>
+  <button id="bPlant">🏭 Tesis (L)</button>
+  <button id="bHoles">🔬 Sondaj (K)</button>
   <button id="bReset">Araziyi sıfırla</button>
   <button id="bCam">Kabin kamerası (V)</button>
   <button id="bSnd">Ses: açık</button>
@@ -113,7 +131,24 @@ body,button,.touch,.stick,.panel,.btns{-webkit-user-select:none;user-select:none
   <button id="bQR">📱 Telefonda aç</button>
 </div>
 <section id="help" class="help">
-  <h2>Kontroller</h2>
+  <h2>İş Makinesi Simülatörü</h2>
+  <div class="msel" id="msel"><h3>Oyun modu</h3><div class="modes"><button id="bCar" class="pri">⛏ Kariyer: Altın madeni</button><button id="bCont" class="hidden">▶ Kariyere devam et</button></div>
+    <p class="story">Kariyer: nehir kıyısında tava ile altın ara, sat, makine ve tesis al. Sonra doğudaki kaya platoda sondajla cevheri bul, patlat, kır, liçle, külçe dök. İlerleme tarayıcıya kaydedilir.</p>
+    <h3>Serbest mod: sahaya çıkacak makineler</h3>
+    <label><input type="checkbox" id="mEx" checked> Ekskavatör (20 t)</label>
+    <label><input type="checkbox" id="mDz"> Dozer (D9 sınıfı, 49 t)</label>
+    <label><input type="checkbox" id="mTr" checked> Kamyon (6x6 damper)</label>
+    <label><input type="checkbox" id="mSh"> Shovel (EX5600 sınıfı, 540 t)</label>
+    <label><input type="checkbox" id="mMt"> Maden kamyonu (230 t yük)</label>
+    <label><input type="checkbox" id="mGd" checked> Greyder (140 sınıfı, 17 t)</label>
+    <label><input type="checkbox" id="mDr" checked> Sondaj makinesi</label>
+    <label><input type="checkbox" id="mCh" checked> Şarj aracı</label>
+    <label><input type="checkbox" id="mPv"> Asfalt finişeri</label>
+    <label><input type="checkbox" id="mRl"> Silindir</label>
+    <label><input type="checkbox" id="mPk" checked> Pikap</label>
+    <small>Motorlar kapalı başlar: <kbd>M</kbd> ya da "Motor" düğmesiyle çalıştır.</small></div>
+  <div style="margin-top:14px;text-align:right"><button id="bGo">Serbest modda başla</button></div>
+  <h2 style="margin-top:18px">Kontroller</h2>
   <p class="mob" style="display:none;color:#fff">Dokunmatik: ekranın altındaki iki çubukla kullanırsın. Ekskavatörde "Çalışma/Yürüyüş" düğmesi sol çubuğu kol ile paletler arasında değiştirir. Boş yere tek parmakla kamera döner, iki parmakla yakınlaşır. "Motor ▶" ile motoru çalıştır, "Kabin" ile kabine geç. Telefonu yan çevir.</p><p>ISO kumanda düzeni: sol kol arm ve dönüş, sağ kol bom ve kova. Gamepad takılıysa çubuklar aynı düzende çalışır. Ses için kulaklık önerilir.</p>
   <div class="grid">
     <div><h3>Sol kol</h3><ul><li><kbd>W</kbd>Arm dışarı</li><li><kbd>S</kbd>Arm içeri</li><li><kbd>A</kbd>Sola dön</li><li><kbd>D</kbd>Sağa dön</li></ul></div>
@@ -123,20 +158,16 @@ body,button,.touch,.stick,.panel,.btns{-webkit-user-select:none;user-select:none
     <div><h3>Kamyon (3) · Maden kamyonu (5)</h3><ul><li><kbd>W</kbd>Gaz</li><li><kbd>S</kbd>Fren / geri</li><li><kbd>A</kbd><kbd>D</kbd>Direksiyon</li><li><kbd>R</kbd><kbd>F</kbd>Damper kaldır / indir</li></ul></div>
     <div><h3>Shovel (4)</h3><ul><li><kbd>W</kbd><kbd>S</kbd>Arm ileri (crowd) / geri</li><li><kbd>↓</kbd><kbd>↑</kbd>Bom kaldır / indir</li><li><kbd>←</kbd><kbd>→</kbd>Kovayı topla / devir</li><li><kbd>A</kbd><kbd>D</kbd>Dönüş</li><li><kbd>R</kbd>Alttan boşalt (basılı tut)</li><li><kbd>Q</kbd><kbd>Z</kbd><kbd>E</kbd><kbd>C</kbd>Paletler</li></ul></div>
     <div><h3>Greyder (6)</h3><ul><li><kbd>W</kbd><kbd>S</kbd>İleri / geri</li><li><kbd>A</kbd><kbd>D</kbd>Direksiyon</li><li><kbd>↑</kbd><kbd>↓</kbd>Bıçak indir / kaldır</li><li><kbd>←</kbd><kbd>→</kbd>Bıçak açısı (daire)</li><li><kbd>Q</kbd><kbd>E</kbd>Bıçağı sola / sağa kaydır</li><li><kbd>R</kbd><kbd>F</kbd>Bıçak yan eğimi</li></ul></div>
-    <div><h3>Genel</h3><ul><li><kbd>1</kbd>-<kbd>6</kbd>Ekskavatör / dozer / kamyon / shovel / maden kamyonu / greyder</li><li><kbd>X</kbd>Üst basamakta patlatma (makineler 26 m uzakta olmalı)</li><li><kbd>M</kbd>Motoru çalıştır / durdur</li><li><kbd>V</kbd>Kamera değiştir</li><li>Fare sürükle: kamera, tekerlek: zoom</li></ul></div>
+    <div><h3>Sondaj (7)</h3><ul><li><kbd>W</kbd><kbd>S</kbd><kbd>A</kbd><kbd>D</kbd>Sür</li><li><kbd>R</kbd><kbd>F</kbd>Direği kaldır / yatır</li><li><kbd>Space</kbd>Del (basılı tut)</li><li><kbd>T</kbd>Patlatma deliği / arama sondajı</li><li><kbd>K</kbd>Sondaj sonuçları</li></ul></div>
+    <div><h3>Şarj (8) · Finişer (9) · Silindir (0) · Pikap (-)</h3><ul><li><kbd>Space</kbd>Şarj: yakındaki deliği doldur</li><li><kbd>F</kbd>/<kbd>R</kbd>Finişer tablası indir / kaldır</li><li><kbd>P</kbd>Tava (suyun kenarında)</li><li><kbd>X</kbd>Dolu delikleri ateşle</li></ul></div>
+    <div><h3>Genel</h3><ul><li><kbd>1</kbd>-<kbd>0</kbd>, <kbd>-</kbd>Makine seç</li><li><kbd>B</kbd>Mağaza · <kbd>J</kbd>Görevler · <kbd>L</kbd>Tesis</li><li><kbd>M</kbd>Motoru çalıştır / durdur</li><li><kbd>V</kbd>Kamera değiştir</li><li>Fare sürükle: kamera, tekerlek: zoom</li></ul></div>
   </div>
-  <div class="tip">Yeni: madenin üst basamağı sert kaya, kova kazamaz. Makineleri 26 m uzaklaştırıp <kbd>X</kbd> ile patlat, gevşeyen kayayı yükle. Kuzeydeki köyde binalar yıkılabilir: dozerle it, kovayla ya da kırıcıyla kır; taşıyıcısı giden kısım çöker. Ağaçlar çarpınca devrilir. Taşıma yolunda kantar var, kamyonu üstünde durdur. Kırmızı toprağın altında sıkı kum-çakıl, en altta ana kaya var. Kayayı kova kazamaz: kırıcıyı tak (T), ucu kayaya dayayıp Space ile vur ya da dozerin ripper'ıyla sök. Büyük kaya blokları kovaya sığmaz, kırıcıyla böl. 1.5 m'den derin kazarsan yeraltı suyu çıkar. Paletlerle sürekli geçtiğin yer sıkışıp sertleşir (koyulaşır), kazması zorlaşır. Yüzeyden ince alırsan kova daha az zorlanır. Kumanda yokken motor rölantiye düşer, ilk harekette devir toplaması bir saniye sürer.</div>
-  <div class="msel" id="msel"><h3>Sahaya çıkacak makineleri seç</h3>
-    <label><input type="checkbox" id="mEx" checked> Ekskavatör (20 t)</label>
-    <label><input type="checkbox" id="mDz"> Dozer (D9 sınıfı, 49 t)</label>
-    <label><input type="checkbox" id="mTr" checked> Kamyon (6x6 damper)</label>
-    <label><input type="checkbox" id="mSh"> Shovel (EX5600 sınıfı, 540 t)</label>
-    <label><input type="checkbox" id="mMt"> Maden kamyonu (230 t yük)</label>
-    <label><input type="checkbox" id="mGd" checked> Greyder (140 sınıfı, 17 t)</label>
-    <small>Motorlar kapalı başlar: <kbd>M</kbd> ya da "Motor" düğmesiyle çalıştır.</small></div>
-  <div style="margin-top:14px;text-align:right"><button id="bGo" class="pri">Başla</button></div>
+  <div class="tip">Kariyer: nehir kıyısında pikapla dur, P ile tava çalkala; altını sat, yıkama tesisi kur, ekskavatörle çakılı bunkere dök. Doğudaki gri kaya platoda sondaj makinesiyle arama sondajı yap (T), sonuçlara bak (K). Cevherin üstüne patlatma deliği del, şarj aracıyla doldur (Space), makineleri 30 m uzaklaştır ve X ile ateşle. Cevheri güneydeki tesis bunkerine dök. Tekerlekli araçlar toprak yolda yavaş: finişerle asfalt dök, silindirle sıkıştır. Nehirden kanal açarsan su akar; derin çukura yeraltı suyu sızar, pompa ile boşalt.</div>
+  
 </section>
 <canvas id="mmap" width="170" height="170" aria-label="Mini harita"></canvas>
+<div id="pnl" class="pnl"><button id="pnlX" aria-label="Kapat">✕</button><div id="pnlB"></div></div>
+<div id="panv" class="panv"><canvas id="panc" width="180" height="180"></canvas><div>Tava çalkalanıyor…</div></div>
 <div id="toast"></div>
 <div id="err">Bu tarayıcıda WebGL açılamadı.</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -206,7 +237,7 @@ const bump=noiseTex(256,11,0,1,0.06);bump.repeat.set(26,26);
 const dustTex=(()=>{const cv=document.createElement('canvas');cv.width=cv.height=64;const x=cv.getContext('2d');const g=x.createRadialGradient(32,32,2,32,32,31);g.addColorStop(0,'rgba(255,255,255,.9)');g.addColorStop(1,'rgba(255,255,255,0)');x.fillStyle=g;x.fillRect(0,0,64,64);return new THREE.CanvasTexture(cv)})();
 
 /* ---------- Sabitler ---------- */
-const N=576,SIZE=180,DX=SIZE/(N-1),HALF=SIZE/2;
+const N=736,SIZE=230,DX=SIZE/(N-1),HALF=SIZE/2;
 const LOOSE=Math.tan(34*Math.PI/180),INTACT=Math.tan(62*Math.PI/180);
 const SANDL=-3.0,WROCK=-7.0,WL=-6.5,RIVL=-1.55,SWELL=1.25,CAP=1.05,DENS=1.8,LOOSE_DENS=1450;
 const TRUCK={x:2.2,z:-6.6,floor:1.6};
@@ -242,7 +273,7 @@ class HF{
     if(moved)this.dirty=true;return moved}
   volume(){let s=0;for(let k=0;k<this.h.length;k++)s+=this.h[k]-this.b[k];return s*this.dx*this.dx}
   mat(k){if(this.c[k]<0.5)return'loose';const h=this.h[k];if(h>this.h0[k]-0.35&&this.h0[k]>-1)return'top';return h<WROCK?'wrock':h<SANDL?'sand':'sub'}
-  matF(k){if(this.cc[k]>0)return 2.6;const t=this.mat(k);return t==='loose'?this.m[k]:t==='sand'?1:t==='wrock'?1.6:0}
+  matF(k){if(this.cc[k]>0)return 2.6;const t=this.mat(k);if(t!=='loose'&&this===T){const g=oreAt(-HALF+(k%N)*DX,this.h[k]-0.15,-HALF+((k/N)|0)*DX);if(g>0.04)return ORE(g)}return t==='loose'?this.m[k]:t==='sand'?1:t==='wrock'?1.6:0}
 }
 const T=new HF(N,N,DX,-SIZE/2,-SIZE/2);
 let Bed=new HF(23,11,0.235,0.1,-1.175); // kasa yerel koordinatlarında
@@ -250,14 +281,15 @@ const sstep=(a,b,x)=>{const t=Math.max(0,Math.min(1,(x-a)/(b-a)));return t*t*(3-
 const RZ=74;function riverH(x,z){const c=RZ+Math.sin(x*0.07)*1.5,d=Math.abs(z-c);return -2.5+Math.max(0,d-2.6)*1.1}
 const HILLS=[[11,5,2.6,26],[-6,9,1.4,40],[-22,-18,3.2,60],[-25,18,2.8,70],[8,24,1.8,35],[30,8,3.5,80],[22,-34,2.4,40],[-33,-4,2.2,55]];
 {let s=4242;const r=()=>(s=(s*16807)%2147483647)/2147483647;let n=0;
-  for(let t=0;t<400&&n<34;t++){const x=(r()-.5)*170,z=(r()-.5)*170;if(Math.max(Math.abs(x),Math.abs(z))<42)continue;if(Math.abs(z-74)<12)continue;
-    if(x>15&&x<75&&z>-70&&z<-2)continue;if(x<-35&&x>-80&&z<-28&&z>-68)continue;if(Math.hypot(x+20,z+37)<9)continue;
+  for(let t=0;t<600&&n<52;t++){const x=(r()-.5)*(SIZE-14),z=(r()-.5)*(SIZE-14);if(x>5&&z<-62)continue;if(Math.max(Math.abs(x),Math.abs(z))<42)continue;if(Math.abs(z-74)<12)continue;
+    if(x>15&&z>-70&&z<-2)continue;if(x<-35&&x>-80&&z<-28&&z>-68)continue;if(Math.hypot(x+20,z+37)<9)continue;
     const big=r()<0.3;HILLS.push([x,z,big?5+r()*5:1.8+r()*3,big?300+r()*500:80+r()*220]);n++}}
 // taşıma yolu (maden -> döküm sahası) ve döküm sahası
-const HAUL=[[22,-30],[8,-35],[-12,-38],[-36,-43],[-56,-50]],HAULW=6.5;
-function haulD(x,z){let best=1e9,bt=0,bi=0;for(let q=0;q<HAUL.length-1;q++){const[a,b]=HAUL[q],[c,d]=HAUL[q+1],dx=c-a,dz=d-b,L2=dx*dx+dz*dz;let t=((x-a)*dx+(z-b)*dz)/L2;t=Math.max(0,Math.min(1,t));const e=Math.hypot(x-a-dx*t,z-b-dz*t);if(e<best){best=e;bt=t;bi=q}}return[best,bi+bt]}
+const HAUL=[[22,-30],[8,-35],[-12,-38],[-36,-43],[-56,-50]],HAULW=6.5,HAUL2=[[14,-36],[13,-56],[17,-72],[22,-83]],ROADS=[HAUL,HAUL2];
+function haulD(x,z){let b=[1e9,0];for(const R of ROADS){const r=roadD(R,x,z);if(r[0]<b[0])b=r}return b}
+function roadD(HAUL,x,z){let best=1e9,bt=0,bi=0;for(let q=0;q<HAUL.length-1;q++){const[a,b]=HAUL[q],[c,d]=HAUL[q+1],dx=c-a,dz=d-b,L2=dx*dx+dz*dz;let t=((x-a)*dx+(z-b)*dz)/L2;t=Math.max(0,Math.min(1,t));const e=Math.hypot(x-a-dx*t,z-b-dz*t);if(e<best){best=e;bt=t;bi=q}}return[best,bi+bt]}
 // beton yol: 5 m genişlik, 25 cm döşeme. Sağlam beton ana kaya gibi davranır (kova/bıçak kesemez); kırıcı/ripper kırar
-const SHP={x:9,z:-20},DZONE={x:-64,z:-54,w:28,d:24};const RD={z:12.5,w:2.5,x0:-86,x1:86},CONC_T=0.25,ROADK=new Uint8Array(N*N);let ROADM=null;
+const SHP={x:9,z:-20},DZONE={x:-64,z:-54,w:28,d:24};const RD={z:12.5,w:2.5,x0:-(HALF-4),x1:HALF-4},CONC_T=0.25,ROADK=new Uint8Array(N*N);let ROADM=null;
 function initTerrain(){
   for(let j=0;j<N;j++)for(let i=0;i<N;i++){const k=j*N+i,x=-SIZE/2+i*DX,z=-SIZE/2+j*DX;
     let h=0.22*Math.sin(x*.17)*Math.cos(z*.13)+0.12*Math.sin(x*.41+z*.33);
@@ -273,12 +305,13 @@ function initTerrain(){
     T.h[k]=T.h0[k]=h;T.c[k]=1;T.m[k]=bench>0.05?0.45:0;const inZ=Math.abs(x-DZONE.x)<DZONE.w/2&&Math.abs(z-DZONE.z)<DZONE.d/2,inB_=bench>0.05||Math.hypot(x-SHP.x,z-SHP.z)<8;T.w[k]=inZ||inB_?1:0;T.cp[k]=inZ?0.6:inB_?0.3:0;// ana kaya derinde (~-14 m); birkaç tepenin altında yüzeye yaklaşan kaya çıkıntıları
     const g1=Math.exp(-((x-30)**2+(z-8)**2)/70),g2=Math.exp(-((x+22)**2+(z+18)**2)/55),g3=Math.exp(-((x-22)**2+(z+34)**2)/30);
     T.b[k]=Math.max(-14+1.6*Math.sin(x*.07+1)+1.3*Math.cos(z*.06),-14+14.8*g1,-14+14.4*g2,-14+14*g3);if(x>44&&bench>4.6&&z>-61&&z<-9.5)T.b[k]=h-0.08;T.bo[k]=T.b[k];T.cc[k]=0}
-  buildRoad();buildHaul();flatSites();
+  buildRoad();buildHaul();flatSites();flatPlant();
   T.dirty=true;T.dj0=0;T.dj1=N-1;Bed.h.fill(0);Bed.b.fill(0);Bed.c.fill(0);Bed.m.fill(0);Bed.dirty=true}
-function buildHaul(){const P=[];let L=0;for(let q=0;q<HAUL.length-1;q++){const[a,b]=HAUL[q],[c,d]=HAUL[q+1],l=Math.hypot(c-a,d-b),n=Math.ceil(l);for(let i=0;i<n;i++)P.push(T.sample(a+(c-a)*i/n,b+(d-b)*i/n));L+=l}
+function buildHaul(){for(const R of ROADS)buildHaul1(R)}
+function buildHaul1(HAUL){const P=[];let L=0;for(let q=0;q<HAUL.length-1;q++){const[a,b]=HAUL[q],[c,d]=HAUL[q+1],l=Math.hypot(c-a,d-b),n=Math.ceil(l);for(let i=0;i<n;i++)P.push(T.sample(a+(c-a)*i/n,b+(d-b)*i/n));L+=l}
   const sm=P.map((_,i)=>{let a=0,n=0;for(let q=-18;q<=18;q++){const v=P[Math.max(0,Math.min(P.length-1,i+q))];a+=v;n++}return a/n});
   const segL=[];for(let q=0;q<HAUL.length-1;q++)segL.push(Math.ceil(Math.hypot(HAUL[q+1][0]-HAUL[q][0],HAUL[q+1][1]-HAUL[q][1])));
-  for(let k=0;k<N*N;k++){const i=k%N,j=(k/N)|0,x=-HALF+i*DX,z=-HALF+j*DX;if(T.cc[k]>0)continue;const[d,u]=haulD(x,z);if(d>HAULW+4.5)continue;
+  for(let k=0;k<N*N;k++){const i=k%N,j=(k/N)|0,x=-HALF+i*DX,z=-HALF+j*DX;if(T.cc[k]>0)continue;const[d,u]=roadD(HAUL,x,z);if(d>HAULW+4.5)continue;
     const q=Math.min(HAUL.length-2,Math.floor(u)),t=u-q;let off=0;for(let w=0;w<q;w++)off+=segL[w];const sx=Math.min(sm.length-1.001,off+t*segL[q]),s0=Math.floor(sx),rh=sm[s0]+(sm[Math.min(sm.length-1,s0+1)]-sm[s0])*(sx-s0);
     const bl=sstep(HAULW,HAULW+4.5,d);T.h[k]=T.h0[k]=rh+(T.h[k]-rh)*bl;if(d<HAULW+0.6){T.w[k]=1;T.cp[k]=0.7;T.m[k]=0.35}}}
 function buildRoad(){ROADK.fill(0);const prof=new Float32Array(N),sm=new Float32Array(N);
@@ -335,15 +368,18 @@ function updRoad(){const R=ROADM,g=R.m.geometry,p=g.attributes.position.array,c=
   g.attributes.position.needsUpdate=true;g.attributes.color.needsUpdate=true;g.attributes.normal.needsUpdate=true}
 const bedMat=soilMat.clone();bedMat.map=detail.clone();bedMat.map.repeat.set(4,2);bedMat.map.needsUpdate=true;
 let bMesh=hfMesh(Bed,22*0.235,10*0.235,bedMat);bMesh.castShadow=true;
-const PAL={rbA:C3('#b9b1a3'),rbB:C3('#a39a8b'),lrA:C3('#9d978d'),lrB:C3('#8a857c'),conc:C3('#aeaba3'),cJ:C3('#8e8b84'),cCr:C3('#6f6c67'),grass:C3('#64b23a'),grass2:C3('#529d30'),worn:C3('#8b7445'),top:C3('#5b3321'),subA:C3('#a8582d'),subB:C3('#954b28'),
+const PAL={asA:C3('#4a4b50'),asB:C3('#424348'),asF:C3('#1c1b1d'),lnA:C3('#2c2d31'),lnB:C3('#27282c'),orA:C3('#9a6a3a'),orB:C3('#86603a'),olA:C3('#a8763e'),olB:C3('#8e6638'),rbA:C3('#b9b1a3'),rbB:C3('#a39a8b'),lrA:C3('#9d978d'),lrB:C3('#8a857c'),conc:C3('#aeaba3'),cJ:C3('#8e8b84'),cCr:C3('#6f6c67'),grass:C3('#64b23a'),grass2:C3('#529d30'),worn:C3('#8b7445'),top:C3('#5b3321'),subA:C3('#a8582d'),subB:C3('#954b28'),
   sandA:C3('#dccb9d'),sandB:C3('#cdb98a'),rock:C3('#8d8f93'),lDirt:C3('#9c5631'),lSand:C3('#e0d0a4'),bank:C3('#c9b98e'),packed:C3('#76583a'),wrA:C3('#8e7c68'),wrB:C3('#766656')};
 const NZ=new Float32Array(N*N).map((_,k)=>{const x=(k%N)*DX,z=((k/N)|0)*DX;return 0.5+0.25*Math.sin(x*1.7+Math.sin(z*1.3)*2.5)+0.25*Math.cos(z*2.1+x*0.9)});
 const SHADE=new Float32Array(N*N).map((_,k)=>{const x=(k%N)*DX,z=((k/N)|0)*DX;return (0.92+0.06*Math.sin(x*.35+Math.sin(z*.21)*2)+0.04*Math.cos(z*.43+x*.12))*(0.97+Math.random()*0.06)});
 const mixC=(a,b,t,o)=>{o[0]=a[0]+(b[0]-a[0])*t;o[1]=a[1]+(b[1]-a[1])*t;o[2]=a[2]+(b[2]-a[2])*t;return o};
 const _cc=[0,0,0];
 function tColor(hf,k,o,q){const h=hf.h[k];let p;
-  if(hf.cc[k]>0&&h-hf.b[k]<0.06){const cr=Math.min(1,(hf.h0[k]-hf.b[k])/CONC_T*1.6),zz=((k/N)|0)*DX,xx=(k%N)*DX-HALF,jn=false;p=mixC(PAL.conc,PAL.cCr,cr,_cc);p=[p[0],p[1],p[2]]}
-  else if(h-hf.b[k]<0.12)p=PAL.rock;
+  if(hf===T&&AS[k]&&h-hf.b[k]<0.06){p=AS[k]===2?(NZ[k]>0.5?PAL.asA:PAL.asB):PAL.asF}
+  else if(hf===T&&PADK[k]&&hf.c[k]>0.5&&Math.abs(h-hf.h0[k])<0.06)p=NZ[k]>0.5?PAL.lnA:PAL.lnB;
+  else if(hf.cc[k]>0&&h-hf.b[k]<0.06){const cr=Math.min(1,(hf.h0[k]-hf.b[k])/CONC_T*1.6),zz=((k/N)|0)*DX,xx=(k%N)*DX-HALF,jn=false;p=mixC(PAL.conc,PAL.cCr,cr,_cc);p=[p[0],p[1],p[2]]}
+  else if(h-hf.b[k]<0.12)p=(hf===T&&oreAt(-HALF+(k%N)*DX,h-0.25,-HALF+((k/N)|0)*DX)>0.7)?(NZ[k]>0.5?PAL.orA:PAL.orB):PAL.rock;
+  else if(hf.c[k]<0.5&&hf.m[k]>=4){p=NZ[k]>0.5?PAL.olA:PAL.olB}
   else if(hf.c[k]<0.5&&hf.m[k]>1.3){p=hf.m[k]>2.2?(NZ[k]>0.5?PAL.rbA:PAL.rbB):(NZ[k]>0.5?PAL.lrA:PAL.lrB)}
   else if(hf.c[k]<0.5){const t=hf.m[k]+(NZ[k]-0.5)*0.55;p=t>0.5?PAL.lSand:PAL.lDirt}
   else if(Math.abs(h-hf.h0[k])<0.03){p=hf.h0[k]<-1.0?PAL.bank:mixC(NZ[k]>0.55?PAL.grass2:PAL.grass,PAL.worn,Math.min(1,hf.w[k]),_cc)}
@@ -357,7 +393,7 @@ function tColor(hf,k,o,q){const h=hf.h[k];let p;
   const cav=n?s/n-h:0,ao=Math.max(0.5,Math.min(1.1,1-cav*0.9)),cp=hf.cp[k],sh=(1+(SHADE[k%SHADE.length]-1)*(1-cp))*ao*(1-0.14*cp);
   o[q]=(p[0]+(PAL.packed[0]-p[0])*cp*0.5)*sh;o[q+1]=(p[1]+(PAL.packed[1]-p[1])*cp*0.5)*sh;o[q+2]=(p[2]+(PAL.packed[2]-p[2])*cp*0.5)*sh}
 const AOK=[[2,0],[-2,0],[0,2],[0,-2],[2,2],[-2,2],[2,-2],[-2,-2]];
-function bColor(hf,k,o,q){const s=SHADE[k]*(0.88+Math.min(0.15,hf.h[k]*0.3)),t=hf.m[k]+(NZ[k*3%NZ.length]-0.5)*0.5,p=t>0.5?PAL.lSand:PAL.lDirt;o[q]=p[0]*s;o[q+1]=p[1]*s;o[q+2]=p[2]*s}
+function bColor(hf,k,o,q){const s=SHADE[k]*(0.88+Math.min(0.15,hf.h[k]*0.3)),t=hf.m[k]+(NZ[k*3%NZ.length]-0.5)*0.5,p=hf.m[k]>=4?PAL.olA:hf.m[k]>1.3?PAL.lrA:t>0.5?PAL.lSand:PAL.lDirt;o[q]=p[0]*s;o[q+1]=p[1]*s;o[q+2]=p[2]*s}
 // yalnızca değişen satırları GPU'ya gönder; normaller heightfield'dan doğrudan hesaplanır
 function syncRows(hf,mesh,colFn,yOff,j0,j1){const g=mesh.geometry,pa=g.attributes.position,ca=g.attributes.color,na=g.attributes.normal,p=pa.array,col=ca.array,nr=na.array,nx=hf.nx,nz=hf.nz,h=hf.h,d2=2*hf.dx;
   j0=Math.max(0,j0|0);j1=Math.min(nz-1,j1|0);
@@ -382,9 +418,9 @@ function outerH(x,z){const d=Math.pow(x**4+z**4,0.25);let h;
   const og=new THREE.Mesh(g,m2);og.receiveShadow=true;scene.add(og)}
 // su (nehir + yeraltı suyu seviyesi)
 {const w=new THREE.Mesh(new THREE.PlaneGeometry(400,400),new THREE.MeshStandardMaterial({color:lin('#2b8ad6'),roughness:0.1,metalness:0.1,transparent:true,opacity:0.9,emissive:lin('#0b3f6e'),emissiveIntensity:0.4}));
-  w.rotation.x=-Math.PI/2;w.position.y=WL;w.receiveShadow=true;scene.add(w);
+  w.rotation.x=-Math.PI/2;w.position.y=WL;w.receiveShadow=true;w.visible=false;scene.add(w);
   // nehir: kanalı takip eden ayrı su şeridi
-  const g=new THREE.PlaneGeometry(620,9.5,310,1);g.rotateX(-Math.PI/2);const p=g.attributes.position.array;for(let v=0;v<p.length;v+=3)p[v+2]+=RZ+Math.sin(p[v]*0.07)*1.5;g.computeVertexNormals();
+  const g=new THREE.PlaneGeometry(620,9.5,310,1);g.rotateX(-Math.PI/2);const p=g.attributes.position.array;for(let v=0;v<p.length;v+=3){p[v+2]+=RZ+Math.sin(p[v]*0.07)*1.5;if(Math.abs(p[v])<HALF-1)p[v+1]-=8}g.computeVertexNormals();
   const rv=new THREE.Mesh(g,w.material);rv.position.y=RIVL;rv.receiveShadow=true;scene.add(rv)}
 // çam ağaçları
 const TREEPOS=[];
@@ -421,7 +457,7 @@ function lowerB(arr,v){let lo=0,hi=arr.length;while(lo<hi){const m=(lo+hi)>>1;if
 const gDist=q=>T.c[q]<0.5||Math.abs(T.h[q]-T.h0[q])>0.04;
 function updGrass(k0=0,k1=N*N){const a=GR.im.instanceMatrix.array,s0=lowerB(GR.k,k0),s1=lowerB(GR.k,k1);if(!GR.sy){GR.sy=new Float32Array(GR.n).fill(-999);GR.sf=new Float32Array(GR.n)}let ch=false;
   for(let i=s0;i<s1;i++){const k=GR.k[i],o=i*16;
-    let f=-1;if(!ROADK[k]&&!gDist(k)&&T.w[k]<0.45&&T.h0[k]>-0.9){const nb=(gDist(k-1)?1:0)+(gDist(k+1)?1:0)+(gDist(k-N)?1:0)+(gDist(k+N)?1:0);if(nb<2)f=Math.max(0.25,1-T.w[k]*1.3-nb*0.45)}
+    let f=-1;if(!ROADK[k]&&!AS[k]&&!PADK[k]&&!gDist(k)&&T.w[k]<0.45&&T.h0[k]>-0.9){const nb=(gDist(k-1)?1:0)+(gDist(k+1)?1:0)+(gDist(k-N)?1:0)+(gDist(k+N)?1:0);if(nb<2)f=Math.max(0.25,1-T.w[k]*1.3-nb*0.45)}
     if(f<0){if(GR.sy[i]!==-999){for(let q=0;q<16;q++)a[o+q]=0;GR.sy[i]=-999;ch=true}continue}
     const y=T.h[k]-0.02;if(Math.abs(y-GR.sy[i])<0.003&&Math.abs(f-GR.sf[i])<0.02)continue;
     for(let q=0;q<16;q++)a[o+q]=GR.base[o+q];a[o+13]=y;if(f<1){a[o+4]*=f;a[o+5]*=f;a[o+6]*=f}GR.sy[i]=y;GR.sf[i]=f;ch=true}
@@ -687,11 +723,11 @@ function trkStep(u,dt){
   trkPose();
   const cf=TC,vol=Bed.volume(),m=cf.m0+vol*1800,W=m*9.81,rf=Math.max(0.3,TRK.rpm/cf.rpmMax);
   const k=T.near(TRK.x,TRK.z),loose=k>=0&&T.c[k]<0.5,pitch=truck.rotation.z;
-  const trac=0.62*W*0.7,res=(loose?0.07:0.025)*W,P=cf.P*rf;let a;
+  const sfc=surf(TRK.x,TRK.z),wdp=waterD(TRK.x,TRK.z),trac=0.62*W*0.7,res=(sfc.r+Math.min(0.35,wdp*0.3))*W,P=cf.P*rf;let a;
   if(Math.abs(u.thr)>0.03&&u.thr*TRK.v<-0.1){a=-Math.sign(TRK.v)*Math.min(Math.abs(TRK.v)/dt,6);TRK.pow=0.1}
   else if(Math.abs(u.thr)>0.03){const Fd=Math.min(trac,P*0.85/Math.max(Math.abs(TRK.v),1.3))*u.thr;a=(Fd-Math.sign(TRK.v||u.thr)*res)/m-9.81*Math.sin(pitch);TRK.pow=Math.min(1,Math.abs(Fd)*Math.max(Math.abs(TRK.v),1.3)/P)}
   else{a=-Math.sign(TRK.v)*Math.min(Math.abs(TRK.v)/dt,res/m+0.9)-9.81*Math.sin(pitch)*(Math.abs(TRK.v)>0.4?1:0);TRK.pow=0.05}
-  TRK.v=Math.max(-cf.vrev,Math.min(cf.vmax,TRK.v+a*dt));if(Math.abs(u.thr)<0.03&&Math.abs(TRK.v)<0.3)TRK.v=0;
+  const pv0=TRK.v;TRK.v=Math.max(-cf.vrev,Math.min(cf.vmax,TRK.v+a*dt));{const vm=cf.vmax*sfc.vf*(wdp>0.5?0.5:1);if(TRK.v>vm)TRK.v=Math.max(vm,Math.min(TRK.v,pv0)-3*dt);if(wdp>0.15&&Math.abs(TRK.v)>0.5&&Math.random()<0.3)splash(TRK.x,T.sample(TRK.x,TRK.z)+wdp,TRK.z,Math.min(1,wdp))}if(Math.abs(u.thr)<0.03&&Math.abs(TRK.v)<0.3)TRK.v=0;
   const st=u.st*cf.stmax*(1-0.55*Math.min(1,Math.abs(TRK.v)/(cf.vmax*0.92)));TRK.steer+=Math.max(-0.9*dt,Math.min(0.9*dt,st-TRK.steer));
   const w=TRK.v*Math.tan(TRK.steer)/cf.wb,ny=TRK.yaw+w*dt,nx=TRK.x+Math.cos(ny)*TRK.v*dt,nz=TRK.z-Math.sin(ny)*TRK.v*dt;
   const o0={x:TRK.x,z:TRK.z,yaw:TRK.yaw};TRK.x=nx;TRK.z=nz;TRK.yaw=ny;
@@ -744,8 +780,8 @@ function hammerBlow(){tmp.copy(HAMPT.l).applyMatrix4(bkG.matrixWorld);bldHammer(
     T.touchRows(j0-1,j0+1);HACC+=vol*1.5;CACC+=cv*1.5;
     while(CACC>0.004){const r=0.06+0.17*Math.pow(Math.random(),1.4),v=volR(r);if(v>CACC)break;CACC-=v;const a=Math.random()*6.28;
       addChunk(tmp.x+Math.cos(a)*0.3,tmp.y+0.12+r,tmp.z+Math.sin(a)*0.3,3,Math.cos(a)*0.8,0.8+Math.random(),Math.sin(a)*0.8,r,1)}
-    while(HACC>0.003){const r=0.05+0.14*Math.pow(Math.random(),1.6),v=volR(r);if(v>HACC)break;HACC-=v;const a=Math.random()*6.28;
-      addChunk(tmp.x+Math.cos(a)*0.25,tmp.y+0.15+r,tmp.z+Math.sin(a)*0.25,2,Math.cos(a)*1.1,1.4+Math.random()*1.4,Math.sin(a)*1.1,r,1)}
+    const hmf=(()=>{const g=oreAt(tmp.x,tmp.y-0.2,tmp.z);return g>0.05?ORE(g):2})();while(HACC>0.003){const r=0.05+0.14*Math.pow(Math.random(),1.6),v=volR(r);if(v>HACC)break;HACC-=v;const a=Math.random()*6.28;
+      addChunk(tmp.x+Math.cos(a)*0.25,tmp.y+0.15+r,tmp.z+Math.sin(a)*0.25,hmf,Math.cos(a)*1.1,1.4+Math.random()*1.4,Math.sin(a)*1.1,r,1)}
     if(Math.random()<0.6)dust(tmp.x,tmp.y+0.2,tmp.z,1)}}
 
 /* ---------- Dozer (CAT D9T örnek alındı: yüksek tahrikli palet, SU bıçak, tek dişli ripper) ---------- */
@@ -930,7 +966,8 @@ const rMesh=new THREE.InstancedMesh(rockGeo,TOON('#ffffff'),DM.max);rMesh.castSh
 const hits={bed:0,ground:0,rock:0};let dmPtr=0;
 const RK=[C3('#8f8b84'),C3('#a29d95'),C3('#77746e'),C3('#9a8f80')];
 const CK=[C3('#c4c1b9'),C3('#b0ada5'),C3('#d0cdc6')];
-function chunkColor(mf,t){if(t===1&&mf>=3){const p=CK[(Math.random()*3)|0],s=0.9+Math.random()*0.15;return _pc.setRGB(p[0]*s,p[1]*s,p[2]*s)}
+const OK=[C3('#a8763e'),C3('#8e6638'),C3('#b8864a')];
+function chunkColor(mf,t){if(mf>=4){const p=OK[(Math.random()*3)|0],s=0.85+Math.random()*0.3;return _pc.setRGB(p[0]*s,p[1]*s,p[2]*s)}if(t===1&&mf>=3){const p=CK[(Math.random()*3)|0],s=0.9+Math.random()*0.15;return _pc.setRGB(p[0]*s,p[1]*s,p[2]*s)}
   if(t===1){const p=RK[(Math.random()*4)|0],s=0.85+Math.random()*0.3;return _pc.setRGB(p[0]*s,p[1]*s,p[2]*s)}
   const q=mf+(Math.random()-.5)*0.5,p=q>1.4?RK[0]:q>0.5?CS:(Math.random()<0.15?CT:CD),s=0.75+Math.random()*0.4;return _pc.setRGB(p[0]*s,p[1]*s,p[2]*s)}
 function addChunk(x,y,z,mf,vx,vy,vz,r,t=0){for(let n=0;n<DM.max;n++){const i=(dmPtr+n)%DM.max;if(DM.a[i])continue;
@@ -1107,7 +1144,7 @@ function drawChunks(){const a=cMesh.instanceMatrix.array,b=rMesh.instanceMatrix.
 const DUST=[];for(let i=0;i<70;i++){const s=new THREE.Sprite(new THREE.SpriteMaterial({map:dustTex,color:lin('#cdb894'),transparent:true,depthWrite:false,opacity:0}));s.visible=false;s.life=0;scene.add(s);DUST.push(s)}
 let dPtr=0;
 function placeRocks(){let s=77;const rnd=()=>(s=(s*16807)%2147483647)/2147483647;let n=0;
-  for(let t=0;t<6000&&n<320;t++){const x=(rnd()-.5)*(SIZE-6),z=(rnd()-.5)*(SIZE-6);if(haulD(x,z)[0]<HAULW+2||(Math.abs(x-DZONE.x)<DZONE.w/2+2&&Math.abs(z-DZONE.z)<DZONE.d/2+2))continue;
+  for(let t=0;t<8000&&n<420;t++){const x=(rnd()-.5)*(SIZE-6),z=(rnd()-.5)*(SIZE-6);if(haulD(x,z)[0]<HAULW+2||(Math.abs(x-DZONE.x)<DZONE.w/2+2&&Math.abs(z-DZONE.z)<DZONE.d/2+2))continue;
     if(Math.hypot(x,z)<6.5||Math.hypot(x-DZ.x,z-DZ.z)<6||(Math.abs(x-TRUCK.x)<6&&Math.abs(z-TRUCK.z)<3.5)||Math.abs(z-RZ)<5||Math.abs(z-RD.z)<6||Math.hypot(x-SHP.x,z-SHP.z)<10||v15Excl(x,z))continue;
     const r=0.2+Math.pow(rnd(),1.4)*0.45,h=T.sample(x,z),i=addChunk(x,h+r*0.72,z,2,0,0,0,r,1);if(i>=0){DM.sl[i]=1;DM.g0[i]=h;n++}}}
 function dust(x,y,z,amt){const s=DUST[dPtr++%DUST.length];s.position.set(x+(Math.random()-.5)*0.5,y,z+(Math.random()-.5)*0.5);s.life=1;s.amt=amt;s.vx=(Math.random()-.5)*0.4;s.vz=(Math.random()-.5)*0.4;s.visible=true}
@@ -1174,7 +1211,7 @@ const keys={};let started=false;
 const TCH={lx:0,ly:0,rx:0,ry:0,drive:false,hit:false,rpD:false,rpU:false,dump:false,on:false};
 function makeStick(el,cb){const kn=el.querySelector('.knob'),R=58;let id=null,cx=0,cy=0;
   const mv=e=>{if(e.pointerId!==id)return;let dx=(e.clientX-cx)/R,dy=(e.clientY-cy)/R;const m=Math.hypot(dx,dy);if(m>1){dx/=m;dy/=m}kn.style.transform=`translate(${dx*R}px,${dy*R}px)`;cb(dx,dy);e.preventDefault()};
-  el.addEventListener('pointerdown',e=>{id=e.pointerId;el.setPointerCapture(id);const r=el.getBoundingClientRect();cx=r.left+r.width/2;cy=r.top+r.height/2;if(!started)start();mv(e)});
+  el.addEventListener('pointerdown',e=>{id=e.pointerId;el.setPointerCapture(id);const r=el.getBoundingClientRect();cx=r.left+r.width/2;cy=r.top+r.height/2;if(!started)return;mv(e)});
   el.addEventListener('pointermove',mv);const up=e=>{if(e.pointerId!==id)return;id=null;kn.style.transform='';cb(0,0)};el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up)}
 makeStick($('stL'),(x,y)=>{TCH.lx=x;TCH.ly=y});makeStick($('stR'),(x,y)=>{TCH.rx=x;TCH.ry=y});
 function holdBtn(label,key,cls){const b=document.createElement('button');b.textContent=label;if(cls)b.className=cls;const on=e=>{TCH[key]=true;b.classList.add('on');e.preventDefault()},off=()=>{TCH[key]=false;b.classList.remove('on')};
@@ -1188,13 +1225,14 @@ function touchUI(){if(!TCH.on)return;const t=$('tbtn');t.innerHTML='';const L=$(
     const tl=document.createElement('button');tl.textContent=ex.tool==='bucket'?'Kova':'Kırıcı';tl.onclick=()=>{setTool(ex.tool==='bucket'?'hammer':'bucket');touchUI()};t.append(tl);
     if(ex.tool==='hammer')t.append(holdBtn('Vur','hit'));
     L.textContent=TCH.drive?'Paletler: ileri / dön':'Arm · dönüş';Rl.textContent='Bom · kova'}
+  else if(VEH[MACH]){vehTouch(t,L,Rl)}
   else if(MACH==='gd'){t.append(holdBtn('Kaydır ◀','ssL'),holdBtn('Kaydır ▶','ssR'),holdBtn('Eğim ▲','rpU'),holdBtn('Eğim ▼','rpD'));L.textContent='Gaz · direksiyon';Rl.textContent='Bıçak ↕ · açı ↔'}
   else if(MACH==='dz'){const ab=document.createElement('button');ab.textContent='Oto bıçak';if(DZ.auto)ab.className='on';ab.onclick=dzAuto;t.append(ab,holdBtn('Ripper ▼','rpD'),holdBtn('Ripper ▲','rpU'));L.textContent='Gaz · yön';Rl.textContent='Bıçak · tilt'}
   else{L.textContent='Gaz / fren · direksiyon';Rl.textContent='Damper ▲▼'}}
 function dzAuto(){DZ.auto=!DZ.auto;DZ.hY=null;toast(DZ.auto?'Otomatik bıçak açık: kesme kotu sabit tutulur':'Otomatik bıçak kapalı');touchUI()}
 for(const ev of['contextmenu','selectstart','dragstart'])addEventListener(ev,e=>{if(!(e.target&&e.target.closest&&e.target.closest('input,textarea')))e.preventDefault()},{passive:false});
 const tdz=v=>Math.abs(v)<0.12?0:(v-Math.sign(v)*0.12)/0.88;
-addEventListener('keydown',e=>{keys[e.code]=true;if(/^Arrow|Space/.test(e.code))e.preventDefault();if(e.code==='KeyV'&&!e.repeat)toggleCam();if(!e.repeat&&started){if(e.code==='Digit1')setMach('ex');if(e.code==='Digit2')setMach('dz');if(e.code==='Digit3')setMach('tr');if(e.code==='Digit4')setMach('sh');if(e.code==='Digit5')setMach('mt');if(e.code==='Digit6')setMach('gd');if(e.code==='KeyX')blastStart();if(e.code==='KeyM')toggleEngine();if(e.code==='KeyT'&&MACH==='ex')setTool(ex.tool==='bucket'?'hammer':'bucket');if(e.code==='KeyG'&&MACH==='dz')dzAuto()}if(!started)start()});
+addEventListener('keydown',e=>{keys[e.code]=true;if(/^Arrow|Space/.test(e.code))e.preventDefault();if(e.code==='KeyV'&&!e.repeat)toggleCam();if(!e.repeat&&started){if(e.code==='Digit1')setMach('ex');if(e.code==='Digit2')setMach('dz');if(e.code==='Digit3')setMach('tr');if(e.code==='Digit4')setMach('sh');if(e.code==='Digit5')setMach('mt');if(e.code==='Digit6')setMach('gd');{const dk={Digit7:'dr',Digit8:'ch',Digit9:'pv',Digit0:'rl',Minus:'pk'}[e.code];if(dk)setMach(dk)}if(e.code==='KeyX')blastStart();if(e.code==='KeyP')panStart();if(e.code==='KeyT'&&MACH==='dr')toggleHT();if(e.code==='KeyB'&&CAREER())(PNL.cur==='shop'?pnlClose():pnlShop());if(e.code==='KeyJ'&&CAREER())(PNL.cur==='tasks'?pnlClose():pnlTasks());if(e.code==='KeyK')(PNL.cur==='holes'?pnlClose():pnlHoles());if(e.code==='KeyL')(PNL.cur==='plant'?pnlClose():pnlPlant());if(e.code==='Escape')pnlClose();if(e.code==='KeyM')toggleEngine();if(e.code==='KeyT'&&MACH==='ex')setTool(ex.tool==='bucket'?'hammer':'bucket');if(e.code==='KeyG'&&MACH==='dz')dzAuto()}});
 addEventListener('keyup',e=>{keys[e.code]=false});
 addEventListener('blur',()=>{for(const k in keys)keys[k]=false});
 const ax=(p,n)=>(keys[p]?1:0)-(keys[n]?1:0);
@@ -1369,7 +1407,7 @@ function soil(dt){nO.copy(NOPEN).transformDirection(bkG.matrixWorld);let cutV=0;
 /* ---------- Palet izleri: ezilen çim, gevşek toprakta tekerlek yolu ---------- */
 function trackRuts(X0,Z0,yaw,gauge,half,vl,vr,dt,w){const c=Math.cos(yaw),s=Math.sin(yaw),offs=w>0.5?[-0.18,0.18]:[0];
   for(const[v0,sg]of[[vl,-1],[vr,1]]){const v=Math.abs(v0);if(v<0.03)continue;
-    for(let a=-half;a<=half+0.01;a+=0.3)for(const off of offs){const b=sg*gauge+off,x=X0+c*a+s*b,z=Z0-s*a+c*b,k=T.near(x,z);if(k<0||(T.cc[k]>0&&T.h[k]-T.b[k]<0.05))continue;
+    for(let a=-half;a<=half+0.01;a+=0.3)for(const off of offs){const b=sg*gauge+off,x=X0+c*a+s*b,z=Z0-s*a+c*b,k=T.near(x,z);if(k<0||((T.cc[k]>0||AS[k])&&T.h[k]-T.b[k]<0.05))continue;
       T.w[k]=Math.min(1,T.w[k]+dt*v*1.6);T.cp[k]=Math.min(1,T.cp[k]+dt*v*(w>0.6?0.06:0.035));
       if(T.c[k]<0.5){const r=Math.min(0.028*dt*v,T.h[k]-T.b[k]);if(r>0){T.h[k]-=r;T.deposit(x+s*sg,z+c*sg,r*DX*DX*0.6,T.m[k])}}
       else if(T.h[k]>T.h0[k]-0.05)T.h[k]-=0.004*dt*v;
@@ -1442,7 +1480,8 @@ function gdPose(){const c=Math.cos(GD.yaw),s=Math.sin(GD.yaw),H=(a,b)=>T.sample(
 function gdDrawLinks(){for(let i=0;i<2;i++){const s=i?1:-1;
   _p1.set(4.15,1.12,s*0.12);gdG.localToWorld(_p1);_p2.set(1.32,GD.bl+0.62,s*0.78);gdG.localToWorld(_p2);placeLink(gdBar[i],_p1,_p2);
   _p1.set(1.35,1.8,s*0.6);gdG.localToWorld(_p1);_p2.set(1.25,GD.bl+0.7-s*GD.tilt*0.8,s*0.86);gdG.localToWorld(_p2);placeCyl(gdLift[i],_p1,_p2,0.75)}}
-function gdBlock(x,z,rad){if(!ACT.gd)return false;const dx=x-GD.x,dz=z-GD.z,c=Math.cos(GD.yaw),s=Math.sin(GD.yaw),lx=dx*c-dz*s,lz=dx*s+dz*c;return lx>-5.1-rad&&lx<5.0+rad&&Math.abs(lz)<1.35+rad}
+function gdBlock(x,z,rad){return gdBlock0(x,z,rad)||vehBlock(x,z,rad,null)}
+function gdBlock0(x,z,rad){if(!ACT.gd)return false;const dx=x-GD.x,dz=z-GD.z,c=Math.cos(GD.yaw),s=Math.sin(GD.yaw),lx=dx*c-dz*s,lz=dx*s+dz*c;return lx>-5.1-rad&&lx<5.0+rad&&Math.abs(lz)<1.35+rad}
 // kesici kenar örnek noktaları (+z ucundan -z ucuna)
 const GDE=[];for(let q=0;q<=14;q++)GDE.push(new V3(0.05,0,1.83-q*3.66/14));
 function gdPen(){let m=1e9;for(const p of GDE){_p1.copy(p).applyMatrix4(gdB.matrixWorld);const k=T.near(_p1.x,_p1.z);if(k>=0&&T.c[k]>0.5)m=Math.min(m,_p1.y-T.h[k])}return m}
@@ -1464,16 +1503,16 @@ function gdSoil(dt){const v=GD.v,lead=GD.ang>=0?1:-1,n=GDE.length;let carry=0,cm
 function gdHitOthers(nx,nz,ny){const c=Math.cos(ny),s=Math.sin(ny);
   for(const a of[4.8,2.4,0,-2.4,-4.7]){const px=nx+c*a,pz=nz-s*a;
     if(ACT.ex&&Math.hypot(px-ex.x,pz-ex.z)<3.7)return true;if(ACT.dz&&Math.hypot(px-DZ.x,pz-DZ.z)<4.0)return true;
-    if(trkBlock(px,pz,1.2)||shBlock(px,pz,1.2))return true}return false}
+    if(trkBlock(px,pz,1.2)||shBlock(px,pz,1.2)||vehBlock(px,pz,1.2,null))return true}return false}
 function gdStep(u,dt){GD.u=u;gdPose();gdSoil(dt);
-  const W=GD.M*9.81,trac=0.62*W*0.75,k=T.near(GD.x,GD.z),loose=k>=0&&T.c[k]<0.5,pitch=gdG.rotation.z;
-  const bladeF=GD.vpile*1500*9.81*0.6+GD.cut+(GD.rock?150e3:0),res=(loose?0.06:0.025)*W+bladeF*(GD.v>=0?1:0.3);GD.fpush=bladeF;
+  const W=GD.M*9.81,trac=0.62*W*0.75,sfc=surf(GD.x,GD.z),wdp=waterD(GD.x,GD.z),pitch=gdG.rotation.z;
+  const bladeF=GD.vpile*1500*9.81*0.6+GD.cut+(GD.rock?150e3:0),res=(sfc.r+Math.min(0.3,wdp*0.25))*W+bladeF*(GD.v>=0?1:0.3);GD.fpush=bladeF;
   const rf=Math.max(0.3,GD.rpm/2100),thr=u.thr,va=Math.abs(GD.v);let a;
   if(Math.abs(thr)>0.03&&thr*GD.v<-0.1){a=-Math.sign(GD.v)*Math.min(va/dt,4);GD.pow=0.1}
   else if(Math.abs(thr)>0.03){const dir=Math.sign(thr),Fe=Math.min(trac,GD.P*0.85*rf/Math.max(va,0.7))*Math.abs(thr);let net=Fe-res;if(net<0&&GD.v*dir<=0.02)net=0;
     a=dir*net/GD.M-9.81*Math.sin(pitch);GD.slip=Fe>=trac*0.98&&res>trac*0.9?1:Math.max(0,GD.slip-dt*2);GD.pow=Math.min(1,Fe*Math.max(va,0.7)/(GD.P*0.85))}
   else{a=-Math.sign(GD.v)*Math.min(va/dt,res/GD.M+0.8)-9.81*Math.sin(pitch)*(va>0.4?1:0);GD.pow=0.05;GD.slip=Math.max(0,GD.slip-dt*2)}
-  GD.v=Math.max(-4.5*rf,Math.min(9.5*rf,GD.v+a*dt));if(Math.abs(thr)<0.03&&Math.abs(GD.v)<0.25)GD.v=0;
+  GD.v=Math.max(-4.5*rf,Math.min(9.5*rf*Math.max(0.6,sfc.vf)*(wdp>0.5?0.5:1),GD.v+a*dt));if(Math.abs(thr)<0.03&&Math.abs(GD.v)<0.25)GD.v=0;
   const st=u.st*0.72*(1-0.6*Math.min(1,va/9));GD.steer+=Math.max(-0.8*dt,Math.min(0.8*dt,st-GD.steer));
   // bisiklet modeli: tandemin ortası kendi doğrultusunda gider, ön teker döndürür
   const w=GD.v*Math.tan(GD.steer)/GD_WB,ny=GD.yaw+w*dt,rx=GD.x+Math.cos(GD.yaw)*GD_XR+Math.cos(ny)*GD.v*dt,rz=GD.z-Math.sin(GD.yaw)*GD_XR-Math.sin(ny)*GD.v*dt;
@@ -1583,9 +1622,9 @@ function bldHammer(p){const x=p.x,y=p.y,z=p.z;for(const b of BLD){if(!bNear(b,x,
 /* ---------- Sahadaki ağaçlar: makine çarpınca devrilir, devrilen gövde itilebilir ---------- */
 const TRE={n:0};
 {const r=sd(97),L=[];const bad=(x,z)=>Math.hypot(x,z)<14||Math.abs(z-RD.z)<6||Math.abs(z-RZ)<6||haulD(x,z)[0]<HAULW+4||(x>14&&z<0&&z>-70)||
-    (Math.abs(x-DZONE.x)<DZONE.w/2+4&&Math.abs(z-DZONE.z)<DZONE.d/2+4)||Math.hypot(x-SHP.x,z-SHP.z)<14||Math.hypot(x-DZ.x,z-DZ.z)<8||Math.hypot(x-GD.x,z-GD.z)<9||bSites().some(b=>Math.hypot(x-b.x,z-b.z)<Math.max(b.nx,b.nz)*VS*0.75+4)||Math.abs(x-KNP.x)<14&&Math.abs(z-KNP.z)<10;
-  const CL=[[-48,30],[-60,52],[30,40],[52,30],[-68,0],[-50,-18],[70,8],[20,58],[-15,62],[44,60],[-78,30]];
-  for(const[cx,cz]of CL)for(let t=0;t<40&&L.length<(MOBILE?70:110);t++){const a=r()*6.28,d=Math.pow(r(),0.6)*11,x=cx+Math.cos(a)*d,z=cz+Math.sin(a)*d;
+    (Math.abs(x-DZONE.x)<DZONE.w/2+4&&Math.abs(z-DZONE.z)<DZONE.d/2+4)||Math.hypot(x-SHP.x,z-SHP.z)<14||Math.hypot(x-DZ.x,z-DZ.z)<8||Math.hypot(x-GD.x,z-GD.z)<9||(x>5&&z<-64)||[-62,-22,18,52].some(sx=>Math.hypot(x-sx,z-(RZ+Math.sin(sx*0.07)*1.5-9))<11)||[[-6,-9],[-24,-8],[-30,-30],[-37,-33],[-28,4]].some(p=>Math.hypot(x-p[0],z-p[1])<6)||bSites().some(b=>Math.hypot(x-b.x,z-b.z)<Math.max(b.nx,b.nz)*VS*0.75+4)||Math.abs(x-KNP.x)<14&&Math.abs(z-KNP.z)<10;
+  const CL=[[-48,30],[-60,52],[30,40],[52,30],[-68,0],[-50,-18],[70,8],[20,58],[-15,62],[44,60],[-78,30],[0,100],[-60,98],[62,100],[-100,40],[100,50],[-98,-20],[-90,-95],[-40,-95]];
+  for(const[cx,cz]of CL)for(let t=0;t<40&&L.length<(MOBILE?90:150);t++){const a=r()*6.28,d=Math.pow(r(),0.6)*11,x=cx+Math.cos(a)*d,z=cz+Math.sin(a)*d;
     if(Math.abs(x)>HALF-4||Math.abs(z)>HALF-4||bad(x,z)||L.some(p=>Math.hypot(p[0]-x,p[1]-z)<3.2))continue;if(r()<0.5)L.push([x,z,0.7+r()*0.6,r()*6])}
   TRE.n=L.length;for(const k of['x','z','y','s','r','st','th','om','dx','dz','pf'])TRE[k]=new Float32Array(TRE.n);
   L.forEach(([x,z,s,rr],i)=>{TRE.x[i]=x;TRE.z[i]=z;TRE.s[i]=s;TRE.r[i]=rr});
@@ -1617,12 +1656,12 @@ const BODY={ex:[[2.3,0.5,-1.6],[2.3,0.5,0],[2.3,0.5,1.6],[-2.3,0.5,-1.6],[-2.3,0
   gd:[[4.95,0.9,-0.7],[4.95,0.9,0.7],[4.3,0.7,-1.3],[4.3,0.7,1.3],[2.2,1.5,0],[0,1.0,-1.3],[0,1.0,1.3],[-2.6,0.8,-1.32],[-2.6,0.8,1.32],[-5.0,0.9,-0.8],[-5.0,0.9,0.8],[-1.5,2.8,0]],
   sh:[[4.9,1.2,-3.8],[4.9,1.2,0],[4.9,1.2,3.8],[-4.9,1.2,-3.8],[-4.9,1.2,0],[-4.9,1.2,3.8],[0,1.2,-3.9],[0,1.2,3.9],[2.5,1.2,-3.9],[-2.5,1.2,3.9]]};
 const MASSF={ex:2.0,dz:4.9,gd:1.7,sh:54,tr:2.2,mt:16};
-function bodyLocal(id){if(BODY[id])return BODY[id];const c=TRUCKS.find(t=>t.id===id);if(!c)return[];const f=c.cfg,x1=f.blkO+f.blkL,x0=f.blkO-f.blkL,w=f.blkW,h=f.big?1.6:0.9;
+function bodyLocal(id){if(BODY[id])return BODY[id];if(VEH[id])return VEH[id].body;const c=TRUCKS.find(t=>t.id===id);if(!c)return[];const f=c.cfg,x1=f.blkO+f.blkL,x0=f.blkO-f.blkL,w=f.blkW,h=f.big?1.6:0.9;
   return[[x1,h,-w],[x1,h,0],[x1,h,w],[x1,h*2,0],[x1,h*2.8,-w*0.6],[x1,h*2.8,w*0.6],[0,h*3,0],[x0,h,-w],[x0,h,w],[0,h,-w],[0,h,w],[x1*0.5,h,-w],[x1*0.5,h,w]]}
-const MGRP=()=>({ex:chassis,dz:dzG,gd:gdG,sh:shG,tr:TRUCKS[0].truck,mt:TRUCKS[1].truck});
+const MGRP=()=>({ex:chassis,dz:dzG,gd:gdG,sh:shG,tr:TRUCKS[0].truck,mt:TRUCKS[1].truck,dr:VEH.dr.g,ch:VEH.ch.g,pv:VEH.pv.g,rl:VEH.rl.g,pk:VEH.pk.g});
 const _vq=new V3();
 // gövde temas kontrolü; true dönerse hareket engellenir (sağlam blok önünde)
-function bldMach(id,dx,dz,dt,thr=1){const g=MGRP()[id];if(!g)return false;let blocked=false;const mf=MASSF[id]||2,mx=g.position.x,mz=g.position.z;const near=BLD.some(b=>bNear(b,mx+dx,mz+dz,9));
+function bldMach(id,dx,dz,dt,thr=1){const g=MGRP()[id];if(!g)return false;let blocked=false;const mf=MASSF[id]||(VEH[id]?VEH[id].M/10000:2),mx=g.position.x,mz=g.position.z;const near=BLD.some(b=>bNear(b,mx+dx,mz+dz,9));
   const moving=Math.abs(dx)+Math.abs(dz)>1e-6;
   for(const p of bodyLocal(id)){_vq.set(p[0],p[1],p[2]);g.localToWorld(_vq);_vq.x+=dx;_vq.z+=dz;
     if(near&&moving){for(const b of BLD){if(!bNear(b,_vq.x,_vq.z,0.3))continue;const q=bLocal(b,_vq.x,_vq.y,_vq.z);if(q>=0&&b.alive[q]){blocked=true;bldPoint(_vq.x,_vq.y,_vq.z,mf*dt*(0.6+Math.abs(thr)),dx/dt*0.5,dz/dt*0.5)}}}
@@ -1637,33 +1676,8 @@ function toolContacts(dt){
   if(ACT.gd&&Math.abs(GD.v)>0.05){for(let q=0;q<GDE.length;q+=2){_vq.copy(GDE[q]).applyMatrix4(gdB.matrixWorld);bldPoint(_vq.x,_vq.y+0.3,_vq.z,1.7*dt,0,0);treePoint(_vq.x,_vq.y+0.3,_vq.z,GD.x,GD.z,0,0)}}
   if(ACT.sh){const sv=Math.abs(SH.v.boom)+Math.abs(SH.v.stick)+Math.abs(SH.v.bk)+Math.abs(SH.v.swing);if(sv>0.03)for(let q=0;q<SHCUT.length;q+=3){_vq.copy(SHCUT[q].l).applyMatrix4(shBk.matrixWorld);bldPoint(_vq.x,_vq.y,_vq.z,30*dt,0,0);treePoint(_vq.x,_vq.y,_vq.z,SH.x,SH.z,0,0)}}}
 
-/* ---------- Patlatma: üst basamak sert kaya; delik deseni yüklenip ateşlenir, kaya parçalanıp önüne yığılır ---------- */
-const BL={i:0,t:0,zones:[]};
-for(const xr of[[44,52.5],[52.5,61],[61,69.5],[69.5,78]])for(const zr of[[-24,-10],[-38,-24],[-52,-38]])BL.zones.push({x0:xr[0],x1:xr[1],z0:zr[0],z1:zr[1]});
-const blHoleG=new THREE.CylinderGeometry(0.05,0.05,0.9,6);blHoleG.translate(0,0.45,0);
-const blIM=new THREE.InstancedMesh(blHoleG,TOON('#ff5a1f',{emissive:lin('#a02a00'),emissiveIntensity:0.5}),40);blIM.frustumCulled=false;scene.add(blIM);
-const blCap=new THREE.InstancedMesh(new THREE.ConeGeometry(0.18,0.25,6),TOON('#ffd21a'),40);blCap.frustumCulled=false;scene.add(blCap);
-function blMarkers(){const z=BL.zones[BL.i];let n=0;const o=_bo;
-  if(z)for(let x=z.x0+1.8;x<z.x1-0.4;x+=2.8)for(let zz=z.z0+1.5;zz<z.z1-0.8;zz+=3){if(n>=40)break;o.position.set(x,T.sample(x,zz),zz);o.rotation.set(0,0,0);o.scale.setScalar(1);o.updateMatrix();blIM.setMatrixAt(n,o.matrix);
-    o.position.y+=0.95;o.updateMatrix();blCap.setMatrixAt(n,o.matrix);n++}
-  blIM.count=blCap.count=n;blIM.instanceMatrix.needsUpdate=blCap.instanceMatrix.needsUpdate=true}
-function blastStart(){if(!started||BL.t>0)return;const z=BL.zones[BL.i];if(!z){toast('Patlatılacak alan kalmadı');return}
-  const cx=(z.x0+z.x1)/2,cz=(z.z0+z.z1)/2;for(const k of MORD){if(!ACT[k])continue;const o=MOBJ()[k];if(Math.hypot(o.x-cx,o.z-cz)<26){toast(MNAME[k]+' patlatma alanına çok yakın: 26 m uzaklaş');return}}
-  BL.t=4;toast('Patlatma! Siren çalıyor, 4 sn');SND.siren(4)}
-let CAMSHK=0;
-function blastNow(z){const i0=Math.max(1,Math.floor((z.x0+HALF)/DX)),i1=Math.min(N-2,Math.ceil((z.x1+HALF)/DX)),j0=Math.max(1,Math.floor((z.z0+HALF)/DX)),j1=Math.min(N-2,Math.ceil((z.z1+HALF)/DX));
-  for(let j=j0;j<=j1;j++){const zw=-HALF+j*DX,F=T.s0(40,zw);for(let i=i0;i<=i1;i++){const k=j*N+i,x=-HALF+i*DX,f=T.h[k]-F;if(f<=0.05)continue;
-    const sw=f*1.35,tf=0.15+0.45*(1-(x-z.x0)/(z.x1-z.x0)),stay=sw*(1-tf);T.h[k]=F+stay;T.b[k]=Math.min(T.b[k],F-0.02);T.c[k]=0;T.m[k]=1.6;T.cp[k]=0;T.w[k]=0;
-    const th=sw*tf*DX*DX;for(let q=0;q<3;q++)T.deposit(z.x0-0.8-Math.pow(Math.random(),0.8)*10,zw+(Math.random()-.5)*2,th/3,1.6)}}
-  T.touchRows(j0-6,j1+6);for(let it=0;it<3;it++)T.relax(6,i0-45,i1+4,j0-5,j1+5);
-  const cx=(z.x0+z.x1)/2,cz=(z.z0+z.z1)/2,cy=T.sample(cx,cz);
-  const nr=Math.min(140,DM.max-DM.n-150);for(let q=0;q<nr;q++){const x=z.x0+Math.random()*(z.x1-z.x0),zz=z.z0+Math.random()*(z.z1-z.z0),r=0.14+Math.pow(Math.random(),1.6)*0.36;
-    addChunk(x,T.sample(x,zz)+r+0.3,zz,2,-(2+Math.random()*9),3+Math.random()*9,(Math.random()-.5)*6,r,1)}
-  for(let q=0;q<40;q++)dust(z.x0+Math.random()*(z.x1-z.x0),cy+Math.random()*4,z.z0+Math.random()*(z.z1-z.z0),1);
-  for(let q=0;q<45;q++)smoke(z.x0+Math.random()*(z.x1-z.x0),cy+1+Math.random()*3,z.z0+Math.random()*(z.z1-z.z0),0.25,1,-0.8,0);
-  CAMSHK=Math.max(0.2,1.3-Math.hypot(camera.position.x-cx,camera.position.z-cz)/120);SND.blast();
-  for(const k of MORD){if(!ACT[k])continue;const o=MOBJ()[k],d=Math.hypot(o.x-cx,o.z-cz),a=Math.max(0,0.12*(1-d/120));shk(k,a*(Math.random()-.5)*2,a*(Math.random()-.5)*2,a*0.6)}
-  BL.i++;blMarkers();toast('Patlatıldı: kaya gevşedi, yükleyebilirsin. Sıradaki delik deseni hazır')}
+/* ---------- Patlatma durumu (delikler: sondaj modülünde) ---------- */
+const BL={t:0,list:null};let CAMSHK=0;
 
 /* ---------- Kantar ve sefer sayacı ---------- */
 const KN={L:16,W:8,yaw:Math.atan2(5,-24),last:-1,on:{},g:new THREE.Group()};scene.add(KN.g);
@@ -1689,15 +1703,18 @@ function mmBg(){const ctx=MM.bg.getContext('2d'),img=ctx.createImageData(144,144
   for(let y=0;y<144;y++)for(let x=0;x<144;x++){const k=Math.min(N-1,y*4)*N+Math.min(N-1,x*4),o=(y*144+x)*4,sh=Math.max(0.55,Math.min(1.25,0.95+(-nr[k*3]*0.6-nr[k*3+2]*0.6)));
     for(let q=0;q<3;q++)img.data[o+q]=Math.min(255,Math.pow(col[k*3+q],1/2.2)*215*sh);img.data[o+3]=255}
   ctx.putImageData(img,0,0)}
-function mmDraw(){const c=MM.cv;if(!c||!started)return;const ctx=c.getContext('2d'),W=c.width,S=W/SIZE,P=(x,z)=>[(x+HALF)*S,(z+HALF)*S];
-  ctx.drawImage(MM.bg,0,0,W,W);
-  ctx.strokeStyle='#ff9a1a';ctx.lineWidth=1.5;{const[a,b]=P(DZONE.x-DZONE.w/2,DZONE.z-DZONE.d/2);ctx.strokeRect(a,b,DZONE.w*S,DZONE.d*S)}
-  const z=BL.zones[BL.i];if(z){ctx.strokeStyle='#ff3b2a';const[a,b]=P(z.x0,z.z0);ctx.strokeRect(a,b,(z.x1-z.x0)*S,(z.z1-z.z0)*S)}
-  {ctx.fillStyle='#58a6d6';const[a,b]=P(KNP.x,KNP.z);ctx.fillRect(a-3,b-2,6,4)}
-  ctx.fillStyle='#55504a';for(const b of BLD){let al=0;for(let q=0;q<b.alive.length;q+=7)al+=b.alive[q];if(!al)continue;const[a,c_]=P(b.x,b.z);ctx.save();ctx.translate(a,c_);ctx.rotate(-b.yaw);ctx.fillRect(-b.nx*VS*S/2,-b.nz*VS*S/2,b.nx*VS*S,b.nz*VS*S);ctx.restore()}
-  for(const k of MORD){if(!ACT[k])continue;const o=MOBJ()[k],[a,b]=P(o.x,o.z),cur=k===MACH,r=cur?5:3.5;ctx.save();ctx.translate(a,b);ctx.rotate(-o.yaw);ctx.beginPath();ctx.moveTo(r*1.4,0);ctx.lineTo(-r,r*0.8);ctx.lineTo(-r,-r*0.8);ctx.closePath();
+function mmDraw(){const c=MM.cv;if(!c||!started)return;const ctx=c.getContext('2d'),W=c.width,S=W/SIZE,P=(x,z)=>[(x+HALF)*S,(HALF-z)*S],RR=(x0,z0,x1,z1)=>{const[a,b]=P(x0,z1);ctx.strokeRect(a,b,(x1-x0)*S,(z1-z0)*S)};
+  ctx.save();ctx.translate(0,W);ctx.scale(1,-1);ctx.drawImage(MM.bg,0,0,W,W);ctx.restore();
+  ctx.lineWidth=1.5;ctx.strokeStyle='#ff9a1a';RR(DZONE.x-DZONE.w/2,DZONE.z-DZONE.d/2,DZONE.x+DZONE.w/2,DZONE.z+DZONE.d/2);
+  {const A=plantArea();ctx.strokeStyle='#c9a227';RR(A.x0,A.z0,A.x1,A.z1);ctx.strokeStyle=PL.built.pad?'#111':'#8a8a8a';RR(A.px0,A.pz0,A.px1,A.pz1)}
+  for(const h of HOLES){const[a,b]=P(h.x,h.z);ctx.fillStyle=h.t==='ex'?(h.res?GRC(h.max):'#e8e6e0'):h.charged?'#d8202a':'#ff8a1a';ctx.fillRect(a-1.5,b-1.5,3,3)}
+  if(PL.slot>=0&&PL.built.sluice){const s_=SLOTS[PL.slot],[a,b]=P(s_.x,s_.z);ctx.fillStyle='#c9a227';ctx.fillRect(a-3,b-3,6,6)}
+  {ctx.fillStyle='#58a6d6';const[a,b]=P(KNP.x,KNP.z);ctx.fillRect(a-3,b-2,6,4);const[h1,h2]=P(25,-91);ctx.fillStyle='#c9a227';ctx.fillRect(h1-3,h2-3,6,6)}
+  ctx.fillStyle='#55504a';for(const b of BLD){let al=0;for(let q=0;q<b.alive.length;q+=7)al+=b.alive[q];if(!al)continue;const[a,c_]=P(b.x,b.z);ctx.save();ctx.translate(a,c_);ctx.rotate(b.yaw);ctx.fillRect(-b.nx*VS*S/2,-b.nz*VS*S/2,b.nx*VS*S,b.nz*VS*S);ctx.restore()}
+  for(const k of MORD){if(!ACT[k])continue;const o=MOBJ()[k],[a,b]=P(o.x,o.z),cur=k===MACH,r=cur?5:3.5;ctx.save();ctx.translate(a,b);ctx.rotate(o.yaw);ctx.beginPath();ctx.moveTo(r*1.4,0);ctx.lineTo(-r,r*0.8);ctx.lineTo(-r,-r*0.8);ctx.closePath();
     ctx.fillStyle=cur?'#ffd21a':'#f3f1ec';ctx.fill();ctx.lineWidth=1;ctx.strokeStyle='#111';ctx.stroke();ctx.restore()}
-  {const[a,b]=P(camera.position.x,camera.position.z);ctx.fillStyle='rgba(255,255,255,.7)';ctx.beginPath();ctx.arc(a,b,2,0,7);ctx.fill()}}
+  {const[a,b]=P(camera.position.x,camera.position.z);ctx.fillStyle='rgba(255,255,255,.7)';ctx.beginPath();ctx.arc(a,b,2,0,7);ctx.fill()}
+  ctx.fillStyle='#fff';ctx.font='600 10px Barlow,sans-serif';ctx.fillText('K',W/2-3,11)}
 
 /* ---------- Ek sesler: siren, patlama, yıkıntı, ağaç ---------- */
 const SND={nb:null,t:{}};
@@ -1718,17 +1735,499 @@ SND.crack=()=>{if(!sndOK()||!sndRate('ck',120))return;const t=AU.ctx.currentTime
 SND.thud=()=>{if(!sndOK()||!sndRate('th',150))return;const t=AU.ctx.currentTime;osc(t,0.5,0.5,75,30);nburst(t,0.6,0.35,'lowpass',900,120)};
 
 /* ---------- Bağlantı ---------- */
-function v15Excl(x,z){return bSites().some(b=>Math.hypot(x-b.x,z-b.z)<Math.max(b.nx,b.nz)*VS*0.75+3)||Math.hypot(x-GD.x,z-GD.z)<7||(Math.abs(x-KNP.x)<10&&Math.abs(z-KNP.z)<7)}
-function v15Init(){buildBld();placeTrees();blMarkers();knPlace();BL.t=0;FB.a.fill(0);FB.n=0;fbIM.instanceMatrix.array.fill(0);fbIM.instanceMatrix.needsUpdate=true;TRIPS=0;MM.t=0}
-function v15Step(dt){STEPN++;toolContacts(dt)}
+function v15Excl(x,z){return [-62,-22,18,52].some(sx=>Math.hypot(x-sx,z-(RZ+Math.sin(sx*0.07)*1.5-9))<9)||(x>8&&z<-68)||VORD.some(k=>Math.hypot(x-DEFP0[k][0],z-DEFP0[k][1])<6)||bSites().some(b=>Math.hypot(x-b.x,z-b.z)<Math.max(b.nx,b.nz)*VS*0.75+3)||Math.hypot(x-GD.x,z-GD.z)<7||(Math.abs(x-KNP.x)<10&&Math.abs(z-KNP.z)<7)}
+function v15Init(){buildBld();placeTrees();knPlace();BL.t=0;FB.a.fill(0);FB.n=0;fbIM.instanceMatrix.array.fill(0);fbIM.instanceMatrix.needsUpdate=true;TRIPS=0;MM.t=0}
+function v15Step(dt){STEPN++;toolContacts(dt);v16Step(dt)}
 function v15Frame(dt){fbStep(dt);treeStep(dt);if(frameN%30===7)for(const b of BLD)if(b.dirty||frameN%120===7)bSupport(b);knStep();
-  if(BL.t>0){BL.t-=dt;if(BL.t<=0){BL.t=0;blastNow(BL.zones[BL.i])}}
+  if(BL.t>0){BL.t-=dt;if(BL.t<=0){BL.t=0;const L=(BL.list||[]).filter(h=>HOLES.includes(h));if(L.length)blastHoles(L)}}
   if(CAMSHK>0){const a=CAMSHK*0.5;camera.position.x+=(Math.random()-.5)*a;camera.position.y+=(Math.random()-.5)*a;camera.position.z+=(Math.random()-.5)*a;CAMSHK=Math.max(0,CAMSHK-dt*0.9)}
-  MM.t-=dt;if(MM.t<=0){MM.t=2;mmBg()}if(frameN%3===0)mmDraw()}
+  v16Frame(dt);MM.t-=dt;if(MM.t<=0){MM.t=2;mmBg()}if(frameN%3===0)mmDraw()}
+
+/* ==================== v0.16: kariyer modu, cevher, sondaj, şarj, tesis, asfalt, su ==================== */
+let MODE='free';const CAREER=()=>MODE==='career';
+const ECO={money:300,gold:0,price:85,sold:0,prod:0,pans:0,sluiceG:0,assays:0,best:0,blasts:0,holesBl:0,oreT:0,buyT:0,paved:0,fuel:0,tasks:{},t:0};
+const fmt$=v=>'$'+Math.round(v).toLocaleString('tr-TR');
+const fmtG=g=>g<1000?g.toFixed(g<10?2:1)+' g':(g/1000).toFixed(2)+' kg';
+function pay(c,what){if(!CAREER()||c<=0)return true;if(ECO.money<c){toast('Yetersiz para: '+fmt$(c)+' gerekiyor'+(what?' · '+what:''),'nomoney');return false}ECO.money-=c;return true}
+function earn(v){if(CAREER())ECO.money+=v}
+
+/* ---------- Cevher alanı: nehir kıyısında plaser altın, doğudaki kaya platonun altında cevher kütleleri ---------- */
+// malzeme kodu: altın içeren malzeme mf = 2.6 + 20·(g/t). Karışınca kod doğrusal karıştığından altın korunur (seyrelme gerçekçi)
+const ORE=g=>2.6+20*g,oreG=mf=>Math.max(0,(mf-2.6)/20);
+const RIVC=x=>RZ+Math.sin(x*0.07)*1.5;
+var PLC=null,OREB=null;
+function placerG(x,z){if(!PLC)return 0;const d=Math.abs(z-RIVC(x));if(d>14)return 0;let g=0;for(const[px,a,w]of PLC)g+=a*Math.exp(-(((x-px)/w)**2));return g*(1-d/14)*(0.55+0.45*Math.sin(x*0.9+z*0.4)**2)}
+function oreAt(x,y,z){if(!OREB)return 0;let g=0;
+  for(const[cx,cy,cz,rx,ry,rz,pk]of OREB){const q=((x-cx)/rx)**2+((y-cy)/ry)**2+((z-cz)/rz)**2;if(q<1)g=Math.max(g,pk*(1-q*q))}
+  if(y>-3.4&&y<0.8&&Math.abs(z-RZ)<17){const p=placerG(x,z);if(p>0)g=Math.max(g,p*(0.45+0.55*sstep(0.8,-2.6,y)))}
+  return g}
+PLC=[[-62,2.8,14],[-22,2.0,11],[18,3.6,9],[52,2.4,13],[88,3.2,11],[-96,2.2,9]];
+OREB=[[72,-1,-38,14,8,10,4.2],[94,-2,-22,7,7,6,6.5],[57,-3,-50,9,6,7,2.6],[84,-8,-40,10,5,8,3.4]];
+
+/* ---------- Yol yüzeyi: tekerlekli araçlar toprakta yavaş, asfaltta hızlı ---------- */
+const AS=new Uint8Array(N*N);
+const SURF={pave:{r:0.012,vf:1,n:'asfalt'},fresh:{r:0.02,vf:0.85,n:'taze asfalt'},loose:{r:0.09,vf:0.42,n:'gevşek toprak'},road:{r:0.04,vf:0.58,n:'toprak yol'},grass:{r:0.055,vf:0.48,n:'arazi'}};
+function surf(x,z){const k=T.near(x,z);if(k<0)return SURF.grass;const hard=T.h[k]-T.b[k]<0.06;
+  if((AS[k]===2&&hard)||(T.cc[k]>0&&hard))return SURF.pave;if(AS[k]===1&&hard)return SURF.fresh;if(T.c[k]<0.5)return SURF.loose;return T.w[k]>0.45?SURF.road:SURF.grass}
+
+/* ---------- Su: kaba ızgarada sanal boru modeli; nehirden kanala/çukura akar, yeraltı suyu derin çukura sızar ---------- */
+const WS={s:4};WS.n=Math.ceil(N/WS.s);WS.c=SIZE/(WS.n-1);
+{const n=WS.n*WS.n;for(const k of['b','d','fL','fR','fU','fD'])WS[k]=new Float32Array(n);WS.src=new Uint8Array(n);WS.row=new Uint8Array(WS.n)}
+const PUMPS=[];
+function wsTerrain(){const n=WS.n;for(let j=0;j<n;j++)for(let i=0;i<n;i++){const x=-HALF+i*WS.c,z=-HALF+j*WS.c,q=j*n+i;WS.b[q]=T.sample(x,z)}}
+function wsInit(){const n=WS.n;wsTerrain();WS.d.fill(0);for(const k of['fL','fR','fU','fD'])WS[k].fill(0);
+  for(let j=0;j<n;j++)for(let i=0;i<n;i++){const x=-HALF+i*WS.c,z=-HALF+j*WS.c,q=j*n+i;WS.src[q]=Math.abs(z-RIVC(x))<2.3?1:0;if(WS.src[q])WS.d[q]=Math.max(0,RIVL-WS.b[q])}WS.row.fill(1)}
+function wsStep(dt){const n=WS.n,b=WS.b,d=WS.d,L=WS.fL,R=WS.fR,U=WS.fU,D=WS.fD,G=9.81/WS.c,rw=WS.row,nr=new Uint8Array(n);
+  for(let j=0;j<n;j++){if(!rw[j]&&!(j>0&&rw[j-1])&&!(j<n-1&&rw[j+1]))continue;for(let i=0;i<n;i++){const q=j*n+i;if(d[q]<=1e-5&&!WS.src[q]){L[q]=R[q]=U[q]=D[q]=0;continue}
+    const H=b[q]+d[q];L[q]=i>0?Math.max(0,L[q]*0.99+dt*G*(H-b[q-1]-d[q-1])):0;R[q]=i<n-1?Math.max(0,R[q]*0.99+dt*G*(H-b[q+1]-d[q+1])):0;
+    U[q]=j>0?Math.max(0,U[q]*0.99+dt*G*(H-b[q-n]-d[q-n])):0;D[q]=j<n-1?Math.max(0,D[q]*0.99+dt*G*(H-b[q+n]-d[q+n])):0;
+    const o=(L[q]+R[q]+U[q]+D[q])*dt;if(o>d[q]&&o>0){const K=d[q]/o;L[q]*=K;R[q]*=K;U[q]*=K;D[q]*=K}}}
+  for(let j=0;j<n;j++){if(!rw[j]&&!(j>0&&rw[j-1])&&!(j<n-1&&rw[j+1]))continue;let wet=false;for(let i=0;i<n;i++){const q=j*n+i;
+    let inn=0;if(i>0)inn+=R[q-1];if(i<n-1)inn+=L[q+1];if(j>0)inn+=D[q-n];if(j<n-1)inn+=U[q+n];
+    let nd=d[q]+dt*(inn-L[q]-R[q]-U[q]-D[q]);
+    if(WS.src[q])nd=Math.max(0,RIVL-b[q]);
+    else{if(b[q]+nd<WL&&b[q]<WL)nd+=0.006*dt;else if(nd>0)nd=Math.max(0,nd-0.0012*dt)}
+    d[q]=nd;if(nd>1e-4||WS.src[q])wet=true}nr[j]=wet?1:0}
+  for(const p of PUMPS){const i0=Math.round((p.x+HALF)/WS.c),j0=Math.round((p.z+HALF)/WS.c);let got=0;for(let dj=-2;dj<=2;dj++)for(let di=-2;di<=2;di++){const i=i0+di,j=j0+dj;if(i<0||j<0||i>=n||j>=n)continue;const q=j*n+i;if(WS.src[q])continue;const r=Math.min(d[q],0.05*dt);d[q]-=r;got+=r}p.on=got>1e-5;nr[Math.max(0,Math.min(n-1,j0))]=1}
+  WS.row=nr}
+function waterD(x,z){const i=Math.round((x+HALF)/WS.c),j=Math.round((z+HALF)/WS.c);if(i<0||j<0||i>=WS.n||j>=WS.n)return 0;const q=j*WS.n+i,dd=WS.d[q];return dd>0.01?Math.max(0,WS.b[q]+dd-T.sample(x,z)):0}
+const wMesh=(()=>{const n=WS.n,g=new THREE.PlaneGeometry(SIZE,SIZE,n-1,n-1);g.rotateX(-Math.PI/2);
+  const m=new THREE.Mesh(g,new THREE.MeshStandardMaterial({color:lin('#2b8ad6'),roughness:0.12,metalness:0.1,transparent:true,opacity:0.86,emissive:lin('#0b3f6e'),emissiveIntensity:0.4}));m.receiveShadow=true;m.frustumCulled=false;scene.add(m);return m})();
+function wsDraw(){const n=WS.n,p=wMesh.geometry.attributes.position,a=p.array;for(let q=0;q<n*n;q++){const dd=WS.d[q];a[q*3+1]=dd>0.025?WS.b[q]+dd:WS.b[q]-1.2}p.needsUpdate=true}
+const SPL=[];for(let i=0;i<40;i++){const s=new THREE.Sprite(new THREE.SpriteMaterial({map:dustTex,color:lin('#e8f4ff'),transparent:true,depthWrite:false,opacity:0}));s.visible=false;scene.add(s);SPL.push(s)}let splP=0;
+function splash(x,y,z,a){const s=SPL[splP++%SPL.length];s.position.set(x+(Math.random()-.5),y,z+(Math.random()-.5));s.life=1;s.a=a;s.vy=1.5+Math.random();s.visible=true}
+function drawSplash(dt){for(const s of SPL){if(!s.visible)continue;s.life-=dt*1.6;if(s.life<=0){s.visible=false;continue}s.position.y+=s.vy*dt;s.vy-=4*dt;s.scale.setScalar(0.5+(1-s.life)*1.6);s.material.opacity=s.life*0.6*s.a}}
+
+/* ---------- Hafif araçlar: pikap, şarj aracı, asfalt finişeri, silindir, sondaj makinesi ---------- */
+const VEH={};
+function vehModel(id){const g=new THREE.Group();g.rotation.order='YZX';scene.add(g);const W=[],add=(x,z,r,w,mat,front)=>{const wg=new THREE.Group();wg.position.set(x,r,z);g.add(wg);const sp=new THREE.Group();wg.add(sp);cyl(r,w,RUBBER,sp,0,0,0,'z',18);cyl(r*0.55,w+0.02,mat||STEEL,sp,0,0,0,'z',12);W.push({g:wg,s:sp,front,r});return wg};
+  const CP=M('#26282d');
+  if(id==='pk'){const B=M('#f2f2ee'),BD=M('#c9c9c4');
+    box(5.0,0.25,1.6,DARK,g,0,0.55,0);rbox(1.45,0.6,1.85,0.12,B,g,1.75,0.98,0);rbox(1.95,0.95,1.85,0.12,B,g,0.15,1.35,0);
+    box(0.03,0.55,1.6,GLASS,g,1.13,1.55,0);box(1.6,0.45,0.02,GLASS,g,0.15,1.6,0.93);box(1.6,0.45,0.02,GLASS,g,0.15,1.6,-0.93);
+    box(1.95,0.08,1.85,BD,g,-1.75,0.72,0);for(const s of[-1,1])box(1.95,0.5,0.06,B,g,-1.75,0.98,s*0.9);box(0.06,0.5,1.85,B,g,-2.72,0.98,0);
+    box(0.25,0.25,1.95,DARK,g,2.55,0.6,0);box(0.2,0.2,1.95,DARK,g,-2.8,0.55,0);for(const s of[-1,1]){const l=box(0.05,0.12,0.3,GLAMP,g,2.5,1.0,s*0.62);l.noOutline=true}
+    {const b=box(0.2,0.09,1.2,M('#ff8a1a',0,0,{emissive:lin('#ff6a00'),emissiveIntensity:0.6}),g,0.2,1.86,0);b.noOutline=true}
+    cyl(0.012,2.6,M('#ff7a1a'),g,-2.6,2.1,-0.85,null,5);{const f=box(0.02,0.25,0.4,M('#ff3b1a'),g,-2.6,3.3,-0.65);f.noOutline=true}
+    cyl(0.32,0.05,STEEL,g,-1.6,0.78,0.3,null,16);box(0.6,0.05,0.15,M('#7a4a2a'),g,-2.1,0.8,-0.4);
+    for(const s of[-1,1]){add(1.6,s*0.82,0.38,0.28,null,true);add(-1.55,s*0.82,0.38,0.28,null,false)}}
+  else if(id==='ch'){const R=M('#d8402c'),WH=M('#ecebe6');
+    box(6.6,0.35,1.1,DARK,g,0,0.75,0);rbox(1.6,1.7,2.35,0.12,R,g,2.75,1.75,0);box(0.03,0.75,2.1,GLASS,g,3.56,2.05,0);
+    for(const s of[-1,1])box(0.8,0.6,0.02,GLASS,g,2.85,2.05,s*1.18);
+    {const t=cyl(0.85,3.3,WH,g,0.15,1.85,0,'x',20);cyl(0.9,0.1,DARK,g,1.8,1.85,0,'x',20);cyl(0.9,0.1,DARK,g,-1.5,1.85,0,'x',20)}
+    box(1.6,0.9,2.2,R,g,-2.45,1.45,0);{const r=cyl(0.55,0.9,DARK,g,-2.6,2.35,0,'z',16);cyl(0.58,0.08,R,g,-2.6,2.35,0.48,'z',16);cyl(0.58,0.08,R,g,-2.6,2.35,-0.48,'z',16)}
+    {const h=cyl(0.04,1.6,M('#111'),g,-3.25,1.6,0.3,null,6);h.rotation.z=0.4}
+    {const pl=box(0.02,0.55,0.55,M('#ff8a1a'),g,-3.26,1.55,-0.5);pl.rotation.x=Math.PI/4;pl.noOutline=true}
+    for(const s of[-1,1]){const p=box(0.02,0.5,0.5,M('#ff8a1a'),g,0.15,1.85,s*0.86);p.rotation.x=Math.PI/4;p.noOutline=true}
+    for(const s of[-1,1]){const b=box(0.12,0.12,0.12,M('#ff8a1a',0,0,{emissive:lin('#ff6a00'),emissiveIntensity:0.6}),g,2.4,2.68,s*0.9);b.noOutline=true;const l=box(0.05,0.15,0.3,GLAMP,g,3.58,1.2,s*0.85);l.noOutline=true}
+    box(0.3,0.3,2.4,DARK,g,3.6,0.85,0);cyl(0.07,1.2,DARK,g,2.05,2.4,1.0,null,8);
+    for(const s of[-1,1]){add(2.4,s*1.0,0.55,0.4,null,true);add(-1.4,s*1.0,0.55,0.4,null,false);add(-2.4,s*1.0,0.55,0.4,null,false)}}
+  else if(id==='pv'){const Y=GDY;
+    for(const s of[-1,1]){box(3.0,0.55,0.4,DARK,g,0,0.3,s*1.15);for(let i=0;i<5;i++)cyl(0.2,0.42,WORN,g,-1.2+i*0.6,0.25,s*1.15,'z',10)}
+    box(3.2,0.8,1.9,Y,g,0,1.0,0);rbox(1.6,0.8,1.8,0.1,Y,g,-0.4,1.75,0);
+    for(const s of[-1,1]){const w=box(1.6,0.06,0.95,Y,g,2.15,1.25,s*0.98);w.rotation.x=s*0.55}box(1.6,0.6,0.06,Y,g,2.15,0.95,0);box(0.06,0.7,2.2,Y,g,2.95,1.1,0);
+    box(0.4,0.35,3.8,DARK,g,-2.45,0.4,0);cyl(0.17,3.8,STEEL,g,-2.05,0.25,0,'z',10);
+    const sc=new THREE.Group();sc.position.set(-2.9,0,0);g.add(sc);box(0.7,0.45,3.6,Y,sc,0,0.3,0);box(0.75,0.05,3.6,STEEL,sc,0,0.05,0);for(const s of[-1,1])box(0.75,0.6,0.06,Y,sc,0,0.4,s*1.82);box(0.1,0.25,3.4,DARK,sc,-0.38,0.55,0);
+    box(0.8,0.06,1.2,STEEL,g,-1.4,1.55,0);for(const x of[-1.75,-0.55])for(const z of[-0.9,0.9])box(0.06,1.5,0.06,CP,g,x,2.3,z).noOutline=true;rbox(1.5,0.1,2.2,0.04,Y,g,-1.15,3.05,0).noOutline=true;
+    box(0.4,0.6,0.4,DARK,g,-1.5,1.9,0.5);box(0.5,0.5,0.6,DARK,g,-1.5,1.85,-0.5);cyl(0.07,0.6,DARK,g,-0.3,2.35,0.6,null,8);
+    {const b=box(0.12,0.12,0.12,M('#ff8a1a',0,0,{emissive:lin('#ff6a00'),emissiveIntensity:0.6}),g,-1.15,3.15,0);b.noOutline=true}
+    g.userData.screed=sc}
+  else if(id==='rl'){const Y=GDY;
+    for(const x of[-1.7,1.7]){cyl(0.62,2.0,STEEL,g,x,0.62,0,'z',22);cyl(0.3,2.06,DARK,g,x,0.62,0,'z',12);box(1.5,0.12,2.25,Y,g,x,1.32,0);for(const s of[-1,1])box(1.5,0.8,0.08,Y,g,x,0.9,s*1.1)}
+    box(1.6,0.9,1.4,Y,g,-0.2,1.5,0);box(0.6,0.5,0.6,DARK,g,0.6,1.3,0);box(0.7,0.08,1.0,STEEL,g,0.1,1.98,0);box(0.4,0.55,0.45,DARK,g,0.1,2.25,0);
+    for(const x of[-0.4,0.7])for(const z of[-0.6,0.6])box(0.06,1.6,0.06,CP,g,x,2.75,z).noOutline=true;rbox(1.4,0.08,1.4,0.04,Y,g,0.15,3.57,0).noOutline=true;
+    cyl(0.06,0.6,DARK,g,-0.7,2.2,0.5,null,8);{const b=box(0.12,0.12,0.12,M('#ff8a1a',0,0,{emissive:lin('#ff6a00'),emissiveIntensity:0.6}),g,0.15,3.67,0);b.noOutline=true}
+    g.userData.drums=[]}
+  else if(id==='dr'){const Y=GDY;
+    for(const s of[-1,1]){ext([[-1.8,0.12],[1.75,0.12],[1.85,0.3],[1.6,0.62],[-1.6,0.62],[-1.85,0.3]],0.45,DARK,g,s*1.1,0.03);cyl(0.3,0.47,STEEL,g,-1.5,0.36,s*1.1,'z',12);cyl(0.3,0.47,STEEL,g,1.5,0.36,s*1.1,'z',14);for(let i=0;i<5;i++)box(0.62,0.07,0.5,WORN,g,-1.6+i*0.8,0.07,s*1.1).noOutline=true}
+    rbox(3.5,0.9,2.2,0.1,Y,g,-0.35,1.15,0);rbox(1.6,1.2,1.8,0.1,Y,g,-1.25,2.1,0.1);for(let i=0;i<6;i++)box(1.2,0.03,0.02,DARK,g,-1.25,1.8+i*0.12,1.01);
+    {const x0=0.2,x1=1.6,z0=-1.15,z1=-0.15,cx=(x0+x1)/2,cz=(z0+z1)/2;rbox(1.4,1.25,1.0,0.06,Y,g,cx,2.25,cz);box(0.03,0.75,0.85,GLASS,g,x1+0.01,2.35,cz);box(1.1,0.7,0.02,GLASS,g,cx,2.35,z0-0.01);box(1.1,0.7,0.02,GLASS,g,cx,2.35,z1+0.01);box(1.45,0.08,1.05,DARK,g,cx,2.92,cz)}
+    cyl(0.07,0.7,DARK,g,-1.8,3.0,0.6,null,8);cyl(0.35,1.0,DARK,g,-0.5,2.0,0.7,null,12);
+    const mg=new THREE.Group();mg.position.set(2.1,1.35,0.35);g.add(mg);
+    box(0.36,10.0,0.42,Y,mg,0,3.6,0);box(0.1,9.8,0.12,DARK,mg,0.24,3.6,0);for(let i=0;i<9;i++)box(0.42,0.05,0.5,DARK,mg,0,-1.0+i*1.1,0);
+    box(0.5,0.7,0.6,DARK,mg,0,-1.2,0);const head=new THREE.Group();mg.add(head);box(0.5,0.6,0.5,M('#2f3a46'),head,0.25,0,0);cyl(0.12,0.4,STEEL,head,0.25,-0.45,0,null,10);
+    const rod=cyl(0.055,1,CHROME,mg,0.25,0,0,null,8);for(let i=0;i<4;i++)cyl(0.05,3.6,CHROME,g,-1.9+i*0.12,1.9,-0.9,'x',6);
+    g.userData.mast=mg;g.userData.head=head;g.userData.rod=rod}
+  g.userData.W=W;return g}
+function vDef(id,o){const g=vehModel(id),v=Object.assign({id,x:0,z:0,yaw:0,v:0,w:0,steer:0,eng:0,crank:0,rpm:0,pow:0,idle:true,lastIn:-1e9,moving:false,wr:0,ts:0,u:{thr:0,st:0,ax:0,act:0},g,fpush:0},o);
+  v.body=[];for(const x of[v.L0,0,v.L1])for(const s of[-1,1])v.body.push([x,0.6,s*v.W]);v.body.push([v.L1,1.4,0],[v.L0,1.4,0]);
+  outline(g);VEH[id]=v;return v}
+vDef('pk',{name:'Pikap',x:-6,z:-9,yaw:0,M:2300,P:110e3,vmax:22,xf:1.6,xr:-1.55,W:0.95,L0:-2.85,L1:2.7,cab:[0.25,1.55,-0.4],look:[9,0.9,-0.4],camY:1.4,fuel:0.02,exh:[-2.7,0.4,0.6],idleR:750,maxR:4200});
+vDef('ch',{name:'Şarj aracı',x:-24,z:-8,yaw:0,M:15000,P:220e3,vmax:16,xf:2.4,xr:-1.9,W:1.25,L0:-3.4,L1:3.7,cab:[2.7,2.55,-0.45],look:[10,1.0,-0.45],camY:2.4,fuel:0.05,exh:[2.05,3.0,1.0],idleR:700,maxR:2100,holeP:0});
+vDef('pv',{name:'Asfalt finişeri',x:-30,z:-30,yaw:0.2,M:18000,P:130e3,vmax:1.8,track:true,xf:1.3,xr:-1.3,W:1.85,L0:-3.3,L1:3.0,cab:[-1.15,2.75,0.4],look:[6,-0.4,0],camY:2.3,fuel:0.05,exh:[-0.3,2.7,0.6],idleR:800,maxR:2000,sd:0});
+vDef('rl',{name:'Silindir',x:-37,z:-33,yaw:0.2,M:10000,P:75e3,vmax:3.2,xf:1.7,xr:-1.7,W:1.15,L0:-2.4,L1:2.4,cab:[0.1,2.7,0.0],look:[8,-0.2,0],camY:2.1,fuel:0.03,exh:[-0.7,2.5,0.5],idleR:850,maxR:2200,drum:true});
+vDef('dr',{name:'Sondaj makinesi',x:-28,z:4,yaw:0,M:21000,P:250e3,vmax:1.1,track:true,xf:1.5,xr:-1.5,W:1.4,L0:-2.3,L1:2.6,cab:[0.95,2.55,-0.65],look:[8,-0.5,0.2],camY:2.6,fuel:0.06,exh:[-1.8,3.3,0.6],idleR:900,maxR:2000,ma:0,hole:null,htype:'bl',depth:0});
+const VORD=['dr','ch','pv','rl','pk'],DEFP0={dr:[-28,4],ch:[-24,-8],pv:[-30,-30],rl:[-37,-33],pk:[-6,-9]};
+function vPose(v){const c=Math.cos(v.yaw),s=Math.sin(v.yaw),H=(a,b)=>T.sample(v.x+c*a+s*b,v.z-s*a+c*b);
+  const hf=(H(v.xf,-v.W*0.85)+H(v.xf,v.W*0.85))/2,hb=(H(v.xr,-v.W*0.85)+H(v.xr,v.W*0.85))/2,hl=(H(v.xf,-v.W*0.85)+H(v.xr,-v.W*0.85))/2,hr=(H(v.xf,v.W*0.85)+H(v.xr,v.W*0.85))/2,L=v.xf-v.xr;
+  v.g.position.set(v.x,hb+(hf-hb)*(-v.xr/L)+0.01,v.z);v.g.rotation.set(Math.atan2(hl-hr,2*v.W*0.85)*0.9,v.yaw,Math.atan2(hf-hb,L));
+  for(const w of v.g.userData.W){w.s.rotation.z=-v.wr*(0.38/w.r);if(w.front)w.g.rotation.y=v.steer}
+  if(v.id==='dr'){const mg=v.g.userData.mast;mg.rotation.z=(1-v.ma)*1.52;const span=8.6,f=v.hole&&v.depth>0?((v.depth%4)/4):0;v.g.userData.head.position.y=8.0-f*span;
+    const hy=v.g.userData.head.position.y-0.6,rl=Math.max(0.1,hy+1.3);v.g.userData.rod.scale.y=rl;v.g.userData.rod.position.y=hy-rl/2}
+  if(v.id==='pv')v.g.userData.screed.position.y=(1-v.sd)*0.35;
+  v.g.updateMatrixWorld(true)}
+function vehBlock(x,z,rad,skip){for(const id of VORD){const v=VEH[id];if(v===skip||!ACT[id])continue;const dx=x-v.x,dz=z-v.z,c=Math.cos(v.yaw),s=Math.sin(v.yaw),lx=dx*c-dz*s,lz=dx*s+dz*c;
+  if(Math.abs(lx-(v.L0+v.L1)/2)<(v.L1-v.L0)/2+rad&&Math.abs(lz)<v.W+rad)return true}return false}
+function vehHit(v,nx,nz,ny){const c=Math.cos(ny),s=Math.sin(ny),r=v.W;for(let a=v.L0+r*0.6;a<=v.L1-r*0.6+0.01;a+=Math.max(0.8,(v.L1-v.L0-r)/4)){const px=nx+c*a,pz=nz-s*a;
+  if(ACT.ex&&Math.hypot(px-ex.x,pz-ex.z)<2.5+r)return true;if(ACT.dz&&Math.hypot(px-DZ.x,pz-DZ.z)<3.0+r)return true;
+  if(trkBlock(px,pz,r)||shBlock(px,pz,r)||gdBlock0(px,pz,r)||vehBlock(px,pz,r,v))return true}return false}
+const Z_VH=()=>({thr:0,st:0,ax:0,act:0});
+function readVeh(){const i={thr:ax('KeyW','KeyS'),st:ax('KeyA','KeyD'),ax:ax('KeyR','KeyF')+ax('ArrowUp','ArrowDown'),act:(keys.Space||TCH.hit)?1:0};
+  if(TCH.on){i.thr+=-tdz(TCH.ly);i.st+=-tdz(TCH.lx);i.ax+=-tdz(TCH.ry)}
+  try{const gp=navigator.getGamepads&&[...navigator.getGamepads()].find(g=>g);if(gp){const a=gp.axes,b=gp.buttons,bv=n=>b[n]?b[n].value:0;i.thr+=bv(7)-bv(6);i.st+=-dz(a[0]||0);i.ax+=-dz(a[3]||0);if(b[0]&&b[0].pressed)i.act=1}}catch(e){}
+  for(const k of['thr','st','ax'])i[k]=Math.max(-1,Math.min(1,i[k]));return i}
+function vehStep(v,u,dt){v.u=u;engTick(v,dt);vPose(v);
+  const sf=surf(v.x,v.z),wd=waterD(v.x,v.z),W=v.M*9.81,pitch=v.g.rotation.z,rf=Math.max(0.3,v.rpm/v.maxR);let vm=v.vmax*(v.track?1:sf.vf)*(wd>0.5?0.45:1);
+  if(v.id==='pv'&&v.sd>0.9)vm=Math.min(vm,0.9);if(v.id==='dr'&&v.ma>0.05)vm=Math.min(vm,0.25);
+  const res=((v.track?0.05:sf.r)+Math.min(0.35,wd*0.3))*W,thr=u.thr,va=Math.abs(v.v);let a;
+  if(Math.abs(thr)>0.03&&thr*v.v<-0.1){a=-Math.sign(v.v)*Math.min(va/dt,5);v.pow=0.1}
+  else if(Math.abs(thr)>0.03){const dir=Math.sign(thr),Fe=Math.min(0.6*W,v.P*0.85*rf/Math.max(va,0.8))*Math.abs(thr);let net=Fe-res;if(net<0&&v.v*dir<=0.02)net=0;a=dir*net/v.M-9.81*Math.sin(pitch);v.pow=Math.min(1,Fe*Math.max(va,0.8)/(v.P*0.85))}
+  else{a=-Math.sign(v.v)*Math.min(va/dt,res/v.M+1.2)-9.81*Math.sin(pitch)*(va>0.4?1:0);v.pow=0.05}
+  const pv0=v.v;v.v+=a*dt;const lim=vm*(v.track?1:rf*1.15);if(v.v>lim)v.v=Math.max(lim,Math.min(v.v,pv0)-4*dt);if(v.v<-lim*0.45)v.v=Math.min(-lim*0.45,Math.max(v.v,pv0)+4*dt);if(Math.abs(thr)<0.03&&Math.abs(v.v)<0.2)v.v=0;
+  let ny,nx,nz;
+  if(v.track){v.w+=(u.st*0.45-v.w)*Math.min(1,dt*3);ny=v.yaw+v.w*dt;nx=v.x+Math.cos(ny)*v.v*dt;nz=v.z-Math.sin(ny)*v.v*dt;v.ts+=v.v*dt}
+  else{const st=u.st*0.6*(1-0.6*Math.min(1,va/Math.max(6,v.vmax)));v.steer+=Math.max(-1.1*dt,Math.min(1.1*dt,st-v.steer));const L=v.xf-v.xr,w=v.v*Math.tan(v.steer)/L;ny=v.yaw+w*dt;
+    const rx=v.x+Math.cos(v.yaw)*v.xr+Math.cos(ny)*v.v*dt,rz=v.z-Math.sin(v.yaw)*v.xr-Math.sin(ny)*v.v*dt;nx=rx-Math.cos(ny)*v.xr;nz=rz+Math.sin(ny)*v.xr}
+  const moved=Math.abs(nx-v.x)+Math.abs(nz-v.z)+Math.abs(ny-v.yaw)>1e-7;
+  if(moved){if(Math.abs(nx)<HALF-3.5&&Math.abs(nz)<HALF-3.5&&!vehHit(v,nx,nz,ny)&&!bldMach(v.id,nx-v.x,nz-v.z,dt,thr)){v.x=nx;v.z=nz;v.yaw=ny}
+    else{if(Math.abs(v.v)>0.8){shk(v.id,-0.1*Math.sign(v.v)*Math.min(1,Math.abs(v.v)/4),(Math.random()-.5)*0.05,0.03);sfx.hit(0.4,'truck')}v.v=0;v.w=0}}
+  v.wr+=v.v*dt/0.38;v.moving=Math.abs(v.v)>0.05||Math.abs(v.w)>0.02;
+  if(v.moving){const c=Math.cos(v.yaw),s=Math.sin(v.yaw);trackRuts(v.x+c*(v.xf+v.xr)/2,v.z-s*(v.xf+v.xr)/2,v.yaw,v.W*0.85,(v.xf-v.xr)/2,v.v,v.v,dt*(v.M/20000),v.track?0.5:0.35);
+    if(wd>0.15&&Math.random()<Math.min(1,Math.abs(v.v)*0.3))splash(v.x+c*v.L1,T.sample(v.x,v.z)+wd,v.z-s*v.L1,Math.min(1,wd))}
+  VTOOL[v.id]&&VTOOL[v.id](v,u,dt);
+  const act=Math.abs(u.thr)+Math.abs(u.st)+Math.abs(u.ax)+u.act>0.05;if(act)v.lastIn=performance.now();v.idle=performance.now()-v.lastIn>4000;
+  const tgt=v.eng!==2?(v.eng===1?190:0):v.idle?v.idleR:v.idleR+(v.maxR-v.idleR)*(0.35+0.65*Math.max(Math.abs(u.thr),v.pow)),rate=tgt>v.rpm?900:600;v.rpm+=Math.max(-rate*dt,Math.min(rate*dt,tgt-v.rpm));if(v.eng===2&&v.rpm<v.idleR*0.85)v.rpm=v.idleR*0.85}
+function vehStepAll(dt){for(const id of VORD){if(!ACT[id])continue;const v=VEH[id];vehStep(v,(MACH===id&&started&&v.eng===2)?readVeh():Z_VH(),dt)}}
+for(const id of VORD){const v=VEH[id];EXH.push({acc:0,prev:0,src:()=>{tmp.set(...v.exh);v.g.localToWorld(tmp);return tmp},m:()=>v,k:id,big:v.M>12000?1:0.6})}
+
+/* ---------- Sondaj: arama sondajı (30 m, laboratuvar analizi) ve patlatma deliği (6 m) ---------- */
+const HOLES=[];const HMAX=400;
+const hCol=new THREE.InstancedMesh(new THREE.CylinderGeometry(0.16,0.2,0.1,8),TOON('#2a2622'),HMAX),hCap=new THREE.InstancedMesh(new THREE.ConeGeometry(0.13,0.3,6),TOON('#ffffff'),HMAX),hStk=new THREE.InstancedMesh(new THREE.CylinderGeometry(0.04,0.04,1.7,6),TOON('#ffffff'),HMAX);
+for(const m of[hCol,hCap,hStk]){m.instanceColor=new THREE.InstancedBufferAttribute(new Float32Array(HMAX*3).fill(1),3);m.count=0;m.frustumCulled=false;scene.add(m)}
+const GRC=g=>g<0.2?'#9aa0a6':g<0.6?'#7cbf5a':g<1.5?'#f2d31a':g<3?'#ff9a1a':'#ff3b2a';
+function holesDraw(){const o=_bo,c=new THREE.Color();let n=0;for(const h of HOLES){if(n>=HMAX)break;o.rotation.set(0,0,0);o.scale.setScalar(1);o.position.set(h.x,h.y0+0.03,h.z);o.updateMatrix();hCol.setMatrixAt(n,o.matrix);
+  if(h.t==='ex'){o.position.y=h.y0+0.85;o.updateMatrix();hStk.setMatrixAt(n,o.matrix);c.copy(lin(h.res?GRC(h.max):'#e8e6e0'));hStk.setColorAt(n,c);o.position.y=-50;o.updateMatrix();hCap.setMatrixAt(n,o.matrix)}
+  else{o.position.y=h.y0+0.25;o.updateMatrix();hCap.setMatrixAt(n,o.matrix);c.copy(lin(h.charged?'#d8202a':h.done?'#ff8a1a':'#bdb6a6'));hCap.setColorAt(n,c);o.position.y=-50;o.updateMatrix();hStk.setMatrixAt(n,o.matrix)}
+  n++}
+  for(const m of[hCol,hCap,hStk]){m.count=n;m.instanceMatrix.needsUpdate=true;if(m.instanceColor)m.instanceColor.needsUpdate=true}}
+let DRT=0;
+const VTOOL={};
+VTOOL.dr=(v,u,dt)=>{v.ma=Math.max(0,Math.min(1,v.ma+u.ax*0.25*dt*(v.eng===2?1:0)));v.drilling=false;
+  _vq.set(0,-1.35,0);v.g.userData.mast.localToWorld(_vq);const cx=_vq.x,cz=_vq.z;
+  if(u.act&&v.ma>0.97&&Math.abs(v.v)<0.03&&v.eng===2){
+    if(v.hole&&Math.hypot(v.hole.x-cx,v.hole.z-cz)>0.4)v.hole=null;
+    if(!v.hole){const old=HOLES.find(h=>Math.hypot(h.x-cx,h.z-cz)<0.6);if(old){if(old.done){toast('Bu delik tamam: makineyi kaydır','hdone');return}v.hole=old}
+      else{if(HOLES.length>=HMAX){toast('Delik sınırı doldu');return}v.hole={x:cx,z:cz,y0:T.sample(cx,cz),depth:0,t:v.htype,tgt:v.htype==='ex'?30:6,done:false,charged:false};HOLES.push(v.hole)}}
+    const h=v.hole,yb=h.y0-h.depth,k=T.near(cx,cz),rock=k>=0&&yb<T.b[k]+0.05;
+    h.depth=Math.min(h.tgt,h.depth+(rock?1.1:2.2)*(h.t==="ex"?0.9:1)*dt);v.depth=h.depth;v.drilling=true;v.pow=Math.max(v.pow,0.75);
+    DRT+=dt;if(DRT>0.09){DRT=0;SND.drill(rock);if(Math.random()<0.5)dust(cx,h.y0+0.3,cz,rock?0.7:0.4);shk('dr',(Math.random()-.5)*0.006,(Math.random()-.5)*0.006,0.003)}
+    if(h.depth>=h.tgt){h.done=true;v.hole=null;if(h.t==='ex')assay(h);else toast('Patlatma deliği hazır ('+HOLES.filter(q=>q.t==='bl'&&q.done&&!q.charged).length+' boş delik) · şarj aracıyla doldur');holesDraw();saveSoon()}
+    else if(Math.random()<0.02)holesDraw()}};
+function assay(h){if(!pay(CAREER()?150:0,'analiz')){h.res=null;h.pend=false;toast('Analiz için 150 $ gerekiyor; sondaj sonuçlarından tekrar iste');return}
+  h.pend=true;toast('Karot numunesi laboratuvara gönderildi (6 sn)');setTimeout(()=>{const r=[];let mx=0;for(let d=0;d<h.tgt;d+=2){let g=0;for(let q=0.25;q<2;q+=0.5)g+=oreAt(h.x,h.y0-d-q,h.z)/4;g=Math.max(0,g*(0.85+Math.random()*0.3));r.push(+g.toFixed(2));mx=Math.max(mx,g)}
+    h.res=r;h.max=mx;h.pend=false;ECO.assays++;ECO.best=Math.max(ECO.best,mx);holesDraw();toast('Analiz sonucu: en yüksek '+mx.toFixed(2)+' g/t'+(mx>1?' · CEVHER!':''));if(PNL.cur==='holes')pnlHoles();saveSoon()},6000)}
+VTOOL.ch=(v,u,dt)=>{if(!u.act||Math.abs(v.v)>0.05||v.eng!==2){v.holeP=0;return}
+  let best=null,bd=6.5;for(const h of HOLES){if(h.t!=='bl'||!h.done||h.charged)continue;const d=Math.hypot(h.x-v.x,h.z-v.z);if(d<bd){bd=d;best=h}}
+  if(!best){toast('Yakında doldurulacak delik yok (6 m)','nohole');return}
+  v.holeP+=dt;v.pow=0.4;if(Math.random()<0.1)splash(best.x,best.y0+0.3,best.z,0.3);
+  if(v.holeP>1.3){v.holeP=0;if(!pay(CAREER()?40:0,'patlayıcı'))return;best.charged=true;holesDraw();toast('Delik dolduruldu · dolu delik: '+HOLES.filter(h=>h.charged).length+' · X ile ateşle','chg')}};
+VTOOL.pv=(v,u,dt)=>{if(Math.abs(u.ax)>0.3){v.sdT=(v.sdT||0)+dt;if(v.sdT<dt*1.5)v.sd=u.ax<0?1:0}else v.sdT=0;
+  if(v.sd<0.9||v.v<0.03)return;const c=Math.cos(v.yaw),s=Math.sin(v.yaw);let cnt=0;
+  for(let a=-3.25;a<=-2.6;a+=0.22)for(let b=-1.8;b<=1.81;b+=0.22){const x=v.x+c*a+s*b,z=v.z-s*a+c*b,k=T.near(x,z);if(k<0||AS[k])continue;
+    _vq.set(a,0,b);v.g.localToWorld(_vq);const y=_vq.y+0.04;T.h[k]=y;T.b[k]=y;T.c[k]=1;T.cp[k]=0;T.w[k]=0;T.m[k]=0;T.cc[k]=0;AS[k]=1;T.touch(k);cnt++}
+  if(cnt){ECO.paved+=cnt*DX*DX;if(CAREER()){ECO.money-=cnt*0.45;if(ECO.money<0){ECO.money=0;v.sd=0;toast('Asfalt için para kalmadı')}}GRD=true}};
+VTOOL.rl=(v,u,dt)=>{if(Math.abs(v.v)<0.05)return;const c=Math.cos(v.yaw),s=Math.sin(v.yaw);
+  for(const a of[-1.7,1.7])for(let b=-1.0;b<=1.01;b+=0.25){const x=v.x+c*a+s*b,z=v.z-s*a+c*b,k=T.near(x,z);if(k<0)continue;
+    if(AS[k]===1){AS[k]=2;T.touch(k)}else if(!AS[k]){T.cp[k]=Math.min(1,T.cp[k]+dt*0.4);T.w[k]=Math.min(1,T.w[k]+dt*0.3);if(T.c[k]<0.5&&T.h[k]-T.b[k]>0.02){T.h[k]-=0.01*dt;if(T.cp[k]>0.9){T.c[k]=1}T.touch(k)}}}};
+
+/* ---------- Delik patlatma: dolu delikler aynı anda ateşlenir ---------- */
+function blastStart(){if(!started)return;const ch=HOLES.filter(h=>h.charged);if(!ch.length){toast('Dolu delik yok: önce sondajla delik del (patlatma deliği), sonra şarj aracıyla doldur');return}
+  if(BL.t>0)return;for(const k of MORD){if(!ACT[k])continue;const o=MOBJ()[k];for(const h of ch)if(Math.hypot(o.x-h.x,o.z-h.z)<30){toast(MNAME[k]+' patlatma alanına çok yakın: 30 m uzaklaş');return}}
+  BL.t=4;BL.list=ch;toast('Patlatma! Siren çalıyor, 4 sn');SND.siren(4)}
+function blastHoles(list){const R=2.3,FR=new Set();let rocks=Math.min(150,DM.max-DM.n-150),cx=0,cz=0;
+  for(const h of list){cx+=h.x/list.length;cz+=h.z/list.length;const bot=h.y0-h.depth,i0=Math.round((h.x-R+HALF)/DX),i1=Math.round((h.x+R+HALF)/DX),j0=Math.round((h.z-R+HALF)/DX),j1=Math.round((h.z+R+HALF)/DX);
+    // serbest yüz: en alçak yön
+    let fx=0,fz=0,lo=1e9;for(let a=0;a<8;a++){const dx=Math.cos(a*0.785),dz=Math.sin(a*0.785),y=T.sample(h.x+dx*4.5,h.z+dz*4.5);if(y<lo){lo=y;fx=dx;fz=dz}}const free=lo<h.y0-1.2;
+    for(let j=Math.max(1,j0);j<=Math.min(N-2,j1);j++)for(let i=Math.max(1,i0);i<=Math.min(N-2,i1);i++){const k=j*N+i,x=-HALF+i*DX,z=-HALF+j*DX,r=Math.hypot(x-h.x,z-h.z);if(r>R||FR.has(k))continue;
+      const top=T.h[k];if(top-bot<0.1)continue;FR.add(k);const f=top-bot;let g=0;for(let q=0.2;q<f;q+=0.7)g+=oreAt(x,top-q,z);g/=Math.max(1,Math.ceil(f/0.7));
+      const code=g>0.05?ORE(g):(T.c[k]<0.5?T.m[k]:1.6),sw=f*(T.c[k]>0.5?1.32:1.05),tf=free?0.3:0,stay=sw*(1-tf);
+      T.h[k]=bot+stay;T.b[k]=Math.min(T.b[k],bot-0.02);T.c[k]=0;T.m[k]=code;T.cp[k]=0;T.w[k]=0;T.cc[k]=0;AS[k]=0;T.touch(k);
+      if(tf>0){const th=sw*tf*DX*DX;for(let q=0;q<2;q++){const d=1.5+Math.random()*6;T.deposit(x+fx*d+(Math.random()-.5),z+fz*d+(Math.random()-.5),th/2,code)}}}
+    const nr=Math.min(rocks,8);rocks-=nr;for(let q=0;q<nr;q++){const r=0.14+Math.pow(Math.random(),1.6)*0.32,g=oreAt(h.x,h.y0-1.5,h.z);addChunk(h.x+(Math.random()-.5)*2,h.y0+r+0.4,h.z+(Math.random()-.5)*2,g>0.05?ORE(g):2,fx*(2+Math.random()*6)+(Math.random()-.5)*3,3+Math.random()*7,fz*(2+Math.random()*6)+(Math.random()-.5)*3,r,1)}
+    for(let q=0;q<3;q++)dust(h.x+(Math.random()-.5)*3,h.y0+Math.random()*3,h.z+(Math.random()-.5)*3,1);for(let q=0;q<2;q++)smoke(h.x,h.y0+1+Math.random()*2,h.z,0.25,1,fx,fz)}
+  {const i=Math.round((cx+HALF)/DX),j=Math.round((cz+HALF)/DX);T.touchRows(j-40,j+40);for(let it=0;it<3;it++)T.relax(5,i-40,i+40,j-40,j+40)}
+  for(const h of list){const ix=HOLES.indexOf(h);if(ix>=0)HOLES.splice(ix,1)}holesDraw();
+  ECO.blasts++;ECO.holesBl+=list.length;CAMSHK=Math.max(0.2,1.3-Math.hypot(camera.position.x-cx,camera.position.z-cz)/120);SND.blast();
+  for(const k of MORD){if(!ACT[k])continue;const o=MOBJ()[k],d=Math.hypot(o.x-cx,o.z-cz),a=Math.max(0,0.12*(1-d/120));shk(k,a*(Math.random()-.5)*2,a*(Math.random()-.5)*2,a*0.6)}
+  toast(list.length+' delik patlatıldı: kaya gevşedi, yükleyebilirsin');saveSoon()}
+
+/* ---------- Tava ile altın arama (nehir kıyısı) ---------- */
+const PAN={on:false,t:0,dep:new Map()};
+function panSpot(){const m=curM();if(!m||Math.abs(m.v||0)>0.1)return null;const c=Math.cos(m.yaw||0),s=Math.sin(m.yaw||0);
+  for(const r of[0,3,6,9])for(let a=0;a<6.28;a+=0.8){const x=m.x+Math.cos(a)*r,z=m.z+Math.sin(a)*r;if(waterD(x,z)>0.08||Math.abs(z-RIVC(x))<2.2)return{x,z}}return null}
+function panStart(){if(PAN.on||!started)return;if(MACH!=='pk'&&CAREER()&&!ACT.pk){toast('Tava için pikabı nehir kıyısına götür');return}const p=panSpot();if(!p){toast('Tava için suyun kenarında dur (nehre 8 m)','pan');return}
+  PAN.on=true;PAN.t=0;PAN.p=p;$('panv').classList.add('on');SND.pan()}
+function panTick(dt){if(!PAN.on)return;PAN.t+=dt;const c=$('panc'),x=c.getContext('2d'),W=c.width,f=PAN.t/3.2;x.clearRect(0,0,W,W);
+  x.fillStyle='#4a4f57';x.beginPath();x.arc(W/2,W/2,W*0.46,0,7);x.fill();x.fillStyle='#6b7079';x.beginPath();x.arc(W/2,W/2,W*0.38,0,7);x.fill();
+  x.fillStyle='rgba(90,150,200,.55)';x.beginPath();x.arc(W/2,W/2,W*0.36,0,7);x.fill();
+  const n=Math.round(90*(1-f*0.85));for(let i=0;i<n;i++){const a=i*2.4+PAN.t*(3+i%5),r=W*(0.05+0.3*((i*37)%100)/100)*(1-f*0.3);x.fillStyle=i%7?'#8a6a48':'#5b4632';x.fillRect(W/2+Math.cos(a)*r,W/2+Math.sin(a)*r,3,3)}
+  if(f>0.6){x.fillStyle='#ffd21a';for(let i=0;i<6;i++){const a=i*1.1;x.fillRect(W/2+Math.cos(a)*W*0.06,W/2+Math.sin(a)*W*0.05+W*0.1,3,2)}}
+  if(PAN.t>3.2){PAN.on=false;$('panv').classList.remove('on');const p=PAN.p,key=Math.round(p.x/6)+','+Math.round(p.z/6),dep=PAN.dep.get(key)??1,g0=Math.max(oreAt(p.x,-1.6,p.z),placerG(p.x,p.z)*0.8);
+    const g=g0*0.22*dep*(0.6+Math.random()*0.8);PAN.dep.set(key,dep*0.82);ECO.pans++;
+    if(g<0.01)toast('Tavada altın yok. Nehir boyunca başka yer dene');else{ECO.gold+=g;ECO.prod+=g;toast('Tavada '+g.toFixed(2)+' g altın! '+(dep<0.5?'(bu nokta tükeniyor)':''))}saveSoon()}}
+
+/* ---------- Tesisler: yıkama tesisi (trommel), kırıcılar, konveyörler, aglomeratör, stacker, liç sahası, ADR ---------- */
+var PH;
+function plantArea(){return{x0:12,x1:76,z0:-106,z1:-76,px0:80,px1:110,pz0:-112,pz1:-74}}
+function flatPlant(){const P=plantArea(),H=T.sample(44,-91)*0.2;PH=H;
+  for(let j=1;j<N-1;j++){const z=-HALF+j*DX;if(z>P.z1+8)continue;for(let i=1;i<N-1;i++){const x=-HALF+i*DX;if(x<P.x0-8)continue;const k=j*N+i;
+    const d1=Math.hypot(Math.max(0,P.x0-x,x-P.x1),Math.max(0,P.z0-z,z-P.z1)),d2=Math.hypot(Math.max(0,P.px0-x,x-P.px1),Math.max(0,P.pz0-z,z-P.pz1)),d=Math.min(d1,d2);if(d>8)continue;
+    const t=sstep(0,8,d);T.h[k]=T.h0[k]=H+(T.h[k]-H)*t;if(d<0.3)T.w[k]=0.3}}}
+const PL={built:{},feed:{t:0,g:0},pad:{t:0,rem:0},pond:0,parcels:[],stock:{},slot:-1,sl:{v:0,mf:0},rev:0};
+const PARTS=[
+  {id:'sluice',name:'Yıkama tesisi (trommel)',d:'Nehir kıyısına kurulur. Kepçeyle çakıl dök, altını ayırır.',p:1200},
+  {id:'pump',name:'Dalgıç pompa',d:'Bulunduğun yerdeki çukurdan suyu çeker.',p:1500},
+  {id:'cr1',name:'Birincil kırıcı + bunker',d:'Kamyonla cevher dök. Kurulmadan önce burası cevher alım noktası (%45 değer).',p:9000},
+  {id:'cv1',name:'Konveyör 1',d:'Birincil kırıcıdan ikincil kırıcıya.',p:1500,req:'cr1'},
+  {id:'cr2',name:'İkincil (konik) kırıcı',d:'Cevheri ince boyuta kırar.',p:6000,req:'cv1'},
+  {id:'cv2',name:'Konveyör 2',d:'İkincil kırıcıdan aglomeratöre.',p:1500,req:'cr2'},
+  {id:'ag',name:'Aglomeratör',d:'Çimento ile topaklar, liç için hazırlar.',p:5000,req:'cv2'},
+  {id:'cv3',name:'Saha konveyörü + stacker',d:'Topaklanmış cevheri liç sahasına yığar.',p:3500,req:'ag'},
+  {id:'pad',name:'Liç sahası (geomembran + damlama)',d:'Yığından altını çözer.',p:7000,req:'cv3'},
+  {id:'adr',name:'ADR tesisi (karbon kolonları + döküm)',d:'Çözeltideki altını külçeye çevirir.',p:9000,req:'pad'}];
+const SLOTS=[[-62],[-22],[18],[52]].map(([x])=>({x,z:RIVC(x)-9}));
+const PG={};const _pg=(id)=>{const g=new THREE.Group();g.visible=false;scene.add(g);PG[id]=g;return g};
+function conveyor(par,A,B,w=0.9){const g=new THREE.Group();par.add(g);const d=new V3().subVectors(B,A),L=d.length(),yaw=Math.atan2(-d.z,d.x),pit=Math.atan2(d.y,Math.hypot(d.x,d.z));
+  g.position.copy(A);g.rotation.order='YZX';g.rotation.set(0,yaw,pit);const CF=M('#8a9097');
+  for(const s of[-1,1])box(L,0.18,0.08,CF,g,L/2,0,s*(w/2+0.1));box(L,0.05,w,M('#1e1f22'),g,L/2,0.1,0);
+  for(let x=0.6;x<L;x+=1.4){cyl(0.06,w,STEEL,g,x,0.05,0,'z',8).noOutline=true}cyl(0.25,w+0.1,DARK,g,0.15,0.05,0,'z',12);cyl(0.25,w+0.1,DARK,g,L-0.15,0.05,0,'z',12);
+  for(let x=2;x<L-1;x+=4){const yy=A.y+(B.y-A.y)*x/L,gy=T.sample(A.x+(B.x-A.x)*x/L,A.z+(B.z-A.z)*x/L);const hh=Math.max(0.2,yy-gy);for(const s of[-1,1]){const l=box(0.1,hh,0.1,CF,g,x,-hh/2,s*(w/2+0.05));l.rotation.z=-pit}}
+  box(L,0.03,0.5,M('#f2b31a'),g,L/2,0.32,w/2+0.3).noOutline=true;return{A:A.clone(),B:B.clone(),L}}
+let PLB=null;
+function buildPlantModels(){const y0=PH,P=(x,y,z)=>new V3(x,y0+y,z),C=M('#bdbab2'),ST=M('#8a9097'),BL_=M('#3a6ea5'),GRN=M('#5f8f4a');
+  // yıkama tesisi (slot belirlenince taşınır)
+  {const g=_pg('sluice');box(3.2,0.3,2.4,ST,g,0,0.15,0);const hp=new THREE.Mesh(new THREE.CylinderGeometry(1.7,0.6,1.5,4,1,true),M('#c9a227'));hp.rotation.y=Math.PI/4;hp.position.set(-0.6,2.3,0);g.add(hp);
+    for(const x of[-1.4,0.2])for(const z of[-1,1])box(0.12,2.2,0.12,ST,g,x,1.1,z);const dr=new THREE.Group();dr.position.set(1.6,1.4,0);dr.rotation.z=-0.12;g.add(dr);cyl(0.7,3.2,M('#7a8088'),dr,1.4,0,0,'x',14);for(let i=0;i<5;i++)cyl(0.73,0.08,DARK,dr,0.1+i*0.65,0,0,'x',14);
+    g.userData.drum=dr;const sl=box(4,0.12,0.9,M('#d0d4d8'),g,4.6,0.7,0);sl.rotation.z=-0.18;for(let i=0;i<7;i++){const r=box(0.05,0.08,0.86,DARK,g,3.0+i*0.5,0.95-i*0.09,0);r.noOutline=true}
+    cyl(0.1,6,DARK,g,1,0.3,2.5,'x',8);box(0.8,0.6,0.6,M('#e0591f'),g,-1.5,0.5,1.8);outline(g)}
+  // birincil kırıcı + bunker
+  {const g=_pg('cr1');box(7,1.4,7,C,g,25,0.7+y0,-92.5);const hp=new THREE.Mesh(new THREE.CylinderGeometry(3.4,1.1,2.6,4,1,true),M('#c9a227'));hp.material.side=THREE.DoubleSide;hp.rotation.y=Math.PI/4;hp.position.set(25,y0+2.6,-91);g.add(hp);
+    box(2.4,2.0,2.2,M('#3a6ea5'),g,25,y0+1.0,-95.2);for(const z of[-96.4,-94])cyl(0.9,0.25,DARK,g,25,y0+1.4,z,'z',16);box(1.2,0.9,1.0,GRN,g,27,y0+0.9,-96.6);
+    for(const s of[-1,1])box(0.15,1.0,7,M('#f2b31a'),g,25+s*3.6,y0+1.9,-92.5);outline(g)}
+  PLB={c1:conveyor(_pg('cv1'),P(26.5,1.1,-95.3),P(40,5.4,-95.3)),c2:conveyor(_pg('cv2'),P(44.5,1.2,-95.3),P(53.5,4.7,-95.3)),c3:conveyor(_pg('cv3'),P(63,1.3,-95.3),P(79,6.6,-95.3))};outline(PG.cv1);outline(PG.cv2);outline(PG.cv3);
+  {const g=_pg('cr2');for(const x of[-1.5,1.5])for(const z of[-1.5,1.5])box(0.25,4.2,0.25,ST,g,42+x,y0+2.1,-95.3+z);box(3.6,0.25,3.6,ST,g,42,y0+4.3,-95.3);cyl(1.2,1.6,M('#3a6ea5'),g,42,y0+5.2,-95.3,null,16);
+    {const c=new THREE.Mesh(new THREE.ConeGeometry(1.25,1.0,16),M('#2f5a8a'));c.position.set(42,y0+6.5,-95.3);g.add(c)}cyl(0.5,1.8,DARK,g,42,y0+3.2,-95.3,null,12);box(1.0,0.8,1.2,GRN,g,43.6,y0+4.8,-94);outline(g)}
+  {const g=_pg('ag');const dr=new THREE.Group();dr.position.set(58,y0+3.2,-95.3);dr.rotation.z=-0.07;g.add(dr);cyl(1.4,8.5,M('#c96a1f'),dr,0,0,0,'x',20);for(const x of[-3,0,3])cyl(1.5,0.25,DARK,dr,x,0,0,'x',20);g.userData.drum=dr;
+    for(const x of[-2.5,2.5])box(0.6,2.0,3.2,C,g,58+x,y0+1.0,-95.3);cyl(1.3,7,M('#d9d6cf'),g,57,y0+8.2,-99.5,null,16);{const c=new THREE.Mesh(new THREE.ConeGeometry(1.3,1.6,16),M('#d9d6cf'));c.rotation.x=Math.PI;c.position.set(57,y0+3.9,-99.5);g.add(c)}
+    for(const x of[-1,1])for(const z of[-1,1])box(0.15,4.5,0.15,ST,g,57+x,y0+2.2,-99.5+z);outline(g)}
+  {const g=_pg('pad');for(let z=-108;z<=-78;z+=4){const l=box(28,0.04,0.04,M('#111'),g,95,y0+0.08,z);l.noOutline=true}
+    box(9,0.5,7,M('#2b8ad6'),g,71,y0-0.6,-109);for(const s of[-1,1])box(9.4,0.6,0.3,M('#2c2d30'),g,71,y0-0.1,-109+s*3.6);cyl(0.15,26,M('#2c2d30'),g,80,y0+0.3,-93,'z',8);outline(g)}
+  {const g=_pg('adr');rbox(10,5,7,0.2,M('#d9d6cf'),g,64,y0+2.5,-82);box(10.4,0.3,7.4,M('#8a2f2a'),g,64,y0+5.1,-82);for(let i=0;i<4;i++)cyl(0.9,6,M('#5d87a6'),g,57+i*2.2,y0+3,-87.5,null,14);
+    cyl(1.6,3,M('#9aa0a6'),g,70,y0+1.5,-88,null,16);cyl(0.3,5,DARK,g,67,y0+7,-80,null,10);box(2.2,2.4,0.1,M('#ffd21a',0,0,{emissive:lin('#a07000'),emissiveIntensity:0.3}),g,64,y0+2.6,-78.45);outline(g)}
+  {const g=_pg('pump');box(0.8,1.2,0.8,M('#e0591f'),g,0,0.6,0);cyl(0.1,3,DARK,g,1.2,0.2,0,'x',8);outline(g)}
+  // stacker
+  {const g=PG.cv3,st=new THREE.Group();st.position.set(80,y0,-95.3);g.add(st);box(1.2,1.4,1.2,ST,st,0,0.7,0);const bm=new THREE.Group();bm.position.set(0,6.6,0);st.add(bm);
+    box(15,0.25,1.0,ST,bm,7.5,0,0);box(15,0.05,0.9,M('#1e1f22'),bm,7.5,0.15,0);for(let x=1;x<15;x+=1.8)cyl(0.06,0.9,STEEL,bm,x,0.1,0,'z',6);box(1.0,6.6,0.6,ST,bm,14,-3.3,0);for(const s of[-1,1])cyl(0.5,0.4,RUBBER,bm,14,-6.1,s*0.6,'z',12);
+    st.userData.bm=bm;PL.stk=st;outline(st)}
+  // cevher alım tabelası
+  {const g=new THREE.Group();scene.add(g);box(0.15,3,0.15,DARK,g,19,y0+1.5,-86);const c=document.createElement('canvas');c.width=256;c.height=96;const x=c.getContext('2d');x.fillStyle='#1d1d20';x.fillRect(0,0,256,96);x.fillStyle='#f2b31a';x.font='700 30px Barlow,sans-serif';x.textAlign='center';x.fillText('CEVHER ALIM',128,42);x.font='500 20px Barlow,sans-serif';x.fillStyle='#fff';x.fillText('bunkere dök',128,76);
+    const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;const m=new THREE.Mesh(new THREE.PlaneGeometry(2.6,1.0),new THREE.MeshBasicMaterial({map:t,side:THREE.DoubleSide}));m.position.set(19,y0+3.2,-86);m.rotation.y=Math.PI/2;g.add(m);PL.sign=g}}
+function placeSluice(){const s=SLOTS[PL.slot];if(!s)return;const g=PG.sluice,y=T.sample(s.x,s.z);g.position.set(s.x,y,s.z);g.rotation.y=-Math.PI/2;g.visible=true;g.updateMatrixWorld(true)}
+function buildPart(id,anim){PL.built[id]=true;const g=PG[id];if(id==='sluice'){placeSluice()}else if(id==='pump'){const m=curM();let bx=m.x,bz=m.z,bd=-1;for(let r=0;r<=14;r+=2)for(let a=0;a<6.28;a+=0.6){const x=m.x+Math.cos(a)*r,z=m.z+Math.sin(a)*r,d=waterD(x,z);if(d>bd){bd=d;bx=x;bz=z}}
+    PUMPS.push({x:bx,z:bz});g.position.set(bx,T.sample(bx,bz),bz);g.visible=true;if(bd<0.05)toast('Pompa kuruldu (yakında su yok; çukur dolunca çeker)')}
+  else if(g){g.visible=true}
+  if(anim&&g){g.scale.y=0.05;PL.grow=PL.grow||[];PL.grow.push(g);const p=new V3();g.getWorldPosition(p);for(let i=0;i<8;i++)dust((id==='sluice'||id==='pump'?p.x:PLX(id))+(Math.random()-.5)*6,(PH||0)+1,(id==='sluice'||id==='pump'?p.z:-93)+(Math.random()-.5)*6,1)}
+  if(id==='pad'){padMark(true)}if(id==='cr1')PL.sign.visible=false}
+const PLX=id=>({cr1:25,cv1:33,cr2:42,cv2:49,ag:58,cv3:72,pad:95,adr:64})[id]||40;
+const PADK=new Uint8Array(N*N);
+function padMark(on){const P=plantArea();for(let j=0;j<N;j++){const z=-HALF+j*DX;if(z<P.pz0||z>P.pz1)continue;for(let i=0;i<N;i++){const x=-HALF+i*DX;if(x<P.px0||x>P.px1)continue;PADK[j*N+i]=on?1:0}}
+  const j0=Math.round((P.pz0+HALF)/DX),j1=Math.round((P.pz1+HALF)/DX);T.touchRows(j0,j1)}
+// alım bölgeleri: içine düşen topak ve yığılan toprak tesise girer
+const INT=[{id:'hop',x:25,z:-91,r:3.0,top:5.5,on:()=>true},{id:'sl',r:1.9,top:4.2,on:()=>PL.built.sluice}];
+function intakes(dt){const sl=SLOTS[PL.slot];if(sl){INT[1].x=sl.x;INT[1].z=sl.z-0.6}
+  for(const I of INT){if(!I.on()||I.x===undefined)continue;const base=I.id==='hop'?PH:T.sample(I.x,I.z),rr=I.r*I.r;let v=0,m=0;
+    for(let i=0;i<DM.max;i++){if(!DM.a[i])continue;const dx=DM.x[i]-I.x,dz=DM.z[i]-I.z;if(dx*dx+dz*dz>rr||DM.y[i]>base+I.top)continue;v+=DM.v[i];m+=DM.v[i]*DM.mf[i];killChunk(i)}
+    if(frameN%10===0){const i0=Math.round((I.x-I.r+HALF)/DX),i1=Math.round((I.x+I.r+HALF)/DX),j0=Math.round((I.z-I.r+HALF)/DX),j1=Math.round((I.z+I.r+HALF)/DX);
+      for(let j=j0;j<=j1;j++)for(let i=i0;i<=i1;i++){const k=j*N+i,x=-HALF+i*DX,z=-HALF+j*DX;if((x-I.x)**2+(z-I.z)**2>rr)continue;const ex_=T.h[k]-(I.id==='hop'?PH:T.h0[k])-0.05;if(ex_>0.02&&T.c[k]<0.5){const dv=ex_*DX*DX;v+=dv;m+=dv*T.m[k];T.h[k]-=ex_;T.touch(k)}}}
+    if(v>0)feed(I.id,v,m/v)}}
+function feed(id,v,mf){const t=v*1.8,g=t*oreG(mf);
+  if(id==='sl'){PL.sl.v+=v;PL.sl.mf+=(mf-PL.sl.mf)*Math.min(1,v/Math.max(PL.sl.v,1e-6));PL.sl.g=(PL.sl.g||0)+g;return}
+  if(!PL.built.cr1){const val=g*ECO.price*0.45;earn(val);ECO.buyT+=t;ECO.oreT+=t;if(val>1)toast('Cevher alım: '+t.toFixed(1)+' t · '+(t>0?(g/t).toFixed(2):0)+' g/t · +'+fmt$(val),'buy');return}
+  PL.feed.t+=t;PL.feed.g+=g;ECO.oreT+=t}
+const PATH=()=>{const P=[],B=PL.built,y0=PH;P.push({k:'cr1',p:new V3(25,y0+1.0,-95.3)});if(!B.cv1)return P;P.push({k:'cv1',belt:PLB.c1});if(!B.cr2)return P;P.push({k:'cr2',p:new V3(42,y0+1.5,-95.3)});if(!B.cv2)return P;P.push({k:'cv2',belt:PLB.c2});
+  if(!B.ag)return P;P.push({k:'ag',p:new V3(62,y0+2.2,-95.3)});if(!B.cv3)return P;P.push({k:'cv3',belt:PLB.c3});P.push({k:'stk'});return P};
+const pIM=new THREE.InstancedMesh(new THREE.DodecahedronGeometry(0.28,0),TOON('#8a7a4a'),260);pIM.count=0;pIM.frustumCulled=false;scene.add(pIM);
+let CRT=0;
+function plantStep(dt){if(PH===undefined)return;const B=PL.built;
+  for(const id of['sluice','ag'])if(B[id]&&PG[id]){const d=PG[id].userData.drum;if(d&&(id==='ag'?PL.parcels.length:PL.sl.v>0.01))d.rotation.x+=dt*1.5}
+  if(B.sluice&&PL.sl.v>0.005){const dv=Math.min(PL.sl.v,0.9*dt),fr=dv/PL.sl.v,g=(PL.sl.g||0)*fr*0.78;PL.sl.v-=dv;PL.sl.g=(PL.sl.g||0)*(1-fr);ECO.gold+=g;ECO.prod+=g;ECO.sluiceG+=g;
+    const s=SLOTS[PL.slot];T.deposit(s.x+0.3,s.z+6.2+Math.random(),dv*0.95,1);if(Math.random()<0.3)splash(s.x,T.sample(s.x,s.z)+1,s.z+4.5,0.6)}
+  // birincil kırıcı: bunkerden 3 t/s
+  if(B.cr1&&PL.feed.t>0.05){const path=PATH();CRT+=dt;if(CRT>0.2){CRT=0;const t=Math.min(PL.feed.t,0.6),g=PL.feed.g*t/PL.feed.t;PL.feed.t-=t;PL.feed.g-=g;PL.parcels.push({i:1,s:0,t,g});if(Math.random()<0.3)dust(25,PH+3,-93,0.6);SND.crush()}}
+  const path=PATH(),keep=[];
+  for(const p of PL.parcels){let st=path[p.i];if(!st){stockpile(path[path.length-1],p);continue}
+    if(st.belt){p.s+=2.4*dt;if(p.s>=st.belt.L){p.i++;p.s=0;st=path[p.i];if(!st){stockpile(path[path.length-1],p);continue}}}
+    if(!st.belt){if(st.k==='stk'){stack(p);continue}p.i++;p.s=0;if(!path[p.i]){stockpile(st,p);continue}}
+    keep.push(p)}
+  PL.parcels=keep;
+  // liç: yığındaki altının %80'i zamanla çözeltiye geçer, ADR külçeye çevirir
+  if(B.pad&&PL.pad.rem>1e-4){const d=PL.pad.rem*0.01*dt;PL.pad.rem-=d;PL.pond+=d}
+  if(B.adr&&PL.pond>1e-4){const d=Math.min(PL.pond,PL.pond*0.05*dt+0.01*dt);PL.pond-=d;ECO.gold+=d;ECO.prod+=d;ECO.padG+=d}
+  // çizim
+  let n=0;const o=_bo;for(const p of PL.parcels){if(n>=260)break;const st=path[p.i];if(!st||!st.belt)continue;const f=p.s/st.belt.L;o.position.lerpVectors(st.belt.A,st.belt.B,f);o.position.y+=0.35;o.rotation.set(p.s,p.s*0.7,0);o.scale.setScalar(0.8+p.t*0.6);o.updateMatrix();pIM.setMatrixAt(n++,o.matrix)}
+  pIM.count=n;pIM.instanceMatrix.needsUpdate=true;
+  if(PL.grow&&PL.grow.length){for(const g of PL.grow)g.scale.y=Math.min(1,g.scale.y+dt*0.6);PL.grow=PL.grow.filter(g=>g.scale.y<1)}}
+function stockpile(st,p){let x,z;if(st.belt){x=st.belt.B.x+1.2;z=st.belt.B.z}else if(st.k==='cr1'){x=27.5;z=-97.5}else if(st.p){x=st.p.x+2;z=st.p.z-1.5}else{x=80;z=-93}
+  T.deposit(x+(Math.random()-.5)*1.5,z+(Math.random()-.5)*1.5,p.t/1.8,ORE(p.t>0?p.g/p.t:0));const i=Math.round((x+HALF)/DX),j=Math.round((z+HALF)/DX);PDB.i0=Math.min(PDB.i0,i-8);PDB.i1=Math.max(PDB.i1,i+8);PDB.j0=Math.min(PDB.j0,j-8);PDB.j1=Math.max(PDB.j1,j+8)}
+let STK={a:0.2,da:0.12,r:14};
+function stack(p){const st=PL.stk,bm=st.userData.bm;STK.a+=STK.da*0.05;if(STK.a>0.9||STK.a<-0.9)STK.da=-STK.da;bm.rotation.y=-STK.a;
+  const x=80+Math.cos(STK.a)*14,z=-95.3+Math.sin(STK.a)*14;if(T.sample(x,z)>PH+5.8)STK.a+=STK.da*0.4;
+  T.deposit(x+(Math.random()-.5),z+(Math.random()-.5),p.t/1.8*1.1,PL.built.pad?2.0:ORE(p.t>0?p.g/p.t:0));const i=Math.round((x+HALF)/DX),j=Math.round((z+HALF)/DX);PDB.i0=Math.min(PDB.i0,i-8);PDB.i1=Math.max(PDB.i1,i+8);PDB.j0=Math.min(PDB.j0,j-8);PDB.j1=Math.max(PDB.j1,j+8);
+  if(PL.built.pad){PL.pad.t+=p.t;PL.pad.rem+=p.g*0.82}}
+
+/* ---------- Mağaza, görevler, paneller ---------- */
+const MPRICE={ex:12000,tr:6000,dz:12000,gd:9000,dr:9000,ch:4000,pv:8000,rl:4000,pk:3000,mt:40000,sh:90000};
+const MDESC={ex:'20 t paletli ekskavatör',tr:'6x6 arazi damperi, ~12 m³',dz:'D9 sınıfı dozer, ripper',gd:'Yol ve şev tesviyesi',dr:'Arama sondajı + patlatma deliği',ch:'Patlatma deliklerini doldurur',pv:'Toprak yolu asfaltlar',rl:'Asfaltı ve dolguyu sıkıştırır',pk:'Hızlı ulaşım, tava',mt:'230 t yük, rijit şasi',sh:'540 t, 29 m³ kova'};
+const PNL={cur:null};
+function pnlOpen(id,html){PNL.cur=id;$('pnlB').innerHTML=html;$('pnl').classList.add('on')}
+function pnlClose(){PNL.cur=null;$('pnl').classList.remove('on');cv.focus()}
+function pnlShop(){let h='<h2>Mağaza</h2><p class="mut">Bakiye: <b>'+fmt$(ECO.money)+'</b> · altın fiyatı '+fmt$(ECO.price)+'/g</p><h3>Makineler</h3>';
+  for(const k of MORD){const own=ACT[k];h+='<div class="row"><div><b>'+MNAME[k]+'</b><br><small>'+(MDESC[k]||'')+'</small></div>'+(own?'<span class="own">Sahada</span>':'<button data-buy="m:'+k+'"'+(ECO.money<MPRICE[k]?' disabled':'')+'>'+fmt$(MPRICE[k])+'</button>')+'</div>'}
+  h+='<h3>Tesis</h3>';for(const p of PARTS){const own=PL.built[p.id]&&p.id!=='pump',lock=p.req&&!PL.built[p.req];h+='<div class="row"><div><b>'+p.name+'</b><br><small>'+p.d+(lock?' · önce: '+PARTS.find(q=>q.id===p.req).name:'')+'</small></div>'+(own?'<span class="own">Kuruldu</span>':'<button data-buy="p:'+p.id+'"'+(lock||ECO.money<p.p?' disabled':'')+'>'+fmt$(p.p)+'</button>')+'</div>'}
+  h+='<p class="mut">Sarf: arama sondajı analizi 150 $, patlatma deliği şarjı 40 $, asfalt ~4.7 $/m², yakıt çalışırken.</p>';pnlOpen('shop',h)}
+function buy(s){const[t,id]=s.split(':');
+  if(t==='m'){if(ACT[id])return;if(!pay(MPRICE[id],MNAME[id]))return;activate(id);toast(MNAME[id]+' sahaya geldi');setMach(id)}
+  else{const p=PARTS.find(q=>q.id===id);if(PL.built[id]&&id!=='pump')return;if(p.req&&!PL.built[p.req])return;if(id==='sluice'){let m=curM(),bi=0,bd=1e9;SLOTS.forEach((s,i)=>{const d=Math.hypot(s.x-m.x,s.z-m.z);if(d<bd){bd=d;bi=i}});PL.slot=bi}
+    if(!pay(p.p,p.name))return;buildPart(id,true);toast(p.name+' kuruldu'+(id==='sluice'?' (nehir kıyısı, x '+Math.round(SLOTS[PL.slot].x)+')':''))}
+  saveSoon();if(PNL.cur==='shop')pnlShop()}
+const TASKS=[
+  {t:'Nehirde tava çalkala',d:'Pikabı nehir kıyısına sür (kuzeyde, haritada mavi), suyun kenarında dur ve Tava (P). Nehrin kıvrımlarında altın daha bol.',ok:()=>ECO.pans>=3,r:100},
+  {t:'İlk 2 gram altın',d:'Farklı noktalarda tava çalkala. Aynı nokta tükenir.',ok:()=>ECO.prod>=2,r:150},
+  {t:'Altını sat',d:'"Altın sat" düğmesiyle altını paraya çevir.',ok:()=>ECO.sold>0,r:0},
+  {t:'Yıkama tesisi kur',d:'Mağaza → Tesis → Yıkama tesisi. En yakın nehir noktasına kurulur.',ok:()=>PL.built.sluice,r:200},
+  {t:'Çakıl yıka: 15 g altın',d:'Ekskavatörle nehir kıyısındaki çakılı kaz (1-3 m derin en zengin), tesisin bunkerine dök.',ok:()=>ECO.sluiceG>=15,r:500},
+  {t:'Kamyon al',d:'Daha uzaktaki zengin çakılı taşımak ve cevher için 6x6 kamyon.',ok:()=>ACT.tr,r:300},
+  {t:'Sondaj makinesi al, 3 arama sondajı',d:'Doğudaki gri kaya platoya git. T ile "Arama sondajı" seç, direği R ile dik, Space ile del. Her analiz 150 $.',ok:()=>ECO.assays>=3,r:1500},
+  {t:'Cevheri bul (≥ 1 g/t)',d:'Sondaj sonuçlarına bak. Turuncu/kırmızı direkler zengin. Cevher platonun altında, 2-15 m derinde.',ok:()=>ECO.best>=1,r:2000},
+  {t:'İlk patlatma',d:'Şarj aracı al. Cevherin üstüne patlatma delikleri del (T: Patlatma deliği), şarj aracıyla Space ile doldur, makineleri uzaklaştır, X ile patlat.',ok:()=>ECO.blasts>=1,r:1500},
+  {t:'Cevher sat: 40 t',d:'Gevşeyen cevheri kamyona yükle, tesis sahasındaki bunkere dök (güneyde, ikinci taşıma yolu). Kırıcı kurulana kadar alıcı %45 öder.',ok:()=>ECO.oreT>=40,r:2500},
+  {t:'Birincil kırıcıyı kur',d:'Mağaza → Tesis. Artık bunkere dökülen cevher işlenir.',ok:()=>PL.built.cr1,r:2000},
+  {t:'Kırma ve topaklama hattı',d:'Konveyörler, ikincil kırıcı, aglomeratör ve saha konveyörü. Eksik kalan yerde stok yığını oluşur.',ok:()=>PL.built.cv3,r:4000},
+  {t:'Liç sahası ve ADR',d:'Yığındaki altın çözülür, ADR külçeye çevirir.',ok:()=>PL.built.adr,r:5000},
+  {t:'Yolu asfaltla: 150 m²',d:'Kamyonlar toprak yolda yavaş. Asfalt finişeri al, F/↓ ile tablayı indir ve yavaşça sür. Ardından silindirle sıkıştır.',ok:()=>ECO.paved>=150,r:3000},
+  {t:'Liçten 100 g altın',d:'Cevheri sürekli besle.',ok:()=>ECO.padG>=100,r:8000},
+  {t:'1 kg altın üret',d:'Toplam üretim 1 kg. Maden patronu oldun!',ok:()=>ECO.prod>=1000,r:25000}];
+function taskTick(){if(!CAREER())return;for(let i=0;i<TASKS.length;i++){if(ECO.tasks[i])continue;if(TASKS[i].ok()){ECO.tasks[i]=1;earn(TASKS[i].r);toast('Görev tamam: '+TASKS[i].t+(TASKS[i].r?' · ödül '+fmt$(TASKS[i].r):''));saveSoon();if(PNL.cur==='tasks')pnlTasks()}break}}
+function curTask(){for(let i=0;i<TASKS.length;i++)if(!ECO.tasks[i])return TASKS[i];return null}
+function pnlTasks(){let h='<h2>Görevler</h2><p class="mut">Hikâye: kasabanın kuzeyindeki nehirde altın parlıyor. Tava ile başla, kazandıkça makine ve tesis al. Doğudaki kaya platonun altında asıl cevher var: sondajla bul, patlat, kır, liçle ve külçe dök.</p>';
+  TASKS.forEach((t,i)=>{const d=ECO.tasks[i],c=!d&&curTask()===t;h+='<div class="task'+(d?' done':'')+(c?' cur':'')+'"><b>'+(d?'✓ ':c?'▶ ':'')+t.t+'</b>'+(t.r?' <small>ödül '+fmt$(t.r)+'</small>':'')+(c||!d?'<br><small>'+t.d+'</small>':'')+'</div>'});pnlOpen('tasks',h)}
+function pnlHoles(){const ex=HOLES.filter(h=>h.t==='ex'),bl=HOLES.filter(h=>h.t==='bl');let h='<h2>Sondaj sonuçları</h2><p class="mut">'+bl.length+' patlatma deliği ('+bl.filter(q=>q.charged).length+' dolu) · '+ex.length+' arama sondajı. Renk: gri &lt;0.2 · yeşil &lt;0.6 · sarı &lt;1.5 · turuncu &lt;3 · kırmızı ≥3 g/t</p>';
+  ex.forEach((q,i)=>{h+='<div class="row hole"><div><b>S-'+(i+1)+'</b> <small>x '+q.x.toFixed(0)+', z '+q.z.toFixed(0)+'</small><br>';
+    if(q.res){h+='<div class="log">'+q.res.map((g,d)=>'<i title="'+(d*2)+'-'+(d*2+2)+' m: '+g+' g/t" style="background:'+GRC(g)+'"></i>').join('')+'</div><small>en yüksek '+q.max.toFixed(2)+' g/t · '+q.res.reduce((a,g,d)=>g>=1?a+'<br>'+(d*2)+'-'+(d*2+2)+' m: '+g+' g/t':a,'')+'</small>'}
+    else h+=q.pend?'<small>analiz bekleniyor…</small>':'<button data-assay="'+HOLES.indexOf(q)+'">Analiz iste (150 $)</button>';h+='</div></div>'});
+  if(!ex.length)h+='<p>Henüz arama sondajı yok. Sondaj makinesinde T ile "Arama sondajı" seç.</p>';pnlOpen('holes',h)}
+function pnlPlant(){const B=PL.built,f=n=>B[n]?'✓':'—';let h='<h2>Tesis</h2>';
+  h+='<div class="row"><div>Yıkama tesisi '+f('sluice')+'<br><small>bunkerde '+PL.sl.v.toFixed(1)+' m³ · üretilen '+fmtG(ECO.sluiceG)+'</small></div></div>';
+  h+='<div class="row"><div>Bunker / kırıcı '+f('cr1')+'<br><small>'+(B.cr1?'bekleyen '+PL.feed.t.toFixed(1)+' t ('+(PL.feed.t>0?(PL.feed.g/PL.feed.t).toFixed(2):'0')+' g/t)':'cevher alım noktası: %45 değer')+' · toplam '+ECO.oreT.toFixed(0)+' t</small></div></div>';
+  h+='<div class="row"><div>Hat: konveyör 1 '+f('cv1')+' · ikincil kırıcı '+f('cr2')+' · konveyör 2 '+f('cv2')+' · aglomeratör '+f('ag')+' · stacker '+f('cv3')+'<br><small>bantta '+PL.parcels.reduce((a,p)=>a+p.t,0).toFixed(1)+' t</small></div></div>';
+  h+='<div class="row"><div>Liç sahası '+f('pad')+' · ADR '+f('adr')+'<br><small>yığın '+PL.pad.t.toFixed(0)+' t · yığında çözülecek '+fmtG(PL.pad.rem)+' · çözeltide '+fmtG(PL.pond)+' · liçten üretilen '+fmtG(ECO.padG)+'</small></div></div>';
+  h+='<p class="mut">Toplam üretim '+fmtG(ECO.prod)+' · satılan '+fmtG(ECO.sold)+' · asfalt '+ECO.paved.toFixed(0)+' m² · patlatma '+ECO.blasts+'</p>';pnlOpen('plant',h)}
+function sellGold(){if(ECO.gold<0.005){toast('Satacak altın yok');return}const v=ECO.gold*ECO.price;ECO.money+=v;ECO.sold+=ECO.gold;toast(fmtG(ECO.gold)+' altın satıldı: +'+fmt$(v));ECO.gold=0;saveSoon()}
+
+/* ---------- Makineleri sahaya çıkarma (kariyerde satın alınca) ---------- */
+const DEFP={};
+function machObjs(k){switch(k){case'ex':return[chassis,...cylBoom.map(c=>c.g),cylArm.g,cylBk.g,...sideL.map(c=>c.g),...hL.map(c=>c.g)];case'dz':return[dzG,...dzArms.map(c=>c.g),...dzLift.map(c=>c.g),dzTiltC.g,...dzRipC.map(c=>c.g)];
+  case'sh':return[shG,...Object.values(SHCYL).flat().map(c=>c.g)];case'gd':return[gdG,...gdBar.map(c=>c.g),...gdLift.map(c=>c.g)];case'tr':case'mt':{const c=TRUCKS.find(t=>t.id===k);return[c.truck,...c.hoists.map(h=>h.g)]}default:return VEH[k]?[VEH[k].g]:[]}}
+function capDef(){DEFP.ex={x:ex.x,z:ex.z,yaw:ex.yaw};DEFP.dz={x:DZ.x,z:DZ.z,yaw:DZ.yaw};DEFP.sh={x:SH.x,z:SH.z,yaw:SH.yaw};DEFP.gd={x:GD.x,z:GD.z,yaw:GD.yaw};for(const c of TRUCKS)DEFP[c.id]={x:c.TRK.x,z:c.TRK.z,yaw:c.TRK.yaw};for(const k of VORD)DEFP[k]={x:VEH[k].x,z:VEH[k].z,yaw:VEH[k].yaw}}
+function activate(k,pos){const was=ACT[k];if(was&&!pos)return;ACT[k]=true;if(!was)for(const o of machObjs(k))o.visible=true;const p=pos||DEFP[k],o=MOBJ()[k];o.x=p.x;o.z=p.z;o.yaw=p.yaw;
+  if(k==='ex')pose();else if(k==='dz')dzPose();else if(k==='sh')shPose();else if(k==='gd')gdPose();else if(VEH[k])vPose(VEH[k]);else{const c=TRUCKS.find(t=>t.id===k);useTruck(c);c.truck.position.set(p.x,0,p.z);trkPose();TACT=TRUCKS.filter(t=>ACT[t.id])}hudM=''}
+function hideVeh(){for(const k of VORD)if(!ACT[k]){VEH[k].g.visible=false;VEH[k].x=VEH[k].z=9000;vPose(VEH[k])}}
+
+/* ---------- Kayıt (yalnızca kariyer) ---------- */
+const SKEY='ismakinesi_kariyer_v16';let SAVT=0,B0=null;
+function saveSoon(){SAVT=Math.min(SAVT,2)}
+function b64(u8){let s='';for(let i=0;i<u8.length;i+=0x8000)s+=String.fromCharCode.apply(null,u8.subarray(i,i+0x8000));return btoa(s)}
+function ub64(s){const b=atob(s),u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u}
+function saveGame(){if(!CAREER()||!started)return;try{
+  const idx=[],vh=[],vb=[],vm=[];for(let k=0;k<N*N;k++){if(Math.abs(T.h[k]-T.h0[k])>0.004||T.c[k]<0.5||T.b[k]!==B0[k]||AS[k]){idx.push(k);vh.push(Math.round(T.h[k]*100));vb.push(Math.round(Math.max(-320,Math.min(320,T.b[k]))*100));vm.push(Math.round(Math.max(-300,Math.min(320,T.m[k]))*100))}}
+  const cc=new Uint8Array(idx.length);for(let i=0;i<idx.length;i++)cc[i]=(T.c[idx[i]]<0.5?1:0)|(AS[idx[i]]<<1)|(T.cc[idx[i]]>0?8:0);
+  const mach={};for(const k of MORD)if(ACT[k]){const o=MOBJ()[k];mach[k]=[+o.x.toFixed(2),+o.z.toFixed(2),+o.yaw.toFixed(3)]}
+  const bl=BLD.map(b=>b64(b.alive));const tr=[];for(let i=0;i<TRE.n;i++)if(TRE.st[i])tr.push([i,+TRE.x[i].toFixed(2),+TRE.z[i].toFixed(2),TRE.dx[i],TRE.dz[i]]);
+  const o={v:16,eco:ECO,pl:{built:PL.built,feed:PL.feed,pad:PL.pad,pond:PL.pond,slot:PL.slot,sl:PL.sl},pumps:PUMPS,holes:HOLES.map(h=>({x:h.x,z:h.z,y0:h.y0,depth:h.depth,t:h.t,tgt:h.tgt,done:h.done,charged:h.charged,res:h.res,max:h.max})),mach,bl,tr,pan:[...PAN.dep],
+    ti:b64(new Uint8Array(new Int32Array(idx).buffer)),th:b64(new Uint8Array(new Int16Array(vh).buffer)),tb:b64(new Uint8Array(new Int16Array(vb).buffer)),tm:b64(new Uint8Array(new Int16Array(vm).buffer)),tc:b64(cc)};
+  localStorage.setItem(SKEY,JSON.stringify(o));SAVT=45}catch(e){SAVT=90;toast('Kayıt yapılamadı (tarayıcı depolama kapalı ya da dolu)','sv')}}
+function hasSave(){try{return!!localStorage.getItem(SKEY)}catch(e){return false}}
+function loadGame(){let o;try{o=JSON.parse(localStorage.getItem(SKEY))}catch(e){return false}if(!o||o.v!==16)return false;
+  Object.assign(ECO,o.eco);Object.assign(PL,{feed:o.pl.feed,pad:o.pl.pad,pond:o.pl.pond,slot:o.pl.slot,sl:o.pl.sl});
+  const idx=new Int32Array(ub64(o.ti).buffer),vh=new Int16Array(ub64(o.th).buffer),vb=new Int16Array(ub64(o.tb).buffer),vm=new Int16Array(ub64(o.tm).buffer),cc=ub64(o.tc);
+  for(let i=0;i<idx.length;i++){const k=idx[i];T.h[k]=vh[i]/100;T.b[k]=vb[i]/100;T.m[k]=vm[i]/100;T.c[k]=(cc[i]&1)?0:1;AS[k]=(cc[i]>>1)&3;if(!(cc[i]&8)&&T.cc[k]>0){T.cc[k]=0;ROADK[k]=0}}
+  T.dirty=true;T.dj0=0;T.dj1=N-1;
+  for(const id in o.pl.built)if(o.pl.built[id]&&id!=='pump')buildPart(id,false);for(const p of(o.pumps||[])){PUMPS.push(p);PG.pump.position.set(p.x,T.sample(p.x,p.z),p.z);PG.pump.visible=true;PL.built.pump=true}
+  HOLES.length=0;for(const h of o.holes)HOLES.push(h);holesDraw();
+  for(const k in o.mach)activate(k,{x:o.mach[k][0],z:o.mach[k][1],yaw:o.mach[k][2]});
+  o.bl.forEach((s,bi)=>{const b=BLD[bi],a=ub64(s);for(let q=0;q<a.length;q++)if(!a[q]&&b.alive[q]){b.alive[q]=0;const id=b.id[q];for(let r=0;r<16;r++){bIM.instanceMatrix.array[id*16+r]=0;bIMO.instanceMatrix.array[id*16+r]=0}}});bIM.instanceMatrix.needsUpdate=bIMO.instanceMatrix.needsUpdate=true;
+  for(const[i,x,z,dx,dz]of o.tr){TRE.x[i]=x;TRE.z[i]=z;TRE.dx[i]=dx;TRE.dz[i]=dz;TRE.st[i]=2;TRE.th[i]=1.48;TRE.y[i]=T.sample(x,z);treeMat(i)}for(const m of[TRE.f,TRE.t,TRE.fo,TRE.to])m.instanceMatrix.needsUpdate=true;
+  PAN.dep=new Map(o.pan||[]);return true}
+addEventListener('pagehide',()=>saveGame());document.addEventListener('visibilitychange',()=>{if(document.hidden)saveGame()});
+
+/* ---------- Ek sesler ---------- */
+SND.drill=rock=>{if(!sndOK())return;const t=AU.ctx.currentTime;nburst(t,0.05,rock?0.16:0.08,'bandpass',rock?2200:1200,900,2);osc(t,0.05,0.06,rock?180:120,90,'square')};
+SND.crush=()=>{if(!sndOK()||!sndRate('cru',180))return;const t=AU.ctx.currentTime;nburst(t,0.25,0.12,'bandpass',500,250,1);osc(t,0.15,0.06,90,60)};
+SND.pan=()=>{if(!sndOK())return;const t=AU.ctx.currentTime;for(let i=0;i<6;i++)nburst(t+i*0.5,0.45,0.08,'bandpass',1500,700,0.8)};
+
+/* ---------- Ana bağlantılar ---------- */
+function v16Init(){if(B0===null)B0=new Float32Array(T.b);capDef();buildPlantModels();wsInit();holesDraw();hideVeh();for(const id of VORD)if(ACT[id])vPose(VEH[id])}
+function v16Step(dt){vehStepAll(dt)}
+let WSA=0,WST=0,ECT=0;
+function v16Frame(dt){WSA+=dt;let n=0;while(WSA>1/30&&n<2){wsStep(1/30);WSA-=1/30;n++}if(n>=2)WSA=0;WST+=dt;if(WST>0.6){WST=0;wsTerrain()}if(frameN%2===0)wsDraw();drawSplash(dt);
+  intakes(dt);plantStep(dt);panTick(dt);
+  if(CAREER()){for(const k of MORD){if(!ACT[k])continue;const m=MOBJ()[k];if(m.eng===2){const f=(FUEL[k]||0.05)*(0.25+(m.pow||0));ECO.money-=f*dt;ECO.fuel+=f*dt}}if(ECO.money<0)ECO.money=0;
+    ECO.t+=dt;if(frameN%60===0)ECO.price=Math.max(60,Math.min(110,ECO.price*(1+(Math.random()-.5)*0.01)));SAVT-=dt;if(SAVT<=0)saveGame();if(frameN%30===0)taskTick()}
+  for(const id of VORD)if(ACT[id])vPose(VEH[id]);
+  if(frameN%10===0)ecoHud()}
+const FUEL={ex:0.08,dz:0.15,tr:0.08,sh:1.2,mt:0.6,gd:0.08,dr:0.1,ch:0.06,pv:0.06,rl:0.04,pk:0.02};
+function ecoHud(){const e=$('eco');if(!e)return;const ps=panSpot(),pb=$('bPan');if(pb)pb.style.display=ps&&(MACH==='pk'||!CAREER())?'':'none';
+  $('bBlast').style.display=HOLES.some(h=>h.charged)?'':'none';
+  if(!CAREER()){e.textContent=ECO.prod>0?'Altın '+fmtG(ECO.gold):'';return}const ct=curTask();
+  e.innerHTML='<b>'+fmt$(ECO.money)+'</b> · altın <b>'+fmtG(ECO.gold)+'</b> ('+fmt$(ECO.price)+'/g)'+(ct?'<br><span>▶ '+ct.t+'</span>':'')}
+
+function v16Reset(){HOLES.length=0;holesDraw();AS.fill(0);wsInit();PL.parcels=[];PL.feed={t:0,g:0};PL.pad={t:0,rem:0};PL.pond=0;PL.sl={v:0,mf:0};if(PL.built.pad)padMark(true);PAN.dep.clear()}
+function freeSetup(){PL.slot=0;for(const p of PARTS)if(p.id!=='pump')buildPart(p.id,false)}
+function toggleHT(){const v=VEH.dr;v.htype=v.htype==='ex'?'bl':'ex';v.hole=null;toast(v.htype==='ex'?'Arama sondajı: 30 m, karot analizi':'Patlatma deliği: 6 m');touchUI()}
+
+/* ---------- Araç arayüzü, mod seçimi, paneller ---------- */
+function vehLab(v){switch(v.id){
+  case'dr':{const h=v.hole;return['Delik',h?h.depth.toFixed(1)+' / '+h.tgt+' m':(v.htype==='ex'?'arama 30 m':'patlatma 6 m'),h?h.depth/h.tgt:0,(v.ma<0.97?'Direği kaldır (R) · ':'Space: del · ')+'T: '+(v.htype==='ex'?'Arama sondajı':'Patlatma deliği')+' · boş delik '+HOLES.filter(q=>q.t==='bl'&&q.done&&!q.charged).length]}
+  case'ch':{const n=HOLES.filter(h=>h.t==='bl'&&h.done&&!h.charged).length,c=HOLES.filter(h=>h.charged).length;return['Dolu delik',c+' dolu · '+n+' boş',Math.min(1,v.holeP/1.3),'Deliğin yanında dur, Space basılı tut · X ile ateşle']}
+  case'pv':return['Tabla',v.sd>0.9?'İNDİ: asfaltlıyor':'kalkık',v.sd,'F/↓ tablayı indir, yavaş sür · asfalt '+ECO.paved.toFixed(0)+' m² · zemin: '+surf(v.x,v.z).n];
+  case'rl':return['Sıkıştırma',surf(v.x,v.z).n,0,'Taze asfaltın üstünden geç: sıkışınca kamyonlar tam hızda gider'];
+  default:return['Zemin',surf(v.x,v.z).n,surf(v.x,v.z).vf,panSpot()?'Suyun kenarındasın: Tava (P)':'Nehir kuzeyde · zemin: '+surf(v.x,v.z).n]}}
+function vehTouch(t,L,Rl){L.textContent='Gaz · direksiyon';
+  if(MACH==='dr'){t.append(holdBtn('Del','hit'));const b=document.createElement('button');b.textContent=VEH.dr.htype==='ex'?'Arama':'Patlatma';b.onclick=toggleHT;t.append(b);Rl.textContent='Direk ↕'}
+  else if(MACH==='ch'){t.append(holdBtn('Doldur','hit'));Rl.textContent='—'}
+  else if(MACH==='pv'){Rl.textContent='Tabla ↓ indir · ↑ kaldır'}
+  else if(MACH==='pk'){const b=document.createElement('button');b.textContent='Tava';b.onclick=panStart;t.append(b);Rl.textContent='—'}
+  else Rl.textContent='—'}
+function vehHelp(m){return{dr:'Sondaj: R/F direk, Space del, T delik tipi (patlatma/arama), K sonuçlar',ch:'Şarj aracı: patlatma deliğinin yanında dur, Space basılı tut. X ile ateşle',pv:'Finişer: F/↓ tablayı indir, yavaşça sür. Silindirle sıkıştır',rl:'Silindir: taze asfaltın üstünden geç',pk:'Pikap: nehir kenarında dur, P ile tava çalkala'}[m]}
+function startMode(mode,cont){MODE=mode;document.body.classList.toggle('career',mode==='career');
+  if(mode==='career'){for(const k of MORD){const el=$('m'+k[0].toUpperCase()+k[1]);if(el)el.checked=(k==='ex'||k==='pk')}
+    if(!cont){Object.assign(ECO,{money:300,gold:0,price:85,sold:0,prod:0,pans:0,sluiceG:0,assays:0,best:0,blasts:0,holesBl:0,oreT:0,buyT:0,paved:0,fuel:0,tasks:{},t:0})}}
+  start();
+  if(mode==='free')freeSetup();
+  else{if(cont&&loadGame()){syncRows(T,tMesh,tColor,0,0,N-1);T.dj0=1e9;T.dj1=-1;GRD=true;GK0=0;GK1=N*N;wsInit();toast('Kayıt yüklendi · '+fmt$(ECO.money))}else{setMach('pk');setTimeout(pnlTasks,600)}SAVT=20}
+  ecoHud()}
+$('bCar').onclick=()=>startMode('career',false);$('bCont').onclick=()=>startMode('career',true);
+if(hasSave())$('bCont').classList.remove('hidden');
+$('pnlX').onclick=pnlClose;
+$('pnlB').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.buy)buy(b.dataset.buy);if(b.dataset.assay){const h=HOLES[+b.dataset.assay];if(h){assay(h);pnlHoles()}}});
+$('bShop').onclick=()=>PNL.cur==='shop'?pnlClose():pnlShop();$('bTasks').onclick=()=>PNL.cur==='tasks'?pnlClose():pnlTasks();
+$('bPlant').onclick=()=>PNL.cur==='plant'?pnlClose():pnlPlant();$('bHoles').onclick=()=>PNL.cur==='holes'?pnlClose():pnlHoles();
+$('bSell').onclick=()=>{sellGold();cv.focus()};$('bPan').onclick=()=>{panStart();cv.focus()};
+setInterval(()=>{if(PNL.cur==='plant')pnlPlant()},1000);
 
 /* ---------- Makine seçimi ve motorlar ---------- */
-const ACT={ex:true,dz:true,tr:true,sh:true,mt:true,gd:true},MORD=['ex','dz','tr','sh','mt','gd'];
-const MNAME={ex:'Ekskavatör',dz:'Dozer D9',tr:'Kamyon 6x6',sh:'Shovel 540 t',mt:'Maden kamyonu',gd:'Greyder'};
+const ACT={ex:true,dz:true,tr:true,sh:true,mt:true,gd:true},MORD=['ex','dz','tr','sh','mt','gd','dr','ch','pv','rl','pk'];
+const MNAME={ex:'Ekskavatör',dz:'Dozer D9',tr:'Kamyon 6x6',sh:'Shovel 540 t',mt:'Maden kamyonu',gd:'Greyder',dr:'Sondaj makinesi',ch:'Şarj aracı',pv:'Asfalt finişeri',rl:'Silindir',pk:'Pikap'};
 /* ---------- Ön kepçe (face shovel), EX5600 sınıfı: ~540 t, 29 m³ alttan boşaltmalı kova, 2 x 1450 kW ---------- */
 const SH={x:SHP.x,z:SHP.z,yaw:0,swing:0,boom:0.55,stick:-2.2,bk:0.25,clam:0,cutV:0,
   v:{swing:0,boom:0,stick:0,bk:0,clam:0,l:0,r:0},rpm:0,pow:0,load:0,mf:1,fcut:0,s:1,trk:{l:0,r:0},eng:0,crank:0,idle:true,lastIn:0,mudT:0,
@@ -1919,7 +2418,7 @@ function shStep(u,dt){SH.u=u;const now=performance.now();if(Object.values(u).som
   // devir
   const tgt=run?(SH.idle?1000:1800-220*SH.pow*SH.pow):SH.eng===1?190:0,rate=tgt>SH.rpm?520:380;SH.rpm+=Math.max(-rate*dt,Math.min(rate*dt,tgt-SH.rpm));if(run&&SH.rpm<650)SH.rpm=650}
 
-const MOBJ=()=>({ex,dz:DZ,tr:TRUCKS[0].TRK,sh:SH,mt:TRUCKS[1].TRK,gd:GD});
+const MOBJ=()=>({ex,dz:DZ,tr:TRUCKS[0].TRK,sh:SH,mt:TRUCKS[1].TRK,gd:GD,dr:VEH.dr,ch:VEH.ch,pv:VEH.pv,rl:VEH.rl,pk:VEH.pk});
 function curM(){return MOBJ()[MACH]}
 function trucksStep(dt){for(const c of TACT){useTruck(c);const inp=(MACH===c.id&&started&&TRK.eng===2)?readTr():{thr:0,st:0,bed:0};trkStep(inp,dt)}}
 function engTick(m,dt){if(m.eng===1){m.crank=(m.crank||0)+dt;if(m.crank>1.3){m.eng=2;m.rpm=Math.max(m.rpm,760)}}}
@@ -1972,9 +2471,9 @@ const pend=e=>{PTR.delete(e.pointerId);if(PTR.size<2)pinch=0;drag=PTR.size===1?{
 cv.addEventListener('wheel',e=>{e.preventDefault();cam.dist=Math.max(6,Math.min(90,cam.dist*(1+Math.sign(e.deltaY)*0.1)))},{passive:false});
 function toggleCam(){cam.mode^=1;$('bCam').textContent=cam.mode?'Takip kamerası (V)':'Kabin kamerası (V)'}
 const cPos=new V3(),cLook=new V3();
-function updateCam(dt){const isG=MACH==='gd',isD=MACH==='dz',isT=MACH==='tr'||MACH==='mt',isS=MACH==='sh';
-  if(cam.mode){if(isG){cPos.set(-1.4,2.75,0.1);gdG.localToWorld(cPos);cLook.set(9,-0.2,0);gdG.localToWorld(cLook)}else if(isS){cPos.set(3.35,5.15,2.15);shUp.localToWorld(cPos);cLook.set(16,-1.5,0.3);shUp.localToWorld(cLook)}else if(isT){cPos.set(...TC.cab);truck.localToWorld(cPos);cLook.set(...TC.look);truck.localToWorld(cLook)}else if(isD){cPos.set(-0.55,3.5,0);dzG.localToWorld(cPos);cLook.set(9,-0.2,0);dzG.localToWorld(cLook)}else{cPos.set(0.25,1.55,-0.78);upper.localToWorld(cPos);cLook.set(7,-0.7,-0.2);upper.localToWorld(cLook)}camera.position.copy(cPos);camera.lookAt(cLook);return}
-  const tx=isG?GD.x:isS?SH.x:isT?TRK.x:isD?DZ.x:ex.x,tz=isG?GD.z:isS?SH.z:isT?TRK.z:isD?DZ.z:ex.z,ty=(isG?gdG.position.y+2.2:isS?shG.position.y+6:isT?truck.position.y+TC.camY:isD?dzG.position.y+2.6:chassis.position.y+2.2);
+function updateCam(dt){const VV=VEH[MACH],isG=MACH==='gd',isD=MACH==='dz',isT=MACH==='tr'||MACH==='mt',isS=MACH==='sh';
+  if(cam.mode){if(VV){cPos.set(...VV.cab);VV.g.localToWorld(cPos);cLook.set(...VV.look);VV.g.localToWorld(cLook)}else if(isG){cPos.set(-1.4,2.75,0.1);gdG.localToWorld(cPos);cLook.set(9,-0.2,0);gdG.localToWorld(cLook)}else if(isS){cPos.set(3.35,5.15,2.15);shUp.localToWorld(cPos);cLook.set(16,-1.5,0.3);shUp.localToWorld(cLook)}else if(isT){cPos.set(...TC.cab);truck.localToWorld(cPos);cLook.set(...TC.look);truck.localToWorld(cLook)}else if(isD){cPos.set(-0.55,3.5,0);dzG.localToWorld(cPos);cLook.set(9,-0.2,0);dzG.localToWorld(cLook)}else{cPos.set(0.25,1.55,-0.78);upper.localToWorld(cPos);cLook.set(7,-0.7,-0.2);upper.localToWorld(cLook)}camera.position.copy(cPos);camera.lookAt(cLook);return}
+  const tx=VV?VV.x:isG?GD.x:isS?SH.x:isT?TRK.x:isD?DZ.x:ex.x,tz=VV?VV.z:isG?GD.z:isS?SH.z:isT?TRK.z:isD?DZ.z:ex.z,ty=(VV?VV.g.position.y+VV.camY:isG?gdG.position.y+2.2:isS?shG.position.y+6:isT?truck.position.y+TC.camY:isD?dzG.position.y+2.6:chassis.position.y+2.2);
   cam.tx=cam.tx===undefined?tx:cam.tx+(tx-cam.tx)*Math.min(1,dt*5);cam.tz=cam.tz===undefined?tz:cam.tz+(tz-cam.tz)*Math.min(1,dt*5);
   cam.ty+=(ty-cam.ty)*Math.min(1,dt*4);cLook.set(cam.tx,cam.ty,cam.tz);
   camera.position.set(cLook.x+Math.cos(cam.pitch)*Math.cos(cam.yaw)*cam.dist,cLook.y+Math.sin(cam.pitch)*cam.dist,cLook.z+Math.cos(cam.pitch)*Math.sin(cam.yaw)*cam.dist);
@@ -2037,18 +2536,18 @@ const trkPh={l:0,r:0};
 function audioUpdate(dt){if(!AU.ctx||!AU.n)return;const C=AU.ctx,t=C.currentTime,n=AU.n,on=AU.on&&started;
   const T_=(p,v,k=0.06)=>p.setTargetAtTime(v,t,k);
   T_(AU.master.gain,on?0.9:0,0.1);T_(AU.cab.frequency,cam.mode?1300:16000,0.2);
-  const isG=MACH==='gd',isD=MACH==='dz'||isG,isT=MACH==='tr'||MACH==='mt',isS=MACH==='sh',M_=curM(),rpm=Math.max(1,M_.rpm),f1=rpm/60,rn=Math.max(0,(rpm-(isS?1000:isT?TC.idle:isD?700:1050))/(isS?800:isT?TC.rpmMax-TC.idle:isD?1100:800)),ld=M_.pow||0,big=isS?1.9:isD?1.3:isT?TC.snd:1,ef=Math.min(1,rpm/520);
+  const isG=MACH==='gd'||!!VEH[MACH],isD=MACH==='dz'||isG,isT=MACH==='tr'||MACH==='mt',isS=MACH==='sh',M_=curM(),rpm=Math.max(1,M_.rpm),f1=rpm/60,rn=Math.min(1.3,Math.max(0,(rpm-(isS?1000:isT?TC.idle:VEH[MACH]?VEH[MACH].idleR:isD?700:1050))/(isS?800:isT?TC.rpmMax-TC.idle:VEH[MACH]?VEH[MACH].maxR-VEH[MACH].idleR:isD?1100:800))),ld=M_.pow||0,big=isS?1.9:isD?1.3:isT?TC.snd:1,ef=Math.min(1,rpm/520);
   T_(n.stG.gain,M_.eng===1?0.07:0,0.03);T_(n.stO.frequency,M_.eng===1?150+20*Math.sin(t*3):150,0.05);
   T_(n.eng.frequency,f1,0.05);T_(n.mod.frequency,3*f1,0.05);
   T_(n.engG.gain,(rpm>300?1:rpm/300)*(0.17+0.08*rn+0.12*ld)*big);T_(n.engLP.frequency,(450+650*rn+1500*ld)*(isS?0.55:isD?0.8:isT?TC.lp:1));
   T_(n.clOut.gain,ef*(0.025+0.035*rn+0.08*ld)*big);T_(n.rumG.gain,ef*(0.06+0.05*rn+0.05*ld)*big);
   T_(n.tur.frequency,1600+2600*rn*(0.6+0.4*ld),0.3);T_(n.turG.gain,ef*(0.003+0.012*rn*ld),0.3);
-  const pm=isS?Math.min(1,SH.pow+(SH.relief?0.5:0)):isT?0.1:isG?Math.min(1,GD.pow*0.5):isD?Math.min(1,DZ.pow*0.6):Math.max(ex.p.boom,ex.p.arm,ex.p.bucket,ex.p.swing)/PREL;
+  const pm=isS?Math.min(1,SH.pow+(SH.relief?0.5:0)):isT?0.1:isG?Math.min(1,(M_.pow||0)*0.5):isD?Math.min(1,DZ.pow*0.6):Math.max(ex.p.boom,ex.p.arm,ex.p.bucket,ex.p.swing)/PREL;
   T_(n.pu.frequency,9*f1);T_(n.pu2.frequency,18*f1);T_(n.puG.gain,ef*(0.008+0.05*pm*Math.min(1,ld*2)));T_(n.pu2G.gain,ef*(0.004+0.02*pm));
   T_(n.hsG.gain,ef*(0.006+0.03*ld));
   const rel=(MACH==='ex'&&ex.relief)||(isS&&SH.relief);T_(n.rlG.gain,rel?0.12:0,0.03);T_(n.rsG.gain,rel?0.035:0,0.03);
   const sv=isS?Math.abs(SH.v.swing)/SHV.swing:MACH!=='ex'?0:Math.abs(ex.v.swing)/SWMAX;T_(n.sw.frequency,360+260*sv);T_(n.swG.gain,0.03*sv);
-  const cp=isS?(SH.cutT<0.1?Math.min(1,SH.fcut*SH.cutV/1.2e6+0.25):0):isT?0:isG?Math.min(1,(GD.fpush*Math.abs(GD.v))/1.2e5):isD?Math.min(1,(DZ.fpush*Math.abs(DZ.v))/2.5e5):Math.min(1,ex.cutP/4e4);T_(n.scG.gain,0.22*cp,0.04);T_(n.slG.gain,0.3*cp,0.04);
+  const cp=isS?(SH.cutT<0.1?Math.min(1,SH.fcut*SH.cutV/1.2e6+0.25):0):isT?0:isG?Math.min(1,((M_.fpush||0)*Math.abs(M_.v||0))/1.2e5+(MACH==='dr'&&VEH.dr.drilling?0.35:0)):isD?Math.min(1,(DZ.fpush*Math.abs(DZ.v))/2.5e5):Math.min(1,ex.cutP/4e4);T_(n.scG.gain,0.22*cp,0.04);T_(n.slG.gain,0.3*cp,0.04);
   // palet şakırtısı: palet adımı 0.19 m
   // geri vites ikaz sesi
   if(on&&isT&&TRK.v<-0.05){TRK.beepT+=dt;if(TRK.beepT>0.9){TRK.beepT=0;sfx.beep()}}else TRK.beepT=0.85;
@@ -2060,17 +2559,19 @@ let delivered=0;
 const setBar=(el,f)=>{el.style.width=(Math.max(0,Math.min(1,f))*100).toFixed(1)+'%'};
 const HB={gB:$('gB'),gT:$('gT'),gR:$('gR'),gL:$('gL'),gF:$('gF')};
 let hudM='';
-function hud(){const VT=viewTruck();if(VT)useTruck(VT);const bv=VT?Bed.volume():0,isG=MACH==='gd',isD=MACH==='dz'||isG,isT=MACH==='tr'||MACH==='mt',isS=MACH==='sh',M_=curM(),engTxt=M_.eng===1?'Marş basılıyor…':'Motor kapalı · M ile çalıştır';
-  const mk=MACH+ex.tool;if(mk!==hudM){hudM=mk;$('lB').textContent=isS?'Kova':isT?'Kasa':isD?'Bıçak önü yük':ex.tool==='hammer'?'Kırıcı':'Kova';$('lF').textContent=isT?'Hız':isD?'İtme direnci':'Kazma kuvveti';
-    $('circ').style.display=MACH==='ex'?'':'none';$('bTool').style.display=MACH==='ex'?'':'none';$('bMach').textContent='Makine: '+MNAME[MACH]+' (1-6)';$('bDump').style.display=TACT.length?'':'none'}
-  if(isS){$('tB').textContent=SH.load.toFixed(1)+' / 29 m³';setBar(HB.gB,SH.load/SH_CAP);
+function hud(){const VT=viewTruck();if(VT)useTruck(VT);const bv=VT?Bed.volume():0,VV=VEH[MACH],isG=MACH==='gd',isD=MACH==='dz'||isG,isT=MACH==='tr'||MACH==='mt',isS=MACH==='sh',M_=curM(),engTxt=M_.eng===1?'Marş basılıyor…':'Motor kapalı · M ile çalıştır';
+  const mk=MACH+ex.tool;if(mk!==hudM){hudM=mk;$('lB').textContent=VV?vehLab(VV)[0]:isS?'Kova':isT?'Kasa':isD?'Bıçak önü yük':ex.tool==='hammer'?'Kırıcı':'Kova';$('lF').textContent=VV?'Hız':isT?'Hız':isD?'İtme direnci':'Kazma kuvveti';
+    $('circ').style.display=MACH==='ex'?'':'none';$('bTool').style.display=MACH==='ex'?'':'none';$('bMach').textContent='Makine: '+MNAME[MACH];$('bDump').style.display=TACT.length?'':'none'}
+  if(VV){const L=vehLab(VV);$('tB').textContent=L[1];setBar(HB.gB,L[2]);$('tR').textContent=Math.round(VV.rpm)+' rpm';setBar(HB.gR,VV.rpm/VV.maxR);$('tL').textContent=Math.round(VV.pow*100)+'%';setBar(HB.gL,VV.pow);
+    $('tF').textContent=(Math.abs(VV.v)*3.6).toFixed(1)+' km/sa';setBar(HB.gF,Math.abs(VV.v)/VV.vmax);$('tI').textContent=VV.eng!==2?engTxt:L[3]}
+  else if(isS){$('tB').textContent=SH.load.toFixed(1)+' / 29 m³';setBar(HB.gB,SH.load/SH_CAP);
     $('tR').textContent=Math.round(SH.rpm)+' rpm';setBar(HB.gR,SH.rpm/2000);$('tL').textContent=Math.round(SH.pow*100)+'%';setBar(HB.gL,SH.pow);
     $('tF').textContent=Math.round(SH.fcut/1000)+' kN';setBar(HB.gF,SH.fcut/SH_FMAX);
     $('tI').textContent=SH.eng!==2?engTxt:SH.clam>0.1?'Alt kapak açık: boşaltıyor':SH.relief?'Kesme kuvveti sınırda: daha ince dilim al':SH.idle?'Otomatik rölanti':'Çalışma devri · 2 x 1450 kW'}
   else if(isT){$('tB').textContent=bv.toFixed(1)+' m³ · '+(bv*DENS).toFixed(1)+' t';setBar(HB.gB,bv/TC.cap);
     $('tR').textContent=Math.round(TRK.rpm)+' rpm';setBar(HB.gR,TRK.rpm/2200);$('tL').textContent=Math.round(TRK.pow*100)+'%';setBar(HB.gL,TRK.pow);
     $('tF').textContent=(Math.abs(TRK.v)*3.6).toFixed(0)+' km/sa';setBar(HB.gF,Math.abs(TRK.v)/TC.vmax);
-    $('tI').textContent=TRK.eng!==2?engTxt:'Kasa açısı '+Math.round(TRK.tip*57.3)+'°'+(inDump(TRK.x,TRK.z)?' · döküm alanındasın':' · döküm alanı: turuncu direkler')}
+    $('tI').textContent=TRK.eng!==2?engTxt:'Zemin: '+surf(TRK.x,TRK.z).n+' · kasa '+Math.round(TRK.tip*57.3)+'°'+(inDump(TRK.x,TRK.z)?' · döküm alanındasın':' · döküm alanı: turuncu direkler')}
   else if(isG){$('tB').textContent=GD.vpile.toFixed(1)+' m³';setBar(HB.gB,GD.vpile/4);
     $('tR').textContent=Math.round(GD.rpm)+' rpm';setBar(HB.gR,GD.rpm/2200);$('tL').textContent=Math.round(GD.pow*100)+'%';setBar(HB.gL,GD.pow);
     $('tF').textContent=Math.round(GD.fpush/1000)+' kN';setBar(HB.gF,GD.fpush/110e3);
@@ -2088,22 +2589,23 @@ function hud(){const VT=viewTruck();if(VT)useTruck(VT);const bv=VT?Bed.volume():
   if(MACH==='ex')for(const[id,j]of[['B','boom'],['A','arm'],['K','bucket'],['S','swing']]){const p=ex.p[j];$('p'+id).textContent=Math.round(p/1e5)+' bar';
     const b=$('b'+id);setBar(b.firstElementChild,p/PREL);b.classList.toggle('rel',p>=PREL-1)}}
 function setMach(m){if(!ACT[m])return;const was=MACH;MACH=m;cam.tx=undefined;if(m==='sh')cam.dist=Math.max(cam.dist,40);else if(m==='mt')cam.dist=Math.max(cam.dist,34);else if((was==='sh'||was==='mt')&&cam.dist>30)cam.dist=19;touchUI();engBtn();
-  const hint=curM().eng!==2?' · motoru çalıştır: M':'';toast((m==='tr'||m==='mt'?(m==='mt'?'Maden kamyonu':'Kamyon')+': W gaz, S fren/geri, A/D direksiyon, R/F damper. Turuncu direkli döküm sahasına dök':m==='dz'?'Dozer: W/S gaz, A/D yön, ↑↓ bıçak, ←→ tilt, R/F ripper':m==='sh'?'Shovel: W/S arm, ↑↓ bom, ←→ kova, A/D dönüş, R alttan boşalt':m==='gd'?'Greyder: W/S gaz, A/D direksiyon, ↑↓ bıçak, ←→ bıçak açısı, Q/E kaydır, R/F yan eğim':'Ekskavatör')+hint);cv.focus()}
+  const hint=curM().eng!==2?' · motoru çalıştır: M':'';toast((m==='tr'||m==='mt'?(m==='mt'?'Maden kamyonu':'Kamyon')+': W gaz, S fren/geri, A/D direksiyon, R/F damper. Turuncu direkli döküm sahasına dök':m==='dz'?'Dozer: W/S gaz, A/D yön, ↑↓ bıçak, ←→ tilt, R/F ripper':m==='sh'?'Shovel: W/S arm, ↑↓ bom, ←→ kova, A/D dönüş, R alttan boşalt':VEH[m]?vehHelp(m):m==='gd'?'Greyder: W/S gaz, A/D direksiyon, ↑↓ bıçak, ←→ bıçak açısı, Q/E kaydır, R/F yan eğim':'Ekskavatör')+hint);cv.focus()}
 function nextMach(){const a=MORD.filter(k=>ACT[k]);setMach(a[(a.indexOf(MACH)+1)%a.length])}
 
 /* ---------- Butonlar ---------- */
-function applyMachines(){const sel={ex:$('mEx').checked,dz:$('mDz').checked,tr:$('mTr').checked,sh:$('mSh').checked,mt:$('mMt').checked,gd:$('mGd').checked};if(!Object.values(sel).some(v=>v))sel.ex=true;
+function applyMachines(){const sel={ex:$('mEx').checked,dz:$('mDz').checked,tr:$('mTr').checked,sh:$('mSh').checked,mt:$('mMt').checked,gd:$('mGd').checked,dr:$('mDr').checked,ch:$('mCh').checked,pv:$('mPv').checked,rl:$('mRl').checked,pk:$('mPk').checked};if(!Object.values(sel).some(v=>v))sel.ex=true;
   for(const k of MORD)ACT[k]=sel[k];
   const hide=(list)=>list.forEach(o=>{o.visible=false});
   if(!ACT.ex){hide([chassis,...cylBoom.map(c=>c.g),cylArm.g,cylBk.g,...sideL.map(c=>c.g),...hL.map(c=>c.g)]);ex.x=ex.z=9000;pose()}
   if(!ACT.dz){hide([dzG,...dzArms.map(c=>c.g),...dzLift.map(c=>c.g),dzTiltC.g,...dzRipC.map(c=>c.g)]);DZ.x=DZ.z=9000;DZ.moving=false;dzPose()}
   for(const c of TRUCKS)if(!ACT[c.id]){hide([c.truck,...c.hoists.map(h=>h.g)]);c.TRK.x=c.TRK.z=9000;c.truck.position.set(9000,0,9000);c.truck.updateMatrixWorld(true)}
   TACT=TRUCKS.filter(c=>ACT[c.id]);
+  for(const k of VORD){if(ACT[k]){ACT[k]=false;activate(k)}}hideVeh();
   if(!ACT.gd){hide([gdG,...gdBar.map(c=>c.g),...gdLift.map(c=>c.g)]);GD.x=GD.z=9000;gdPose()}
   if(!ACT.sh){hide([shG,...Object.values(SHCYL).flat().map(c=>c.g)]);SH.x=SH.z=9000;shPose()}
   $('msel').style.display='none';MACH=MORD.find(k=>ACT[k]);cam.tx=undefined;if(MACH==='sh')cam.dist=40;if(MACH==='mt')cam.dist=34;hudM=''}
 function start(){if(started)return;applyMachines();started=true;$('help').classList.add('hidden');setTimeout(()=>{engBtn();toast(MNAME[MACH]+' · motoru çalıştır: M ya da "Motor" düğmesi')},300);if(MOBILE){TCH.on=true;$('touch').classList.remove('hidden');touchUI();try{const el=document.documentElement;(el.requestFullscreen||el.webkitRequestFullscreen).call(el).catch(()=>{})}catch(e){}}audioInit();if(AU.ctx)AU.ctx.resume();ex.lastIn=performance.now();cv.focus()}
-$('bGo').onclick=start;
+$('bGo').onclick=()=>startMode('free');
 $('bMach').onclick=nextMach;$('bBlast').onclick=()=>{blastStart();cv.focus()};$('bEng').onclick=()=>{toggleEngine();cv.focus()};
 $('bTool').onclick=()=>{if(MACH==='ex')setTool(ex.tool==='bucket'?'hammer':'bucket');cv.focus()};
 $('bQR').onclick=()=>$('qrbox').classList.add('on');$('qrbox').onclick=()=>$('qrbox').classList.remove('on');
@@ -2111,25 +2613,25 @@ $('bHelp').onclick=()=>{$('help').classList.toggle('hidden')};
 $('bCam').onclick=()=>{toggleCam();cv.focus()};
 $('bSnd').onclick=()=>{AU.on=!AU.on;$('bSnd').textContent='Ses: '+(AU.on?'açık':'kapalı');if(AU.on){audioInit();AU.ctx&&AU.ctx.resume()}cv.focus()};
 $('bDump').onclick=()=>{const VT=viewTruck();if(!VT)return;useTruck(VT);const v=Bed.volume();if(v<0.05){toast('Kamyon boş');return}delivered+=v;Bed.h.fill(0);Bed.dirty=true;BMC.a.fill(0);BMCD=true;for(let i=0;i<DM.max;i++){if(DM.a[i]&&bedLocalAny(DM.x[i],DM.y[i],DM.z[i])===VT)killChunk(i)}toast(v.toFixed(1)+' m³ gönderildi (kasa boşaltıldı)');cv.focus()};
-$('bReset').onclick=()=>{CR.st.fill(0);initTerrain();for(const c of TRUCKS){for(const k of['h','b','c','m'])c.Bed[k].fill(0);c.Bed.dirty=true;c.BMC.a.fill(0);c.BMCD=true}BMCD=true;syncRows(T,tMesh,tColor,0,0,N-1);GRD=true;GK0=0;GK1=N*N;ex.load=0;DM.a.fill(0);DM.sl.fill(0);DM.n=0;placeRocks();MC.a.fill(0);MCD=true;CUTACC=CUTMF=0;delivered=0;v15Init();syncRows(T,tMesh,tColor,0,0,N-1);cv.focus()};
+$('bReset').onclick=()=>{CR.st.fill(0);initTerrain();for(const c of TRUCKS){for(const k of['h','b','c','m'])c.Bed[k].fill(0);c.Bed.dirty=true;c.BMC.a.fill(0);c.BMCD=true}BMCD=true;syncRows(T,tMesh,tColor,0,0,N-1);GRD=true;GK0=0;GK1=N*N;ex.load=0;DM.a.fill(0);DM.sl.fill(0);DM.n=0;placeRocks();MC.a.fill(0);MCD=true;CUTACC=CUTMF=0;delivered=0;v15Init();v16Reset();syncRows(T,tMesh,tColor,0,0,N-1);cv.focus()};
 
 /* ---------- Döngü ---------- */
 function size(){renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix()}
 addEventListener('resize',size);size();
 syncRows(T,tMesh,tColor,0,0,N-1);T.dj0=1e9;T.dj1=-1;updGrass();updClods();
-dzPose();shPose();gdPose();v15Init();for(const c of TRUCKS){useTruck(c);trkPose()}useTruck(TRUCKS[0]);TACT=TRUCKS.slice();placeRocks();
+dzPose();shPose();gdPose();v15Init();v16Init();for(const c of TRUCKS){useTruck(c);trkPose()}useTruck(TRUCKS[0]);TACT=TRUCKS.slice();placeRocks();
 pose();for(const t of TEETH)t.p.copy(t.l).applyMatrix4(bkG.matrixWorld);for(const p of PLOW)p.p.copy(p.l).applyMatrix4(p.f.matrixWorld);
 let PB0=1e9,PB1=-1,last=performance.now(),acc=0,frameN=0,GRD=true,GK0=0,GK1=N*N;const H=1/120;
 // çarpma sarsıntısı: makine gövdesi yay-sönüm gibi kısa salınır (görsel; fizik pozunu bozmaz)
-const SHK={ex:{p:0,vp:0,r:0,vr:0,y:0,vy:0},dz:{p:0,vp:0,r:0,vr:0,y:0,vy:0},tr:{p:0,vp:0,r:0,vr:0,y:0,vy:0},sh:{p:0,vp:0,r:0,vr:0,y:0,vy:0},mt:{p:0,vp:0,r:0,vr:0,y:0,vy:0},gd:{p:0,vp:0,r:0,vr:0,y:0,vy:0}};
+const SHK={ex:{p:0,vp:0,r:0,vr:0,y:0,vy:0},dz:{p:0,vp:0,r:0,vr:0,y:0,vy:0},tr:{p:0,vp:0,r:0,vr:0,y:0,vy:0},sh:{p:0,vp:0,r:0,vr:0,y:0,vy:0},mt:{p:0,vp:0,r:0,vr:0,y:0,vy:0},gd:{p:0,vp:0,r:0,vr:0,y:0,vy:0}};for(const id of VORD)SHK[id]={p:0,vp:0,r:0,vr:0,y:0,vy:0};
 function shk(m,p,r,y){const s=SHK[m];s.vp+=p;s.vr+=r;s.vy+=y}
 function shkStep(dt){for(const k in SHK){const s=SHK[k],w=k==='tr'?11:k==='mt'?7:k==='sh'?9:15,z=k==='tr'||k==='mt'?0.16:0.22;
   s.vp+=(-w*w*s.p-2*z*w*s.vp)*dt;s.p+=s.vp*dt;s.vr+=(-w*w*s.r-2*z*w*s.vr)*dt;s.r+=s.vr*dt;s.vy+=(-w*w*s.y-2*z*w*s.vy)*dt;s.y+=s.vy*dt;
   s.p=Math.max(-0.035,Math.min(0.035,s.p));s.r=Math.max(-0.035,Math.min(0.035,s.r));s.y=Math.max(-0.08,Math.min(0.08,s.y))}}
 const SHM={ex:new THREE.Matrix4(),tr:new THREE.Matrix4(),mt:new THREE.Matrix4()},_shi=new THREE.Matrix4();let SHON=false;
-function shakeOn(){const G={ex:chassis,dz:dzG,tr:TRUCKS[0].truck,sh:shG,mt:TRUCKS[1].truck,gd:gdG};
+function shakeOn(){const G=MGRP();
   for(const k in G){const g=G[k],s=SHK[k];if(SHM[k])_shi.copy(g.matrixWorld).invert();g.rotation.z+=s.p;g.rotation.x+=s.r;g.position.y+=s.y;g.updateMatrixWorld(true);if(SHM[k])SHM[k].copy(g.matrixWorld).multiply(_shi)}SHON=true}
-function shakeOff(){const G={ex:chassis,dz:dzG,tr:TRUCKS[0].truck,sh:shG,mt:TRUCKS[1].truck,gd:gdG};for(const k in G){const g=G[k],s=SHK[k];g.rotation.z-=s.p;g.rotation.x-=s.r;g.position.y-=s.y;g.updateMatrixWorld(true)}SHON=false}
+function shakeOff(){const G=MGRP();for(const k in G){const g=G[k],s=SHK[k];g.rotation.z-=s.p;g.rotation.x-=s.r;g.position.y-=s.y;g.updateMatrixWorld(true)}SHON=false}
 function frame(now){const dt=Math.min(0.05,(now-last)/1000);last=now;acc+=dt;let n=0;hits.bed=hits.ground=hits.rock=0;
   while(acc>=H&&n<8){step(H);acc-=H;n++}if(n>=8)acc=0;
   // aktif bölgeler: makinelerin ve kamyonun çevresi; ara sıra tüm harita
