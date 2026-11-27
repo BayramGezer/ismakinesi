@@ -78,7 +78,7 @@ body,button,.touch,.stick,.panel,.btns{-webkit-user-select:none;user-select:none
 </head>
 <body>
 <canvas id="c" tabindex="0"></canvas>
-<div class="top"><h1>Ekskavatör · toprak fiziği</h1><span class="tag">prototip v0.12</span></div>
+<div class="top"><h1>Ekskavatör · toprak fiziği</h1><span class="tag">prototip v0.13</span></div>
 <aside class="panel gauges">
   <div class="g"><label><span id="lB">Kova</span> <b id="tB">0.00 m³</b></label><div class="bar"><i id="gB"></i></div></div>
   <div class="g"><label>Kamyon <b id="tT">0.0 m³ · 0.0 t</b></label><div class="bar"><i id="gT" class="grn"></i></div></div>
@@ -242,7 +242,7 @@ const T=new HF(N,N,DX,-SIZE/2,-SIZE/2);
 let Bed=new HF(23,11,0.235,0.1,-1.175); // kasa yerel koordinatlarında
 const sstep=(a,b,x)=>{const t=Math.max(0,Math.min(1,(x-a)/(b-a)));return t*t*(3-2*t)};
 const RZ=74;function riverH(x,z){const c=RZ+Math.sin(x*0.07)*1.5,d=Math.abs(z-c);return -2.5+Math.max(0,d-2.6)*1.1}
-const HILLS=[[11,5,2.6,26],[-6,9,1.4,40],[-22,-18,3.2,60],[25,-20,2.2,45],[-25,18,2.8,70],[8,24,1.8,35],[30,8,3.5,80],[22,-34,2.4,40],[-33,-4,2.2,55]];
+const HILLS=[[11,5,2.6,26],[-6,9,1.4,40],[-22,-18,3.2,60],[-25,18,2.8,70],[8,24,1.8,35],[30,8,3.5,80],[22,-34,2.4,40],[-33,-4,2.2,55]];
 {let s=4242;const r=()=>(s=(s*16807)%2147483647)/2147483647;let n=0;
   for(let t=0;t<400&&n<34;t++){const x=(r()-.5)*170,z=(r()-.5)*170;if(Math.max(Math.abs(x),Math.abs(z))<42)continue;if(Math.abs(z-74)<12)continue;
     if(x>15&&x<75&&z>-70&&z<-2)continue;if(x<-35&&x>-80&&z<-28&&z>-68)continue;if(Math.hypot(x+20,z+37)<9)continue;
@@ -784,10 +784,12 @@ function dzDrawLinks(){for(let i=0;i<2;i++){const s=i?1:-1;
   _p1.set(1.9,1.05,1.6);dzG.localToWorld(_p1);_p2.set(3.2,DZ.bl+1.25,1.45);dzG.localToWorld(_p2);placeCyl(dzTiltC,_p1,_p2,0.8)}
 // bıçak ve ripper ile toprak etkileşimi, çekiş ve güç dengesi
 let DZACC=0,DZMF=0,RIPACC=0;
+function dzPen(){let m=1e9;for(let zs=-2.0;zs<=2.01;zs+=0.5){_p1.set(3.62,DZ.bl+DZ.tilt*(zs/4.3),zs);dzG.localToWorld(_p1);const k=T.near(_p1.x,_p1.z);if(k>=0&&T.c[k]>0.5)m=Math.min(m,_p1.y-T.h[k])}return m}
 function dzSoil(dt){const v=DZ.v;let cutVol=0,cutS=0,rockHit=0,mfs=0,dep=[];
   for(let zs=-2.1;zs<=2.11;zs+=0.28){const ye=DZ.bl+DZ.tilt*(zs/4.3);
     for(const xl of[3.42,3.62,3.82]){_p1.set(xl,ye,zs);dzG.localToWorld(_p1);const k=T.near(_p1.x,_p1.z);if(k<0)continue;
       const h=T.h[k];if(h<=_p1.y)continue;
+      if(T.c[k]>0.5&&v<0.05)continue;
       if(_p1.y<T.b[k]-0.03)rockHit++;
       const tgt=Math.max(_p1.y,T.b[k]);if(h<=tgt)continue;const rem=h-tgt,mf=T.matF(k),sk=sigAt(k);let vol=rem*DX*DX*(T.c[k]>0.5?SWELL:1);
       T.h[k]=tgt;T.cp[k]*=rem>0.15?0.2:0.7;T.touch(k);cutVol+=rem*DX*DX;cutS+=rem*DX*DX*sk;mfs+=mf*vol;dep.push([zs,vol,mf])}}
@@ -836,7 +838,7 @@ function dzStep(u,dt){DZ.u=u;
   const sl=DZ.slip>0.5&&Math.abs(thr)>0.03?Math.sign(thr)*1.6:0;
   DZ.trk.l=DZ.v-DZ.w*1.1+sl;DZ.trk.r=DZ.v+DZ.w*1.1+sl;DZ.ts.l+=DZ.trk.l*dt;DZ.ts.r+=DZ.trk.r*dt;
   DZ.moving=Math.abs(DZ.v)>0.05||Math.abs(DZ.w)>0.02;
-  DZ.bl=Math.max(-0.55,Math.min(1.45,DZ.bl+u.bl*0.42*dt*rf));
+  {const bl0=DZ.bl;DZ.bl=Math.max(-0.55,Math.min(1.45,DZ.bl+u.bl*0.42*dt*rf));if(DZ.bl<bl0&&DZ.v<0.05&&dzPen()<-0.06)DZ.bl=bl0}
   // otomatik bıçak (Cat AutoCarry / Slope Assist benzeri): kol bırakılınca, bıçak zemine değiyorsa kesme kotu sabit tutulur;
   // ön palet kesilen çukura girip burun eğilse de bıçak aşağı dalmaz
   if(DZ.auto&&started){const pY=dzG.position.y,pt=dzG.rotation.z,sp=Math.sin(pt),cp=Math.cos(pt),ey=pY+DZ.bl*cp+3.62*sp;
@@ -1042,7 +1044,7 @@ function dem(dt){
     if(TT[i]===1){if(DM.rest[i]>0.8){if(bedLocalAny(X[i],Y[i],Z[i]))mergeChunk(i);else{SL[i]=1;DM.g0[i]=T.sample(X[i],Z[i])}}}
     else if(DM.rest[i]>0.6||(DM.n>DM.max-80&&DM.rest[i]>0.1))mergeChunk(i)}
   DM.bc=bc;ex.load=bv+CUTACC;ex.mf=bv?bm/bv:ex.mf;frameStep++}
-let HEAPN=0,HEAPC=true,CUTACC=0,CUTMF=0,CUTZ=0,CUTW=0,frameStep=0,nextR=soilR();
+const _td=new V3();let HEAPN=0,HEAPC=true,CUTACC=0,CUTMF=0,CUTZ=0,CUTW=0,frameStep=0,nextR=soilR();
 // kovanın içinde boş yer ara: derin (ağızdan uzak) ve diğer topaklardan uzak nokta
 function spawnInBucket(mf,lz0=0){const r=nextR;let best=null,bs=-1e9;
   // kesilen toprak tam kesildiği yerde, dişlerin arkasında kova ağzında belirir; sonraki topaklar onu içeri iter (havadan düşmez)
@@ -1240,7 +1242,8 @@ function collisions(){let n=0,what='',tid='tr';const sa=selfArm();if(sa){n+=sa;w
     _l.copy(_w);upper.worldToLocal(_l);if(inB(_l,SELF_U)){n++;what='self'}}
   return{n,what,tid}}
 function plowClear(){let m=1e9;if(ex.tool==='hammer'){for(const p of[HAMPT,...HPLOW]){tmp.copy(p.l).applyMatrix4(bkG.matrixWorld);const k=T.near(tmp.x,tmp.z);if(k>=0)m=Math.min(m,tmp.y-T.h[k]+(p===HAMPT?0.35:0))}return m}
-  const pts=PLOW;for(const p of pts){if(p.f!==bkG)continue;tmp.copy(p.l).applyMatrix4(bkG.matrixWorld);const k=T.near(tmp.x,tmp.z);if(k>=0&&T.c[k]>0.5)m=Math.min(m,tmp.y-T.h[k])}return m}
+  const pts=PLOW;for(const p of pts){if(p.f!==bkG)continue;tmp.copy(p.l).applyMatrix4(bkG.matrixWorld);const k=T.near(tmp.x,tmp.z);if(k>=0&&T.c[k]>0.5)m=Math.min(m,tmp.y-T.h[k])}
+  for(const t of TEETH){tmp.copy(t.l).applyMatrix4(bkG.matrixWorld);const k=T.near(tmp.x,tmp.z);if(k>=0&&T.c[k]>0.5)m=Math.min(m,tmp.y-T.h[k])}return m}
 function boulderClear(){if(ex.tool!=='hammer')return 1e9;let m=1e9;for(const p of[HAMPT.l,...HBKP]){tmp.copy(p).applyMatrix4(bkG.matrixWorld);
   for(let i=0;i<DM.max;i++){if(!DM.a[i]||DM.t[i]!==1||DM.r[i]<0.28)continue;const d=Math.hypot(DM.x[i]-tmp.x,DM.y[i]-tmp.y,DM.z[i]-tmp.z)-DM.r[i];if(d<m)m=d}}return m}
 function rockClear(){let m=1e9;for(const t of(ex.tool==='hammer'?[HAMPT]:TEETH)){tmp.copy(t.l).applyMatrix4(bkG.matrixWorld);const k=T.near(tmp.x,tmp.z);if(k>=0)m=Math.min(m,tmp.y-T.b[k])}return m}
@@ -1292,8 +1295,10 @@ let cutDust=0,curLZ=0;
 function soil(dt){nO.copy(NOPEN).transformDirection(bkG.matrixWorld);let cutV=0;const ham=ex.tool==='hammer';if(ex.fullT>0)ex.fullT-=dt;
   const dec=Math.exp(-dt/0.18);CUT.V*=dec;CUT.S*=dec;CUT.L*=dec;CUT.D*=Math.exp(-dt/0.35);
   {const t=ham?HAMPT:TEETH[2];tmp.copy(t.l).applyMatrix4(bkG.matrixWorld);_l.subVectors(tmp,t.p);const d=_l.length();CUT.L+=d;CUT.dir.multiplyScalar(dec).add(_l)}
-  const cutK=(k,ty,vx,vy,vz,tooth,wx,wy,wz)=>{const hs=T.h[k];if(ty>=hs)return;
+  const cutK=(k,ty,vx,vy,vz,tooth,wx,wy,wz,atk=1)=>{const hs=T.h[k];if(ty>=hs)return;
     const tgt=Math.max(ty,T.b[k]),rem=hs-tgt;if(rem<=0)return;
+    // sağlam zemini diş ancak ucunun gösterdiği yöne giderken keser; taban/yan/geri hareket kesmez, kova zemine dayanır
+    if(tooth&&T.c[k]>0.5&&atk<0.25)return;
     // kova sırtı ve arm yerinde (sıkı) toprağı kesmez: bastırınca direnç oluşur, yalnızca gevşek toprağı yana iter
     if(!tooth&&T.c[k]>0.5){const pv=rem*DX*DX;CUT.V+=pv*0.5;CUT.S+=pv*0.5*sigAt(k);return}
     const sk=sigAt(k),mf=T.matF(k);let vol=rem*DX*DX*(T.c[k]>0.5?SWELL:1);T.h[k]=tgt;T.cp[k]*=rem>0.15?0.2:0.7;T.touch(k);const sp=Math.hypot(vx,vy,vz);cutV=Math.max(cutV,sp);
@@ -1308,6 +1313,7 @@ function soil(dt){nO.copy(NOPEN).transformDirection(bkG.matrixWorld);let cutV=0;
     cutDust+=rem*sp*2;if(tooth&&Math.random()<Math.min(0.6,rem*3+0.08))spray(wx,ty+0.05,wz,1+(Math.random()*2|0),mf,0.8,1.0,vx*0.3,vz*0.3);if(tooth)ex.mudB=Math.min(1.2,ex.mudB+rem*DX*DX*0.12)};
   const proc=(pt,frame,tooth)=>{const ox=pt.p.x,oy=pt.p.y,oz=pt.p.z;tmp.copy(pt.l).applyMatrix4(frame.matrixWorld);
     const vx=(tmp.x-ox)/dt,vy=(tmp.y-oy)/dt,vz=(tmp.z-oz)/dt;pt.p.copy(tmp);
+    let atk=1;if(tooth){_td.set(0.998,0.066,0).transformDirection(frame.matrixWorld);const sp=Math.hypot(vx,vy,vz);atk=sp<0.02?0:(vx*_td.x+vy*_td.y+vz*_td.z)/sp}
     if(!tooth){const k=T.near(tmp.x,tmp.z);if(k<0)return;_l.set(0,0,pt.l.z<0?-1:1).transformDirection(frame.matrixWorld);cutK(k,tmp.y,vx,vy,vz,false,tmp.x,tmp.y,tmp.z);return}
     // diş, bu karede taradığı yol boyunca keser: her ızgara noktası, dişin o noktadan geçtiği yükseklikte kesilir (çizginin altı kazılmaz)
     const sx=tmp.x-ox,sz=tmp.z-oz,L2=sx*sx+sz*sz,fx=(Math.min(tmp.x,ox)-T.ox)/DX,fz=(Math.min(tmp.z,oz)-T.oz)/DX;
@@ -1315,7 +1321,7 @@ function soil(dt){nO.copy(NOPEN).transformDirection(bkG.matrixWorld);let cutV=0;
     if(i1-i0>4||j1-j0>4)return;curLZ=pt.l.z;
     for(let j=j0;j<=j1;j++)for(let i=i0;i<=i1;i++){if(i<1||j<1||i>=N-1||j>=N-1)continue;const k=j*N+i,X=T.ox+i*DX,Z=T.oz+j*DX;
       let t=L2>1e-8?((X-ox)*sx+(Z-oz)*sz)/L2:1;t=Math.max(0,Math.min(1,t));const qx=ox+sx*t,qz=oz+sz*t,d=Math.hypot(X-qx,Z-qz);if(d>DX*0.72)continue;
-      cutK(k,oy+(tmp.y-oy)*t,vx,vy,vz,true,X,oy+(tmp.y-oy)*t,Z)}};
+      cutK(k,oy+(tmp.y-oy)*t,vx,vy,vz,true,X,oy+(tmp.y-oy)*t,Z,atk)}};
   if(!ham)for(const t of TEETH)proc(t,bkG,true);
   for(const p of PLOW)if(!(ham&&p.f===bkG))proc(p,p.f,false);
   ex.cutP=ex.fdig*cutV;
@@ -1446,7 +1452,16 @@ function shSpawn(vol,mf,lx,ly,spreadZ,vx,vy,vz){SHSP+=vol;let n=0;
     const i=addChunk(tmp.x,tmp.y,tmp.z,mf,vx+(Math.random()-.5)*0.6,vy,vz+(Math.random()-.5)*0.6,r,0);
     if(i<0){T.deposit(tmp.x,tmp.z,v,mf)}SHSP-=v;n++}}
 
-const _sw=new V3(),_sl=new V3(),_bv=new V3(),_bp=new V3(),_bp0=new V3();let SHBP=false;
+const _std=new V3(),_sw=new V3(),_sl=new V3(),_bv=new V3(),_bp=new V3(),_bp0=new V3();let SHBP=false;
+const SHALL=SHCUT.concat(SHPLOW),SHPA=new Float32Array(SHALL.length),SHPB=new Float32Array(SHALL.length);
+function shPenArr(o){for(let i=0;i<SHALL.length;i++){const p=SHALL[i];tmp.copy(p.l);shBk.localToWorld(tmp);const k=T.near(tmp.x,tmp.z);o[i]=(k>=0&&T.c[k]>0.5)?Math.max(0,T.h[k]-tmp.y-0.12):0}}
+// kesecek dişler (uç önde) ve onları izleyen topuk hariç, zemine gömülme toplamı
+function shPenSum(o,ex){let m=0;for(let i=0;i<o.length;i++)if(!ex[i])m+=o[i];return m}
+function shExempt(){const ex=new Uint8Array(SHALL.length);_std.set(-0.37,0.93,0).transformDirection(shBk.matrixWorld);let ok=0,n=0;
+  for(let i=0;i<SHCUT.length;i++){const p=SHCUT[i];if(!p.ok)continue;tmp.copy(p.l);shBk.localToWorld(tmp);const mx=tmp.x-p.p.x,my=tmp.y-p.p.y,mz=tmp.z-p.p.z,ml=Math.hypot(mx,my,mz);n++;
+    if(ml>0.0002&&(mx*_std.x+my*_std.y+mz*_std.z)/ml>0.25){ex[i]=1;ok++}}
+  if(n&&ok>n*0.5)for(let i=SHCUT.length;i<SHALL.length;i++)ex[i]=1;return ex}
+function shClearPen(){shPenArr(SHPA);return shPenSum(SHPA,new Uint8Array(SHALL.length))}
 function shClearRock(){let m=1e9;for(const p of SHCUT.concat(SHPLOW)){tmp.copy(p.l);shBk.localToWorld(tmp);const k=T.near(tmp.x,tmp.z);if(k>=0)m=Math.min(m,tmp.y-T.b[k])}return m}
 function shCollide(){let n=0,what='',tid='tr';for(const p of SHPTS){_sw.copy(p);shBk.localToWorld(_sw);
   for(const c of TACT){const T_=c.TRK;if((_sw.x-T_.x)**2+(_sw.z-T_.z)**2>c.cfg.near2+40)continue;useTruck(c);_sl.copy(_sw);truck.worldToLocal(_sl);let tb=false;for(const b of TBOX)if(inB(_sl,b)){tb=true;break}
@@ -1474,10 +1489,10 @@ function shStep(u,dt){SH.u=u;const now=performance.now();if(Object.values(u).som
   SH.moving=Math.abs(sp)>0.02||Math.abs(w)>0.01;SH.trk.l=SH.v.l;SH.trk.r=SH.v.r;SHTR.l.s+=SH.v.l*dt;SHTR.r.s+=SH.v.r*dt;
   if(SH.moving){trackRuts(SH.x,SH.z,SH.yaw,2.95,4.4,SH.v.l,SH.v.r,dt*2.2,1.0);if(onLoose(SH.x,SH.z))SH.mudT=Math.min(1.2,SH.mudT+Math.abs(sp)*dt*0.03)}
   // eklemler: dene, çarpışma/kaya/zemin kontrolü, gerekirse geri al
-  const prev=[SH.swing,SH.boom,SH.stick,SH.bk],rb=shClearRock(),cb=shCollide().n;
+  const prev=[SH.swing,SH.boom,SH.stick,SH.bk],rb=shClearRock(),cb=shCollide().n;shPenArr(SHPB);
   SH.swing+=SH.v.swing*dt;for(const j of['boom','stick','bk']){SH[j]+=SH.v[j]*dt;const[a,b]=SHLIM[j];if(SH[j]<a){SH[j]=a;SH.v[j]=0}if(SH[j]>b){SH[j]=b;SH.v[j]=0}}
-  shPose();const ra=shClearRock(),col=shCollide();
-  if((ra<-0.03&&ra<rb-0.001)||col.n>cb){const v0={...SH.v},sv=Math.abs(v0.swing)*3+Math.abs(v0.boom)+Math.abs(v0.stick)+Math.abs(v0.bk);
+  shPose();const ra=shClearRock(),col=shCollide();shPenArr(SHPA);const sex=shExempt(),qa=shPenSum(SHPA,sex),qb=shPenSum(SHPB,sex);
+  if((ra<-0.03&&ra<rb-0.001)||(qa>0.05&&qa>qb+0.002)||col.n>cb){const v0={...SH.v},sv=Math.abs(v0.swing)*3+Math.abs(v0.boom)+Math.abs(v0.stick)+Math.abs(v0.bk);
     [SH.swing,SH.boom,SH.stick,SH.bk]=prev;for(const j of['swing','boom','stick','bk'])SH.v[j]=-v0[j]*0.15;shPose();
     if(now-SH.lastBump>220&&sv>0.04){SH.lastBump=now;const A=0.03+0.07*Math.min(1,sv*2.5);shk('sh',A*Math.cos(SH.swing)*(v0.boom<0?1:-1),-A*Math.sin(SH.swing)*0.6+v0.swing*0.1,0.02);
       if(col.n>cb){if(now-SH.lastHit>450){sfx.hit(Math.min(1,sv*2),col.what);SH.lastHit=now}if(col.what==='truck')shk(col.tid,col.tid==='mt'?0.05:0.14,(Math.random()-.5)*0.08,-0.08)}
@@ -1487,13 +1502,16 @@ function shStep(u,dt){SH.u=u;const now=performance.now();if(Object.values(u).som
   _sl.set(0,1,0).transformDirection(shBk.matrixWorld);const nwy=_sl.y;
   // kesme: her nokta bu adımda taradığı yol boyunca keser (ex ile aynı yöntem), kesilen hacim kovaya girer
   let E=0,V=0,MF=0,dist=0,cut=false,HV=0,HMF=0;
+  _std.set(-0.37,0.93,0).transformDirection(shBk.matrixWorld);
   const sweep=(pt,heel)=>{const ox=pt.p.x,oy=pt.p.y,oz=pt.p.z;tmp.copy(pt.l);shBk.localToWorld(tmp);const fresh=!pt.ok;pt.ok=true;pt.p.copy(tmp);if(fresh)return;
+    const mx=tmp.x-ox,my=tmp.y-oy,mz=tmp.z-oz,ml=Math.hypot(mx,my,mz),atk=ml<0.0002?0:(mx*_std.x+my*_std.y+mz*_std.z)/ml,okI=heel?cut:atk>0.25;
     const sx=tmp.x-ox,sz=tmp.z-oz,L2=sx*sx+sz*sz;if(!heel)dist=Math.max(dist,Math.hypot(sx,tmp.y-oy,sz));
     const i0=Math.floor((Math.min(tmp.x,ox)-T.ox)/DX),j0=Math.floor((Math.min(tmp.z,oz)-T.oz)/DX),i1=Math.ceil((Math.max(tmp.x,ox)-T.ox)/DX),j1=Math.ceil((Math.max(tmp.z,oz)-T.oz)/DX);
     if(i1-i0>4||j1-j0>4)return;
     for(let j=j0;j<=j1;j++)for(let i=i0;i<=i1;i++){if(i<1||j<1||i>=N-1||j>=N-1)continue;const k=j*N+i,X=T.ox+i*DX,Z=T.oz+j*DX;
       let t=L2>1e-8?((X-ox)*sx+(Z-oz)*sz)/L2:1;t=Math.max(0,Math.min(1,t));if(Math.hypot(X-(ox+sx*t),Z-(oz+sz*t))>(heel?DX*1.1:DX*0.72))continue;
       const ty=oy+(tmp.y-oy)*t,hs=T.h[k];if(ty>=hs)continue;const tgt=Math.max(ty,T.b[k]),rem=hs-tgt;if(rem<=0)continue;
+      if(T.c[k]>0.5&&!okI)continue;
       const sk=sigAt(k),mf=T.matF(k),v=rem*DX*DX*(T.c[k]>0.5?SWELL:1);T.h[k]=tgt;T.cp[k]*=0.2;T.touch(k);E+=rem*DX*DX*sk*(heel?2.5:1);
       if(heel){HV+=v;HMF+=mf*v}else{V+=v;MF+=mf*v;cut=true}}};
   for(const pt of SHCUT)sweep(pt,false);for(const pt of SHPLOW)sweep(pt,true);
