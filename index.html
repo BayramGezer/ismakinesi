@@ -91,7 +91,7 @@ body,button,.touch,.stick,.panel,.btns{-webkit-user-select:none;user-select:none
 </head>
 <body>
 <canvas id="c" tabindex="0"></canvas>
-<div class="top"><h1>İş makinesi · altın madeni</h1><span class="tag">prototip v0.17</span></div>
+<div class="top"><h1>İş makinesi · altın madeni</h1><span class="tag">prototip v0.18</span></div>
 <aside class="panel gauges">
   <div class="g"><label><span id="lB">Kova</span> <b id="tB">0.00 m³</b></label><div class="bar"><i id="gB"></i></div></div>
   <div class="g"><label>Kamyon <b id="tT">0.0 m³ · 0.0 t</b></label><div class="bar"><i id="gT" class="grn"></i></div></div>
@@ -126,6 +126,7 @@ body,button,.touch,.stick,.panel,.btns{-webkit-user-select:none;user-select:none
   <button id="bHoles">🔬 Sondaj (K)</button>
   <button id="bReset">Araziyi sıfırla</button>
   <button id="bCam">Kabin kamerası (V)</button>
+  <button id="bNight">🌙 Gece (N)</button>
   <button id="bSnd">Ses: açık</button>
   <button id="bHelp">Kontroller</button>
   <button id="bQR">📱 Telefonda aç</button>
@@ -147,6 +148,7 @@ body,button,.touch,.stick,.panel,.btns{-webkit-user-select:none;user-select:none
     <label><input type="checkbox" id="mRl"> Silindir</label>
     <label><input type="checkbox" id="mPk" checked> Pikap</label>
     <label><input type="checkbox" id="mHv" checked> Harvester (ağaç kesme)</label>
+    <label><input type="checkbox" id="mWl" checked> Ön yükleyici (belden kırma)</label>
     <small>Motorlar kapalı başlar: <kbd>M</kbd> ya da "Motor" düğmesiyle çalıştır.</small></div>
   <div style="margin-top:14px;text-align:right"><button id="bGo">Serbest modda başla</button></div>
   <h2 style="margin-top:18px">Kontroller</h2>
@@ -161,6 +163,8 @@ body,button,.touch,.stick,.panel,.btns{-webkit-user-select:none;user-select:none
     <div><h3>Greyder (6)</h3><ul><li><kbd>W</kbd><kbd>S</kbd>İleri / geri</li><li><kbd>A</kbd><kbd>D</kbd>Direksiyon</li><li><kbd>↑</kbd><kbd>↓</kbd>Bıçak indir / kaldır</li><li><kbd>←</kbd><kbd>→</kbd>Bıçak açısı (daire)</li><li><kbd>Q</kbd><kbd>E</kbd>Bıçağı sola / sağa kaydır</li><li><kbd>R</kbd><kbd>F</kbd>Bıçak yan eğimi</li></ul></div>
     <div><h3>Sondaj (7)</h3><ul><li><kbd>W</kbd><kbd>S</kbd><kbd>A</kbd><kbd>D</kbd>Sür</li><li><kbd>R</kbd><kbd>F</kbd>Direği kaldır / yatır</li><li><kbd>Space</kbd>Del (basılı tut)</li><li><kbd>T</kbd>Patlatma deliği / arama sondajı</li><li><kbd>K</kbd>Sondaj sonuçları</li></ul></div>
     <div><h3>Şarj (8) · Finişer (9) · Silindir (0) · Pikap (-)</h3><ul><li><kbd>Space</kbd>Şarj: yakındaki deliği doldur</li><li><kbd>F</kbd>/<kbd>R</kbd>Finişer tablası indir / kaldır</li><li><kbd>P</kbd>Tava (suyun kenarında)</li><li><kbd>X</kbd>Dolu delikleri ateşle (💥 düğmesi)</li></ul></div>
+    <div><h3>Ön yükleyici (\\)</h3><ul><li><kbd>W</kbd><kbd>S</kbd><kbd>A</kbd><kbd>D</kbd>Sür (belden kırma)</li><li><kbd>↑</kbd><kbd>↓</kbd>Kol kaldır/indir</li><li><kbd>←</kbd><kbd>→</kbd> / <kbd>Q</kbd><kbd>E</kbd>Kova topla / boşalt</li><li>Yığına sürerek doldur; kovayı yere bastırırsan ön taraf kalkar</li></ul></div>
+    <div><h3>Genel</h3><ul><li><kbd>N</kbd>Gece / gündüz</li></ul></div>
     <div><h3>Harvester (=)</h3><ul><li><kbd>W</kbd><kbd>S</kbd><kbd>A</kbd><kbd>D</kbd>Sür</li><li><kbd>Space</kbd>Vinç menzilindeki ağacı kes ve tomrukla</li><li>Kalan kütüğü ekskavatör kovası ya da dozerle sök</li></ul></div>
     <div><h3>Genel</h3><ul><li><kbd>1</kbd>-<kbd>0</kbd>, <kbd>-</kbd>Makine seç</li><li><kbd>B</kbd>Mağaza · <kbd>J</kbd>Görevler · <kbd>L</kbd>Tesis</li><li><kbd>M</kbd>Motoru çalıştır / durdur</li><li><kbd>V</kbd>Kamera değiştir</li><li>Fare sürükle: kamera, tekerlek: zoom</li></ul></div>
   </div>
@@ -192,12 +196,15 @@ const scene=new THREE.Scene();
 scene.fog=new THREE.Fog(lin('#c9e4f6'),70,300);
 const SUN=new V3(0.55,0.62,0.42).normalize();
 const skyMat=new THREE.ShaderMaterial({side:THREE.BackSide,depthWrite:false,fog:false,
-  uniforms:{sun:{value:SUN}},
+  uniforms:{sun:{value:SUN},night:{value:0}},
   vertexShader:'varying vec3 vd;void main(){vd=normalize(position);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}',
-  fragmentShader:`varying vec3 vd;uniform vec3 sun;
+  fragmentShader:`varying vec3 vd;uniform vec3 sun;uniform float night;
   void main(){float h=vd.y;vec3 hor=vec3(.80,.90,.97),zen=vec3(.25,.55,.92),gnd=vec3(.45,.62,.38);
   vec3 c=h>0.?mix(hor,zen,pow(clamp(h,0.,1.),.55)):mix(hor,gnd,clamp(-h*4.,0.,1.));
-  float d=max(dot(vd,sun),0.);c+=vec3(1.,.95,.8)*(pow(d,900.)*4.+pow(d,12.)*.15);gl_FragColor=vec4(c,1.);}`});
+  float d=max(dot(vd,sun),0.);c+=vec3(1.,.95,.8)*(pow(d,900.)*4.+pow(d,12.)*.15);
+  if(night>0.){vec3 nc=h>0.?mix(vec3(.035,.06,.12),vec3(.004,.008,.025),pow(clamp(h,0.,1.),.5)):vec3(.012,.016,.022);float st=0.;if(h>0.02){vec3 q=floor(vd*210.);float r=fract(sin(dot(q,vec3(12.9898,78.233,37.719)))*43758.5453);st=step(.9965,r)*(0.5+0.5*fract(r*91.7))*smoothstep(0.02,0.25,h);}
+  float md=max(dot(vd,normalize(vec3(-.45,.5,-.55))),0.);vec3 mo=vec3(.85,.9,1.)*(step(.99975,md)*1.6+pow(md,60.)*.12);c=mix(c,nc+vec3(st)+mo,night);}
+  gl_FragColor=vec4(c,1.);}`});
 const sky=new THREE.Mesh(new THREE.SphereGeometry(400,32,16),skyMat);scene.add(sky);
 // ortam yansıması: gökyüzünden PMREM
 try{const cv=document.createElement('canvas');cv.width=256;cv.height=128;const x=cv.getContext('2d');const g=x.createLinearGradient(0,0,0,128);
@@ -508,7 +515,7 @@ function rbox(w,h,d,r,mat,parent,x=0,y=0,z=0){const b=Math.min(r*0.6,w/4,h/4,d/4
 function seg(a,b,th,w,mat,parent){const dx=b[0]-a[0],dy=b[1]-a[1],L=Math.hypot(dx,dy);const o=box(L+0.02,th,w,mat,parent,(a[0]+b[0])/2,(a[1]+b[1])/2,0);o.rotation.z=Math.atan2(dy,dx);return o}
 
 /* ---------- Ekskavatör ---------- */
-const ex={eng:0,crank:0,lastHit:0,lastRock:0,mf:0,u:{swing:0,arm:0,boom:0,bucket:0},x:0,z:0,yaw:0,swing:0,boom:0.75,arm:-1.95,bucket:-1.6,load:0,fdig:0,pow:0,rpm:600,spill:0,relief:false,idle:true,lastIn:-1e9,
+const ex={eng:0,crank:0,lastHit:0,lastRock:0,mf:0,u:{swing:0,arm:0,boom:0,bucket:0},x:0,z:0,yaw:0,lift:0,lv:0,swing:0,boom:0.75,arm:-1.95,bucket:-1.6,load:0,fdig:0,pow:0,rpm:600,spill:0,relief:false,idle:true,lastIn:-1e9,
   p:{boom:0,arm:0,bucket:0,swing:0},v:{swing:0,boom:0,arm:0,bucket:0,l:0,r:0},trk:{l:0,r:0},cutP:0};
 const chassis=new THREE.Group();chassis.rotation.order='YZX';scene.add(chassis);
 // alt şasi ve paletler
@@ -582,6 +589,8 @@ const cabX0=-0.35,cabX1=1.25,cz0=-1.27,cz1=-0.29;
   const bc=cyl(0.07,0.12,ORG,upper,cabX0+0.3,yt+0.12,czm,null,10);bc.material=M('#ff8a1a',0,0,{emissive:lin('#ff6a00'),emissiveIntensity:0.6})}
 // bom
 const boomG=new THREE.Group();boomG.position.set(0.95,1.0,0.25);upper.add(boomG);
+{const LT=M('#fff6c9',0,0,{emissive:lin('#fff3b0'),emissiveIntensity:0.6});for(const z of[-1.12,-0.45])box(0.08,0.12,0.22,LT,upper,1.3,1.98,z).noOutline=true;box(0.1,0.16,0.26,LT,boomG,1.9,0.6,-0.3).noOutline=true;box(0.1,0.16,0.26,LT,upper,-0.45,1.98,-0.78).noOutline=true;
+  const b=box(0.14,0.14,0.14,M('#ff8a1a',0,0,{emissive:lin('#ff6a00'),emissiveIntensity:0.6}),upper,0.1,2.06,-0.9);b.noOutline=true}
 ext([[-0.3,-0.25],[0.2,-0.38],[2.5,0.30],[5.9,-0.22],[5.95,0.2],[5.6,0.45],[2.7,1.0],[0.4,0.42],[-0.3,0.28]],0.5,YEL,boomG);
 cyl(0.12,0.75,STEEL,boomG,0,0,0,'z');cyl(0.11,0.62,STEEL,boomG,5.7,0,0,'z');
 box(0.35,0.22,0.3,YD,boomG,3.3,0.96,0);box(0.3,0.18,0.9,YD,boomG,2.3,0.22,0);
@@ -1268,7 +1277,7 @@ function touchUI(){if(!TCH.on)return;const t=$('tbtn');t.innerHTML='';const L=$(
 function dzAuto(){DZ.auto=!DZ.auto;DZ.hY=null;toast(DZ.auto?'Otomatik bıçak açık: kesme kotu sabit tutulur':'Otomatik bıçak kapalı');touchUI()}
 for(const ev of['contextmenu','selectstart','dragstart'])addEventListener(ev,e=>{if(!(e.target&&e.target.closest&&e.target.closest('input,textarea')))e.preventDefault()},{passive:false});
 const tdz=v=>Math.abs(v)<0.12?0:(v-Math.sign(v)*0.12)/0.88;
-addEventListener('keydown',e=>{keys[e.code]=true;if(/^Arrow|Space/.test(e.code))e.preventDefault();if(e.code==='KeyV'&&!e.repeat)toggleCam();if(!e.repeat&&started){if(e.code==='Digit1')setMach('ex');if(e.code==='Digit2')setMach('dz');if(e.code==='Digit3')setMach('tr');if(e.code==='Digit4')setMach('sh');if(e.code==='Digit5')setMach('mt');if(e.code==='Digit6')setMach('gd');{const dk={Digit7:'dr',Digit8:'ch',Digit9:'pv',Digit0:'rl',Minus:'pk',Equal:'hv'}[e.code];if(dk)setMach(dk)}if(e.code==='KeyX')blastStart();if(e.code==='KeyP')panStart();if(e.code==='KeyT'&&MACH==='dr')toggleHT();if(e.code==='KeyB'&&CAREER())(PNL.cur==='shop'?pnlClose():pnlShop());if(e.code==='KeyJ'&&CAREER())(PNL.cur==='tasks'?pnlClose():pnlTasks());if(e.code==='KeyK')(PNL.cur==='holes'?pnlClose():pnlHoles());if(e.code==='KeyL')(PNL.cur==='plant'?pnlClose():pnlPlant());if(e.code==='Escape')pnlClose();if(e.code==='KeyM')toggleEngine();if(e.code==='KeyT'&&MACH==='ex')setTool(ex.tool==='bucket'?'hammer':'bucket');if(e.code==='KeyG'&&MACH==='dz')dzAuto()}});
+addEventListener('keydown',e=>{keys[e.code]=true;if(/^Arrow|Space/.test(e.code))e.preventDefault();if(e.code==='KeyV'&&!e.repeat)toggleCam();if(!e.repeat&&started){if(e.code==='Digit1')setMach('ex');if(e.code==='Digit2')setMach('dz');if(e.code==='Digit3')setMach('tr');if(e.code==='Digit4')setMach('sh');if(e.code==='Digit5')setMach('mt');if(e.code==='Digit6')setMach('gd');{const dk={Digit7:'dr',Digit8:'ch',Digit9:'pv',Digit0:'rl',Minus:'pk',Equal:'hv',Backslash:'wl',IntlBackslash:'wl'}[e.code];if(dk)setMach(dk)}if(e.code==='KeyX')blastStart();if(e.code==='KeyN'&&!e.repeat)toggleNight();if(e.code==='KeyP')panStart();if(e.code==='KeyT'&&MACH==='dr')toggleHT();if(e.code==='KeyB'&&CAREER())(PNL.cur==='shop'?pnlClose():pnlShop());if(e.code==='KeyJ'&&CAREER())(PNL.cur==='tasks'?pnlClose():pnlTasks());if(e.code==='KeyK')(PNL.cur==='holes'?pnlClose():pnlHoles());if(e.code==='KeyL')(PNL.cur==='plant'?pnlClose():pnlPlant());if(e.code==='Escape')pnlClose();if(e.code==='KeyM')toggleEngine();if(e.code==='KeyT'&&MACH==='ex')setTool(ex.tool==='bucket'?'hammer':'bucket');if(e.code==='KeyG'&&MACH==='dz')dzAuto()}});
 addEventListener('keyup',e=>{keys[e.code]=false});
 addEventListener('blur',()=>{for(const k in keys)keys[k]=false});
 const ax=(p,n)=>(keys[p]?1:0)-(keys[n]?1:0);
@@ -1312,8 +1321,12 @@ function pose(){const c=Math.cos(ex.yaw),s=Math.sin(ex.yaw);
   const H=(a,b)=>T.sample(ex.x+c*a+s*b,ex.z-s*a+c*b);
   const hf=(H(1.9,-1.1)+H(1.9,1.1))/2,hb=(H(-1.9,-1.1)+H(-1.9,1.1))/2,hl=(H(1.9,-1.1)+H(-1.9,-1.1))/2,hr=(H(1.9,1.1)+H(-1.9,1.1))/2;
   chassis.position.set(ex.x,(hf+hb)/2+0.04,ex.z);chassis.rotation.set(Math.atan2(hl-hr,2.2),ex.yaw,Math.atan2(hf-hb,3.8));
+  if(ex.lift>1e-4){const dc=Math.cos(ex.swing),ds=Math.sin(ex.swing),L=Math.min(2.3/Math.max(1e-3,Math.abs(dc)),1.62/Math.max(1e-3,Math.abs(ds)));_la.set(ds,0,dc);_lq.setFromAxisAngle(_la,ex.lift);
+    _lp.set(-dc*L,-0.04,ds*L);_lv.copy(_lp).applyQuaternion(_lq);_lp.sub(_lv).applyQuaternion(chassis.quaternion);chassis.position.add(_lp);chassis.quaternion.multiply(_lq)}
   upper.rotation.y=ex.swing;boomG.rotation.z=ex.boom;armG.rotation.z=ex.arm;bkG.rotation.z=ex.bucket;
   chassis.updateMatrixWorld(true)}
+const _la=new THREE.Vector3(),_lp=new THREE.Vector3(),_lv=new THREE.Vector3(),_lq=new THREE.Quaternion();
+function exLiftArm(){const dc=Math.cos(ex.swing),ds=Math.sin(ex.swing),L=Math.min(2.3/Math.max(1e-3,Math.abs(dc)),1.62/Math.max(1e-3,Math.abs(ds)));tmp.copy(TIP).applyMatrix4(bkG.matrixWorld);return Math.max(2,L+Math.hypot(tmp.x-ex.x,tmp.z-ex.z))}
 const tA=new V3(),tB=new V3(),tmp=new V3(),nO=new V3();
 function drawCyls(){
   for(let i=0;i<2;i++){const z=0.25+(i?0.36:-0.36);tA.set(0.95+BOOM_A[0],1.0+BOOM_A[1],z);upper.localToWorld(tA);tB.set(BOOM_B[0],BOOM_B[1],i?0.36:-0.36);boomG.localToWorld(tB);placeCyl(cylBoom[i],tA,tB,1.4)}
@@ -1325,7 +1338,9 @@ function drawCyls(){
 /* ---------- Örnek noktalar ---------- */
 const TIP=new V3(1.7,0.29,0);
 const TEETH=[-0.5,-0.25,0,0.25,0.5].map(z=>({l:new V3(1.7,0.29,z),p:new V3()}));
-const PLOW=[];for(const p of[[0.3,1.06],[0.85,1.06],[1.28,0.86]])for(const z of[-0.45,0.45])PLOW.push({l:new V3(p[0],p[1],z),f:bkG,p:new V3()});
+const PLOW=[];{const cx=0.65,cy=0.55;for(let i=0;i<SHELL.length-1;i++){const a=SHELL[i],b=SHELL[i+1];let nx=b[1]-a[1],ny=-(b[0]-a[0]);const l=Math.hypot(nx,ny);nx/=l;ny/=l;if(((a[0]+b[0])/2-cx)*nx+((a[1]+b[1])/2-cy)*ny<0){nx=-nx;ny=-ny}
+  for(const t of[0.2,0.7])for(const z of[-0.62,0,0.62])PLOW.push({l:new V3(a[0]+(b[0]-a[0])*t+nx*0.03,a[1]+(b[1]-a[1])*t+ny*0.03,z),n:new V3(nx,ny,0),f:bkG,p:new V3()})}}
+const PLW=6/PLOW.length;
 for(const p of[[1.2,-0.36],[2.3,-0.2]])PLOW.push({l:new V3(p[0],p[1],0),f:armG,p:new V3()});
 const CP=[];for(const p of SHELL)for(const z of[-0.62,0.62])CP.push({l:new V3(p[0],p[1],z),f:bkG});
 for(const z of[-0.55,0,0.55])CP.push({l:new V3(1.74,0.29,z),f:bkG});
@@ -1353,7 +1368,7 @@ function collisions(){let n=0,what='',tid='tr';const sa=selfArm();if(sa){n+=sa;w
   return{n,what,tid}}
 function plowClear(){let m=1e9;if(ex.tool==='hammer'){for(const p of[HAMPT,...HPLOW]){tmp.copy(p.l).applyMatrix4(bkG.matrixWorld);const k=T.near(tmp.x,tmp.z);if(k>=0)m=Math.min(m,tmp.y-T.h[k]+(p===HAMPT?0.35:0))}return m}
   const pts=PLOW;for(const p of pts){if(p.f!==bkG)continue;tmp.copy(p.l).applyMatrix4(bkG.matrixWorld);const k=T.near(tmp.x,tmp.z);if(k>=0&&T.c[k]>0.5)m=Math.min(m,tmp.y-T.h[k])}
-  for(const t of TEETH){tmp.copy(t.l).applyMatrix4(bkG.matrixWorld);const k=T.near(tmp.x,tmp.z);if(k>=0&&T.c[k]>0.5)m=Math.min(m,tmp.y-T.h[k])}return m}
+  for(const t of TEETH){tmp.copy(t.l).applyMatrix4(bkG.matrixWorld);const k=T.near(tmp.x,tmp.z);if(k>=0&&T.c[k]>0.5)m=Math.min(m,tmp.y-T.h[k]+0.07)}return m}
 function boulderClear(){if(ex.tool!=='hammer')return 1e9;let m=1e9;for(const p of[HAMPT.l,...HBKP]){tmp.copy(p).applyMatrix4(bkG.matrixWorld);
   for(let i=0;i<DM.max;i++){if(!DM.a[i]||DM.t[i]!==1||DM.r[i]<0.28)continue;const d=Math.hypot(DM.x[i]-tmp.x,DM.y[i]-tmp.y,DM.z[i]-tmp.z)-DM.r[i];if(d<m)m=d}}return m}
 function rockClear(){let m=1e9;for(const t of(ex.tool==='hammer'?[HAMPT]:TEETH)){tmp.copy(t.l).applyMatrix4(bkG.matrixWorld);const k=T.near(tmp.x,tmp.z);if(k>=0)m=Math.min(m,tmp.y-T.b[k])}return m}
@@ -1375,7 +1390,7 @@ function hydraulics(u,dt){
   const fill=ex.load/CAP;Fs.set(0,0,0);let mag=0;const vl=vdem.length();
   if(CUT.V>1e-5&&vl>1e-3){const A=Math.min(3,CUT.V/(CUT.L+0.06)),sig=CUT.S/Math.max(1e-6,CUT.V);_l.copy(CUT.dir);const dl0=_l.length();
     const al=dl0>1e-6?Math.max(0,vdem.dot(_l)/(vl*dl0)):0;
-    mag=A*sig*(0.3+0.7*Math.min(1,CUT.D/0.55))*(1+0.45*fill)*al;Fs.copy(vdem).divideScalar(-vl);if(-Fs.y>0)mag*=1-0.7*(-Fs.y);Fs.multiplyScalar(mag)}
+    mag=1.3*A*sig*(0.3+0.7*Math.min(1,CUT.D/0.55))*(1+0.45*fill)*al;Fs.copy(vdem).divideScalar(-vl);if(-Fs.y>0)mag*=1-0.7*(-Fs.y);Fs.multiplyScalar(mag)}
   ex.fdig+= (mag-ex.fdig)*Math.min(1,dt*10);
   // yerçekimi yükleri
   const lm=ex.load*LOOSE_DENS,G=[[boomG,[2.8,0.35],1700],[armG,[1.1,0.05],950],[bkG,[0.65,0.6],ex.tool==='hammer'?1900:780],[bkG,[0.65,0.6],lm]];
@@ -1408,9 +1423,11 @@ function soil(dt){nO.copy(NOPEN).transformDirection(bkG.matrixWorld);let cutV=0;
   const cutK=(k,ty,vx,vy,vz,tooth,wx,wy,wz,atk=1)=>{const hs=T.h[k];if(ty>=hs)return;
     const tgt=Math.max(ty,T.b[k]),rem=hs-tgt;if(rem<=0)return;
     // sağlam zemini diş ancak ucunun gösterdiği yöne giderken keser; taban/yan/geri hareket kesmez, kova zemine dayanır
-    if(tooth&&T.c[k]>0.5&&atk<0.25)return;
+    if(tooth&&T.c[k]>0.5&&atk<0.25){const pv=Math.min(rem,0.15)*DX*DX*0.4;CUT.V+=pv;CUT.S+=pv*sigAt(k);return}
+    // dişler zemini sıyırıyorsa (3.5 cm altı) kesmez: kazmak için bastırmak gerekir
+    if(tooth&&T.c[k]>0.5&&hs-ty<0.035){const pv=rem*DX*DX*0.6;CUT.V+=pv;CUT.S+=pv*sigAt(k);return}
     // kova sırtı ve arm yerinde (sıkı) toprağı kesmez: bastırınca direnç oluşur, yalnızca gevşek toprağı yana iter
-    if(!tooth&&T.c[k]>0.5){const pv=rem*DX*DX;CUT.V+=pv*0.5;CUT.S+=pv*0.5*sigAt(k);return}
+    if(!tooth&&T.c[k]>0.5){const pv=rem*DX*DX*PLW*1.5;CUT.V+=pv*0.5;CUT.S+=pv*0.5*sigAt(k);return}
     const sk=sigAt(k),mf=T.matF(k);let vol=rem*DX*DX*(T.c[k]>0.5?SWELL:1);T.h[k]=tgt;T.cp[k]*=rem>0.15?0.2:0.7;T.touch(k);const sp=Math.hypot(vx,vy,vz);cutV=Math.max(cutV,sp);
     if(tooth)CUT.D=Math.max(CUT.D,hs-ty);
     const bv=rem*DX*DX*(tooth?1:1.6);CUT.V+=bv;CUT.S+=bv*sk;
@@ -1419,12 +1436,12 @@ function soil(dt){nO.copy(NOPEN).transformDirection(bkG.matrixWorld);let cutV=0;
     if(tooth&&vn>0.05&&ex.fullT<=0){CUTACC+=vol;CUTMF+=mf*vol;CUTZ+=curLZ*vol;CUTW+=vol;vol=0}
     if(vol>1e-6){if(tooth){let hx=vx,hz=vz,m=Math.hypot(hx,hz);if(m<0.05){hx=wx-ex.x;hz=wz-ex.z;m=Math.hypot(hx,hz)||1}
         pushDep(wx+hx/m*DX,wz+hz/m*DX,hx,hz,vol,mf)}
-      else{T.deposit(wx+_l.x*0.95,wz+_l.z*0.95,vol,mf)}}
+      else{T.deposit(wx+_l.x*0.75,wz+_l.z*0.75,vol,mf)}}
     cutDust+=rem*sp*2;if(tooth&&Math.random()<Math.min(0.6,rem*3+0.08))spray(wx,ty+0.05,wz,1+(Math.random()*2|0),mf,0.8,1.0,vx*0.3,vz*0.3);if(tooth)ex.mudB=Math.min(1.2,ex.mudB+rem*DX*DX*0.12)};
   const proc=(pt,frame,tooth)=>{const ox=pt.p.x,oy=pt.p.y,oz=pt.p.z;tmp.copy(pt.l).applyMatrix4(frame.matrixWorld);
     const vx=(tmp.x-ox)/dt,vy=(tmp.y-oy)/dt,vz=(tmp.z-oz)/dt;pt.p.copy(tmp);
     let atk=1;if(tooth){_td.set(0.998,0.066,0).transformDirection(frame.matrixWorld);const sp=Math.hypot(vx,vy,vz);atk=sp<0.02?0:(vx*_td.x+vy*_td.y+vz*_td.z)/sp}
-    if(!tooth){const k=T.near(tmp.x,tmp.z);if(k<0)return;_l.set(0,0,pt.l.z<0?-1:1).transformDirection(frame.matrixWorld);cutK(k,tmp.y,vx,vy,vz,false,tmp.x,tmp.y,tmp.z);return}
+    if(!tooth){const k=T.near(tmp.x,tmp.z);if(k<0)return;if(pt.n){_l.copy(pt.n).transformDirection(frame.matrixWorld);_l.y=0;const sz=pt.l.z<-0.1?-1:pt.l.z>0.1?1:0;if(sz){_td.set(0,0,sz).transformDirection(frame.matrixWorld);_l.addScaledVector(_td,0.7)}if(_l.lengthSq()<1e-4)_l.set(0,0,1).transformDirection(frame.matrixWorld);_l.y=0;_l.normalize()}else _l.set(0,0,pt.l.z<0?-1:1).transformDirection(frame.matrixWorld);cutK(k,tmp.y,vx,vy,vz,false,tmp.x,tmp.y,tmp.z);return}
     // diş, bu karede taradığı yol boyunca keser: her ızgara noktası, dişin o noktadan geçtiği yükseklikte kesilir (çizginin altı kazılmaz)
     const sx=tmp.x-ox,sz=tmp.z-oz,L2=sx*sx+sz*sz,fx=(Math.min(tmp.x,ox)-T.ox)/DX,fz=(Math.min(tmp.z,oz)-T.oz)/DX;
     const i0=Math.floor(fx),j0=Math.floor(fz),i1=Math.ceil((Math.max(tmp.x,ox)-T.ox)/DX),j1=Math.ceil((Math.max(tmp.z,oz)-T.oz)/DX);
@@ -1734,7 +1751,7 @@ const BODY={ex:[[2.3,0.5,-1.6],[2.3,0.5,0],[2.3,0.5,1.6],[-2.3,0.5,-1.6],[-2.3,0
 const MASSF={ex:2.0,dz:4.9,gd:1.7,sh:54,tr:2.2,mt:16};
 function bodyLocal(id){if(BODY[id])return BODY[id];if(VEH[id])return VEH[id].body;const c=TRUCKS.find(t=>t.id===id);if(!c)return[];const f=c.cfg,x1=f.blkO+f.blkL,x0=f.blkO-f.blkL,w=f.blkW,h=f.big?1.6:0.9;
   return[[x1,h,-w],[x1,h,0],[x1,h,w],[x1,h*2,0],[x1,h*2.8,-w*0.6],[x1,h*2.8,w*0.6],[0,h*3,0],[x0,h,-w],[x0,h,w],[0,h,-w],[0,h,w],[x1*0.5,h,-w],[x1*0.5,h,w]]}
-const MGRP=()=>({ex:chassis,dz:dzG,gd:gdG,sh:shG,tr:TRUCKS[0].truck,mt:TRUCKS[1].truck,dr:VEH.dr.g,ch:VEH.ch.g,pv:VEH.pv.g,rl:VEH.rl.g,pk:VEH.pk.g,hv:VEH.hv.g});
+const MGRP=()=>({ex:chassis,dz:dzG,gd:gdG,sh:shG,tr:TRUCKS[0].truck,mt:TRUCKS[1].truck,dr:VEH.dr.g,ch:VEH.ch.g,pv:VEH.pv.g,rl:VEH.rl.g,pk:VEH.pk.g,hv:VEH.hv.g,wl:VEH.wl.g});
 const _vq=new V3();
 // gövde temas kontrolü; true dönerse hareket engellenir (sağlam blok önünde)
 function bldMach(id,dx,dz,dt,thr=1){const g=MGRP()[id];if(!g)return false;let blocked=false;const mf=MASSF[id]||(VEH[id]?VEH[id].M/10000:2),mx=g.position.x,mz=g.position.z;const near=BLD.some(b=>bNear(b,mx+dx,mz+dz,9));
@@ -1925,6 +1942,7 @@ function vehModel(id){const g=new THREE.Group();g.rotation.order='YZX';scene.add
     const rod=cyl(0.055,1,CHROME,mg,0.25,0,0,null,8);for(let i=0;i<4;i++)cyl(0.05,3.6,CHROME,g,-1.9+i*0.12,1.9,-0.9,'x',6);
     g.userData.mast=mg;g.userData.head=head;g.userData.rod=rod}
   else if(id==='hv'){g.userData.W=W;hvModel(g)}
+  else if(id==='wl'){g.userData.W=W;wlModel(g)}
   g.userData.W=W;return g}
 function vDef(id,o){const g=vehModel(id),v=Object.assign({id,x:0,z:0,yaw:0,v:0,w:0,steer:0,eng:0,crank:0,rpm:0,pow:0,idle:true,lastIn:-1e9,moving:false,wr:0,ts:0,u:{thr:0,st:0,ax:0,act:0},g,fpush:0},o);
   v.body=[];for(const x of[v.L0,0,v.L1])for(const s of[-1,1])v.body.push([x,0.6,s*v.W]);v.body.push([v.L1,1.4,0],[v.L0,1.4,0]);
@@ -1935,7 +1953,8 @@ vDef('pv',{name:'Asfalt finişeri',x:-30,z:-17,yaw:-Math.PI/2,M:18000,P:130e3,vm
 vDef('rl',{name:'Silindir',x:-35,z:-17,yaw:-Math.PI/2,M:10000,P:75e3,vmax:3.2,xf:1.7,xr:-1.7,W:1.15,L0:-2.4,L1:2.4,cab:[0.1,2.7,0.0],look:[8,-0.2,0],camY:2.1,fuel:0.03,exh:[-0.7,2.5,0.5],idleR:850,maxR:2200,drum:true});
 vDef('dr',{name:'Sondaj makinesi',x:-24,z:-17,yaw:-Math.PI/2,M:21000,P:250e3,vmax:1.1,track:true,xf:1.5,xr:-1.5,W:1.4,L0:-2.3,L1:2.6,cab:[0.95,2.55,-0.65],look:[8,-0.5,0.2],camY:2.6,fuel:0.06,exh:[-1.8,3.3,0.6],idleR:900,maxR:2000,ma:0,hole:null,htype:'bl',depth:0});
 vDef('hv',{name:'Harvester',x:-72,z:-6,yaw:Math.PI,M:22900,P:200e3,vmax:6,xf:2.3,xr:-2.1,W:1.4,L0:-3.9,L1:3.9,cab:[1.9,2.75,0.27],look:[10,-0.6,0.3],camY:2.4,fuel:0.05,exh:[-1.6,3.2,-0.6],idleR:800,maxR:1900});
-const VORD=['dr','ch','pv','rl','pk','hv'],DEFP0={dr:[-24,-17],ch:[-18,-17],pv:[-30,-17],rl:[-35,-17],pk:[-6,-9],hv:[-72,-6]};
+vDef('wl',{name:'Ön yükleyici',x:-12,z:-19,yaw:-Math.PI/2,M:23000,P:225e3,vmax:10,xf:1.78,xr:-1.78,W:1.45,L0:-4.6,L1:5.2,cab:[-0.95,3.15,0],look:[10,-0.4,0],camY:2.6,fuel:0.06,exh:[-2.3,3.3,0.45],idleR:750,maxR:2000,la:-0.35,bt:0.15,load:0,mf:0.3,lift:0,fres:0});
+const VORD=['dr','ch','pv','rl','pk','hv','wl'],DEFP0={wl:[-12,-19],dr:[-24,-17],ch:[-18,-17],pv:[-30,-17],rl:[-35,-17],pk:[-6,-9],hv:[-72,-6]};
 function vPose(v){const c=Math.cos(v.yaw),s=Math.sin(v.yaw),H=(a,b)=>T.sample(v.x+c*a+s*b,v.z-s*a+c*b);
   const hf=(H(v.xf,-v.W*0.85)+H(v.xf,v.W*0.85))/2,hb=(H(v.xr,-v.W*0.85)+H(v.xr,v.W*0.85))/2,hl=(H(v.xf,-v.W*0.85)+H(v.xr,-v.W*0.85))/2,hr=(H(v.xf,v.W*0.85)+H(v.xr,v.W*0.85))/2,L=v.xf-v.xr;
   v.g.position.set(v.x,hb+(hf-hb)*(-v.xr/L)+0.01,v.z);v.g.rotation.set(Math.atan2(hl-hr,2*v.W*0.85)*0.9,v.yaw,Math.atan2(hf-hb,L));
@@ -1944,21 +1963,22 @@ function vPose(v){const c=Math.cos(v.yaw),s=Math.sin(v.yaw),H=(a,b)=>T.sample(v.
     const hy=v.g.userData.head.position.y-0.6,rl=Math.max(0.1,hy+1.3);v.g.userData.rod.scale.y=rl;v.g.userData.rod.position.y=hy-rl/2}
   if(v.id==='pv')v.g.userData.screed.position.y=(1-v.sd)*0.35;
   if(v.id==='hv')v.g.userData.fr.rotation.y=v.steer*0.8;
+  if(v.id==='wl'){v.g.userData.fr.rotation.y=v.steer*1.15;if(v.lift>0){v.g.rotation.z+=v.lift;v.g.position.y+=Math.sin(v.lift)*(-v.xr)}}
   v.g.updateMatrixWorld(true)}
 function vehBlock(x,z,rad,skip){for(const id of VORD){const v=VEH[id];if(v===skip||!ACT[id])continue;const dx=x-v.x,dz=z-v.z,c=Math.cos(v.yaw),s=Math.sin(v.yaw),lx=dx*c-dz*s,lz=dx*s+dz*c;
   if(Math.abs(lx-(v.L0+v.L1)/2)<(v.L1-v.L0)/2+rad&&Math.abs(lz)<v.W+rad)return true}return false}
 function vehHit(v,nx,nz,ny){const c=Math.cos(ny),s=Math.sin(ny),r=v.W;for(let a=v.L0+r*0.6;a<=v.L1-r*0.6+0.01;a+=Math.max(0.8,(v.L1-v.L0-r)/4)){const px=nx+c*a,pz=nz-s*a;
   if(ACT.ex&&Math.hypot(px-ex.x,pz-ex.z)<2.5+r)return true;if(ACT.dz&&Math.hypot(px-DZ.x,pz-DZ.z)<3.0+r)return true;
   if(trkBlock(px,pz,r)||shBlock(px,pz,r)||gdBlock0(px,pz,r)||vehBlock(px,pz,r,v))return true}return false}
-const Z_VH=()=>({thr:0,st:0,ax:0,act:0});
-function readVeh(){const i={thr:ax('KeyW','KeyS'),st:ax('KeyA','KeyD'),ax:ax('KeyR','KeyF')+ax('ArrowUp','ArrowDown'),act:(keys.Space||TCH.hit)?1:0};
-  if(TCH.on){i.thr+=-tdz(TCH.ly);i.st+=-tdz(TCH.lx);i.ax+=-tdz(TCH.ry)}
+const Z_VH=()=>({thr:0,st:0,ax:0,act:0,tl:0});
+function readVeh(){const i={thr:ax('KeyW','KeyS'),st:ax('KeyA','KeyD'),ax:ax('KeyR','KeyF')+ax('ArrowUp','ArrowDown'),tl:ax('ArrowLeft','ArrowRight')+ax('KeyQ','KeyE'),act:(keys.Space||TCH.hit)?1:0};
+  if(TCH.on){i.thr+=-tdz(TCH.ly);i.st+=-tdz(TCH.lx);i.ax+=-tdz(TCH.ry);i.tl+=-tdz(TCH.rx)}
   try{const gp=navigator.getGamepads&&[...navigator.getGamepads()].find(g=>g);if(gp){const a=gp.axes,b=gp.buttons,bv=n=>b[n]?b[n].value:0;i.thr+=bv(7)-bv(6);i.st+=-dz(a[0]||0);i.ax+=-dz(a[3]||0);if(b[0]&&b[0].pressed)i.act=1}}catch(e){}
-  for(const k of['thr','st','ax'])i[k]=Math.max(-1,Math.min(1,i[k]));return i}
+  for(const k of['thr','st','ax','tl'])i[k]=Math.max(-1,Math.min(1,i[k]));return i}
 function vehStep(v,u,dt){v.u=u;engTick(v,dt);vPose(v);
   const sf=surf(v.x,v.z),wd=waterD(v.x,v.z),W=v.M*9.81,pitch=v.g.rotation.z,rf=Math.max(0.3,v.rpm/v.maxR);let vm=v.vmax*(v.track?1:sf.vf)*(wd>0.5?0.45:1);
   if(v.id==='pv'&&v.sd>0.9)vm=Math.min(vm,0.9);if(v.id==='dr'&&v.ma>0.05)vm=Math.min(vm,0.25);
-  const res=((v.track?0.05:sf.r)+Math.min(0.35,wd*0.3))*W,thr=u.thr,va=Math.abs(v.v);let a;
+  const res=((v.track?0.05:sf.r)+Math.min(0.35,wd*0.3))*W+(v.fres||0)*(v.v>=0?1:0.15),thr=u.thr,va=Math.abs(v.v);let a;
   if(Math.abs(thr)>0.03&&thr*v.v<-0.1){a=-Math.sign(v.v)*Math.min(va/dt,5);v.pow=0.1}
   else if(Math.abs(thr)>0.03){const dir=Math.sign(thr),Fe=Math.min(0.6*W,v.P*0.85*rf/Math.max(va,0.8))*Math.abs(thr);let net=Fe-res;if(net<0&&v.v*dir<=0.02)net=0;a=dir*net/v.M-9.81*Math.sin(pitch);v.pow=Math.min(1,Fe*Math.max(va,0.8)/(v.P*0.85))}
   else{a=-Math.sign(v.v)*Math.min(va/dt,res/v.M+1.2)-9.81*Math.sin(pitch)*(va>0.4?1:0);v.pow=0.05}
@@ -1974,7 +1994,7 @@ function vehStep(v,u,dt){v.u=u;engTick(v,dt);vPose(v);
   if(v.moving){const c=Math.cos(v.yaw),s=Math.sin(v.yaw);trackRuts(v.x+c*(v.xf+v.xr)/2,v.z-s*(v.xf+v.xr)/2,v.yaw,v.W*0.85,(v.xf-v.xr)/2,v.v,v.v,dt*(v.M/20000),v.track?0.5:0.35);
     if(wd>0.15&&Math.random()<Math.min(1,Math.abs(v.v)*0.3))splash(v.x+c*v.L1,T.sample(v.x,v.z)+wd,v.z-s*v.L1,Math.min(1,wd))}
   VTOOL[v.id]&&VTOOL[v.id](v,u,dt);
-  const act=Math.abs(u.thr)+Math.abs(u.st)+Math.abs(u.ax)+u.act>0.05;if(act)v.lastIn=performance.now();v.idle=performance.now()-v.lastIn>4000;
+  const act=Math.abs(u.thr)+Math.abs(u.st)+Math.abs(u.ax)+Math.abs(u.tl||0)+u.act>0.05;if(act)v.lastIn=performance.now();v.idle=performance.now()-v.lastIn>4000;
   const tgt=v.eng!==2?(v.eng===1?190:0):v.idle?v.idleR:v.idleR+(v.maxR-v.idleR)*(0.35+0.65*Math.max(Math.abs(u.thr),v.pow)),rate=tgt>v.rpm?900:600;v.rpm+=Math.max(-rate*dt,Math.min(rate*dt,tgt-v.rpm));if(v.eng===2&&v.rpm<v.idleR*0.85)v.rpm=v.idleR*0.85}
 function vehStepAll(dt){for(const id of VORD){if(!ACT[id])continue;const v=VEH[id];vehStep(v,(MACH===id&&started&&v.eng===2)?readVeh():Z_VH(),dt)}}
 for(const id of VORD){const v=VEH[id];EXH.push({acc:0,prev:0,src:()=>{tmp.set(...v.exh);v.g.localToWorld(tmp);return tmp},m:()=>v,k:id,big:v.M>12000?1:0.6})}
@@ -2016,6 +2036,7 @@ VTOOL.pv=(v,u,dt)=>{if(Math.abs(u.ax)>0.3){v.sdT=(v.sdT||0)+dt;if(v.sdT<dt*1.5)v
     _vq.set(a,0,b);v.g.localToWorld(_vq);const y=_vq.y+0.04;T.h[k]=y;T.b[k]=y;T.c[k]=1;T.cp[k]=0;T.w[k]=0;T.m[k]=0;T.cc[k]=0;AS[k]=1;T.touch(k);cnt++}
   if(cnt){ECO.paved+=cnt*DX*DX;if(CAREER()){ECO.money-=cnt*0.45;if(ECO.money<0){ECO.money=0;v.sd=0;toast('Asfalt için para kalmadı')}}GRD=true}};
 VTOOL.hv=hvTool;
+VTOOL.wl=(v,u,dt)=>wlTool(v,u,dt);
 VTOOL.rl=(v,u,dt)=>{if(Math.abs(v.v)<0.05)return;const c=Math.cos(v.yaw),s=Math.sin(v.yaw);
   for(const a of[-1.7,1.7])for(let b=-1.0;b<=1.01;b+=0.25){const x=v.x+c*a+s*b,z=v.z-s*a+c*b,k=T.near(x,z);if(k<0)continue;
     if(AS[k]===1){AS[k]=2;T.touch(k)}else if(!AS[k]){T.cp[k]=Math.min(1,T.cp[k]+dt*0.4);T.w[k]=Math.min(1,T.w[k]+dt*0.3);if(T.c[k]<0.5&&T.h[k]-T.b[k]>0.02){T.h[k]-=0.01*dt;if(T.cp[k]>0.9){T.c[k]=1}T.touch(k)}}}};
@@ -2166,8 +2187,8 @@ function stack(p){const st=PL.stk,bm=st.userData.bm;STK.a+=STK.da*0.05;if(STK.a>
   if(PL.built.pad){PL.pad.t+=p.t;PL.pad.rem+=p.g*0.82}}
 
 /* ---------- Mağaza, görevler, paneller ---------- */
-const MPRICE={hv:10000,ex:12000,tr:6000,dz:12000,gd:9000,dr:9000,ch:4000,pv:8000,rl:4000,pk:3000,mt:40000,sh:90000};
-const MDESC={hv:'Ağaç keser, tomruklar (vinç 10 m)',ex:'20 t paletli ekskavatör',tr:'6x6 arazi damperi, ~12 m³',dz:'D9 sınıfı dozer, ripper',gd:'Yol ve şev tesviyesi',dr:'Arama sondajı + patlatma deliği',ch:'Patlatma deliklerini doldurur',pv:'Toprak yolu asfaltlar',rl:'Asfaltı ve dolguyu sıkıştırır',pk:'Hızlı ulaşım, tava',mt:'230 t yük, rijit şasi',sh:'540 t, 29 m³ kova'};
+const MPRICE={wl:14000,hv:10000,ex:12000,tr:6000,dz:12000,gd:9000,dr:9000,ch:4000,pv:8000,rl:4000,pk:3000,mt:40000,sh:90000};
+const MDESC={wl:'Belden kırma ön yükleyici, 4.2 m³ kova',hv:'Ağaç keser, tomruklar (vinç 10 m)',ex:'20 t paletli ekskavatör',tr:'6x6 arazi damperi, ~12 m³',dz:'D9 sınıfı dozer, ripper',gd:'Yol ve şev tesviyesi',dr:'Arama sondajı + patlatma deliği',ch:'Patlatma deliklerini doldurur',pv:'Toprak yolu asfaltlar',rl:'Asfaltı ve dolguyu sıkıştırır',pk:'Hızlı ulaşım, tava',mt:'230 t yük, rijit şasi',sh:'540 t, 29 m³ kova'};
 const PNL={cur:null};
 function pnlOpen(id,html){PNL.cur=id;$('pnlB').innerHTML=html;$('pnl').classList.add('on')}
 function pnlClose(){PNL.cur=null;$('pnl').classList.remove('on');cv.focus()}
@@ -2268,7 +2289,7 @@ function v16Frame(dt){WSA+=dt;let n=0;while(WSA>1/30&&n<2){wsStep(1/30);WSA-=1/3
     ECO.t+=dt;if(frameN%60===0)ECO.price=Math.max(60,Math.min(110,ECO.price*(1+(Math.random()-.5)*0.01)));SAVT-=dt;if(SAVT<=0)saveGame();if(frameN%30===0)taskTick()}
   for(const id of VORD)if(ACT[id])vPose(VEH[id]);
   if(frameN%10===0)ecoHud()}
-const FUEL={hv:0.05,ex:0.08,dz:0.15,tr:0.08,sh:1.2,mt:0.6,gd:0.08,dr:0.1,ch:0.06,pv:0.06,rl:0.04,pk:0.02};
+const FUEL={wl:0.06,hv:0.05,ex:0.08,dz:0.15,tr:0.08,sh:1.2,mt:0.6,gd:0.08,dr:0.1,ch:0.06,pv:0.06,rl:0.04,pk:0.02};
 function ecoHud(){const e=$('eco');if(!e)return;const ps=panSpot(),pb=$('bPan');if(pb)pb.style.display=ps&&(MACH==='pk'||!CAREER())?'':'none';
   const nch=HOLES.filter(h=>h.charged).length,nbl=HOLES.filter(h=>h.t==='bl'&&h.done&&!h.charged).length,bb=$('bBlast');bb.style.display='';bb.textContent=nch?'💥 Patlat ('+nch+' dolu)':'💥 Patlatma';bb.classList.toggle('pri',nch>0);
   const hint=nch?'Patlatmaya hazır: makineleri 30 m uzaklaştır → 💥 Patlat (X)':nbl?nbl+' boş delik: şarj aracını (8) deliğin yanına getir, Space basılı tut':(MACH==='dr'?'Sondaj: R ile direği kaldır, T ile delik tipi, Space ile del':'');
@@ -2285,6 +2306,7 @@ function vehLab(v){switch(v.id){
   case'ch':{const n=HOLES.filter(h=>h.t==='bl'&&h.done&&!h.charged).length,c=HOLES.filter(h=>h.charged).length;return['Dolu delik',c+' dolu · '+n+' boş',Math.min(1,v.holeP/1.3),'Deliğin yanında dur, Space basılı tut · X ile ateşle']}
   case'pv':return['Tabla',v.sd>0.9?'İNDİ: asfaltlıyor':'kalkık',v.sd,'F/↓ tablayı indir, yavaş sür · asfalt '+ECO.paved.toFixed(0)+' m² · zemin: '+surf(v.x,v.z).n];
   case'rl':return['Sıkıştırma',surf(v.x,v.z).n,0,'Taze asfaltın üstünden geç: sıkışınca kamyonlar tam hızda gider'];
+  case'wl':return['Kova',(v.load).toFixed(1)+' / '+WL_CAP+' m³'+(v.lift>0.01?' · ön kalktı':''),v.load/WL_CAP,'↑↓ kol · ←→ (Q/E) kova devir · yığına sür, kovayı kaldır, kamyona boşalt'];
   case'hv':return['Vinç',['hazır','uzanıyor','kesiyor','düşüyor','tomrukluyor','toplanıyor'][HVQ.ph],0,'Ağacın yanında dur, Space: kes ve tomrukla · kesilen ağaç '+(ECO.wood||0)];
   default:return['Zemin',surf(v.x,v.z).n,surf(v.x,v.z).vf,panSpot()?'Suyun kenarındasın: Tava (P)':'Nehir kuzeyde · zemin: '+surf(v.x,v.z).n]}}
 function vehTouch(t,L,Rl){L.textContent='Gaz · direksiyon';
@@ -2292,9 +2314,10 @@ function vehTouch(t,L,Rl){L.textContent='Gaz · direksiyon';
   else if(MACH==='ch'){t.append(holdBtn('Doldur','hit'));Rl.textContent='—'}
   else if(MACH==='pv'){Rl.textContent='Tabla ↓ indir · ↑ kaldır'}
   else if(MACH==='hv'){t.append(holdBtn('Kes','hit'));Rl.textContent='—'}
+  else if(MACH==='wl'){Rl.textContent='Kol ↕ · kova ↔'}
   else if(MACH==='pk'){const b=document.createElement('button');b.textContent='Tava';b.onclick=panStart;t.append(b);Rl.textContent='—'}
   else Rl.textContent='—'}
-function vehHelp(m){return{dr:'Sondaj: R/F direk, Space del, T delik tipi (patlatma/arama), K sonuçlar',ch:'Şarj aracı: patlatma deliğinin yanında dur, Space basılı tut. X ile ateşle',pv:'Finişer: F/↓ tablayı indir, yavaşça sür. Silindirle sıkıştır',rl:'Silindir: taze asfaltın üstünden geç',hv:'Harvester: ağaca yaklaş, dur, Space ile kes. Kütükleri ekskavatör ya da dozerle sök',pk:'Pikap: nehir kenarında dur, P ile tava çalkala'}[m]}
+function vehHelp(m){return{dr:'Sondaj: R/F direk, Space del, T delik tipi (patlatma/arama), K sonuçlar',ch:'Şarj aracı: patlatma deliğinin yanında dur, Space basılı tut. X ile ateşle',pv:'Finişer: F/↓ tablayı indir, yavaşça sür. Silindirle sıkıştır',rl:'Silindir: taze asfaltın üstünden geç',wl:'Ön yükleyici: kovayı yere indir, yığına sür (dolar), ↑ ile kaldır, kamyonun yanında ← ile boşalt. Kovayı bastırınca ön taraf kalkar',hv:'Harvester: ağaca yaklaş, dur, Space ile kes. Kütükleri ekskavatör ya da dozerle sök',pk:'Pikap: nehir kenarında dur, P ile tava çalkala'}[m]}
 function startMode(mode,cont){MODE=mode;document.body.classList.toggle('career',mode==='career');
   if(mode==='career'){for(const k of MORD){const el=$('m'+k[0].toUpperCase()+k[1]);if(el)el.checked=(k==='ex'||k==='pk')}
     if(!cont){Object.assign(ECO,{money:300,gold:0,price:85,sold:0,prod:0,pans:0,sluiceG:0,assays:0,best:0,blasts:0,holesBl:0,oreT:0,buyT:0,paved:0,fuel:0,tasks:{},t:0})}}
@@ -2407,9 +2430,122 @@ function hvTool(v,u,dt){const c=v.g.userData.crane,lerp=(a,b,k)=>a+(b-a)*Math.mi
   hvIK(v)}
 SND.saw=()=>{if(!sndOK())return;const t=AU.ctx.currentTime;osc(t,0.7,0.12,320,420,'sawtooth');nburst(t,0.7,0.2,'bandpass',2600,1800,1.2)};
 
+/* ==================== v0.18: belden kırma ön yükleyici, gece modu ==================== */
+/* ---------- Ön yükleyici (CAT 966 sınıfı: ~23 t, 225 kW, dingil mesafesi 3.55 m, 4.2 m³ kova, 1.64 m lastik) ---------- */
+const WL_CAP=4.2;
+function wlModel(g){const Y=M('#f2b21b'),YD=M('#c98d0c'),CP=M('#26282d'),W=g.userData.W,LT=M('#fff6c9',0,0,{emissive:lin('#fff3b0'),emissiveIntensity:0.6});
+  const add=(par,x,z,r,w)=>{const wg=new THREE.Group();wg.position.set(x,r,z);par.add(wg);const sp=new THREE.Group();wg.add(sp);cyl(r,w,RUBBER,sp,0,0,0,'z',24);
+    for(let i=0;i<18;i++){const a=i/18*6.28;for(const h of[-1,1]){const l=box(0.15,0.08,w*0.48,RUBBER,sp,Math.cos(a)*r,Math.sin(a)*r,h*w*0.24);l.rotation.z=a;l.rotation.x=h*0.45;l.noOutline=true}}
+    cyl(r*0.58,w+0.02,Y,sp,0,0,0,'z',14);cyl(r*0.25,w+0.05,DARK,sp,0,0,0,'z',10);W.push({g:wg,s:sp,front:false,r});return wg};
+  // arka şasi: motor kaputu (arkaya doğru alçalan), radyatör ızgarası, karşı ağırlık, arka aks
+  box(3.9,0.55,1.15,DARK,g,-2.15,1.0,0);for(const s of[-1,1]){add(g,-1.78,s*1.12,0.82,0.62);const f=box(1.7,0.08,0.72,YD,g,-1.78,1.74,s*1.12);box(0.08,0.4,0.72,YD,g,-2.6,1.56,s*1.12)}
+  ext([[-1.85,1.3],[-4.0,1.3],[-4.12,2.2],[-3.9,2.38],[-1.9,2.55]],1.55,Y,g,0,0.06);for(let i=0;i<5;i++)for(const s of[-1,1])box(1.4,0.03,0.02,DARK,g,-3.0,1.55+i*0.15,s*0.79);
+  box(0.08,0.85,1.4,DARK,g,-4.16,1.8,0);for(let i=0;i<6;i++)box(0.03,0.05,1.36,Y,g,-4.2,1.45+i*0.13,0);box(0.45,0.75,2.35,YD,g,-4.3,1.0,0);
+  for(const s of[-1,1]){const l=box(0.05,0.12,0.25,M('#d32f2f',0,0,{emissive:lin('#a00000'),emissiveIntensity:0.5}),g,-4.54,1.25,s*0.9);l.noOutline=true;const w=box(0.06,0.14,0.26,LT,g,-4.15,2.3,s*0.6);w.noOutline=true}
+  cyl(0.08,0.75,DARK,g,-2.3,2.9,0.45,null,10);cyl(0.13,0.5,YD,g,-2.6,2.78,-0.45,null,10);box(0.6,0.5,0.6,DARK,g,-0.15,1.15,0);cyl(0.18,0.9,STEEL,g,0,1.15,0,null,10);
+  // kabin: mafsalın hemen arkasında, geniş camlı
+  {const x0=-1.75,x1=-0.25,cx=(x0+x1)/2,yb=1.85,yt=3.6;rbox(1.6,0.3,1.95,0.05,Y,g,cx,yb,0);
+    for(const x of[x0+0.05,x1-0.05])for(const z of[-0.92,0.92])box(0.07,yt-yb,0.07,CP,g,x,(yb+yt)/2+0.1,z).noOutline=true;
+    rbox(1.8,0.14,2.15,0.05,Y,g,cx,yt+0.08,0).noOutline=true;{const w=box(0.03,yt-yb-0.35,1.8,GLASS,g,x1-0.02,(yb+yt)/2+0.12,0);w.rotation.z=0.05}
+    box(1.35,yt-yb-0.4,0.02,GLASS,g,cx,(yb+yt)/2+0.15,0.93);box(1.35,yt-yb-0.4,0.02,GLASS,g,cx,(yb+yt)/2+0.15,-0.93);box(0.02,1.0,1.7,GLASS,g,x0,(yb+yt)/2+0.3,0);
+    box(0.45,0.5,0.5,DARK,g,cx-0.25,yb+0.5,0);for(const s of[-1,1]){const l=box(0.07,0.12,0.24,LT,g,x1+0.08,yt+0.05,s*0.7);l.noOutline=true;const r_=box(0.07,0.12,0.24,LT,g,x0-0.08,yt+0.05,s*0.7);r_.noOutline=true;cyl(0.015,0.5,DARK,g,x1+0.15,yt-0.3,s*1.15,'z',5)}
+    {const b=box(0.14,0.14,0.14,M('#ff8a1a',0,0,{emissive:lin('#ff6a00'),emissiveIntensity:0.6}),g,cx-0.4,yt+0.22,-0.6);b.noOutline=true}
+    for(let q=0;q<4;q++)box(0.36,0.05,0.24,STEEL,g,-1.1,0.55+q*0.36,-1.32);cyl(0.02,1.4,M('#e9e3d2'),g,-1.35,1.6,-1.25,null,5)}
+  // ön şasi: kule, ön aks, çamurluklar; kollar ve kova bu gruba bağlı (mafsalla döner)
+  const fr=new THREE.Group();g.add(fr);g.userData.fr=fr;
+  box(2.4,0.6,1.1,DARK,fr,1.2,1.0,0);for(const s of[-1,1]){box(0.55,1.55,0.24,DARK,fr,0.6,1.65,s*0.55);add(fr,1.78,s*1.12,0.82,0.62);const f=box(1.4,0.08,0.72,YD,fr,1.9,1.74,s*1.12);f.rotation.z=-0.12}
+  {const l1=box(0.06,0.14,0.28,LT,fr,0.85,2.45,0.35);l1.noOutline=true;const l2=box(0.06,0.14,0.28,LT,fr,0.85,2.45,-0.35);l2.noOutline=true}
+  const arm=new THREE.Group();arm.position.set(0.6,2.15,0);fr.add(arm);for(const s of[-1,1])box(3.35,0.38,0.22,Y,arm,1.65,0,s*0.62);cyl(0.13,1.25,Y,arm,1.55,0,0,'z',10);
+  const bell=box(0.9,0.22,0.2,YD,arm,1.25,0.45,0);bell.rotation.z=0.5;
+  const bk=new THREE.Group();bk.position.set(3.3,0,0);arm.add(bk);
+  const P=[[-0.32,0.85],[-0.32,-0.05],[-0.16,-0.36],[0.1,-0.5],[1.05,-0.5]];for(let i=0;i<P.length-1;i++)seg(P[i],P[i+1],0.07,3.1,Y,bk);
+  for(const s of[-1,1])ext([[-0.32,0.85],[-0.32,-0.05],[-0.16,-0.36],[0.1,-0.5],[1.05,-0.5],[0.9,-0.2],[0.25,0.55]],0.06,Y,bk,s*1.55,0.01);
+  box(0.26,0.06,3.15,STEEL,bk,0.98,-0.5,0);for(let i=0;i<9;i++)box(0.2,0.06,0.1,STEEL,bk,1.18,-0.5,-1.4+i*0.35);box(0.08,0.32,3.1,YD,bk,-0.32,1.0,0);for(const z of[-0.45,0.45])box(0.25,0.3,0.12,DARK,bk,-0.42,0.65,z);
+  const hm=TOON('#8a6a48'),heap=new THREE.Mesh(new THREE.SphereGeometry(1,12,8),hm);heap.position.set(0.4,-0.22,0);heap.visible=false;heap.castShadow=true;bk.add(heap);
+  const lc=[makeCyl(0.12,0.08),makeCyl(0.12,0.08)],tc=makeCyl(0.13,0.085);for(const c of[...lc,tc])outline(c.g);
+  g.userData.wl={fr,arm,bk,heap,hm,lc,tc}}
+const WLE=[];for(let z=-1.45;z<=1.46;z+=0.29)WLE.push(new V3(1.12,-0.5,z));
+const WLF=[];for(const p of[[0.1,-0.53],[0.6,-0.53],[-0.16,-0.4],[-0.34,-0.05]])for(const z of[-1.4,0,1.4])WLF.push(new V3(p[0],p[1],z));
+function wlPose(v){const w=v.g.userData.wl;w.arm.rotation.z=v.la;w.bk.rotation.z=v.bt-v.la;v.g.updateMatrixWorld(true)}
+function wlDraw(v){const w=v.g.userData.wl;for(let i=0;i<2;i++){const s=i?1:-1;_p1.set(0.95,0.85,s*0.55);w.fr.localToWorld(_p1);_p2.set(1.55,-0.22,s*0.62);w.arm.localToWorld(_p2);placeCyl(w.lc[i],_p1,_p2,1.0)}
+  _p1.set(0.95,0.55,0);w.arm.localToWorld(_p1);_p2.set(-0.4,0.7,0);w.bk.localToWorld(_p2);placeCyl(w.tc,_p1,_p2,1.1);
+  const f=v.load/WL_CAP;w.heap.visible=f>0.02;if(w.heap.visible){const s=Math.cbrt(f);w.heap.scale.set(0.62*s+0.1,0.45*s+0.05,1.45*s+0.1);w.heap.position.set(0.38,-0.48+0.42*s,0);w.hm.color.copy(_pc.setRGB(...(v.mf>4?C3('#a8763e'):v.mf>1.3?C3('#8e8a82'):v.mf>0.5?C3('#b48a58'):C3('#7a5838'))))}}
+function wlPen(v){let m=1e9;for(const p of WLF){_p1.copy(p).applyMatrix4(v.g.userData.wl.bk.matrixWorld);const k=T.near(_p1.x,_p1.z);if(k>=0&&T.c[k]>0.5)m=Math.min(m,_p1.y-T.h[k])}
+  for(const p of WLE){_p1.copy(p).applyMatrix4(v.g.userData.wl.bk.matrixWorld);const k=T.near(_p1.x,_p1.z);if(k>=0&&T.c[k]>0.5)m=Math.min(m,_p1.y-T.h[k]+0.1)}return m}
+function wlTool(v,u,dt){const w=v.g.userData.wl,rf=Math.max(0.35,v.rpm/v.maxR),la0=v.la,bt0=v.bt,on=v.eng===2;
+  if(!v.pe){v.pe=WLE.map(()=>new V3());v.peOK=false}
+  v.la=Math.max(-0.62,Math.min(0.92,v.la+(on?u.ax:0)*0.36*dt*rf));v.bt=Math.max(-0.9,Math.min(0.8,v.bt+(on?u.tl:0)*0.95*dt*rf));
+  
+  vPose(v);wlPose(v);let pen=wlPen(v);
+  // kova zemine bastırıyorsa önce makinenin ön tarafı kalkar (arka aks etrafında), kalkamazsa hareket durur
+  if(pen<-0.06&&(v.la<la0||v.bt!==bt0)){const l0=v.lift;for(let it=0;it<4&&pen<-0.06&&v.lift<0.15;it++){v.lift=Math.min(0.15,v.lift+(-pen-0.03)/5.4);vPose(v);wlPose(v);pen=wlPen(v)}
+    if(pen<-0.06){v.lift=l0;v.la=la0;v.bt=bt0;vPose(v);wlPose(v)}}
+  if(v.lift>0){const l0=v.lift;v.lift=Math.max(0,l0-0.6*dt);vPose(v);wlPose(v);if(wlPen(v)<-0.06){v.lift=l0;vPose(v);wlPose(v)}else if(v.lift===0&&l0>0.01){shk('wl',-0.05,0,0.04);sfx.hit(0.4,'truck')}}
+  // kesme ve dolum: kesici kenar ileri itilirken önündeki malzemeyi alır; sıkı zeminde ince talaş
+  let cutA=0,vp=0;const room=()=>WL_CAP-v.load,flat=v.bt>-0.3&&v.bt<0.5;
+  _p2.set(1,0,0).transformDirection(w.bk.matrixWorld);const fx=_p2.x,fz=_p2.z;
+  for(let q=0;q<WLE.length;q++){_p1.copy(WLE[q]).applyMatrix4(w.bk.matrixWorld);const pe=v.pe[q],dx=_p1.x-pe.x,dy=_p1.y-pe.y,dz=_p1.z-pe.z,fwd=(dx*fx+dz*fz)/dt;pe.copy(_p1);if(!v.peOK)continue;
+    const k=T.near(_p1.x,_p1.z);if(k<0)continue;const h=T.h[k];if(h<=_p1.y)continue;
+    const intact=T.c[k]>0.5;let rem=h-Math.max(_p1.y,T.b[k]);if(rem<=0)continue;
+    if(intact){if(fwd<0.08||!flat||rem<0.035)continue;rem=Math.min(rem,0.06+0.05*Math.min(1,fwd))}
+    else if(fwd<0.02&&!(v.bt>bt0+1e-4))continue;
+    const mf=T.matF(k),sk=sigAt(k);T.h[k]-=rem;T.cp[k]=0;T.touch(k);let vol=rem*DX*DX*(intact?SWELL:1);cutA+=rem*DX*DX*sk*(intact?2.2:0.6);
+    const take=Math.min(vol,Math.max(0,room()));if(take>0){v.mf=(v.mf*v.load+mf*take)/(v.load+take);v.load+=take;vol-=take}
+    if(vol>1e-6)pushDep(_p1.x+fx*0.3,_p1.z+fz*0.3,fx,fz,vol,mf)}
+  v.peOK=true;
+  for(let q=0;q<WLE.length;q+=2)for(const f of[0.35,0.8]){_p1.copy(WLE[q]).applyMatrix4(w.bk.matrixWorld);const y=_p1.y,h=T.sample(_p1.x+fx*f,_p1.z+fz*f);if(h>y)vp+=Math.min(1.4,h-y)*0.58*0.45}
+  const spd=Math.max(0.3,Math.abs(v.v));v.fres=vp*1700*9.81*0.55+cutA/(spd*dt)*0.002*1e3;if(v.la!==la0||v.bt!==bt0)v.pow=Math.max(v.pow,0.45);if(pen<0&&v.v>0.05)v.fres+=60e3;
+  // boşaltma: kova öne yatınca yük kenardan akar (topaklar kamyon kasasına ya da yere düşer)
+  const tip=-v.bt;if(v.load>0.01&&tip>0.15){const out=Math.min(v.load,(tip-0.1)*2.4*dt*(0.4+v.load/WL_CAP));v.load-=out;v.acc=(v.acc||0)+out;
+    while(v.acc>=0.11){v.acc-=0.11;const q=(Math.random()*WLE.length)|0;_p1.copy(WLE[q]).applyMatrix4(w.bk.matrixWorld);_p1.y-=0.15;const r=0.24+Math.random()*0.06;
+      if(addChunk(_p1.x+fx*0.25,_p1.y,_p1.z+fz*0.25,v.mf,fx*0.6+Math.cos(v.yaw)*v.v,-0.4,fz*0.6-Math.sin(v.yaw)*v.v,r,0)<0){const c=bedLocalAny(_p1.x,_p1.y-1,_p1.z);if(c){useTruck(c);Bed.deposit(_bx,_bz,0.11,v.mf)}else T.deposit(_p1.x,_p1.z,0.11,v.mf)}}
+    if(Math.random()<0.3)dust(_p1.x,_p1.y-0.5,_p1.z,0.5)}
+  wlDraw(v)}
+
+/* ---------- Gece modu: ay ışığı, yıldızlar, farlar, çalışma lambaları, ışık hüzmeleri, sokak lambaları, yanan pencereler ---------- */
+const NG={on:false,k:0,mats:null,beams:{},spots:[],win:null,glow:[],t:0};
+function ngCollect(){if(NG.mats)return;NG.mats=[];const seen=new Set();scene.traverse(o=>{const m=o.material;if(!m||Array.isArray(m)||seen.has(m)||!m.emissive)return;seen.add(m);const e=m.emissive,L=e.r+e.g+e.b;
+  if(m.emissiveIntensity>0.2&&L>0.25)NG.mats.push({m,b:m.emissiveIntensity,beacon:e.r>0.5&&e.g<0.35&&e.b<0.1})})}
+const NGLIGHT={ex:[upperRef,[1.3,1.95,-0.75],[1,-0.25,0]],dz:['dz',[2.6,2.7,0],[1,-0.3,0]],tr:['tr',[4.3,1.9,0],[1,-0.12,0]],mt:['mt',[6.75,1.5,0],[1,-0.1,0]],sh:['sh',[0.4,3.3,-0.6],[1,-0.3,0]],gd:['gd',[4.9,1.12,0],[1,-0.15,0]],
+  dr:['dr',[1.6,2.95,-0.65],[1,-0.3,0]],ch:['ch',[3.6,1.2,0],[1,-0.12,0]],pv:['pv',[0.3,3.0,0],[1,-0.4,0]],rl:['rl',[0.8,3.6,0],[1,-0.35,0]],pk:['pk',[2.55,1.0,0],[1,-0.08,0]],hv:['hv',[2.9,3.25,0.4],[1,-0.3,0]],wl:['wl',[0.9,2.45,0],[1,-0.25,0]]};
+function upperRef(){return upper}
+function ngGroup(id){const e=NGLIGHT[id];if(!e)return null;if(typeof e[0]==='function')return e[0]();if(id==='hv'||id==='wl')return VEH[id].g.userData.fr;return MGRP()[id]}
+function ngLights(){for(let i=0;i<2;i++){const s=new THREE.SpotLight(lin('#fff1cc'),0,60,0.55,0.55,1.2);s.castShadow=false;scene.add(s,s.target);NG.spots.push(s)}
+  NG.work=new THREE.PointLight(lin('#ffe9c4'),0,26,1.6);scene.add(NG.work)}
+ngLights();
+function ngInit(){if(NG.bgeo)return;
+  const bg=new THREE.CylinderGeometry(0.15,3.2,14,16,1,true);bg.translate(0,-7,0);bg.rotateZ(Math.PI/2);NG.bgeo=bg;
+  NG.bmat=new THREE.MeshBasicMaterial({color:lin('#fff3c8'),transparent:true,opacity:0.07,blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.DoubleSide,fog:false});
+  NG.pool=new THREE.MeshBasicMaterial({color:lin('#ffe8b0'),transparent:true,opacity:0.16,blending:THREE.AdditiveBlending,depthWrite:false,fog:false});
+  const gt=(()=>{const c=document.createElement('canvas');c.width=c.height=64;const x=c.getContext('2d'),g=x.createRadialGradient(32,32,0,32,32,32);g.addColorStop(0,'rgba(255,240,200,1)');g.addColorStop(0.3,'rgba(255,220,150,.5)');g.addColorStop(1,'rgba(255,200,120,0)');x.fillStyle=g;x.fillRect(0,0,64,64);return new THREE.CanvasTexture(c)})();
+  NG.gmat=new THREE.SpriteMaterial({map:gt,color:0xffffff,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,opacity:0});
+  for(let x=-98;x<=20;x+=18)for(const s of[-1,1]){const z=112+s*4.4,y=T.sample(x,z),sp=new THREE.Sprite(NG.gmat);sp.position.set(x,y+4.8,z-s*0.8);sp.scale.setScalar(2.2);scene.add(sp);NG.glow.push(sp);
+    const pl=new THREE.Mesh(new THREE.CircleGeometry(4.5,20),NG.pool);pl.rotation.x=-Math.PI/2;pl.position.set(x,y+0.08,z-s*0.8);pl.visible=false;scene.add(pl);NG.glow.push(pl)}
+  ngCollect()}
+function ngWindows(){if(!NG.win){let n=0;for(const b of BLD)for(let q=0;q<b.t.length;q++)if(b.t[q]===3)n++;NG.win=new THREE.InstancedMesh(new THREE.BoxGeometry(VS*1.01,VS*0.8,VS*1.01),new THREE.MeshBasicMaterial({color:lin('#ffd27a'),fog:true}),n);NG.win.frustumCulled=false;scene.add(NG.win)}
+  let n=0;const o=_bo;for(const b of BLD)for(let q=0;q<b.t.length;q++){if(b.t[q]!==3||!b.alive[q])continue;if(((q*2654435761)>>>0)%5===0)continue;bPos(b,q,o.position);o.rotation.set(0,Math.atan2(b.s,b.c),0);o.scale.setScalar(1);o.updateMatrix();NG.win.setMatrixAt(n++,o.matrix)}
+  NG.win.count=n;NG.win.instanceMatrix.needsUpdate=true}
+function toggleNight(){NG.on=!NG.on;ngInit();if(NG.on){ngWindows();if(!NG.env)NG.env=scene.environment;scene.environment=null}else if(NG.env)scene.environment=NG.env;$('bNight').textContent=NG.on?'☀️ Gündüz (N)':'🌙 Gece (N)';toast(NG.on?'Gece modu: farlar ve çalışma lambaları açık':'Gündüz modu')}
+const DAYC={fog:lin('#c9e4f6'),hemi:0.75,sun:1.75,sunC:lin('#fff4e0')},NIGHTC={fog:lin('#070d1a'),hemi:0.1,sun:0.2,sunC:lin('#9fb6ff')};let HEMI=null;
+scene.traverse(o=>{if(o.isHemisphereLight)HEMI=o});
+const _nc=new THREE.Color();
+function ngFrame(dt){const tg=NG.on?1:0;if(NG.k===tg&&!NG.on)return;NG.k+=Math.max(-dt*0.8,Math.min(dt*0.8,tg-NG.k));const k=NG.k,s=k*k*(3-2*k);NG.t+=dt;
+  skyMat.uniforms.night.value=s;scene.fog.color.copy(_nc.copy(DAYC.fog).lerp(NIGHTC.fog,s));scene.fog.near=70-40*s;scene.fog.far=300-120*s;
+  if(HEMI)HEMI.intensity=DAYC.hemi+(NIGHTC.hemi-DAYC.hemi)*s;sunL.intensity=DAYC.sun+(NIGHTC.sun-DAYC.sun)*s;sunL.color.copy(_nc.copy(DAYC.sunC).lerp(NIGHTC.sunC,s));
+  if(!NG.mats)return;for(const e of NG.mats){e.m.emissiveIntensity=e.b*(1+s*(e.beacon?3*(0.5+0.5*Math.sin(NG.t*7)):2.6))}
+  NG.gmat.opacity=s*0.9;for(const p of NG.glow)if(p.isMesh)p.visible=s>0.05;if(NG.win)NG.win.visible=s>0.3;
+  // aktif makinenin farları (gerçek ışık) ve tüm makinelerin hüzmeleri
+  const id=MACH,G=ngGroup(id),L=NGLIGHT[id];
+  for(let i=0;i<2;i++){const sp=NG.spots[i];sp.intensity=s*3.2;if(G&&L){_p1.set(L[1][0],L[1][1],L[1][2]+(i?0.6:-0.6));G.localToWorld(_p1);sp.position.copy(_p1);_p2.set(L[1][0]+L[2][0]*10,L[1][1]+L[2][1]*10,L[1][2]+(i?2.4:-2.4));G.localToWorld(_p2);sp.target.position.copy(_p2)}}
+  if(G&&L){_p1.set(L[1][0]-1.2,L[1][1]+1.6,L[1][2]);G.localToWorld(_p1);NG.work.position.copy(_p1)}NG.work.intensity=s*1.4;
+  for(const k_ of MORD){const g=ngGroup(k_);let b=NG.beams[k_];if(!g)continue;if(!b){b=new THREE.Mesh(NG.bgeo,NG.bmat);const e=NGLIGHT[k_];b.position.set(e[1][0],e[1][1],e[1][2]);b.rotation.z=Math.atan2(e[2][1],e[2][0]);b.renderOrder=5;g.add(b);NG.beams[k_]=b}
+    b.visible=s>0.05&&ACT[k_]&&((MOBJ()[k_].eng??2)===2)}
+  NG.bmat.opacity=0.07*s;wMesh.material.emissiveIntensity=0.4*(1-0.8*s);if(s>0.3&&frameN%120===0)ngWindows()}
+$('bNight').onclick=()=>{toggleNight();$('c').focus()};
+
 /* ---------- Makine seçimi ve motorlar ---------- */
-const ACT={ex:true,dz:true,tr:true,sh:true,mt:true,gd:true},MORD=['ex','dz','tr','sh','mt','gd','dr','ch','pv','rl','pk','hv'];
-const MNAME={ex:'Ekskavatör',dz:'Dozer D9',tr:'Kaya kamyonu',sh:'Shovel 540 t',mt:'Maden kamyonu',gd:'Greyder',dr:'Sondaj makinesi',ch:'Şarj aracı',pv:'Asfalt finişeri',rl:'Silindir',pk:'Pikap',hv:'Harvester'};
+const ACT={ex:true,dz:true,tr:true,sh:true,mt:true,gd:true},MORD=['ex','dz','tr','sh','mt','gd','dr','ch','pv','rl','pk','hv','wl'];
+const MNAME={ex:'Ekskavatör',dz:'Dozer D9',tr:'Kaya kamyonu',sh:'Shovel 540 t',mt:'Maden kamyonu',gd:'Greyder',dr:'Sondaj makinesi',ch:'Şarj aracı',pv:'Asfalt finişeri',rl:'Silindir',pk:'Pikap',hv:'Harvester',wl:'Ön yükleyici'};
 /* ---------- Ön kepçe (face shovel), EX5600 sınıfı: ~540 t, 29 m³ alttan boşaltmalı kova, 2 x 1450 kW ---------- */
 const SH={x:SHP.x,z:SHP.z,yaw:0,swing:0,boom:0.55,stick:-2.2,bk:0.25,clam:0,cutV:0,
   v:{swing:0,boom:0,stick:0,bk:0,clam:0,l:0,r:0},rpm:0,pow:0,load:0,mf:1,fcut:0,s:1,trk:{l:0,r:0},eng:0,crank:0,idle:true,lastIn:0,mudT:0,
@@ -2602,7 +2738,7 @@ function shStep(u,dt){SH.u=u;const now=performance.now();if(Object.values(u).som
   // devir
   const tgt=run?(SH.idle?1000:1800-220*SH.pow*SH.pow):SH.eng===1?190:0,rate=tgt>SH.rpm?520:380;SH.rpm+=Math.max(-rate*dt,Math.min(rate*dt,tgt-SH.rpm));if(run&&SH.rpm<650)SH.rpm=650}
 
-const MOBJ=()=>({ex,dz:DZ,tr:TRUCKS[0].TRK,sh:SH,mt:TRUCKS[1].TRK,gd:GD,dr:VEH.dr,ch:VEH.ch,pv:VEH.pv,rl:VEH.rl,pk:VEH.pk,hv:VEH.hv});
+const MOBJ=()=>({ex,dz:DZ,tr:TRUCKS[0].TRK,sh:SH,mt:TRUCKS[1].TRK,gd:GD,dr:VEH.dr,ch:VEH.ch,pv:VEH.pv,rl:VEH.rl,pk:VEH.pk,hv:VEH.hv,wl:VEH.wl});
 function curM(){return MOBJ()[MACH]}
 function trucksStep(dt){for(const c of TACT){useTruck(c);const inp=(MACH===c.id&&started&&TRK.eng===2)?readTr():{thr:0,st:0,bed:0};trkStep(inp,dt)}}
 function engTick(m,dt){if(m.eng===1){m.crank=(m.crank||0)+dt;if(m.crank>1.3){m.eng=2;m.rpm=Math.max(m.rpm,760)}}}
@@ -2630,8 +2766,12 @@ function step(dt){const u=(MACH==='ex'&&started&&ex.eng===2)?readInput():Z_EX(),
   ex.swing+=ex.v.swing*dt;
   for(const j of['boom','arm','bucket']){ex[j]+=ex.v[j]*dt;const[a,b]=LIM[j];if(ex[j]<a){ex[j]=a;ex.v[j]=0}if(ex[j]>b){ex[j]=b;ex.v[j]=0}}
   pose();
-  const ra=rockClear(),col=collisions(),pa=plowClear(),oa=boulderClear();
-  if((pa<-0.25&&pa<pb-0.0015)||(oa<-0.02&&oa<ob-0.0015)){{const nowB=performance.now(),sv=Math.abs(ex.v.boom)+Math.abs(ex.v.arm)+Math.abs(ex.v.bucket);if(nowB-(ex.lastBump||0)>250&&sv>0.15){ex.lastBump=nowB;shk('ex',0.08*Math.min(1,sv)*Math.cos(ex.swing),-0.06*Math.min(1,sv)*Math.sin(ex.swing),0.03)}}[ex.swing,ex.boom,ex.arm,ex.bucket]=prev;for(const j of['swing','boom','arm','bucket'])ex.v[j]=0;pose()}
+  let ra=rockClear(),col=collisions(),pa=plowClear(),oa=boulderClear();
+  let pen=pa<-0.06&&pa<pb-0.0015;
+  // kova zemine bastırılınca: hidrolik güç makineyi devrilme kenarı etrafında kaldırır (en fazla ~11°)
+  if(pen&&!(oa<-0.02&&oa<ob-0.0015)){const l0=ex.lift,A_=exLiftArm();for(let it=0;it<4&&pen&&ex.lift<0.2;it++){ex.lift=Math.min(0.2,ex.lift+(-pa-0.045)/A_);pose();pa=plowClear();pen=pa<-0.06&&pa<pb-0.0015}
+    if(pen){ex.lift=l0;pose();pa=plowClear()}else{ex.lv=0;ra=rockClear();if(ex.lift>0.02&&Math.random()<0.05)sfx.clank&&sfx.clank()}}
+  if(pen||(oa<-0.02&&oa<ob-0.0015)){{const nowB=performance.now(),sv=Math.abs(ex.v.boom)+Math.abs(ex.v.arm)+Math.abs(ex.v.bucket);if(nowB-(ex.lastBump||0)>250&&sv>0.15){ex.lastBump=nowB;shk('ex',0.08*Math.min(1,sv)*Math.cos(ex.swing),-0.06*Math.min(1,sv)*Math.sin(ex.swing),0.03)}}[ex.swing,ex.boom,ex.arm,ex.bucket]=prev;for(const j of['swing','boom','arm','bucket'])ex.v[j]=0;pose()}
   else if((ra<-0.03&&ra<rb-0.0015)||col.n>cb){const sv=Math.abs(ex.v.swing)+Math.abs(ex.v.boom)+Math.abs(ex.v.arm)+Math.abs(ex.v.bucket),v0={...ex.v};
     [ex.swing,ex.boom,ex.arm,ex.bucket]=prev;for(const j of['swing','boom','arm','bucket'])ex.v[j]=-v0[j]*0.22;pose();
     {const nowB=performance.now();if(nowB-(ex.lastBump||0)>180){ex.lastBump=nowB;const A=0.05+0.16*Math.min(1,sv),sg=(v0.boom+0.4*v0.arm)<0?1:-1,cs=Math.cos(ex.swing),sn=Math.sin(ex.swing);
@@ -2639,6 +2779,9 @@ function step(dt){const u=(MACH==='ex'&&started&&ex.eng===2)?readInput():Z_EX(),
     const now2=performance.now();
     if(col.n>cb){if(col.what!=='arm'&&now2-ex.lastHit>450)sfx.hit(Math.min(1,sv*1.2),col.what);ex.lastHit=now2}
     else{if(now2-ex.lastRock>450)sfx.scrapeRock();ex.lastRock=now2}}
+  // kalkmış makine kendi ağırlığıyla iner; kova taşıyorsa havada kalır
+  if(ex.lift>0){ex.lv+=4.2*dt;const l0=ex.lift,p0=plowClear();ex.lift=Math.max(0,l0-ex.lv*dt);pose();const p1=plowClear();
+    if(p1<-0.06&&p1<p0-0.0005){ex.lift=l0;ex.lv=0;pose()}else if(ex.lift===0){if(ex.lv>0.25){shk('ex',0.06*Math.min(1,ex.lv)*Math.cos(ex.swing),-0.05*Math.min(1,ex.lv)*Math.sin(ex.swing),0.05);sfx.hit(Math.min(1,ex.lv*0.8),'truck');dust(ex.x,T.sample(ex.x,ex.z)+0.2,ex.z,1)}ex.lv=0}}
   if(ex.relief&&ex.fdig>30e3)toast('Tahliye valfi açtı: daha ince talaş al','rel');
   hammerTick(dt);if(ACT.dz)dzStep(du,dt);trucksStep(dt);if(ACT.sh)shStep(su,dt);if(ACT.gd)gdStep(gu,dt);v15Step(dt);soil(dt);pushSettle();dem(dt);
   // motor devri (otomatik rölanti)
@@ -2777,7 +2920,7 @@ function setMach(m){if(!ACT[m])return;const was=MACH;MACH=m;cam.tx=undefined;if(
 function nextMach(){const a=MORD.filter(k=>ACT[k]);setMach(a[(a.indexOf(MACH)+1)%a.length])}
 
 /* ---------- Butonlar ---------- */
-function applyMachines(){const sel={ex:$('mEx').checked,dz:$('mDz').checked,tr:$('mTr').checked,sh:$('mSh').checked,mt:$('mMt').checked,gd:$('mGd').checked,dr:$('mDr').checked,ch:$('mCh').checked,pv:$('mPv').checked,rl:$('mRl').checked,pk:$('mPk').checked,hv:$('mHv').checked};if(!Object.values(sel).some(v=>v))sel.ex=true;
+function applyMachines(){const sel={ex:$('mEx').checked,dz:$('mDz').checked,tr:$('mTr').checked,sh:$('mSh').checked,mt:$('mMt').checked,gd:$('mGd').checked,dr:$('mDr').checked,ch:$('mCh').checked,pv:$('mPv').checked,rl:$('mRl').checked,pk:$('mPk').checked,hv:$('mHv').checked,wl:$('mWl').checked};if(!Object.values(sel).some(v=>v))sel.ex=true;
   for(const k of MORD)ACT[k]=sel[k];
   const hide=(list)=>list.forEach(o=>{o.visible=false});
   if(!ACT.ex){hide([chassis,...cylBoom.map(c=>c.g),cylArm.g,cylBk.g,...sideL.map(c=>c.g),...hL.map(c=>c.g)]);ex.x=ex.z=9000;pose()}
@@ -2828,7 +2971,7 @@ function frame(now){const dt=Math.min(0.05,(now-last)/1000);last=now;acc+=dt;let
   if(++frameN%4===0&&GRD){updGrass(GK0,GK1);updClods(GK0,GK1);GRD=false;GK0=1e9;GK1=-1}
   {const p=ex.mf>0.5?CS:CD;SOILM.color.setRGB(p[0],p[1],p[2])}
   for(const[st,a,b]of JOY){st.rotation.z=-(ex.u[a]||0)*0.35;st.rotation.x=(ex.u[b]||0)*0.35}
-  shakeOn();if(ACT.ex){drawTracks();drawCyls()}if(ACT.dz){dzDrawTracks();dzDrawLinks()}if(ACT.gd)gdDrawLinks();for(const c of TACT){useTruck(c);trkDraw()}if(ACT.sh){shDrawTracks();shDrawCyls();shDrawLoad()}drawChunks();crumbs(dt);if(frameN%10===0)mudUpdate(dt*10);for(const c of TACT){useTruck(c);if(BMCD||frameN%6===1)updBMC()}if(MCD||frameN%6===3)updMC();drawDust(dt);exhaust(dt);drawSmoke(dt);{const VT=viewTruck();if(VT)useTruck(VT)}updateCam(dt);v15Frame(dt);
+  shakeOn();if(ACT.ex){drawTracks();drawCyls()}if(ACT.dz){dzDrawTracks();dzDrawLinks()}if(ACT.gd)gdDrawLinks();for(const c of TACT){useTruck(c);trkDraw()}if(ACT.sh){shDrawTracks();shDrawCyls();shDrawLoad()}drawChunks();crumbs(dt);if(frameN%10===0)mudUpdate(dt*10);for(const c of TACT){useTruck(c);if(BMCD||frameN%6===1)updBMC()}if(MCD||frameN%6===3)updMC();drawDust(dt);exhaust(dt);drawSmoke(dt);{const VT=viewTruck();if(VT)useTruck(VT)}updateCam(dt);v15Frame(dt);ngFrame(dt);
   {const VT=viewTruck();if(VT)useTruck(VT);const p=curM();sunL.target.position.set(p.x,0,p.z);sunL.position.set(p.x+SUN.x*40,SUN.y*40,p.z+SUN.z*40)}
   audioUpdate(dt);hud();renderer.render(scene,camera);shakeOff();requestAnimationFrame(frame)}
 requestAnimationFrame(frame);
