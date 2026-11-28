@@ -125,7 +125,7 @@ body,button,.touch,.stick,.panel,.btns{-webkit-user-select:none;user-select:none
   <button id="bPlant">🏭 Tesis (L)</button>
   <button id="bHoles">🔬 Sondaj (K)</button>
   <button id="bReset">Araziyi sıfırla</button>
-  <button id="bCam">Kabin kamerası (V)</button>
+  <button id="bCam">🎥 Serbest kamera → Kabin (V)</button>
   <button id="bNight">🌙 Gece (N)</button>
   <button id="bRain">🌧 Yağmur (Y)</button>
   <button id="bWalk">🚶 Makineden in (Enter)</button>
@@ -2708,7 +2708,7 @@ function walkStep(dt){if(!WALK.on)return;let f=ax('KeyW','KeyS'),r=-ax('KeyA','K
     else{a.t+=dt;if(Math.random()<dt*8)sfx.hammer&&sfx.hammer(0.25);if(Math.random()<dt*10)dust(DM.x[a.i],DM.y[a.i]+DM.r[a.i],DM.z[a.i],0.3);if(a.t>=1.8){WALK.anc=null;WALK.pend={t:'r',i:a.i};toast('Ankraj takıldı, zincir elinde: bir makinenin yanına git, H ile bağla')}}}}
 function walkDraw(){if(!WALK.on)return;wkG.position.set(WALK.x,WALK.y,WALK.z);wkG.rotation.y=WALK.yaw;const a=Math.sin(WALK.ph)*0.55,U=wkG.userData;U.legs[0].rotation.z=a;U.legs[1].rotation.z=-a;U.arms[0].rotation.z=-a*0.8;U.arms[1].rotation.z=a*0.8}
 const _wl=new THREE.Vector3();
-function walkCam(dt){const tx=WALK.x,tz=WALK.z,ty=WALK.y+1.5;if(cam.mode){camera.position.set(tx+Math.cos(WALK.yaw)*0.1,WALK.y+1.65,tz-Math.sin(WALK.yaw)*0.1);_wl.set(tx-Math.cos(cam.yaw)*10,WALK.y+1.65-Math.tan(cam.pitch-0.2)*10,tz-Math.sin(cam.yaw)*10);camera.lookAt(_wl);wkG.visible=false;return}
+function walkCam(dt){const tx=WALK.x,tz=WALK.z,ty=WALK.y+1.5;if(cam.mode===1){camera.position.set(tx+Math.cos(WALK.yaw)*0.1,WALK.y+1.65,tz-Math.sin(WALK.yaw)*0.1);_wl.set(tx-Math.cos(cam.yaw)*10,WALK.y+1.65-Math.tan(cam.pitch-0.2)*10,tz-Math.sin(cam.yaw)*10);camera.lookAt(_wl);wkG.visible=false;return}
   wkG.visible=true;cam.tx=cam.tx===undefined?tx:cam.tx+(tx-cam.tx)*Math.min(1,dt*8);cam.tz=cam.tz===undefined?tz:cam.tz+(tz-cam.tz)*Math.min(1,dt*8);cam.ty+=(ty-cam.ty)*Math.min(1,dt*6);cLook.set(cam.tx,cam.ty,cam.tz);
   camera.position.set(cLook.x+Math.cos(cam.pitch)*Math.cos(cam.yaw)*cam.dist,cLook.y+Math.sin(cam.pitch)*cam.dist,cLook.z+Math.cos(cam.pitch)*Math.sin(cam.yaw)*cam.dist);
   const g=T.sample(camera.position.x,camera.position.z)+0.4;if(camera.position.y<g)camera.position.y=g;camera.lookAt(cLook)}
@@ -3158,20 +3158,25 @@ function step(dt){const u=(MACH==='ex'&&started&&!WALK.on&&ex.eng===2)?readInput
   const rate=tgt>ex.rpm?700:450;ex.rpm+=Math.max(-rate*dt,Math.min(rate*dt,tgt-ex.rpm));if(ex.eng===2&&ex.rpm<600)ex.rpm=600}
 
 /* ---------- Kamera ---------- */
-const cam={yaw:Math.PI+0.55,pitch:0.38,dist:19,mode:0,ty:0};let drag=null;
+const cam={yaw:Math.PI+0.55,pitch:0.38,dist:19,mode:0,ty:0,cy:0,cp:0,fo:0,fT:0};const CAMN=['Serbest kamera','Kabin kamerası','Takip kamerası','Üstten kamera'];let drag=null;
 const cv=$('c');
 const PTR=new Map();let pinch=0;
 cv.addEventListener('pointerdown',e=>{PTR.set(e.pointerId,{x:e.clientX,y:e.clientY});drag={x:e.clientX,y:e.clientY};cv.setPointerCapture(e.pointerId);cv.focus();if(PTR.size===2){const[a,b]=[...PTR.values()];pinch=Math.hypot(a.x-b.x,a.y-b.y)}});
-cv.addEventListener('pointermove',e=>{if(PTR.has(e.pointerId))PTR.set(e.pointerId,{x:e.clientX,y:e.clientY});if(PTR.size>=2){const[a,b]=[...PTR.values()],d=Math.hypot(a.x-b.x,a.y-b.y);if(pinch>0)cam.dist=Math.max(6,Math.min(90,cam.dist*pinch/d));pinch=d;return}if(!drag)return;cam.yaw-=(e.clientX-drag.x)*0.005;cam.pitch=Math.max(0.05,Math.min(1.45,cam.pitch+(e.clientY-drag.y)*0.005));drag={x:e.clientX,y:e.clientY}});
+cv.addEventListener('pointermove',e=>{if(PTR.has(e.pointerId))PTR.set(e.pointerId,{x:e.clientX,y:e.clientY});if(PTR.size>=2){const[a,b]=[...PTR.values()],d=Math.hypot(a.x-b.x,a.y-b.y);if(pinch>0)cam.dist=Math.max(6,Math.min(90,cam.dist*pinch/d));pinch=d;return}if(!drag)return;const ddx=e.clientX-drag.x,ddy=e.clientY-drag.y;if(cam.mode===1&&!WALK.on){cam.cy=Math.max(-2.7,Math.min(2.7,cam.cy-ddx*0.005));cam.cp=Math.max(-1.1,Math.min(0.9,cam.cp-ddy*0.004))}else if(cam.mode===2&&!WALK.on){cam.fo-=ddx*0.005;cam.fT=performance.now();cam.pitch=Math.max(0.05,Math.min(1.45,cam.pitch+ddy*0.005))}else{cam.yaw-=ddx*0.005;if(cam.mode!==3||WALK.on)cam.pitch=Math.max(0.05,Math.min(1.45,cam.pitch+ddy*0.005))}drag={x:e.clientX,y:e.clientY}});
+cv.addEventListener('dblclick',()=>{cam.cy=0;cam.cp=0;cam.fo=0});
 const pend=e=>{PTR.delete(e.pointerId);if(PTR.size<2)pinch=0;drag=PTR.size===1?{...[...PTR.values()][0]}:null};cv.addEventListener('pointerup',pend);cv.addEventListener('pointercancel',pend);
 cv.addEventListener('wheel',e=>{e.preventDefault();cam.dist=Math.max(6,Math.min(90,cam.dist*(1+Math.sign(e.deltaY)*0.1)))},{passive:false});
-function toggleCam(){cam.mode^=1;$('bCam').textContent=cam.mode?'Takip kamerası (V)':'Kabin kamerası (V)'}
+function setCam(m){cam.mode=m;cam.cy=0;cam.cp=0;cam.fo=0;cam.tx=undefined;if(m===3)cam.dist=Math.max(cam.dist,30);$('bCam').textContent='🎥 '+CAMN[m]+' → '+CAMN[(m+1)%4].split(' ')[0]+' (V)';toast(CAMN[m]+(m===1?' · sürükleyerek etrafa bak, çift tıkla öne dön':m===2?' · makinenin arkasından izler, sürükleyince geçici döner':m===3?' · tepeden bakış':' · sürükleyerek etrafında dön'))}
+function toggleCam(){setCam((cam.mode+1)%4)}
 const cPos=new V3(),cLook=new V3();
 function updateCam(dt){if(WALK.on){walkCam(dt);return}const VV=VEH[MACH],isG=MACH==='gd',isD=MACH==='dz',isT=MACH==='tr'||MACH==='mt',isS=MACH==='sh';
-  if(cam.mode){if(VV){cPos.set(...VV.cab);VV.g.localToWorld(cPos);cLook.set(...VV.look);VV.g.localToWorld(cLook)}else if(isG){cPos.set(-1.4,2.75,0.1);gdG.localToWorld(cPos);cLook.set(9,-0.2,0);gdG.localToWorld(cLook)}else if(isS){cPos.set(3.35,5.15,2.15);shUp.localToWorld(cPos);cLook.set(16,-1.5,0.3);shUp.localToWorld(cLook)}else if(isT){cPos.set(...TC.cab);truck.localToWorld(cPos);cLook.set(...TC.look);truck.localToWorld(cLook)}else if(isD){cPos.set(-0.55,3.5,0);dzG.localToWorld(cPos);cLook.set(9,-0.2,0);dzG.localToWorld(cLook)}else{cPos.set(0.25,1.55,-0.78);upper.localToWorld(cPos);cLook.set(7,-0.7,-0.2);upper.localToWorld(cLook)}camera.position.copy(cPos);camera.lookAt(cLook);return}
+  if(cam.mode===1){if(VV){cPos.set(...VV.cab);VV.g.localToWorld(cPos);cLook.set(...VV.look);VV.g.localToWorld(cLook)}else if(isG){cPos.set(-1.4,2.75,0.1);gdG.localToWorld(cPos);cLook.set(9,-0.2,0);gdG.localToWorld(cLook)}else if(isS){cPos.set(3.35,5.15,2.15);shUp.localToWorld(cPos);cLook.set(16,-1.5,0.3);shUp.localToWorld(cLook)}else if(isT){cPos.set(...TC.cab);truck.localToWorld(cPos);cLook.set(...TC.look);truck.localToWorld(cLook)}else if(isD){cPos.set(-0.55,3.5,0);dzG.localToWorld(cPos);cLook.set(9,-0.2,0);dzG.localToWorld(cLook)}else{cPos.set(0.25,1.55,-0.78);upper.localToWorld(cPos);cLook.set(7,-0.7,-0.2);upper.localToWorld(cLook)}
+    {const dx=cLook.x-cPos.x,dy=cLook.y-cPos.y,dz=cLook.z-cPos.z,h=Math.hypot(dx,dz),y0=Math.atan2(dz,dx)+cam.cy,p0=Math.max(-1.35,Math.min(1.2,Math.atan2(dy,h)+cam.cp));cLook.set(cPos.x+Math.cos(y0)*Math.cos(p0)*10,cPos.y+Math.sin(p0)*10,cPos.z+Math.sin(y0)*Math.cos(p0)*10)}
+    camera.position.copy(cPos);camera.lookAt(cLook);return}
   const tx=VV?VV.x:isG?GD.x:isS?SH.x:isT?TRK.x:isD?DZ.x:ex.x,tz=VV?VV.z:isG?GD.z:isS?SH.z:isT?TRK.z:isD?DZ.z:ex.z,ty=(VV?VV.g.position.y+VV.camY:isG?gdG.position.y+2.2:isS?shG.position.y+6:isT?truck.position.y+TC.camY:isD?dzG.position.y+2.6:chassis.position.y+2.2);
   cam.tx=cam.tx===undefined?tx:cam.tx+(tx-cam.tx)*Math.min(1,dt*5);cam.tz=cam.tz===undefined?tz:cam.tz+(tz-cam.tz)*Math.min(1,dt*5);
   cam.ty+=(ty-cam.ty)*Math.min(1,dt*4);cLook.set(cam.tx,cam.ty,cam.tz);
+  if(cam.mode>=2){const m=curM(),hy=MACH==='ex'?ex.yaw+ex.swing:MACH==='sh'?SH.yaw+(SH.swing||0):m.yaw;if(performance.now()-cam.fT>1500)cam.fo*=Math.pow(0.15,dt);let tg=Math.PI-hy+cam.fo,d=tg-cam.yaw;d=Math.atan2(Math.sin(d),Math.cos(d));cam.yaw+=d*Math.min(1,dt*(cam.mode===3?2:3.2));if(cam.mode===3)cam.pitch+=(1.38-cam.pitch)*Math.min(1,dt*3)}
   camera.position.set(cLook.x+Math.cos(cam.pitch)*Math.cos(cam.yaw)*cam.dist,cLook.y+Math.sin(cam.pitch)*cam.dist,cLook.z+Math.cos(cam.pitch)*Math.sin(cam.yaw)*cam.dist);
   const g=T.sample(camera.position.x,camera.position.z)+0.6;if(camera.position.y<g)camera.position.y=g;camera.lookAt(cLook)}
 
@@ -3231,7 +3236,7 @@ function audioInit(){if(AU.ctx)return;try{
 const trkPh={l:0,r:0};
 function audioUpdate(dt){if(!AU.ctx||!AU.n)return;const C=AU.ctx,t=C.currentTime,n=AU.n,on=AU.on&&started;
   const T_=(p,v,k=0.06)=>p.setTargetAtTime(v,t,k);
-  T_(AU.master.gain,on?0.9:0,0.1);T_(AU.cab.frequency,cam.mode?1300:16000,0.2);
+  T_(AU.master.gain,on?0.9:0,0.1);T_(AU.cab.frequency,cam.mode===1?1300:16000,0.2);
   const isG=MACH==='gd'||!!VEH[MACH],isD=MACH==='dz'||isG,isT=MACH==='tr'||MACH==='mt',isS=MACH==='sh',M_=curM(),rpm=Math.max(1,M_.rpm),f1=rpm/60,rn=Math.min(1.3,Math.max(0,(rpm-(isS?1000:isT?TC.idle:VEH[MACH]?VEH[MACH].idleR:isD?700:1050))/(isS?800:isT?TC.rpmMax-TC.idle:VEH[MACH]?VEH[MACH].maxR-VEH[MACH].idleR:isD?1100:800))),ld=M_.pow||0,big=isS?1.9:isD?1.3:isT?TC.snd:1,ef=Math.min(1,rpm/520);
   T_(n.stG.gain,M_.eng===1?0.07:0,0.03);T_(n.stO.frequency,M_.eng===1?150+20*Math.sin(t*3):150,0.05);
   T_(n.eng.frequency,f1,0.05);T_(n.mod.frequency,3*f1,0.05);
