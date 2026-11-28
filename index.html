@@ -1272,18 +1272,15 @@ function makeStick(el,cb){const kn=el.querySelector('.knob'),R=58;let id=null,cx
 makeStick($('stL'),(x,y)=>{TCH.lx=x;TCH.ly=y});makeStick($('stR'),(x,y)=>{TCH.rx=x;TCH.ry=y});
 function holdBtn(label,key,cls){const b=document.createElement('button');b.textContent=label;if(cls)b.className=cls;const on=e=>{TCH[key]=true;b.classList.add('on');e.preventDefault()},off=()=>{TCH[key]=false;b.classList.remove('on')};
   b.addEventListener('pointerdown',on);b.addEventListener('pointerup',off);b.addEventListener('pointercancel',off);b.addEventListener('pointerleave',off);return b}
-function touchUI(){if(!TCH.on)return;const t=$('tbtn');t.innerHTML='';const L=$('labL'),Rl=$('labR');if(WALK.on){walkTouch(t,L,Rl);return}{const wb=document.createElement('button');wb.textContent='🚶 İn';wb.onclick=()=>{walkToggle();cv.focus()};t.append(wb);const lb=document.createElement('button');lb.textContent='💡';if(LT.hd[MACH])lb.className='on';lb.onclick=()=>{toggleHead();touchUI()};const bb=document.createElement('button');bb.textContent='🚨';if(LT.bc[MACH])bb.className='on';bb.onclick=()=>{toggleBeacon();touchUI()};t.append(lb,bb)}
-  {const m=curM(),eb=document.createElement('button');eb.textContent=m.eng===2?'Motor ■':m.eng===1?'Marş…':'Motor ▶';if(m.eng===2)eb.className='on';eb.onclick=()=>toggleEngine();
-   const cb=document.createElement('button');cb.textContent=cam.mode?'Dış kamera':'Kabin';if(cam.mode)cb.className='on';cb.onclick=()=>{toggleCam();touchUI()};t.append(eb,cb)}
+function touchUI(){if(!TCH.on)return;const t=$('tbtn');t.innerHTML='';const L=$('labL'),Rl=$('labR');if(WALK.on){walkTouch(t,L,Rl);return}
   if(MACH==='sh'){const d=document.createElement('button');d.textContent=TCH.drive?'Yürüyüş':'Çalışma';if(TCH.drive)d.className='on';d.onclick=()=>{TCH.drive=!TCH.drive;touchUI()};t.append(d,holdBtn('Boşalt','dump'));
     L.textContent=TCH.drive?'Paletler: ileri / dön':'Arm · dönüş';Rl.textContent='Bom · kova';return}
   if(MACH==='ex'){const d=document.createElement('button');d.textContent=TCH.drive?'Yürüyüş':'Çalışma';if(TCH.drive)d.className='on';d.onclick=()=>{TCH.drive=!TCH.drive;touchUI()};t.append(d);
-    const tl=document.createElement('button');tl.textContent=ex.tool==='bucket'?'Kova':'Kırıcı';tl.onclick=()=>{setTool(ex.tool==='bucket'?'hammer':'bucket');touchUI()};t.append(tl);
     if(ex.tool==='hammer')t.append(holdBtn('Vur','hit'));
     L.textContent=TCH.drive?'Paletler: ileri / dön':'Arm · dönüş';Rl.textContent='Bom · kova'}
   else if(VEH[MACH]){vehTouch(t,L,Rl)}
   else if(MACH==='gd'){t.append(holdBtn('Kaydır ◀','ssL'),holdBtn('Kaydır ▶','ssR'),holdBtn('Eğim ▲','rpU'),holdBtn('Eğim ▼','rpD'));L.textContent='Gaz · direksiyon';Rl.textContent='Bıçak ↕ · açı ↔'}
-  else if(MACH==='dz'){const ab=document.createElement('button');ab.textContent='Oto bıçak';if(DZ.auto)ab.className='on';ab.onclick=dzAuto;t.append(ab,holdBtn('Ripper ▼','rpD'),holdBtn('Ripper ▲','rpU'));L.textContent='Gaz · yön';Rl.textContent='Bıçak · tilt'}
+  else if(MACH==='dz'){t.append(holdBtn('Ripper ▼','rpD'),holdBtn('Ripper ▲','rpU'));L.textContent='Gaz · yön';Rl.textContent='Bıçak · tilt'}
   else{L.textContent='Gaz / fren · direksiyon';Rl.textContent='Damper ▲▼'}}
 function dzAuto(){DZ.auto=!DZ.auto;DZ.hY=null;toast(DZ.auto?'Otomatik bıçak açık: kesme kotu sabit tutulur':'Otomatik bıçak kapalı');touchUI()}
 for(const ev of['contextmenu','selectstart','dragstart'])addEventListener(ev,e=>{if(!(e.target&&e.target.closest&&e.target.closest('input,textarea')))e.preventDefault()},{passive:false});
@@ -2326,12 +2323,12 @@ function vehLab(v){switch(v.id){
   case'hv':return['Vinç',['hazır','uzanıyor','kesiyor','düşüyor','tomrukluyor','toplanıyor'][HVQ.ph],0,'Ağacın yanında dur, Space: kes ve tomrukla · kesilen ağaç '+(ECO.wood||0)];
   default:return['Zemin',surf(v.x,v.z).n,surf(v.x,v.z).vf,panSpot()?'Suyun kenarındasın: Tava (P)':'Nehir kuzeyde · zemin: '+surf(v.x,v.z).n]}}
 function vehTouch(t,L,Rl){L.textContent='Gaz · direksiyon';
-  if(MACH==='dr'){t.append(holdBtn('Del','hit'));const b=document.createElement('button');b.textContent=VEH.dr.htype==='ex'?'Arama':'Patlatma';b.onclick=toggleHT;t.append(b);Rl.textContent='Direk ↕'}
+  if(MACH==='dr'){t.append(holdBtn('Del','hit'));Rl.textContent='Direk ↕'}
   else if(MACH==='ch'){t.append(holdBtn('Doldur','hit'));Rl.textContent='—'}
   else if(MACH==='pv'){Rl.textContent='Tabla ↓ indir · ↑ kaldır'}
   else if(MACH==='hv'){t.append(holdBtn('Kes','hit'));Rl.textContent='—'}
   else if(MACH==='wl'){Rl.textContent='Kol ↕ · kova ↔'}
-  else if(MACH==='pk'){const b=document.createElement('button');b.textContent='Tava';b.onclick=panStart;t.append(b);Rl.textContent='—'}
+  else if(MACH==='pk'){Rl.textContent='—'}
   else Rl.textContent='—'}
 function vehHelp(m){return{dr:'Sondaj: R/F direk, Space del, T delik tipi (patlatma/arama), K sonuçlar',ch:'Şarj aracı: patlatma deliğinin yanında dur, Space basılı tut. X ile ateşle',pv:'Finişer: F/↓ tablayı indir, yavaşça sür. Silindirle sıkıştır',rl:'Silindir: taze asfaltın üstünden geç',wl:'Ön yükleyici: kovayı yere indir, yığına sür (dolar), ↑ ile kaldır, kamyonun yanında ← ile boşalt. Kovayı bastırınca ön taraf kalkar',hv:'Harvester: ağaca yaklaş, dur, Space ile kes. Kütükleri ekskavatör ya da dozerle sök',pk:'Pikap: nehir kenarında dur, P ile tava çalkala'}[m]}
 function startMode(mode,cont){MODE=mode;document.body.classList.toggle('career',mode==='career');
@@ -2708,7 +2705,7 @@ function walkCam(dt){const tx=WALK.x,tz=WALK.z,ty=WALK.y+1.5;if(cam.mode){camera
   camera.position.set(cLook.x+Math.cos(cam.pitch)*Math.cos(cam.yaw)*cam.dist,cLook.y+Math.sin(cam.pitch)*cam.dist,cLook.z+Math.cos(cam.pitch)*Math.sin(cam.yaw)*cam.dist);
   const g=T.sample(camera.position.x,camera.position.z)+0.4;if(camera.position.y<g)camera.position.y=g;camera.lookAt(cLook)}
 function walkTouch(t,L,Rl){const mk=(lab,fn)=>{const b=document.createElement('button');b.textContent=lab;b.onclick=()=>{fn();cv.focus()};t.append(b)};
-  mk('🚜 Bin',walkToggle);mk('📍 Kazık',()=>stakeKey('KeyG'));mk('▲ Kot',()=>stakeKey('KeyE'));mk('▼ Kot',()=>stakeKey('KeyQ'));mk('⛓ Zincir',chainKey);t.append(holdBtn('Zıpla','jump'));L.textContent='Yürü';Rl.textContent='—'}
+  mk('📍 Kazık',()=>stakeKey('KeyG'));mk('▲ Kot',()=>stakeKey('KeyE'));mk('▼ Kot',()=>stakeKey('KeyQ'));mk('⛓ Zincir',chainKey);t.append(holdBtn('Zıpla','jump'));L.textContent='Yürü';Rl.textContent='—'}
 function stakeKey(code,fine){if(code==='KeyG'){const x=WALK.x+Math.cos(WALK.yaw)*0.8,z=WALK.z-Math.sin(WALK.yaw)*0.8;if(stkNear(x,z,1.2)){toast('Burada zaten kazık var');return}stkAdd(x,z);return}
   const s=stkNear(WALK.x,WALK.z,3.5);if(!s){toast('Yakında kazık yok (G ile çak)');return}
   if(code==='KeyZ'){stkDel(s);toast('Kazık söküldü');return}const d=(fine?0.05:0.25)*(code==='KeyE'?1:-1);s.y+=d;stkLabel(s);stkDraw(s);const o=s.y-T.sample(s.x,s.z);toast('Kazık kotu '+(o>=0?'+':'')+o.toFixed(2)+' m · '+(o>0.02?'dolgu':o<-0.02?'kazı':'mevcut zemin'))}
@@ -2836,7 +2833,7 @@ function menuRefresh(){if(!MENU.arac)return;
   const st=document.createElement('style');st.textContent=`.dd{position:relative}.dd .menu{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);display:none;flex-direction:column;gap:6px;background:rgba(20,20,23,.94);padding:8px;border-radius:12px;min-width:230px;max-height:70vh;overflow:auto;z-index:30;box-shadow:0 6px 24px rgba(0,0,0,.4)}
 .dd.open .menu{display:flex}.dd .menu button{width:100%;text-align:left}.dd .dyn{display:flex;flex-direction:column;gap:6px}.dd .dyn:empty{display:none}.dd .mh{font:700 15px "Barlow Condensed",sans-serif;color:var(--y);padding:2px 4px}
 button.on{background:#2f5d2a}.dd.open>.ddt{outline:2px solid var(--y)}
-body.mobile .dd .menu{top:calc(100% + 6px);bottom:auto;left:auto;right:0;transform:none;min-width:200px}`;document.head.append(st)})();
+body.mobile .dd .menu #bCam,body.mobile .dd .menu #bSnd,body.mobile .dd .menu #bReset{display:block}body.mobile .dd .menu{top:calc(100% + 6px);bottom:auto;left:auto;right:0;transform:none;min-width:200px}`;document.head.append(st)})();
 addEventListener('keydown',e=>{if(!started||e.repeat)return;if(e.code==='KeyU'&&!WALK.on)toggleHead();if(e.code==='KeyI'&&!WALK.on)toggleBeacon()});
 
 /* ---------- Makine seçimi ve motorlar ---------- */
